@@ -10,6 +10,9 @@ public class PlayerAttack : MonoBehaviour
     public Animator animator;
     private bool isAttacking = false; // 플레이어가 공격중인지 확인
     public GameObject weaponObject;
+    string skillName = "Skil1"; // 활성화할 스킬 이름
+
+
 
     private void Update()
     {
@@ -39,6 +42,8 @@ public class PlayerAttack : MonoBehaviour
                 StartCoroutine(WaitForAnimation());
             }
         }
+
+
     }
 
     public void ActiveSkilAnimation()
@@ -51,6 +56,11 @@ public class PlayerAttack : MonoBehaviour
                 isAttacking = true;
                 StartCoroutine(WaitForAnimation());
             }
+        }
+
+        if(animator != null)
+        {
+
         }
     }
 
