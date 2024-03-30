@@ -11,65 +11,39 @@ public class PlayerAttack : MonoBehaviour
     private bool isAttacking = false; // 플레이어가 공격중인지 확인
     public GameObject weaponObject;
 
-
-
     private void Update()
     {
         if (Input.GetMouseButton(0))
         {
-            ActiveAttackAnimation();        
+            ActivateSkillAnimation("Attack");        
         }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))   
         {
-            ActiveSkilAnimation();
+            ActivateSkillAnimation("Skil1");
+           
         }
-
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ActiveSkil1Animation();
+            ActivateSkillAnimation("Skil2");
+
         }
-    }
-    public void ActiveAttackAnimation()
-    {   
-        if(animator != null)
+        if (Input.GetKey(KeyCode.Alpha3))
         {
-            if (!isAttacking) 
-            {
-                animator.SetTrigger("Attack");
-                isAttacking = true;
-                StartCoroutine(WaitForAnimation());
-            }
+            ActivateSkillAnimation("Skil3");
+
         }
-
-
     }
-
-    public void ActiveSkilAnimation()
+  
+    public void ActivateSkillAnimation(string skillName)
     {
-        if(animator != null)
+        if (animator != null && !isAttacking)
         {
-            if (!isAttacking)
-            {
-                animator.SetTrigger("Skil");
-                isAttacking = true;
-                StartCoroutine(WaitForAnimation());
-            }
+            animator.SetTrigger(skillName);
+            isAttacking = true;
+            StartCoroutine(WaitForAnimation());
         }
     }
 
-    public void ActiveSkil1Animation()
-    {
-        if (animator != null)
-        {
-            if (!isAttacking)
-            {
-                animator.SetTrigger("Skil1");
-                isAttacking = true;
-                StartCoroutine(WaitForAnimation());
-            }
-        }
-    }
     private IEnumerator WaitForAnimation()
     {
         yield return new WaitForSeconds(1f); // 애니메이션 구현 중 (1)초 간은 다른 애니메이션 발생 x 
