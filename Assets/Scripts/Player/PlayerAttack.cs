@@ -22,6 +22,11 @@ public class PlayerAttack : MonoBehaviour
         {
             ActiveSkilAnimation();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ActiveSkilAnimation();
+        }
     }
     public void ActiveAttackAnimation()
     {   
