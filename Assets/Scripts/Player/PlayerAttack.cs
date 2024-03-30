@@ -16,7 +16,12 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             ActiveAttackAnimation();        
-        }   
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))   
+        {
+            ActiveSkilAnimation();
+        }
     }
     public void ActiveAttackAnimation()
     {   
@@ -25,6 +30,19 @@ public class PlayerAttack : MonoBehaviour
             if (!isAttacking) 
             {
                 animator.SetTrigger("Attack");
+                isAttacking = true;
+                StartCoroutine(WaitForAnimation());
+            }
+        }
+    }
+
+    public void ActiveSkilAnimation()
+    {
+        if(animator != null)
+        {
+            if (!isAttacking)
+            {
+                animator.SetTrigger("Skil");
                 isAttacking = true;
                 StartCoroutine(WaitForAnimation());
             }
