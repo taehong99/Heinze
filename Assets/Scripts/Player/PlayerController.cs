@@ -7,11 +7,15 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-    [SerializeField] float sprintSpeedDelta;
-    [SerializeField] float jumpHeight;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance;
     [SerializeField] LayerMask groundMask;
+
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashCooldown;
+    private float dashCooldownTimer;
+    private bool isDashing;
 
     CharacterController controller;
     Animator animator;
@@ -26,23 +30,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            animator.SetBool("isSprinting", true);
-            moveSpeed += sprintSpeedDelta;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            animator.SetBool("isSprinting", false);
-            moveSpeed -= sprintSpeedDelta;
-        }
         Move();
-        HandleGravityAndJump();
+        HandleGravity();
     }
 
     float rotationSpeed = 10f;
     private void Move()
     {
+        if (isDashing)
+            return;
+
         Vector3 forwardDir = Camera.main.transform.forward;
         forwardDir = new Vector3(forwardDir.x, 0, forwardDir.z).normalized;
 
@@ -65,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
-    private void HandleGravityAndJump()
+    private void HandleGravity()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool("isGrounded", isGrounded);
@@ -77,13 +74,38 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void Jump()
+    private void Dash()
     {
-        if (!isGrounded)
+        if (dashCooldownTimer > 0)
             return;
 
-        animator.SetTrigger("Jump");
-        velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+        animator.Play("Dash");
+        StartCoroutine(DashRoutine());
+        StartCoroutine(DashCooldownRoutine());
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        isDashing = true;
+        float time = 0; // need to remember this to know how long to dash
+        Vector3 dashDir = transform.forward;
+        while (time < dashDuration)
+        {
+            controller.Move(dashDir * dashSpeed * Time.deltaTime);
+            time += Time.deltaTime;
+            yield return null; // this will make Unity stop here and continue next frame
+        }
+        isDashing = false;
+    }
+
+    private IEnumerator DashCooldownRoutine()
+    {
+        dashCooldownTimer = dashCooldown;
+        while(dashCooldownTimer >= 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+            yield return null;
+        }
     }
 
     private void OnMove(InputValue value)
@@ -97,9 +119,9 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("zSpeed", moveDir.z);
     }
 
-    private void OnJump()
+    private void OnDash()
     {
-        Jump();
+        Dash();
     }
 
     private void OnInteract()
