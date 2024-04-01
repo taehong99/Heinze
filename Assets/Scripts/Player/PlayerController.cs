@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Animator animator;
     Vector3 moveDir;
+    public event Action InteractPressed;
 
     private void Awake()
     {
@@ -98,5 +100,10 @@ public class PlayerController : MonoBehaviour
     private void OnJump()
     {
         Jump();
+    }
+
+    private void OnInteract()
+    {
+        InteractPressed?.Invoke();
     }
 }
