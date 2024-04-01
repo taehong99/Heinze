@@ -5,19 +5,31 @@ using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
+    // Data
+    [SerializeField] PlayerDataSO data;
+
+    // HP
     const int minHP = 0;
-
-    public event Action PlayerHPChanged;
-    public event Action PlayerDied;
-    const int startingHP = 100;
-    public int maxHP = 100;
-
+    public int maxHP;
     private int curHP;
     public int CurHP { get => curHP; set { curHP = value; PlayerHPChanged?.Invoke(); } }
 
+    // Stats
+    private float attack;
+    private float defense;
+    public float Attack => attack;
+    public float Defense => defense;
+
+    // Events
+    public event Action PlayerHPChanged;
+    public event Action PlayerDied;
+
     private void Start()
     {
-        curHP = startingHP;
+        maxHP = data.baseHP;
+        curHP = maxHP;
+        attack = data.baseAttack;
+        defense = data.baseDefense;
     }
 
     public void Heal(int amount)
@@ -35,5 +47,13 @@ public class PlayerManager : Singleton<PlayerManager>
             // Player died event
             PlayerDied?.Invoke();
         }
+    }
+
+    public void Reset() // Call on game restart
+    {
+        maxHP = data.baseHP;
+        curHP = maxHP;
+        attack = data.baseAttack;
+        defense = data.baseDefense;
     }
 }

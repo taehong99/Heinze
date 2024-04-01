@@ -25,6 +25,7 @@ public class PlayerHPPresenter : BaseUI
         if (player == null || hpText == null)
             return;
 
+        hpSlider.maxValue = player.maxHP;
         hpSlider.value = player.CurHP;
         hpText.text = $"{player.CurHP} / {player.maxHP}";
     }
