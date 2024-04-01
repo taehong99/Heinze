@@ -6,7 +6,6 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance;
     [SerializeField] LayerMask groundMask;
@@ -46,8 +45,8 @@ public class PlayerController : MonoBehaviour
         Vector3 rightDir = Camera.main.transform.right;
         rightDir = new Vector3(rightDir.x, 0, rightDir.z).normalized;
 
-        controller.Move(forwardDir * moveDir.z * moveSpeed * Time.deltaTime);
-        controller.Move(rightDir * moveDir.x * moveSpeed * Time.deltaTime);
+        controller.Move(forwardDir * moveDir.z * Manager.Player.MoveSpeed * Time.deltaTime);
+        controller.Move(rightDir * moveDir.x * Manager.Player.MoveSpeed * Time.deltaTime);
 
         Vector3 lookDir = forwardDir * moveDir.z + rightDir * moveDir.x;
         if (lookDir.sqrMagnitude > 0) // if(lookDir != Vector3.zero) <= faster alternative

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   baseHP: 50
+  baseMoveSpeed: 7
+  baseCritRate: 0.1
   baseAttack: 3
   baseDefense: 3

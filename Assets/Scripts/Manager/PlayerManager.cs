@@ -16,9 +16,14 @@ public class PlayerManager : Singleton<PlayerManager>
 
     // Stats
     private float attack;
+    [Range(0f, 1f)]
+    private float critRate;
     private float defense;
+    private float moveSpeed;
     public float Attack => attack;
+    public float CritRate => critRate;
     public float Defense => defense;
+    public float MoveSpeed => moveSpeed;
 
     // Events
     public event Action PlayerHPChanged;
@@ -29,7 +34,9 @@ public class PlayerManager : Singleton<PlayerManager>
         maxHP = data.baseHP;
         curHP = maxHP;
         attack = data.baseAttack;
+        critRate = data.baseCritRate;
         defense = data.baseDefense;
+        moveSpeed = data.baseMoveSpeed;
     }
 
     public void Heal(int amount)
