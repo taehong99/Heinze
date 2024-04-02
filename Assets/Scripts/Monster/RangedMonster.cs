@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -47,6 +48,7 @@ public class RangedMonster : MonoBehaviour
 
     IEnumerator IDLE()
     {
+        Debug.Log("아이들");
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             anim.Play("Idle", 0, 0);
@@ -56,6 +58,7 @@ public class RangedMonster : MonoBehaviour
 
     IEnumerator CHASE()
     {
+        Debug.Log("chase");
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
@@ -87,24 +90,18 @@ public class RangedMonster : MonoBehaviour
 
     IEnumerator ATTACK()
     {
-        if (canAttack)
-        {
-            anim.Play("Attack1", 0, 0);
-            canAttack = false;
 
-            // 공격 애니메이션의 길이만큼 대기
-            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        nmAgent.velocity = Vector3.zero;
+        Debug.Log("공격");
+        anim.Play("Attack1", 0, 0);
+        // 공격 애니메이션의 길이만큼 대기
+        ShootProjectile();
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        //yield return new WaitForSeconds(3); // 3초 대기
+        nmAgent.isStopped = false; // 공격 후 다시 이동 시작
+        ChangeState(State.CHASE);  // 쿨다운이 끝나면 다시 추적 상태로 변경
 
-            ShootProjectile();
-            yield return new WaitForSeconds(attackCooldown); // 쿨다운 시간만큼 대기
-            canAttack = true;
-            nmAgent.isStopped = false; // 공격 후 다시 이동 시작
-            ChangeState(State.CHASE); // 쿨다운이 끝나면 다시 추적 상태로 변경
-        }
-        else
-        {
-            ChangeState(State.CHASE);
-        }
+
     }
 
     void ShootProjectile()
@@ -119,6 +116,7 @@ public class RangedMonster : MonoBehaviour
 
     IEnumerator KILLED()
     {
+        Debug.Log("디짐");
         anim.Play("Idle", 0, 0);
         Destroy(gameObject, 2f);
         yield return null;
