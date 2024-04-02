@@ -939,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2410479665550321089, guid: 2490dcbeb1e91b042a1bb160ce422710, type: 3}
       propertyPath: dashSpeed
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2410479665550321089, guid: 2490dcbeb1e91b042a1bb160ce422710, type: 3}
       propertyPath: dashCooldown
@@ -947,7 +947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2410479665550321089, guid: 2490dcbeb1e91b042a1bb160ce422710, type: 3}
       propertyPath: dashDuration
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3032508285786172616, guid: 2490dcbeb1e91b042a1bb160ce422710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
