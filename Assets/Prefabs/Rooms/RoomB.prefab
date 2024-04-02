@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491514655620636002}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7019063, z: -0, w: 0.7122693}
-  m_LocalPosition: {x: 0.7834489, y: 0, z: -0.4944151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -195,7 +195,7 @@ Transform:
   - {fileID: 3352275660687411140}
   - {fileID: 7337972322506841679}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.16, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3261379134118705444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,11 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 1278049729029536946}
-  - {fileID: 1734918289243402821}
-  - {fileID: 9021712088746630179}
-  - {fileID: 2352537178367997591}
+  gates:
+  - {fileID: 3988686180218920797}
+  - {fileID: 6558498168285962520}
+  - {fileID: 4140966744863497054}
+  - {fileID: 5028884929809408176}
   spawnPositions: []
 --- !u!1 &8668424916419943556
 GameObject:

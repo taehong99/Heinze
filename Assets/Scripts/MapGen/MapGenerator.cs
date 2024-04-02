@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] float roomOffset;
     RoomTemplates templates;
 
-    Dictionary<Vector3, GameObject> rooms = new Dictionary<Vector3, GameObject>();
+    Dictionary<Vector3, Room> rooms = new Dictionary<Vector3, Room>();
     HashSet<Vector3> takenPositions = new HashSet<Vector3>();
 
     //int numRooms;
@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
         templates = GetComponent<RoomTemplates>();
 
         GenerateLevel();
-        //ConnectRooms();
+        ConnectRooms();
     }
 
     // Utils
@@ -139,8 +139,8 @@ public class MapGenerator : MonoBehaviour
 
     private void PlaceRoom(GameObject room, Vector3 position)
     {
-        Instantiate(room, position, Quaternion.identity);
-        rooms.Add(position, room);
+        Room newRoom = Instantiate(room, position, Quaternion.identity).GetComponent<Room>();
+        rooms.Add(position, newRoom);
         takenPositions.Add(position);
     }
 
@@ -168,7 +168,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (rooms.ContainsKey(GetAdjPos(curPos, (Direction)i)))
                 {
-                    entry.Value.GetComponent<Room>().OpenGate((Direction)i);
+                    entry.Value.OpenGate((Direction)i);
                 }
             }
         }

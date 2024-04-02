@@ -313,11 +313,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 7156450286267962851}
+  gates:
   - {fileID: 292711735628867358}
-  - {fileID: 7271253215274498173}
+  - {fileID: 7156450286267962851}
   - {fileID: 5289706558724941302}
+  - {fileID: 7271253215274498173}
   spawnPositions: []
 --- !u!1001 &19985556406631599
 PrefabInstance:

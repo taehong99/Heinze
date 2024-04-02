@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gates:
-  - {fileID: 6008374646397806543}
   - {fileID: 1988653974983534951}
-  - {fileID: 2410887067095941567}
+  - {fileID: 6991853110779751308}
   - {fileID: 8438891725151768641}
+  - {fileID: 2410887067095941567}
   spawnPositions: []
 --- !u!1001 &5449776931752660
 PrefabInstance:
