@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class MonsterCollider : MonoBehaviour
 {
-    [SerializeField] Collider sightCollider;
-    [SerializeField] Collider deathCollider;
-
     void Start()
     {
 

@@ -41,7 +41,6 @@ public class Monster : MonoBehaviour, IDamagable
 
     IEnumerator IDLE()
     {
-        //Debug.Log("Idle");
         // 애니메이션이 IDLE 상태가 아니면 재생
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("IdleNormal"))
         {
@@ -105,28 +104,25 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator KILLED()
     {
         Debug.Log("Killed");
-        anim.Play("IdleBattle", 0, 0);
-        Destroy(gameObject, 2f);
+        anim.Play("Die", 0, 0);
+        DisableCollider();
+        Destroy(gameObject, 3f);
         yield return null;
     }
-
+    void DisableCollider()
+    {
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // 몬스터의 모든 콜라이더 가져오기
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false; // 각 콜라이더를 비활성화
+        }
+    }
     void ChangeState(State newState)
     {
-        Debug.Log($"{state} -> {newState}");
         StopCoroutine(state.ToString());
         state = newState;
         // 변경된 상태에 맞는 코루틴 시작
         StartCoroutine(state.ToString());
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
-            target = other.transform;
-            ChangeState(State.CHASE);
-        }
     }
 
     public void TakeDamage(int damage)
@@ -136,5 +132,12 @@ public class Monster : MonoBehaviour, IDamagable
         {
             ChangeState(State.KILLED);
         }
+    }
+
+    public void Detect(Transform target)
+    {
+        // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
+        this.target = target;
+        ChangeState(State.CHASE);
     }
 }

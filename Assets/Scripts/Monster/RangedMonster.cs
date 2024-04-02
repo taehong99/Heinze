@@ -1,23 +1,20 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
-public class RangedMonster : MonoBehaviour
+public class RangedMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // 목표와의 최대 거리
-    [SerializeField] float attackRange; // 원거리 공격 사정거리
-    [SerializeField] float attackCooldown; // 공격 쿨다운
-    [SerializeField] GameObject projectilePrefab; // 발사체 프리팹
-    [SerializeField] Transform projectileSpawnPoint; // 발사체 발사 위치
-
+    [SerializeField] float lostDistance;
+    [SerializeField] float attackRange;
+    [SerializeField] float attackCooldown;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Transform projectileSpawnPoint;
+    MonserSensor sensor;
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
-
-    bool canAttack = true;
-
     enum State
     {
         IDLE,
@@ -26,12 +23,13 @@ public class RangedMonster : MonoBehaviour
         KILLED
     }
 
-    State state;
+    [SerializeField] State state;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
+        sensor = GetComponentInChildren<MonserSensor>();
 
         hp = 1;
         state = State.IDLE;
@@ -42,100 +40,113 @@ public class RangedMonster : MonoBehaviour
     {
         while (hp > 0)
         {
+            // 현재 상태에 따라 코루틴 시작
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        Debug.Log("아이들");
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        // 애니메이션이 IDLE 상태가 아니면 재생
+        while(true)
         {
-            anim.Play("Idle", 0, 0);
+            Debug.Log("Idle");
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                anim.Play("Idle", 0, 0);
+            }
+            if (sensor.target != null)
+            {
+                ChangeState(State.CHASE);
+                yield break;
+            }
+            yield return null;
         }
-        yield return null;
     }
 
     IEnumerator CHASE()
     {
-        Debug.Log("chase");
-        while (target != null)
-        {
-            nmAgent.SetDestination(target.position);
+        Debug.Log("Chasing");
 
+        // CHASE 상태에서는 계속해서 이동
+        if(sensor.target != null)
+        { 
+            nmAgent.SetDestination(sensor.target.position);
+
+            // 현재 애니메이션 상태 확인
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
+            // WalkFWD 애니메이션이 아니면 재생
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
+            // 목표까지의 남은 거리가 멈추는 지점보다 작거나 같으면
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
+                // ATTACK 상태로 변경
                 ChangeState(State.ATTACK);
-                nmAgent.isStopped = true; // 공격 시 이동 멈춤
-                yield break;
+                yield break; // CHASE 상태를 빠져나옴
             }
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            // 목표와의 거리가 멀어진 경우
+            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
             {
-                target = null;
+                sensor.target = null;
+                // IDLE 상태로 변경
                 ChangeState(State.IDLE);
-                yield break;
+                yield break; // CHASE 상태를 빠져나옴
             }
 
+            // 목표 위치로 이동
             yield return null;
         }
+        ChangeState(State.IDLE);
     }
-
     IEnumerator ATTACK()
     {
-
+        Debug.Log("attack");
         nmAgent.velocity = Vector3.zero;
-        Debug.Log("공격");
         anim.Play("Attack1", 0, 0);
-        // 공격 애니메이션의 길이만큼 대기
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
         ShootProjectile();
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-        //yield return new WaitForSeconds(3); // 3초 대기
-        nmAgent.isStopped = false; // 공격 후 다시 이동 시작
-        ChangeState(State.CHASE);  // 쿨다운이 끝나면 다시 추적 상태로 변경
-
+        nmAgent.isStopped = false;
+        ChangeState(State.CHASE); 
 
     }
-
     void ShootProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Projectile script = projectile.GetComponent<Projectile>();
-        if (script != null && target != null)
+        if (script != null && sensor.target != null)
         {
-            script.SetTarget(target);
+            script.SetTarget(sensor.target);
         }
     }
-
     IEnumerator KILLED()
     {
-        Debug.Log("디짐");
-        anim.Play("Idle", 0, 0);
-        Destroy(gameObject, 2f);
+        Debug.Log("Killed");
+        anim.Play("Die", 0, 0);
+        DisableCollider();
+        Destroy(gameObject, 3f);
         yield return null;
     }
-
+    void DisableCollider()
+    {
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // 몬스터의 모든 콜라이더 가져오기
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false; // 각 콜라이더를 비활성화
+        }
+    }
     void ChangeState(State newState)
     {
         StopCoroutine(state.ToString());
         state = newState;
+        // 변경된 상태에 맞는 코루틴 시작
         StartCoroutine(state.ToString());
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            target = other.transform;
-            ChangeState(State.CHASE);
-        }
     }
 
     public void TakeDamage(int damage)
@@ -145,5 +156,12 @@ public class RangedMonster : MonoBehaviour
         {
             ChangeState(State.KILLED);
         }
+    }
+
+    public void Detect(Transform target)
+    {
+        // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
+        this.target = target;
+        ChangeState(State.CHASE);
     }
 }
