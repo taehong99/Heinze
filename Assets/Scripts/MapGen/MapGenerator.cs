@@ -1,63 +1,141 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static LevelGenerator;
+
+public enum Direction { North, South, East, West }
+
+[RequireComponent(typeof(RoomTemplates))]
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] int numRooms;
     [SerializeField] float roomOffset;
-    RoomTemplates1 roomTemplates;
+    RoomTemplates templates;
+
+    HashSet<Vector3> takenPositions = new HashSet<Vector3>();
+
+    //int numRooms;
+    int CCount;
+    int DCount;
 
     void Start()
     {
-        roomTemplates = GetComponent<RoomTemplates1>();
-        Instantiate(roomTemplates.rooms[0], Vector3.zero, Quaternion.identity);
-        //GenerateLevel();
+        templates = GetComponent<RoomTemplates>();
+
+        GenerateLevel();
+    }
+
+    // Utils
+    private Queue<char> CreateRoomPool()
+    {
+        List<char> order = new List<char>();
+        CCount = 1; //Random.Range(1, 3);
+        DCount = 1; //Random.Range(1, 3);
+        numRooms -= (CCount + DCount);
+
+        for (int i = 0; i < numRooms / 2; i++)
+        {
+            order.Add('A');
+            order.Add('B');
+        }
+        for(int i = 0; i < CCount; i++)
+        {
+            order.Add('C');
+        }
+        for (int i = 0; i < DCount; i++)
+        {
+            order.Add('D');
+        }
+
+        ShuffleList(order);
+        return new Queue<char>(order);
+    }
+
+    private void ShuffleList(List<char> rooms)
+    {
+        int n = rooms.Count;
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            char temp = rooms[i];
+            rooms[i] = rooms[j];
+            rooms[j] = temp;
+        }
     }
 
     private void GenerateLevel()
     {
-        // Instantiate starting room (all 4 sides are open)
-        Instantiate(roomTemplates.rooms[0], Vector3.zero, Quaternion.identity);
-        Queue<EmptySlot> opens = new Queue<EmptySlot>();
-        opens.Enqueue(new EmptySlot(GetAdjPos(Vector3.zero, Direction.North), Direction.South));
-        opens.Enqueue(new EmptySlot(GetAdjPos(Vector3.zero, Direction.East), Direction.West));
+        // Queue to check which type of room to instantiate next
+        Queue<char> roomPool = CreateRoomPool();
+        Debug.Log(roomPool.Count);
+
+        // Instantiate starting room with 2 ~ 4 doors
+        Room curRoom = templates.roomA.GetComponent<Room>();
+        PlaceRoom(templates.roomA, Vector3.zero);
+
+        // Add openings to queue
+        Queue<Vector3> spawnPoints = new Queue<Vector3>();
+        spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.West));
+        spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.East));
+        if(Random.Range(0f, 1f) <= 0.5f)
+            spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.North));
+        if (Random.Range(0f, 1f) <= 0.5f)
+            spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.South));
 
         // Create N open rooms
-        for (int i = 0; i < numRooms; i++)
+        while (roomPool.Count > 0)
         {
-            int rand;
-            Room2 roomToAdd;
-            EmptySlot curSlot = opens.Dequeue();
-            switch (curSlot.openDir)
+            Vector3 nextPos = spawnPoints.Dequeue();
+            if (takenPositions.Contains(nextPos))
+                continue;
+
+            char nextRoomType = roomPool.Dequeue();
+            GameObject nextRoom;
+            switch (nextRoomType)
             {
-                case Direction.South:
-                    rand = Random.Range(0, roomTemplates.rooms.Length);
-                    roomToAdd = roomTemplates.rooms[rand].GetComponent<Room2>();
-                    Instantiate(roomTemplates.rooms[rand], curSlot.pos, Quaternion.identity);
-                    opens.Enqueue(new EmptySlot(GetAdjPos(curSlot.pos, Direction.North), Direction.South));
-                    opens.Enqueue(new EmptySlot(GetAdjPos(curSlot.pos, Direction.East), Direction.West));
+                case 'A':
+                    nextRoom = templates.roomA;
                     break;
-                case Direction.West:
-                    rand = Random.Range(0, roomTemplates.rooms.Length);
-                    roomToAdd = roomTemplates.rooms[rand].GetComponent<Room2>();
-                    Instantiate(roomTemplates.rooms[rand], curSlot.pos, Quaternion.identity);
-                    opens.Enqueue(new EmptySlot(GetAdjPos(curSlot.pos, Direction.North), Direction.South));
-                    opens.Enqueue(new EmptySlot(GetAdjPos(curSlot.pos, Direction.East), Direction.West));
+                case 'B':
+                    nextRoom = templates.roomB;
+                    break;
+                case 'C':
+                    nextRoom = templates.roomC;
                     break;
                 default:
+                    nextRoom = templates.roomD;
                     break;
             }
-            Debug.Log($"Room instantiated at: {curSlot.pos}");
+            int numOpenings = Random.Range(1, 4);
+            int count = 0;
+            while (count < numOpenings) {
+                Direction dir = (Direction)count;
+                if(takenPositions.Contains(GetAdjPos(nextPos, dir))){
+                    count++;
+                    continue;
+                }
+
+                spawnPoints.Enqueue(GetAdjPos(nextPos, dir));
+                count++;
+            }
+
+            PlaceRoom(nextRoom, nextPos);
         }
 
         // Create Boss Room
-        while(opens.Count > 1)
+        Vector3 furthestPoint = Vector3.zero;
+        while (spawnPoints.Count > 1)
         {
-            opens.Dequeue();
+            Vector3 cur = spawnPoints.Dequeue();
+            furthestPoint = cur.sqrMagnitude > furthestPoint.sqrMagnitude ? cur : furthestPoint;
         }
-        EmptySlot bossSlot = opens.Dequeue();
-        Instantiate(roomTemplates.bossRoom, bossSlot.pos, Quaternion.identity);
+        PlaceRoom(templates.roomA, furthestPoint);
+        Debug.Log(furthestPoint);
+    }
+
+    private void PlaceRoom(GameObject room, Vector3 position)
+    {
+        Instantiate(room, position, Quaternion.identity);
+        takenPositions.Add(position);
     }
 
     private Vector3 GetAdjPos(Vector3 origin, Direction dir)
@@ -72,6 +150,21 @@ public class MapGenerator : MonoBehaviour
                 return origin + Vector3.right * roomOffset;
             default:
                 return origin + Vector3.left * roomOffset;
+        }
+    }
+
+    private Direction GetOppositeDirection(Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.North:
+                return Direction.South;
+            case Direction.South:
+                return Direction.North;
+            case Direction.East:
+                return Direction.West;
+            default:
+                return Direction.East;
         }
     }
 }

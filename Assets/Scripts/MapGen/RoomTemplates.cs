@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour
 {
-    // south means south is open
-    public GameObject[] southRooms;
-    public GameObject[] northRooms;
-    public GameObject[] westRooms;
-    public GameObject[] eastRooms;
-
-    public GameObject southDeadEnd;
-    public GameObject northDeadEnd;
-    public GameObject westDeadEnd;
-    public GameObject eastDeadEnd;
+    public GameObject roomA;
+    public GameObject roomB;
+    public GameObject roomC;
+    public GameObject roomD;
 }
