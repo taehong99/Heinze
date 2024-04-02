@@ -114,7 +114,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
         ShootProjectile();
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
         nmAgent.isStopped = false;
-        ChangeState(State.CHASE); 
+        ChangeState(State.CHASE); //¹¹¾ß
 
     }
     void ShootProjectile()
