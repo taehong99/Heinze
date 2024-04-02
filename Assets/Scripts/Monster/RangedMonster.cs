@@ -20,7 +20,8 @@ public class RangedMonster : MonoBehaviour, IDamagable
         IDLE,
         CHASE,
         ATTACK,
-        KILLED
+        KILLED,
+        SKIL
     }
 
     [SerializeField] State state;

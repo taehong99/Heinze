@@ -365,6 +365,11 @@ Transform:
   - {fileID: 1069338106}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &759626300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2150605593437465995, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
+  m_PrefabInstance: {fileID: 1882535790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &820323113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2120978240799133072, guid: 2490dcbeb1e91b042a1bb160ce422710, type: 3}
@@ -756,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1098669015
 Transform:
   m_ObjectHideFlags: 0
@@ -784,6 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3132d1d309ac74a4ba00d33ba7605a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <target>k__BackingField: {fileID: 0}
 --- !u!135 &1098669017
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -919,27 +925,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &1388482486
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388482482}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1388482487
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -978,8 +963,9 @@ MonoBehaviour:
   lostDistance: 7
   attackRange: 0
   attackCooldown: 0
-  projectilePrefab: {fileID: 0}
-  projectileSpawnPoint: {fileID: 0}
+  projectilePrefab: {fileID: 5759924016462239049, guid: e68d91b51ea91fa42bde9d603fa57ccf, type: 3}
+  projectileSpawnPoint: {fileID: 759626300}
+  state: 0
 --- !u!4 &1388482490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2150605593437465987, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
@@ -1144,9 +1130,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2150605593437106595, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1388482487}
-    - targetCorrespondingSourceObject: {fileID: 2150605593437106595, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1388482486}
     - targetCorrespondingSourceObject: {fileID: 2150605593437106595, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1388482485}
