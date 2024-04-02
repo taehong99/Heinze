@@ -178,6 +178,7 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("TakeDamage");
         hp -= damage;
         if (hp <= 0)
         {

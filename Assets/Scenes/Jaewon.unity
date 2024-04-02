@@ -491,6 +491,18 @@ PrefabInstance:
       value: Flower Dryad
       objectReference: {fileID: 0}
     - target: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.84
       objectReference: {fileID: 0}
@@ -623,8 +635,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2.5116262, z: 1}
+  m_Center: {x: 0, y: 0.7558129, z: 0}
 --- !u!1 &1056701321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2150605593437106595, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2150605593437465987, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1530,7 +1542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 737492392737420725, guid: e0749ee9fb077f843983971c435282c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1206508367005308531, guid: e0749ee9fb077f843983971c435282c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
