@@ -208,10 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasNorthExit: 0
-  hasSouthExit: 0
-  hasEastExit: 0
-  hasWestExit: 0
+  doors:
+  - {fileID: 1278049729029536946}
+  - {fileID: 1734918289243402821}
+  - {fileID: 9021712088746630179}
+  - {fileID: 2352537178367997591}
   spawnPositions: []
 --- !u!1 &8668424916419943556
 GameObject:

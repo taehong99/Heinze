@@ -6,15 +6,12 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     // Direction Ordering: North South East West
-    //public Vector2 gridPos;
-    //public int type;
-    public List<RoomInfo> exits = new List<RoomInfo>();
-    public Vector3[] spawnPositions;
-}
+    //public List<RoomInfo> exits = new List<RoomInfo>();
+    public Transform[] gates = new Transform[4];
+    public Transform[] spawnPositions = new Transform[4];
 
-[Serializable]
-public class RoomInfo
-{
-    public Direction exitDir;
-    public Vector3 spawnPos;
+    public void OpenGate(Direction direction)
+    {
+        gates[(int)direction].gameObject.SetActive(false);
+    }
 }

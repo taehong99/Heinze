@@ -352,11 +352,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exits:
-  - exitDir: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-  - exitDir: 0
-    spawnPos: {x: 0, y: 0, z: 0}
+  doors:
+  - {fileID: 7697339360941816894}
+  - {fileID: 7024898608052696514}
+  - {fileID: 8484763512724920962}
+  - {fileID: 528549741302068914}
   spawnPositions: []
 --- !u!1001 &12106289944876044
 PrefabInstance:

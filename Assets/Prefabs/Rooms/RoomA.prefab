@@ -184,10 +184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasNorthExit: 0
-  hasSouthExit: 0
-  hasEastExit: 0
-  hasWestExit: 0
+  gates:
+  - {fileID: 6008374646397806543}
+  - {fileID: 1988653974983534951}
+  - {fileID: 2410887067095941567}
+  - {fileID: 8438891725151768641}
   spawnPositions: []
 --- !u!1001 &5449776931752660
 PrefabInstance:
@@ -2203,6 +2204,10 @@ PrefabInstance:
       value: WallMesh
       objectReference: {fileID: 0}
     - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -3041,6 +3046,10 @@ PrefabInstance:
     - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
       propertyPath: m_Name
       value: WallMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -8741,6 +8750,10 @@ PrefabInstance:
       value: WallMesh
       objectReference: {fileID: 0}
     - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -13319,6 +13332,10 @@ PrefabInstance:
     - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
       propertyPath: m_Name
       value: WallMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1319359743785216, guid: 3d4af4e99151b3143accc9131d752414, type: 3}
       propertyPath: m_StaticEditorFlags

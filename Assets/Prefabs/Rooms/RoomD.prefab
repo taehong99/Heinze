@@ -313,10 +313,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasNorthExit: 0
-  hasSouthExit: 0
-  hasEastExit: 0
-  hasWestExit: 0
+  doors:
+  - {fileID: 7156450286267962851}
+  - {fileID: 292711735628867358}
+  - {fileID: 7271253215274498173}
+  - {fileID: 5289706558724941302}
   spawnPositions: []
 --- !u!1001 &19985556406631599
 PrefabInstance:

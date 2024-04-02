@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] float roomOffset;
     RoomTemplates templates;
 
+    Dictionary<Vector3, GameObject> rooms = new Dictionary<Vector3, GameObject>();
     HashSet<Vector3> takenPositions = new HashSet<Vector3>();
 
     //int numRooms;
@@ -22,6 +23,7 @@ public class MapGenerator : MonoBehaviour
         templates = GetComponent<RoomTemplates>();
 
         GenerateLevel();
+        //ConnectRooms();
     }
 
     // Utils
@@ -76,10 +78,14 @@ public class MapGenerator : MonoBehaviour
         Queue<Vector3> spawnPoints = new Queue<Vector3>();
         spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.West));
         spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.East));
-        if(Random.Range(0f, 1f) <= 0.5f)
-            spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.North));
         if (Random.Range(0f, 1f) <= 0.5f)
+        {
+            spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.North));
+        }
+        if (Random.Range(0f, 1f) <= 0.5f)
+        {
             spawnPoints.Enqueue(GetAdjPos(Vector3.zero, Direction.South));
+        }
 
         // Create N open rooms
         while (roomPool.Count > 0)
@@ -105,6 +111,8 @@ public class MapGenerator : MonoBehaviour
                     nextRoom = templates.roomD;
                     break;
             }
+            PlaceRoom(nextRoom, nextPos);
+            
             int numOpenings = Random.Range(1, 4);
             int count = 0;
             while (count < numOpenings) {
@@ -117,8 +125,6 @@ public class MapGenerator : MonoBehaviour
                 spawnPoints.Enqueue(GetAdjPos(nextPos, dir));
                 count++;
             }
-
-            PlaceRoom(nextRoom, nextPos);
         }
 
         // Create Boss Room
@@ -129,12 +135,12 @@ public class MapGenerator : MonoBehaviour
             furthestPoint = cur.sqrMagnitude > furthestPoint.sqrMagnitude ? cur : furthestPoint;
         }
         PlaceRoom(templates.roomA, furthestPoint);
-        Debug.Log(furthestPoint);
     }
 
     private void PlaceRoom(GameObject room, Vector3 position)
     {
         Instantiate(room, position, Quaternion.identity);
+        rooms.Add(position, room);
         takenPositions.Add(position);
     }
 
@@ -150,6 +156,21 @@ public class MapGenerator : MonoBehaviour
                 return origin + Vector3.right * roomOffset;
             default:
                 return origin + Vector3.left * roomOffset;
+        }
+    }
+
+    private void ConnectRooms()
+    {
+        foreach (var entry in rooms)
+        {
+            Vector3 curPos = entry.Key;
+            for(int i = 0; i < 4; i++)
+            {
+                if (rooms.ContainsKey(GetAdjPos(curPos, (Direction)i)))
+                {
+                    entry.Value.GetComponent<Room>().OpenGate((Direction)i);
+                }
+            }
         }
     }
 
