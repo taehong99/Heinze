@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] CharacterController controller;
 
     public Animator animator;
+
     [SerializeField] private bool isAttacking = false; // �÷��̾ ���������� Ȯ��p
     public GameObject weaponObject;
 
@@ -70,7 +71,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void EndAttack()
     {
-        Debug.Log("Called");
         count = 0;
         controller.enabled = true;
     }
