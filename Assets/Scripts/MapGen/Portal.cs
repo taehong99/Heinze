@@ -5,7 +5,13 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     [SerializeField] Portal destination;
-    [SerializeField] Vector3 spawnPos;
+    [SerializeField] Transform spawnPos;
+    ScreenFader fader;
+
+    private void Start()
+    {
+        fader = Manager.UI.Fader;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,9 +19,26 @@ public class Portal : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        StartCoroutine(RoomTransitionRoutine(other));
+    }
+
+    private IEnumerator RoomTransitionRoutine(Collider other) {
+        // Disable player movement
         CharacterController cc = other.GetComponent<CharacterController>();
         cc.enabled = false;
-        other.transform.position = destination.spawnPos;
+
+        // Screen fade to black
+        fader.FadeOut();
+        yield return new WaitForSeconds(fader.FadeDuration);
+
+        // Teleport Player
+        other.transform.position = destination.spawnPos.position;
+        
+        // Screen fade back to white
+        fader.FadeIn();
+
+        // Enable player movement
         cc.enabled = true;
     }
+
 }

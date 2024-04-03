@@ -7,12 +7,18 @@ using UnityEngine.UI;
 public class ScreenFader : BaseUI
 {
     [SerializeField] float fadeDuration;
+    public float FadeDuration => fadeDuration;
     Color dark = new Color(0, 0, 0, 1);
     Color transparent = new Color(0, 0, 0, 0);
 
     public void FadeOut() // Screen slowly turns dark
     {
         StartCoroutine(FadeOutRoutine());
+    }
+
+    public void FadeIn() // Screen slowly lights up
+    {
+        StartCoroutine(FadeInRoutine());
     }
 
     private IEnumerator FadeOutRoutine()
@@ -26,11 +32,6 @@ public class ScreenFader : BaseUI
             yield return null;
         }
         GetUI<Image>("FadeImage").color = dark;
-    }
-
-    public void FadeIn() // Screen slowly lights up
-    {
-        StartCoroutine(FadeInRoutine());
     }
 
     private IEnumerator FadeInRoutine()
