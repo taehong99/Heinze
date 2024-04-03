@@ -17,16 +17,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashCooldown;
     private float dashCooldownTimer;
     private bool isDashing;
+    public bool isAttacking;
 
     CharacterController controller;
     Animator animator;
+    PlayerAttack attacker;
     Vector3 moveDir;
+    Vector3 forwardDir;
+    Vector3 rightDir;
     public event Action InteractPressed;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        attacker = GetComponent<PlayerAttack>();
     }
 
     private void Start()
@@ -53,13 +58,13 @@ public class PlayerController : MonoBehaviour
     float rotationSpeed = 10f;
     private void Move()
     {
-        if (isDashing)
+        if (isDashing || isAttacking)
             return;
 
-        Vector3 forwardDir = Camera.main.transform.forward;
+        forwardDir = Camera.main.transform.forward;
         forwardDir = new Vector3(forwardDir.x, 0, forwardDir.z).normalized;
 
-        Vector3 rightDir = Camera.main.transform.right;
+        rightDir = Camera.main.transform.right;
         rightDir = new Vector3(rightDir.x, 0, rightDir.z).normalized;
 
         controller.Move(forwardDir * moveDir.z * moveSpeed * Time.deltaTime);
@@ -103,8 +108,19 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DashRoutine()
     {
         isDashing = true;
+        attacker.ForceExitAttack();
         float time = 0; // need to remember this to know how long to dash
-        Vector3 dashDir = transform.forward;
+
+        Vector3 dashDir;
+        if (moveDir.magnitude == 0)
+        {
+            dashDir = transform.forward;
+        }
+        else
+        {
+            dashDir = forwardDir * moveDir.z + rightDir * moveDir.x;
+        }
+        
         while (time < dashDuration)
         {
             controller.Move(dashDir * dashSpeed * Time.deltaTime);
