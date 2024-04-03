@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Direction { North, South, East, West }
+public enum Stage { Normal, MidBoss, Boss }
 
 [RequireComponent(typeof(RoomTemplates))]
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] int numRooms;
     [SerializeField] float roomOffset;
+    [SerializeField] Stage stage;
     RoomTemplates templates;
 
     Dictionary<Vector3, Room> rooms = new Dictionary<Vector3, Room>();
@@ -127,14 +129,22 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        // Create Boss Room
+        // Create Boss Room if needed
         Vector3 furthestPoint = Vector3.zero;
         while (spawnPoints.Count > 1)
         {
             Vector3 cur = spawnPoints.Dequeue();
             furthestPoint = cur.sqrMagnitude > furthestPoint.sqrMagnitude ? cur : furthestPoint;
         }
-        PlaceRoom(templates.roomBoss, furthestPoint);
+
+        if(stage == Stage.MidBoss)
+        {
+            PlaceRoom(templates.roomMidBoss, furthestPoint);
+        }
+        else if(stage == Stage.Boss)
+        {
+            PlaceRoom(templates.roomBoss, furthestPoint);
+        }
     }
 
     private void PlaceRoom(GameObject room, Vector3 position)
