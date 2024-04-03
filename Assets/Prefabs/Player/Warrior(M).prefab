@@ -625,8 +625,8 @@ GameObject:
   - component: {fileID: 764874365395733236}
   - component: {fileID: 2410479665550321089}
   - component: {fileID: 965403901639615895}
-  - component: {fileID: 8822862162515818725}
-  - component: {fileID: 4261196834880631562}
+  - component: {fileID: 1311544851872156592}
+  - component: {fileID: 4270141205490548178}
   m_Layer: 7
   m_Name: Warrior(M)
   m_TagString: Player
@@ -664,7 +664,7 @@ Animator:
   m_GameObject: {fileID: 2120978240799133072}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b04406949810a0a46b21e74416b63350, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4283fb92a6532483db1f1f17cb9a022b, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6d26a7f351764c76a086079e3b5801b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -713,14 +713,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c525d6458b9463d88813e878f9c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  sprintSpeedDelta: 3
-  jumpHeight: 2
   groundCheck: {fileID: 1344134580086111119}
   groundDistance: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  sprintSpeedDelta: 3
+  dashSpeed: 25
+  dashDuration: 0.2
+  dashCooldown: 0.5
+  isAttacking: 0
 --- !u!114 &965403901639615895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,7 +753,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8822862162515818725
+--- !u!114 &1311544851872156592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -763,36 +765,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e94d25d8d75e7944bbb9e211329b4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 4558965496711471019}
-  animator: {fileID: 3768220572089237415}
+  weapon: {fileID: 8322227734125218841}
+  attackInterval: 0.5
+  comboCooldown: 0.1
+  combo:
+  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
+  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
+  - {fileID: 11400000, guid: e41715dc2144744f1a945c0c07b121d7, type: 2}
+  - {fileID: 11400000, guid: fea33ea14415b41e4937d1ba94a040d1, type: 2}
   weaponObject: {fileID: 7350538283848230575}
---- !u!54 &4261196834880631562
-Rigidbody:
+--- !u!114 &4270141205490548178
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120978240799133072}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e904cc2c3eeb427993d689f42f51810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PierceEffect1: {fileID: 198926107242498482, guid: 3e04efdf8ee665d48962b33b06e8e3d3, type: 3}
+  PierceEffect2: {fileID: 198659754889719218, guid: 09a2baab97fbf474f9499bf610686e4d, type: 3}
+  SlashEffect: {fileID: 198741542255655676, guid: 5bea49531fc500c408823a2e2863106f, type: 3}
+  SlamEffect: {fileID: 198190562059387860, guid: ca63c6ac7458764498741e0306f78528, type: 3}
 --- !u!1 &2165733910850745292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,9 +2600,9 @@ GameObject:
   - component: {fileID: 6858258649770545381}
   - component: {fileID: 6377372881678941743}
   - component: {fileID: 81343673936153164}
-  - component: {fileID: 4558965496711471019}
-  - component: {fileID: 6003257390494859210}
-  - component: {fileID: 2695098485738580043}
+  - component: {fileID: 8322227734125218841}
+  - component: {fileID: 8508763439550639805}
+  - component: {fileID: 6102918983841296944}
   m_Layer: 0
   m_Name: Mesh_Warrior_WeaponSword
   m_TagString: Untagged
@@ -2678,7 +2675,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4558965496711471019
+--- !u!114 &8322227734125218841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2690,9 +2687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eb035878e09674cbaeb0511a2a5277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCollider: {fileID: 6003257390494859210}
+  attackCollider: {fileID: 8508763439550639805}
   damage: 1
---- !u!65 &6003257390494859210
+--- !u!65 &8508763439550639805
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2709,11 +2706,11 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.2746425, y: 0.057551563, z: 1.3703617}
   m_Center: {x: 0.00000006618497, y: -0.0000000105800755, z: 0.4707991}
---- !u!54 &2695098485738580043
+--- !u!54 &6102918983841296944
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
