@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9e42761d4c8df429119219647dd94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  data: {fileID: 11400000, guid: c7ca600f41cd84bd5b2647e03a421a3b, type: 2}
+  maxHP: 0

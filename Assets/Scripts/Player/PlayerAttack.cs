@@ -6,32 +6,73 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Weapon weapon;
+    [SerializeField] CharacterController controller;
 
     public Animator animator;
-    private bool isAttacking = false; // ÇÃ·¹ÀÌ¾î°¡ °ø°ÝÁßÀÎÁö È®ÀÎ
+    [SerializeField] private bool isAttacking = false; // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½p
     public GameObject weaponObject;
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            ActivateSkillAnimation("Attack");        
+            Attack();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))   
-        {
-            ActivateSkillAnimation("Skil1");
-           
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ActivateSkillAnimation("Skil2");
+        //if (Input.GetKeyDown(KeyCode.Alpha1))   
+        //{
+        //    ActivateSkillAnimation("Skil1");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    ActivateSkillAnimation("Skil2");
+        //}
+        //if (Input.GetKey(KeyCode.Alpha3))
+        //{
+        //    ActivateSkillAnimation("Skil3");
+        //}
+    }
 
-        }
-        if (Input.GetKey(KeyCode.Alpha3))
+    private int count = 0;
+    private void Attack()
+    {
+        controller.enabled = false;
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Slam")
         {
-            ActivateSkillAnimation("Skil3");
-
+            count = 0;
+            return;
         }
+
+        if(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Pierce")
+        {
+            if(count == 0)
+            {
+                Debug.Log("Attack2");
+                animator.SetTrigger("Attack2");
+                count++;
+            }
+            else
+            {
+                Debug.Log("Attack3");
+                animator.SetTrigger("Attack3");
+            }
+        }
+        else if(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Slash")
+        {
+            Debug.Log("Attack4");
+            animator.SetTrigger("Attack4");
+        }
+        else
+        {
+            Debug.Log("Attack1");
+            animator.SetTrigger("Attack1");
+        }
+    }
+
+    private void EndAttack()
+    {
+        Debug.Log("Called");
+        count = 0;
+        controller.enabled = true;
     }
   
     public void ActivateSkillAnimation(string skillName)
@@ -46,8 +87,8 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator WaitForAnimation()
     {
-        yield return new WaitForSeconds(1f); // ¾Ö´Ï¸ÞÀÌ¼Ç ±¸Çö Áß (1)ÃÊ °£Àº ´Ù¸¥ ¾Ö´Ï¸ÞÀÌ¼Ç ¹ß»ý x 
-        isAttacking = false; // Àç»ý Á¾·á
+        yield return new WaitForSeconds(1f); // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (1)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ß»ï¿½ x
+        isAttacking = false; // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
     
     public void EnableWeapon()
