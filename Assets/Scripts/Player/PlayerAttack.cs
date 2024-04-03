@@ -34,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
         ExitAttack();
     }
 
+    #region Basic Attacks
     void Attack()
     {
         if (Time.time - lastComboEnd > comboCooldown && comboCounter < combo.Count)
@@ -77,6 +78,21 @@ public class PlayerAttack : MonoBehaviour
         comboCounter = 0;
         lastComboEnd = Time.time;
     }
+    #endregion
+
+    #region Skills
+
+    private void CrescentSlash() // Skill1
+    {
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
+    }
+
+    private void GoldenSword() // Skill2
+    {
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
+    }
+
+    #endregion
 
     public void EnableWeapon()
     {
@@ -86,6 +102,16 @@ public class PlayerAttack : MonoBehaviour
     public void DisableWeapon()
     {
         weapon.DisableWeapon();
+    }
+
+    private void OnSkill1()
+    {
+        CrescentSlash();
+    }
+
+    private void OnSkill2()
+    {
+        GoldenSword();
     }
 }
 
