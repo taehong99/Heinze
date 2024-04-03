@@ -109,7 +109,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("attack");
         nmAgent.velocity = Vector3.zero;
-        anim.Play("Attack1", 0, 0);
+        anim.Play("Attack", 0, 0);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
         ShootProjectile();
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);

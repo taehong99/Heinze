@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8987766766461562441}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fcfa33b2f5d5e47b5fc920f8e1da03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemToPickup:
+  - {fileID: 11400000, guid: ea1ae775b14704d40883b90efcdd244b, type: 2}
+  - {fileID: 11400000, guid: c457a9a27d467354b8d2b7501777eb5a, type: 2}
+  - {fileID: 11400000, guid: 5e7c7d7df9a98044794bba2b462608eb, type: 2}

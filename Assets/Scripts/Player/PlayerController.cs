@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundDistance;
     [SerializeField] LayerMask groundMask;
 
+    //스킬 컨트롤러
+    //private String[] skilName = new string[3] { "Skil1", "Skil2", "Skil3" };
+
+    // 선택된 슬롯 스킬 업데이트
+    //private InventoryManager inventoryManager;
+
     CharacterController controller;
     Animator animator;
     Vector3 moveDir;
