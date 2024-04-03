@@ -1,29 +1,39 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
-public class Monster : MonoBehaviour, IDamagable
+public class BossMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // 목표와의 최대 거리
+    [SerializeField] float lostDistance;
+    [SerializeField] float attackRange;
+    [SerializeField] float attackCooldown;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Transform projectileSpawnPoint;
+    [SerializeField] float skillDuration;
+    MonserSensor sensor;
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
-
+    int attackCount = 0;
     enum State
     {
         IDLE,
         CHASE,
         ATTACK,
-        KILLED
+        KILLED,
+        SKIL
     }
 
-    State state;
+    [SerializeField] State state;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
+        sensor = GetComponentInChildren<MonserSensor>();
 
         hp = 1;
         state = State.IDLE;
@@ -41,12 +51,19 @@ public class Monster : MonoBehaviour, IDamagable
 
     IEnumerator IDLE()
     {
-        // 애니메이션이 IDLE 상태가 아니면 재생
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("IdleNormal"))
+        while (true)
         {
-            anim.Play("IdleNormal", 0, 0);
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                anim.Play("Idle", 0, 0);
+            }
+            if (sensor.target != null)
+            {
+                ChangeState(State.CHASE);
+                yield break;
+            }
+            yield return null;
         }
-        yield return null;
     }
 
     IEnumerator CHASE()
@@ -54,31 +71,37 @@ public class Monster : MonoBehaviour, IDamagable
         Debug.Log("Chasing");
 
         // CHASE 상태에서는 계속해서 이동
-        while (target != null)
+        if (sensor.target != null)
         {
-            nmAgent.SetDestination(target.position);
+            nmAgent.SetDestination(sensor.target.position);
 
             // 현재 애니메이션 상태 확인
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
             // WalkFWD 애니메이션이 아니면 재생
-            if (!curAnimStateInfo.IsName("WalkFWD"))
+            if (!curAnimStateInfo.IsName("Walk"))
             {
-                anim.Play("WalkFWD", 0, 0);
-                yield return null;
+                anim.Play("Walk", 0, 0);
             }
 
             // 목표까지의 남은 거리가 멈추는 지점보다 작거나 같으면
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
                 // ATTACK 상태로 변경
-                ChangeState(State.ATTACK);
+                if (attackCount < 3)
+                {
+                    ChangeState(State.ATTACK);
+                }
+                else
+                {
+                    ChangeState(State.SKIL);
+                }
                 yield break; // CHASE 상태를 빠져나옴
             }
             // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
             {
-                target = null;
+                sensor.target = null;
                 // IDLE 상태로 변경
                 ChangeState(State.IDLE);
                 yield break; // CHASE 상태를 빠져나옴
@@ -87,20 +110,48 @@ public class Monster : MonoBehaviour, IDamagable
             // 목표 위치로 이동
             yield return null;
         }
+        ChangeState(State.IDLE);
     }
-
     IEnumerator ATTACK()
     {
-        Debug.Log("Attacking");
+        nmAgent.velocity = Vector3.zero;
+        anim.Play("Attack", 0, 0);
+        
+        Debug.Log("attack");
+        ShootProjectile();
+        attackCount++; // 어택 카운트 증가하는거 세기
 
-        // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
-        anim.Play("Attack01", 0, 0);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(1.2f);
+        anim.Play("Idle", 0, 0);
+        yield return new WaitForSeconds(1.8f);
+        nmAgent.isStopped = false;
+        ChangeState(State.CHASE);
 
-        // 공격이 끝나면 다시 CHASE 상태로 변경
+    }
+
+    IEnumerator SKIL()
+    {
+        Debug.Log("Skill activated"); // 스킬 발동을 디버그 로그로 출력
+
+        attackCount = 0;
+        anim.Play("Skil", 0, 0);
+
+        yield return new WaitForSeconds(4.1f);
+
+        //yield return new WaitForSeconds(skillDuration); // 스킬 지속 시간만큼 대기
+        nmAgent.isStopped = false; //멈춤 상태 해제
         ChangeState(State.CHASE);
     }
 
+    void ShootProjectile()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile script = projectile.GetComponent<Projectile>();
+        if (script != null && sensor.target != null)
+        {
+            script.SetTarget(sensor.target);
+        }
+    }
     IEnumerator KILLED()
     {
         Debug.Log("Killed");
@@ -127,6 +178,7 @@ public class Monster : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("TakeDamage");
         hp -= damage;
         if (hp <= 0)
         {
