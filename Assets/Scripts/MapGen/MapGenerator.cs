@@ -134,7 +134,7 @@ public class MapGenerator : MonoBehaviour
             Vector3 cur = spawnPoints.Dequeue();
             furthestPoint = cur.sqrMagnitude > furthestPoint.sqrMagnitude ? cur : furthestPoint;
         }
-        PlaceRoom(templates.roomA, furthestPoint);
+        PlaceRoom(templates.roomBoss, furthestPoint);
     }
 
     private void PlaceRoom(GameObject room, Vector3 position)

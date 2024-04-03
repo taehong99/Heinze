@@ -8,4 +8,6 @@ public class RoomTemplates : MonoBehaviour
     public GameObject roomB;
     public GameObject roomC;
     public GameObject roomD;
+    public GameObject roomMidBoss;
+    public GameObject roomBoss;
 }
