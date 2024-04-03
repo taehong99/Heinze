@@ -1,29 +1,36 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
-public class Monster : MonoBehaviour, IDamagable
+public class RangedMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // 목표와의 최대 거리
+    [SerializeField] float lostDistance;
+    [SerializeField] float attackRange;
+    [SerializeField] float attackCooldown;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Transform projectileSpawnPoint;
+    MonserSensor sensor;
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
-
     enum State
     {
         IDLE,
         CHASE,
         ATTACK,
-        KILLED
+        KILLED,
+        SKIL
     }
 
-    State state;
+    [SerializeField] State state;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
+        sensor = GetComponentInChildren<MonserSensor>();
 
         hp = 1;
         state = State.IDLE;
@@ -42,11 +49,20 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator IDLE()
     {
         // 애니메이션이 IDLE 상태가 아니면 재생
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("IdleNormal"))
+        while(true)
         {
-            anim.Play("IdleNormal", 0, 0);
+            Debug.Log("Idle");
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                anim.Play("Idle", 0, 0);
+            }
+            if (sensor.target != null)
+            {
+                ChangeState(State.CHASE);
+                yield break;
+            }
+            yield return null;
         }
-        yield return null;
     }
 
     IEnumerator CHASE()
@@ -54,17 +70,17 @@ public class Monster : MonoBehaviour, IDamagable
         Debug.Log("Chasing");
 
         // CHASE 상태에서는 계속해서 이동
-        while (target != null)
-        {
-            nmAgent.SetDestination(target.position);
+        if(sensor.target != null)
+        { 
+            nmAgent.SetDestination(sensor.target.position);
 
             // 현재 애니메이션 상태 확인
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
             // WalkFWD 애니메이션이 아니면 재생
-            if (!curAnimStateInfo.IsName("WalkFWD"))
+            if (!curAnimStateInfo.IsName("Walk"))
             {
-                anim.Play("WalkFWD", 0, 0);
+                anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
@@ -76,9 +92,9 @@ public class Monster : MonoBehaviour, IDamagable
                 yield break; // CHASE 상태를 빠져나옴
             }
             // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
             {
-                target = null;
+                sensor.target = null;
                 // IDLE 상태로 변경
                 ChangeState(State.IDLE);
                 yield break; // CHASE 상태를 빠져나옴
@@ -87,20 +103,29 @@ public class Monster : MonoBehaviour, IDamagable
             // 목표 위치로 이동
             yield return null;
         }
+        ChangeState(State.IDLE);
     }
-
     IEnumerator ATTACK()
     {
-        Debug.Log("Attacking");
-
-        // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
-        anim.Play("Attack01", 0, 0);
+        Debug.Log("attack");
+        nmAgent.velocity = Vector3.zero;
+        anim.Play("Attack1", 0, 0);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        ShootProjectile();
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        nmAgent.isStopped = false;
+        ChangeState(State.CHASE); //뭐야
 
-        // 공격이 끝나면 다시 CHASE 상태로 변경
-        ChangeState(State.CHASE);
     }
-
+    void ShootProjectile()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile script = projectile.GetComponent<Projectile>();
+        if (script != null && sensor.target != null)
+        {
+            script.SetTarget(sensor.target);
+        }
+    }
     IEnumerator KILLED()
     {
         Debug.Log("Killed");
