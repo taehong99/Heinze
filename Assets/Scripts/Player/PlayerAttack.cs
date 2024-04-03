@@ -6,11 +6,24 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Weapon weapon;
-    [SerializeField] CharacterController controller;
+    [SerializeField] float attackInterval;
+    [SerializeField] float comboCooldown;
+    [SerializeField] List<AttackSO> combo;
 
-    public Animator animator;
-    [SerializeField] private bool isAttacking = false; // �÷��̾ ���������� Ȯ��p
+    private float lastClickedTime;
+    private float lastComboEnd;
+    int comboCounter;
+
+    PlayerController controller;
+    Animator animator;
+
     public GameObject weaponObject;
+
+    private void Start()
+    {
+        controller = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -18,79 +31,69 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
-        //if (Input.GetKeyDown(KeyCode.Alpha1))   
-        //{
-        //    ActivateSkillAnimation("Skil1");
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    ActivateSkillAnimation("Skil2");
-        //}
-        //if (Input.GetKey(KeyCode.Alpha3))
-        //{
-        //    ActivateSkillAnimation("Skil3");
-        //}
+        ExitAttack();
     }
 
-    private int count = 0;
-    private void Attack()
+    #region Basic Attacks
+    void Attack()
     {
-        controller.enabled = false;
-        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Slam")
+        if (Time.time - lastComboEnd > comboCooldown && comboCounter < combo.Count)
         {
-            count = 0;
-            return;
-        }
+            CancelInvoke("EndCombo");
 
-        if(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Pierce")
-        {
-            if(count == 0)
+            if (Time.time - lastClickedTime >= attackInterval)
             {
-                Debug.Log("Attack2");
-                animator.SetTrigger("Attack2");
-                count++;
-            }
-            else
-            {
-                Debug.Log("Attack3");
-                animator.SetTrigger("Attack3");
+                controller.isAttacking = true;
+                animator.runtimeAnimatorController = combo[comboCounter].animatorOC;
+                animator.Play("Attack", 0, 0);
+                comboCounter++;
+                lastClickedTime = Time.time;
+
+                if (comboCounter > combo.Count)
+                {
+                    comboCounter = 0;
+                }
             }
         }
-        else if(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Slash")
+    }
+
+    void ExitAttack()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f &&
+            animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            Debug.Log("Attack4");
-            animator.SetTrigger("Attack4");
-        }
-        else
-        {
-            Debug.Log("Attack1");
-            animator.SetTrigger("Attack1");
+            controller.isAttacking = false;
+            Invoke("EndCombo", 0.5f);
         }
     }
 
-    private void EndAttack()
+    public void ForceExitAttack()
     {
-        Debug.Log("Called");
-        count = 0;
-        controller.enabled = true;
-    }
-  
-    public void ActivateSkillAnimation(string skillName)
-    {
-        if (animator != null && !isAttacking)
-        {
-            animator.SetTrigger(skillName);
-            isAttacking = true;
-            StartCoroutine(WaitForAnimation());
-        }
+        controller.isAttacking = false;
+        Invoke("EndCombo", 0);
     }
 
-    private IEnumerator WaitForAnimation()
+    void EndCombo()
     {
-        yield return new WaitForSeconds(1f); // �ִϸ��̼� ���� �� (1)�� ���� �ٸ� �ִϸ��̼� �߻� x
-        isAttacking = false; // ��� ����
+        comboCounter = 0;
+        lastComboEnd = Time.time;
     }
-    
+    #endregion
+
+    #region Skills
+
+    private void CrescentSlash() // Skill1
+    {
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
+    }
+
+    private void GoldenSword() // Skill2
+    {
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
+    }
+
+    #endregion
+
     public void EnableWeapon()
     {
         weapon.EnableWeapon();
@@ -99,6 +102,16 @@ public class PlayerAttack : MonoBehaviour
     public void DisableWeapon()
     {
         weapon.DisableWeapon();
+    }
+
+    private void OnSkill1()
+    {
+        CrescentSlash();
+    }
+
+    private void OnSkill2()
+    {
+        GoldenSword();
     }
 }
 
