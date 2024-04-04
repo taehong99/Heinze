@@ -6,19 +6,30 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance;
     [SerializeField] LayerMask groundMask;
     [SerializeField] float sprintSpeedDelta;
     private float moveSpeed;
 
+    [Header("Dash")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float dashCooldown;
-    private float dashCooldownTimer;
+    private float dashCooldownProgress;
+    public event Action<int> DashCountChanged;
+    private int maxDashes = 3;
+    private int dashCount;
+    public int DashCount { get { return dashCount; } set { dashCount = value; DashCountChanged?.Invoke(value); } }
+    public float DashCooldownProgress => dashCooldownProgress;
+    public float DashCooldown => dashCooldown;
+
+    [Header("State Bools")]
     private bool isDashing;
     public bool isAttacking;
 
+    [Header("Misc")]
     CharacterController controller;
     Animator animator;
     PlayerAttack attacker;
@@ -37,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         moveSpeed = Manager.Player.MoveSpeed;
+        DashCount = 0;
     }
 
     private void Update()
@@ -53,6 +65,7 @@ public class PlayerController : MonoBehaviour
         }
         Move();
         HandleGravity();
+        DashCooldownUpdate();
     }
 
     float rotationSpeed = 10f;
@@ -97,19 +110,19 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (dashCooldownTimer > 0)
+        if (dashCount == 0)
             return;
 
         animator.Play("Dash");
+        DashCount--;
         StartCoroutine(DashRoutine());
-        StartCoroutine(DashCooldownRoutine());
     }
 
     private IEnumerator DashRoutine()
     {
         isDashing = true;
         attacker.ForceExitAttack();
-        float time = 0; // need to remember this to know how long to dash
+        float time = 0;
 
         Vector3 dashDir;
         if (moveDir.magnitude == 0)
@@ -125,18 +138,23 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(dashDir * dashSpeed * Time.deltaTime);
             time += Time.deltaTime;
-            yield return null; // this will make Unity stop here and continue next frame
+            yield return null;
         }
         isDashing = false;
     }
 
-    private IEnumerator DashCooldownRoutine()
+    private void DashCooldownUpdate()
     {
-        dashCooldownTimer = dashCooldown;
-        while(dashCooldownTimer >= 0)
+        if(dashCount == maxDashes)
         {
-            dashCooldownTimer -= Time.deltaTime;
-            yield return null;
+            return;
+        }
+
+        dashCooldownProgress += Time.deltaTime;
+        if(dashCooldownProgress >= dashCooldown)
+        {
+            DashCount++;
+            dashCooldownProgress = 0;
         }
     }
 
