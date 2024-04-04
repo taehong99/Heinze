@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] Portal destination;
+    public Portal destination;
     [SerializeField] Transform spawnPos;
     ScreenFader fader;
 

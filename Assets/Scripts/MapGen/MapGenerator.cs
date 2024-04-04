@@ -178,7 +178,12 @@ public class MapGenerator : MonoBehaviour
             {
                 if (rooms.ContainsKey(GetAdjPos(curPos, (Direction)i)))
                 {
+                    // Break Gate/Wall
                     entry.Value.OpenGate((Direction)i);
+
+                    // Create Portal to neighbor
+                    entry.Value.ActivatePortal((Direction)i);
+                    entry.Value.ConnectPortal((Direction)i, rooms[GetAdjPos(curPos, (Direction)i)].portals[(int)GetOppositeDirection((Direction)i)]);
                 }
             }
         }
