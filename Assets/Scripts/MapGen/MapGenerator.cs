@@ -173,13 +173,18 @@ public class MapGenerator : MonoBehaviour
     {
         foreach (var entry in rooms)
         {
+            if (entry.Value.RoomType != Stage.Normal)
+            {
+                continue;
+            }
+
             Vector3 curPos = entry.Key;
             for(int i = 0; i < 4; i++)
             {
                 if (rooms.ContainsKey(GetAdjPos(curPos, (Direction)i)))
                 {
                     // Break Gate/Wall
-                    entry.Value.OpenGate((Direction)i);
+                    //entry.Value.OpenGate((Direction)i);
 
                     // Create Portal to neighbor
                     entry.Value.ActivatePortal((Direction)i);

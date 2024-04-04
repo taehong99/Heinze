@@ -30,7 +30,6 @@ public class ObjectFader : MonoBehaviour
         Vector3 direction = (transform.position - player.transform.position).normalized;
         int count = Physics.RaycastNonAlloc(player.transform.position + direction, direction, hits, distance);
         Debug.DrawRay(player.transform.position, direction * distance, Color.red);
-        Debug.Log(hits[0].transform.name);
         // Find all renderers hit by ray and make them transparent
         cur.Clear();
         for(int i = 0; i < count; i++)
