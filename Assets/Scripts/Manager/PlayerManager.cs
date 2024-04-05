@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Stat { Attack, Crit, Defense, Speed, Health}
 public class PlayerManager : Singleton<PlayerManager>
 {
     // Data
@@ -43,6 +44,27 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         curHP += amount;
         curHP = Mathf.Clamp(curHP, minHP, maxHP);
+    }
+
+    public void UpdateStat(Stat stat, float delta)
+    {
+        switch (stat)
+        {
+            case Stat.Attack:
+                attack += delta;
+                break;
+            case Stat.Crit:
+                critRate += delta;
+                break;
+            case Stat.Defense:
+                defense += delta;
+                break;
+            case Stat.Speed:
+                moveSpeed += delta;
+                break;
+            case Stat.Health:
+                break;
+        }
     }
 
     public void TakeDamage(int amount)
