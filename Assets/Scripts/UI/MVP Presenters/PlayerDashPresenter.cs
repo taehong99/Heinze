@@ -8,8 +8,6 @@ public class PlayerDashPresenter : BaseUI
     [SerializeField] PlayerController player;
     Slider dashSlider;
     Image[] dashSlots = new Image[3];
-    [SerializeField] Sprite dashEmptySprite;
-    [SerializeField] Sprite dashReadySprite;
 
     void Start()
     {
@@ -19,9 +17,9 @@ public class PlayerDashPresenter : BaseUI
         dashSlider = GetUI<Slider>("DashBar");
         dashSlider.maxValue = player.DashCooldown;
 
-        dashSlots[0] = GetUI<Image>("Dash1");
-        dashSlots[1] = GetUI<Image>("Dash2");
-        dashSlots[2] = GetUI<Image>("Dash3");
+        dashSlots[0] = GetUI<Image>("DashOrb1");
+        dashSlots[1] = GetUI<Image>("DashOrb2");
+        dashSlots[2] = GetUI<Image>("DashOrb3");
 
     }
 
@@ -41,11 +39,13 @@ public class PlayerDashPresenter : BaseUI
         {
             if(i < charges)
             {
-                dashSlots[i].sprite = dashReadySprite;
+                //dashSlots[i].sprite = dashReadySprite;
+                dashSlots[i].gameObject.SetActive(true);
             }
             else
             {
-                dashSlots[i].sprite = dashEmptySprite;
+                //dashSlots[i].sprite = dashEmptySprite;
+                dashSlots[i].gameObject.SetActive(false);
             }
         }
     }
