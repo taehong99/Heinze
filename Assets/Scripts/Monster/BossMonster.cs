@@ -131,7 +131,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         ChangeState(State.CHASE);
 
     }
-
+    // ¾È³ç ³­±èÀç¿ø
 
     public void TakeDamage(int damage)
     {
