@@ -9,6 +9,7 @@ public class RandomSelect : MonoBehaviour
     bool canExecute = true;
     float delayTime = 1f; // 이 값은 필요에 따라 조절 가능합니다.
     bool isPressed;
+    public Transform panelTr;
     void Start()
     {
         for (int i = 0; i < deck.Count; i++)
@@ -41,6 +42,7 @@ public class RandomSelect : MonoBehaviour
             // 비어 있는 카드를 생성하고
             CardUI cardUI = Instantiate(cardprefab, parent).GetComponent<CardUI>();
             cardUI.CardUISet(result[i]);
+            cardUI.transform.parent = panelTr;
             cards.Add(cardUI);
             yield return new WaitForSeconds(0.07f);
         }

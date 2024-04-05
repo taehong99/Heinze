@@ -9,6 +9,11 @@ public class CardUI : MonoBehaviour, IPointerDownHandler
     public Image chr;
     public Text cardName;
     Animator animator;
+    public Text cardNameText;
+    public Button addToInventoryButton; // 인벤토리에 추가하는 버튼
+
+    private Card card;
+
 
     private void Start()
     {
@@ -17,8 +22,20 @@ public class CardUI : MonoBehaviour, IPointerDownHandler
     // 카드의 정보를 초기화
     public void CardUISet(Card card)
     {
-        //chr.sprite = card.cardImage;
-        //cardName.text = card.cardName;
+        if (card != null)
+        {
+            this.card = card;
+            cardNameText.text = card.cardName;
+
+            // 버튼 클릭 이벤트 설정
+            addToInventoryButton.onClick.AddListener(AddToInventory);
+        }
+        else
+        {
+            Debug.LogError("Card is null!");
+        }
+
+       
     }
     // 카드가 클릭되면 뒤집는 애니메이션 재생
 
@@ -35,5 +52,10 @@ public class CardUI : MonoBehaviour, IPointerDownHandler
     {
         //연결된 객체에 데이터를 삽입
         //
+    }
+
+    private void AddToInventory()
+    {
+        Debug.Log("인벤토리에 추가함.");
     }
 }

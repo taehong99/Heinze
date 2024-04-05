@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isSprinting", false);
             moveSpeed -= sprintSpeedDelta;
         }
+
         Move();
         HandleGravityAndJump();
     }

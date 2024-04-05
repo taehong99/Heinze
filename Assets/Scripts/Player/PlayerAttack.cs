@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (MouseManager.Instance.Left)
         {
             ActivateSkillAnimation("Attack");        
         }
