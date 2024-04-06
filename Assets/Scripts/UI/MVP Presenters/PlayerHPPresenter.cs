@@ -20,6 +20,11 @@ public class PlayerHPPresenter : BaseUI
         UpdateView();
     }
 
+    private void OnDestroy()
+    {
+        player.PlayerHPChanged -= OnHPChanged;
+    }
+
     public void UpdateView()
     {
         if (player == null || hpText == null)

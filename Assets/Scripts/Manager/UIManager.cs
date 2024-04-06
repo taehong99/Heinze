@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using DungeonArchitect.Samples.GridFlow;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +14,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Image popUpBlocker;
     [SerializeField] Button inGameBlocker;
 
+    private Dictionary<string, BaseUI> dictionary = new Dictionary<string, BaseUI>();
+
     private Stack<PopUpUI> popUpStack = new Stack<PopUpUI>();
     private float prevTimeScale;
     private InGameUI curInGameUI;
@@ -19,6 +23,25 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         EnsureEventSystem();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (popUpStack.Count == 0)
+            {
+                ShowPopUpUI<PlayerStatsUI>();
+            }
+            else if (popUpStack.Peek().name == "PlayerStatsUI(Clone)")
+            {
+                ClosePopUpUI();
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 
     public void EnsureEventSystem()
@@ -47,6 +70,12 @@ public class UIManager : Singleton<UIManager>
         T ui = Instantiate(popUpUI, popUpCanvas.transform);
         popUpStack.Push(ui);
         return ui;
+    }
+
+    public T ShowPopUpUI<T>() where T : PopUpUI
+    {
+        T resource = Load<T>($"UI/PopUp/{typeof(T).Name}");
+        return ShowPopUpUI(resource);
     }
 
     public void ClosePopUpUI()
@@ -118,5 +147,19 @@ public class UIManager : Singleton<UIManager>
         inGameBlocker.gameObject.SetActive(false);
         Destroy(curInGameUI.gameObject);
         curInGameUI = null;
+    }
+
+    private T Load<T>(string path) where T : BaseUI
+    {
+        if (dictionary.TryGetValue(path, out BaseUI ui))
+        {
+            return ui as T;
+        }
+        else
+        {
+            T resource = Resources.Load<T>(path);
+            dictionary.Add(path, resource);
+            return resource;
+        }
     }
 }
