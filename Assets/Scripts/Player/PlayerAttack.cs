@@ -6,10 +6,24 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Weapon weapon;
+    [SerializeField] float attackInterval;
+    [SerializeField] float comboCooldown;
+    [SerializeField] List<AttackSO> combo;
 
-    public Animator animator;
-    private bool isAttacking = false; // 플레이어가 공격중인지 확인
+    private float lastClickedTime;
+    private float lastComboEnd;
+    int comboCounter;
+
+    PlayerController controller;
+    Animator animator;
+
     public GameObject weaponObject;
+
+    private void Start()
+    {
+        controller = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -19,37 +33,71 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))   
         {
-            ActivateSkillAnimation("Skil1");
-           
+            Attack();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ActivateSkillAnimation("Skil2");
-
-        }
-        if (Input.GetKey(KeyCode.Alpha3))
-        {
-            ActivateSkillAnimation("Skil3");
-
-        }
+        ExitAttack();
     }
-  
-    public void ActivateSkillAnimation(string skillName)
+
+    #region Basic Attacks
+    void Attack()
     {
-        if (animator != null && !isAttacking)
+        if (Time.time - lastComboEnd > comboCooldown && comboCounter < combo.Count)
         {
-            animator.SetTrigger(skillName);
-            isAttacking = true;
-            StartCoroutine(WaitForAnimation());
+            CancelInvoke("EndCombo");
+
+            if (Time.time - lastClickedTime >= attackInterval)
+            {
+                controller.isAttacking = true;
+                animator.runtimeAnimatorController = combo[comboCounter].animatorOC;
+                animator.Play("Attack", 0, 0);
+                comboCounter++;
+                lastClickedTime = Time.time;
+
+                if (comboCounter > combo.Count)
+                {
+                    comboCounter = 0;
+                }
+            }
         }
     }
 
-    private IEnumerator WaitForAnimation()
+    void ExitAttack()
     {
-        yield return new WaitForSeconds(1f); // 애니메이션 구현 중 (1)초 간은 다른 애니메이션 발생 x 
-        isAttacking = false; // 재생 종료
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f &&
+            animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            controller.isAttacking = false;
+            Invoke("EndCombo", 0.5f);
+        }
     }
-    
+
+    public void ForceExitAttack()
+    {
+        controller.isAttacking = false;
+        Invoke("EndCombo", 0);
+    }
+
+    void EndCombo()
+    {
+        comboCounter = 0;
+        lastComboEnd = Time.time;
+    }
+    #endregion
+
+    #region Skills
+
+    private void CrescentSlash() // Skill1
+    {
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
+    }
+
+    private void GoldenSword() // Skill2
+    {
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
+    }
+
+    #endregion
+
     public void EnableWeapon()
     {
         weapon.EnableWeapon();
@@ -58,6 +106,16 @@ public class PlayerAttack : MonoBehaviour
     public void DisableWeapon()
     {
         weapon.DisableWeapon();
+    }
+
+    private void OnSkill1()
+    {
+        CrescentSlash();
+    }
+
+    private void OnSkill2()
+    {
+        GoldenSword();
     }
 }
 
