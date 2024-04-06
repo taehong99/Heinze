@@ -15,6 +15,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
+
     enum State
     {
         IDLE,
@@ -109,10 +110,9 @@ public class RangedMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("attack");
         nmAgent.velocity = Vector3.zero;
-        anim.Play("Attack1", 0, 0);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
         ShootProjectile();
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        anim.Play("Attack", 0, 0);
+        yield return new WaitForSeconds(attackCooldown);
         nmAgent.isStopped = false;
         ChangeState(State.CHASE); //¹¹¾ß
 
