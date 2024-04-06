@@ -18,13 +18,16 @@ public class BossMonster : MonoBehaviour, IDamagable
     NavMeshAgent nmAgent;
     Animator anim;
     int attackCount = 0;
+    public GameObject hudDamageText;
+    public Transform hudPos;
     enum State
     {
         IDLE,
         CHASE,
         ATTACK,
         KILLED,
-        SKIL
+        SKIL,
+        DAMAGED
     }
 
     [SerializeField] State state;
@@ -34,8 +37,8 @@ public class BossMonster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         sensor = GetComponentInChildren<MonserSensor>();
-
-        hp = 1;
+        // 테스트용 *^*^^*&^*$&^&#^%#^%@^%#@^바꿔야됨
+        hp = 5;
         state = State.IDLE;
         StartCoroutine(StateMachine());
     }
@@ -55,7 +58,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
-                anim.Play("Idle", 0, 0);
+                anim.Play("Idle");
             }
             if (sensor.target != null)
             {
@@ -81,7 +84,7 @@ public class BossMonster : MonoBehaviour, IDamagable
             // WalkFWD 애니메이션이 아니면 재생
             if (!curAnimStateInfo.IsName("Walk"))
             {
-                anim.Play("Walk", 0, 0);
+                anim.Play("Walk");
             }
 
             // 목표까지의 남은 거리가 멈추는 지점보다 작거나 같으면
@@ -116,7 +119,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         nmAgent.velocity = Vector3.zero;
         anim.Play("Attack", 0, 0);
-        
+
         Debug.Log("attack");
         ShootProjectile();
         attackCount++; // 어택 카운트 증가하는거 세기
@@ -128,6 +131,37 @@ public class BossMonster : MonoBehaviour, IDamagable
         ChangeState(State.CHASE);
 
     }
+    // 안녕 난김재원
+
+    public void TakeDamage(int damage)
+    {
+        GameObject hudText = Instantiate(hudDamageText);
+        hudText.GetComponent<DamageText>().damage = damage;
+        hudText.transform.position = hudPos.position;
+        Debug.Log("데미지 숫자를 받음");
+        hp -= damage;
+        if (hp <= 0)
+        {
+            ChangeState(State.KILLED);
+        }
+        else
+        {
+            Debug.Log("데미지를 받음 ㄷㄷ");
+            StartCoroutine(DAMAGED());
+
+        }
+    }
+
+    IEnumerator DAMAGED()
+    {
+
+        anim.Play("Damaged");
+        // 데미지를 입은 후에 잠시 대기합니다. 이 시간 동안 몬스터는 애니메이션이 재생됩니다.
+        yield return new WaitForSeconds(1.0f);
+
+    }
+
+
 
     IEnumerator SKIL()
     {
@@ -176,15 +210,15 @@ public class BossMonster : MonoBehaviour, IDamagable
         StartCoroutine(state.ToString());
     }
 
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("TakeDamage");
-        hp -= damage;
-        if (hp <= 0)
-        {
-            ChangeState(State.KILLED);
-        }
-    }
+    //public void TakeDamage(int damage)
+    //{
+    //    Debug.Log("TakeDamage");
+    //    hp -= damage;
+    //    if (hp <= 0)
+    //    {
+    //        ChangeState(State.KILLED);
+    //    }
+    //}
 
     public void Detect(Transform target)
     {
@@ -193,3 +227,4 @@ public class BossMonster : MonoBehaviour, IDamagable
         ChangeState(State.CHASE);
     }
 }
+

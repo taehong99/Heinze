@@ -42,9 +42,9 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator IDLE()
     {
         // 애니메이션이 IDLE 상태가 아니면 재생
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("IdleNormal"))
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            anim.Play("IdleNormal", 0, 0);
+            anim.Play("Idle", 0, 0);
         }
         yield return null;
     }
@@ -62,9 +62,9 @@ public class Monster : MonoBehaviour, IDamagable
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
             // WalkFWD 애니메이션이 아니면 재생
-            if (!curAnimStateInfo.IsName("WalkFWD"))
+            if (!curAnimStateInfo.IsName("Walk"))
             {
-                anim.Play("WalkFWD", 0, 0);
+                anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
@@ -94,7 +94,7 @@ public class Monster : MonoBehaviour, IDamagable
         Debug.Log("Attacking");
 
         // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
-        anim.Play("Attack01", 0, 0);
+        anim.Play("Attack", 0, 0);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
         // 공격이 끝나면 다시 CHASE 상태로 변경
