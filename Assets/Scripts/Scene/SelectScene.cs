@@ -6,6 +6,7 @@ public class SelectScene : BaseScene
 {
     public void ChooseWarrior()
     {
+        Manager.Player.ChooseJob(PlayerJob.Warrior);
         Manager.Scene.LoadScene("Floor1");
     }
 
