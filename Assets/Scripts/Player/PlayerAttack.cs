@@ -105,7 +105,6 @@ public class PlayerAttack : MonoBehaviour
     {
         Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
         int count = Physics.OverlapSphereNonAlloc(transform.position, skill1Radius, colliders, monsterMask);
-        Debug.Log(count);
         for(int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
@@ -121,7 +120,6 @@ public class PlayerAttack : MonoBehaviour
     private void Skill2Damage()
     {
         int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(0.5f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
-        Debug.Log(count);
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();

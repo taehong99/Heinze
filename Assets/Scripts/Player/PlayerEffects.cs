@@ -29,7 +29,6 @@ public class PlayerEffects : MonoBehaviour
         switch (effect)
         {
             case "Pierce1":
-                Debug.Log("Pricked");
                 Manager.Pool.GetPool(Pierce1, transform.position + Vector3.up * 0.8f, transform.rotation);
                 break;
             case "Pierce2":
