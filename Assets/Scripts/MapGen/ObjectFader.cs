@@ -8,7 +8,7 @@ using UnityEngine.TextCore.Text;
 
 public class ObjectFader : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
+    PlayerController player;
     float originalOpacity;
     Material material;
 
@@ -16,6 +16,7 @@ public class ObjectFader : MonoBehaviour
     {
         //material = GetComponent<Material>();
         //originalOpacity = material.color.a;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Ray Version

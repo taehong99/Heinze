@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a8cf2cce92649e99ed44fb3f9abee6, type: 3}
+  m_Name: WarriorBuff3
+  m_EditorClassIdentifier: 
+  affectedStat: 2
+  increaseRate: 0
+  value: 3
+  buffIcon: {fileID: 0}
+  buffName: "\uBC29\uC5B4\uAD6C \uAD00\uB9AC"
+  buffDescription: "\uBC29\uC5B4\uB825 5 \uC99D\uAC00."
+  buffCaption: "\u2018\uB2E6\uACE0, \uC870\uC774\uACE0, \uAE30\uB984\uCE58\uC790!\u2019"

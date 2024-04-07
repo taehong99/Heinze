@@ -88,24 +88,25 @@ public class PlayerAttack : MonoBehaviour
 
     #region Skills
 
-    protected virtual void UseSkill1()
+    protected virtual void UseSkill(int skillId)
     {
         ForceExitAttack();
-        animator.Play("CrescentSlash");
-    }
-
-    protected virtual void UseSkill2()
-    {
-        ForceExitAttack();
-        animator.Play("SummonSword");
-        SummonSword();
+        switch (skillId)
+        {
+            case 0:
+                animator.Play("CrescentSlash");
+                break;
+            case 1:
+                animator.Play("SummonSword");
+                SummonSword();
+                break;
+        }
     }
 
     private void CrescentSlash() // Skill1
     {
         Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
         int count = Physics.OverlapSphereNonAlloc(transform.position, skill1Radius, colliders, monsterMask);
-        Debug.Log(count);
         for(int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
@@ -121,7 +122,6 @@ public class PlayerAttack : MonoBehaviour
     private void Skill2Damage()
     {
         int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(0.5f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
-        Debug.Log(count);
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
@@ -149,12 +149,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSkill1()
     {
-        UseSkill1();
+        UseSkill(0);
     }
 
     private void OnSkill2()
     {
-        UseSkill2();
+        UseSkill(1);
     }
 }
 
