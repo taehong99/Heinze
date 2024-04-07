@@ -9,9 +9,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Canvas popUpCanvas;
     [SerializeField] Canvas windowCanvas;
     [SerializeField] Canvas inGameCanvas;
+    [SerializeField] Canvas fadeCanvas;
 
     [SerializeField] Image popUpBlocker;
     [SerializeField] Button inGameBlocker;
+    [SerializeField] ScreenFader fader;
+    public ScreenFader Fader => fader;
 
     private Dictionary<string, BaseUI> dictionary = new Dictionary<string, BaseUI>();
 

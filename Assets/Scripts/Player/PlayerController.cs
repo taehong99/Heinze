@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     float rotationSpeed = 10f;
     private void Move()
     {
-        if (isDashing || isAttacking)
+        if (isDashing || isAttacking || !controller.enabled)
             return;
 
         forwardDir = Camera.main.transform.forward;
