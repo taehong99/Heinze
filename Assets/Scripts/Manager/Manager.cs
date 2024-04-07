@@ -9,11 +9,15 @@ public static class Manager
     public static SceneManager Scene { get { return SceneManager.Instance; } }
     public static SoundManager Sound { get { return SoundManager.Instance; } }
     public static UIManager UI { get { return UIManager.Instance; } }
+    public static PlayerManager Player { get { return PlayerManager.Instance; } }
+    public static MouseManager Mouse { get { return MouseManager.Instance; } }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
         GameManager.ReleaseInstance();
+        MouseManager.ReleaseInstance();
+        PlayerManager.ReleaseInstance();
         DataManager.ReleaseInstance();
         PoolManager.ReleaseInstance();
         ResourceManager.ReleaseInstance();
@@ -22,6 +26,8 @@ public static class Manager
         UIManager.ReleaseInstance();
 
         GameManager.CreateInstance();
+        MouseManager.CreateInstance();
+        PlayerManager.CreateInstance();
         DataManager.CreateInstance();
         PoolManager.CreateInstance();
         ResourceManager.CreateInstance();

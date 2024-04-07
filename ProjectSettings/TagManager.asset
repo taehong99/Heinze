@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - InventoryManager
+  - GameManager
+  - ItemInventory
   layers:
   - Default
   - TransparentFX
@@ -12,11 +15,11 @@ TagManager:
   - Water
   - UI
   - Ground
+  - Player
+  - Monster
+  - Interactable
   - 
-  - 
-  - 
-  - 
-  - 
+  - MonsterDeath
   - 
   - 
   - 
