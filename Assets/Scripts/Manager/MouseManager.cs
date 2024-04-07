@@ -2,24 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
-    private static MouseManager instance;
     [SerializeField] RectTransform[] slotBars;
-    public static MouseManager Instance 
-    { 
-        get 
-        { 
-            return instance; 
-        }
-    }
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this);
-    }
+
     public bool Left
     {
         get;

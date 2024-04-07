@@ -33,12 +33,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (MouseManager.Instance.Left)
-        {
-            ActivateSkillAnimation("Attack");        
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))   
-        {
+        if (MouseManager.Instance.Left)        {
+            //ActivateSkillAnimation("Attack");
             Attack();
         }
         ExitAttack();
