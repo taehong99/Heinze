@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerJob { Warrior, Archer, Magician }
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject warriorPrefab;
@@ -27,10 +26,10 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
 
-        /*inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
-        for (int i=0; i < itemToPickup.Count; i++)
+        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
+        for (int i = 0; i < itemToPickup.Count; i++)
         {
             bool addRestult = inventoryManager.AddItem(itemToPickup[i]);
-        }*/
+        }
     }
 }
