@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     float rotationSpeed = 10f;
     private void Move()
     {
+        if (!controller.enabled)
+            return;
+
         Vector3 forwardDir = Camera.main.transform.forward;
         forwardDir = new Vector3(forwardDir.x, 0, forwardDir.z).normalized;
 

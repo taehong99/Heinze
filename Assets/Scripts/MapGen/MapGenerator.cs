@@ -51,6 +51,10 @@ public class MapGenerator : MonoBehaviour
         }
 
         ShuffleList(order);
+        while (!(order[0] == 'A' || order[0] == 'B')) // Ensure first room is A or B
+        {
+            ShuffleList(order);
+        }
         return new Queue<char>(order);
     }
 
@@ -73,8 +77,17 @@ public class MapGenerator : MonoBehaviour
         Debug.Log(roomPool.Count);
 
         // Instantiate starting room with 2 ~ 4 doors
-        Room curRoom = templates.roomA.GetComponent<Room>();
-        PlaceRoom(templates.roomA, Vector3.zero);
+        /*Room curRoom = templates.roomA.GetComponent<Room>();
+        PlaceRoom(templates.roomA, Vector3.zero);*/
+        char roomType = roomPool.Dequeue();
+        if(roomType == 'A')
+        {
+            PlaceRoom(templates.roomA[Random.Range(0, templates.roomA.Length)], Vector3.zero);
+        }
+        else
+        {
+            PlaceRoom(templates.roomB[Random.Range(0, templates.roomB.Length)], Vector3.zero);
+        }
 
         // Add openings to queue
         Queue<Vector3> spawnPoints = new Queue<Vector3>();
@@ -101,16 +114,16 @@ public class MapGenerator : MonoBehaviour
             switch (nextRoomType)
             {
                 case 'A':
-                    nextRoom = templates.roomA;
+                    nextRoom = templates.roomA[Random.Range(0, templates.roomA.Length)];
                     break;
                 case 'B':
-                    nextRoom = templates.roomB;
+                    nextRoom = templates.roomB[Random.Range(0, templates.roomB.Length)];
                     break;
                 case 'C':
-                    nextRoom = templates.roomC;
+                    nextRoom = templates.roomC[Random.Range(0, templates.roomC.Length)];
                     break;
                 default:
-                    nextRoom = templates.roomD;
+                    nextRoom = templates.roomD[Random.Range(0, templates.roomD.Length)];
                     break;
             }
             PlaceRoom(nextRoom, nextPos);
