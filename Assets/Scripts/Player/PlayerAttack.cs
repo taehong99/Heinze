@@ -88,17 +88,19 @@ public class PlayerAttack : MonoBehaviour
 
     #region Skills
 
-    protected virtual void UseSkill1()
+    protected virtual void UseSkill(int skillId)
     {
         ForceExitAttack();
-        animator.Play("CrescentSlash");
-    }
-
-    protected virtual void UseSkill2()
-    {
-        ForceExitAttack();
-        animator.Play("SummonSword");
-        SummonSword();
+        switch (skillId)
+        {
+            case 0:
+                animator.Play("CrescentSlash");
+                break;
+            case 1:
+                animator.Play("SummonSword");
+                SummonSword();
+                break;
+        }
     }
 
     private void CrescentSlash() // Skill1
@@ -147,12 +149,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSkill1()
     {
-        UseSkill1();
+        UseSkill(0);
     }
 
     private void OnSkill2()
     {
-        UseSkill2();
+        UseSkill(1);
     }
 }
 
