@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public Item item;
     public Image image;
     public Text countText;
     public Transform canvas;

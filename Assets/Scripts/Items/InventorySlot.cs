@@ -28,16 +28,20 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
     public void UpdateIcon()
     {
         icon.sprite = skillData.skillIcon;
+        filled = true;
     }
 
     public void UpdateIcon(Sprite newIcon)
     {
         icon.sprite = newIcon;
-        //filled = true;
+        filled = true;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!filled)
+            return;
+
         Debug.Log("Begin drag");
         if (parent.dragData == null) // Instantiate if null
             parent.dragData = new InventoryBar.DragData();
@@ -50,13 +54,16 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!filled)
+            return;
         Debug.Log("Dragging");
         icon.transform.position = eventData.position;
-        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!filled)
+            return;
         Debug.Log("End Drag");
         icon.raycastTarget = true;
 
@@ -90,11 +97,15 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
                         {
                             PlayerSkillDataSO tempData = slots[i].skillData;
                             slots[i].skillData = skillData;
+                            Manager.Game.UpdateSkillSlot(i, skillData);
+                            Manager.Game.UpdateSkillSlot(idx, tempData);
                             skillData = tempData;
                         }
                         else
                         {
                             slots[i].skillData = skillData;
+                            Manager.Game.UpdateSkillSlot(i, skillData);
+                            Manager.Game.UpdateSkillSlot(idx, null);
                             skillData = null;
                             filled = false;
                         }

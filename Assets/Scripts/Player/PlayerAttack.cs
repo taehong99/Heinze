@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Basic Attack")]
     [SerializeField] Weapon weapon;
     [SerializeField] float attackInterval;
     [SerializeField] float comboCooldown;
@@ -33,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (MouseManager.Instance.Left)        {
+        if (MouseManager.Instance.Left){
             //ActivateSkillAnimation("Attack");
             Attack();
         }

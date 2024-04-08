@@ -5,11 +5,21 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject warriorPrefab;
-    public PlayerSkillDataSO skillArsenal;
+    private PlayerSkillDataSO[] skillSlots = new PlayerSkillDataSO[4];
 
     public void Test()
     {
         Debug.Log(GetInstanceID());
+    }
+
+    public void UpdateSkillSlot(int idx, PlayerSkillDataSO skillData)
+    {
+        skillSlots[idx] = skillData;
+    }
+
+    public int GetSkillIDInSlot(int idx)
+    {
+        return skillSlots[idx].skillID;
     }
 
     public void CreatePools()

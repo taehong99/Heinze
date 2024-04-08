@@ -42,6 +42,7 @@ public class InventoryBar : MonoBehaviour
                 continue;
             inventorySlots[i].skillData = skillData;
             inventorySlots[i].UpdateIcon();
+            Manager.Game.UpdateSkillSlot(i, skillData);
             return;
         }
 
