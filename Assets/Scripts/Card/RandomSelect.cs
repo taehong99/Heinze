@@ -10,6 +10,7 @@ public class RandomSelect : MonoBehaviour
     float delayTime = 1f; // 이 값은 필요에 따라 조절 가능합니다.
     bool isPressed;
     public Transform panelTr;
+    public InventoryManager inventoryManager;
     void Start()
     {
         for (int i = 0; i < deck.Count; i++)
@@ -68,9 +69,10 @@ public class RandomSelect : MonoBehaviour
     {
         result.Clear(); // 결과 리스트 초기화
         canExecute = true;
-        //for (int i = 0; i < 3; i++)
+        //foreach (var card in cards)
         //{
-
+        //    // InventoryManager를 통해 아이템을 추가
+        //    inventoryManager.AddCard(card.Card);
         //}
     }
 

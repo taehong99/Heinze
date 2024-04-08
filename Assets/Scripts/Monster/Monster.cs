@@ -9,13 +9,16 @@ public class Monster : MonoBehaviour, IDamagable
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
+    public GameObject hudDamageText;
+    public Transform hudPos;
 
     enum State
     {
         IDLE,
         CHASE,
         ATTACK,
-        KILLED
+        KILLED,
+        DAMAGED
     }
 
     State state;
@@ -25,6 +28,7 @@ public class Monster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
 
+        // 몬스터의 hp
         hp = 1;
         state = State.IDLE;
         StartCoroutine(StateMachine());
@@ -92,13 +96,17 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator ATTACK()
     {
         Debug.Log("Attacking");
-
         // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
         anim.Play("Attack", 0, 0);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-
         // 공격이 끝나면 다시 CHASE 상태로 변경
         ChangeState(State.CHASE);
+    }
+
+    IEnumerator DAMAGED()
+    {
+        anim.Play("Damaged");
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator KILLED()
@@ -127,13 +135,21 @@ public class Monster : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
+        GameObject hudText = Instantiate(hudDamageText);
+        hudText.GetComponent<DamageText>().damage = damage;
+        hudText.transform.position = hudPos.position;
+        Debug.Log("데미지 숫자를 받음");
         hp -= damage;
         if (hp <= 0)
         {
             ChangeState(State.KILLED);
         }
+        else
+        {
+            Debug.Log("데미지를 받음 ㄷㄷ");
+            StartCoroutine(DAMAGED());
+        }
     }
-
     public void Detect(Transform target)
     {
         // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경

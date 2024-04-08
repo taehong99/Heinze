@@ -37,7 +37,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         sensor = GetComponentInChildren<MonserSensor>();
-        // 테스트용 *^*^^*&^*$&^&#^%#^%@^%#@^바꿔야됨
+        sensor = GetComponentInChildren<MonserSensor>();
         hp = 5;
         state = State.IDLE;
         StartCoroutine(StateMachine());
@@ -117,13 +117,11 @@ public class BossMonster : MonoBehaviour, IDamagable
     }
     IEnumerator ATTACK()
     {
-        nmAgent.velocity = Vector3.zero;
-        anim.Play("Attack", 0, 0);
-
         Debug.Log("attack");
+        nmAgent.velocity = Vector3.zero;
         ShootProjectile();
+        anim.Play("Attack", 0, 0);
         attackCount++; // 어택 카운트 증가하는거 세기
-
         yield return new WaitForSeconds(1.2f);
         anim.Play("Idle", 0, 0);
         yield return new WaitForSeconds(1.8f);
@@ -131,8 +129,6 @@ public class BossMonster : MonoBehaviour, IDamagable
         ChangeState(State.CHASE);
 
     }
-    // 안녕 난김재원
-
     public void TakeDamage(int damage)
     {
         GameObject hudText = Instantiate(hudDamageText);
@@ -148,7 +144,6 @@ public class BossMonster : MonoBehaviour, IDamagable
         {
             Debug.Log("데미지를 받음 ㄷㄷ");
             StartCoroutine(DAMAGED());
-
         }
     }
 
