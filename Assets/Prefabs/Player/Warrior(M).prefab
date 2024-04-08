@@ -621,12 +621,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642117232620955313}
-  - component: {fileID: 3768220572089237415}
-  - component: {fileID: 764874365395733236}
   - component: {fileID: 2410479665550321089}
-  - component: {fileID: 965403901639615895}
   - component: {fileID: 1311544851872156592}
   - component: {fileID: 4270141205490548178}
+  - component: {fileID: 3768220572089237415}
+  - component: {fileID: 764874365395733236}
+  - component: {fileID: 965403901639615895}
   m_Layer: 7
   m_Name: Warrior(M)
   m_TagString: Player
@@ -655,6 +655,71 @@ Transform:
   - {fileID: 9126284744480706870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2410479665550321089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120978240799133072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c525d6458b9463d88813e878f9c7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 1344134580086111119}
+  groundDistance: 0.1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  sprintSpeedDelta: 3
+  dashSpeed: 25
+  dashDuration: 0.2
+  dashCooldown: 4
+  isAttacking: 0
+--- !u!114 &1311544851872156592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120978240799133072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e94d25d8d75e7944bbb9e211329b4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 8322227734125218841}
+  attackInterval: 0.5
+  comboCooldown: 0.1
+  combo:
+  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
+  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
+  - {fileID: 11400000, guid: e41715dc2144744f1a945c0c07b121d7, type: 2}
+  - {fileID: 11400000, guid: fea33ea14415b41e4937d1ba94a040d1, type: 2}
+  monsterMask:
+    serializedVersion: 2
+    m_Bits: 256
+  skill1Radius: 5
+  skill2DamagePoint: {fileID: 9126284744480706870}
+  skill3Prefab: {fileID: 0}
+  weaponObject: {fileID: 7350538283848230575}
+--- !u!114 &4270141205490548178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120978240799133072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e904cc2c3eeb427993d689f42f51810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PierceEffect1: {fileID: 198926107242498482, guid: 3e04efdf8ee665d48962b33b06e8e3d3, type: 3}
+  PierceEffect2: {fileID: 198659754889719218, guid: 09a2baab97fbf474f9499bf610686e4d, type: 3}
+  SlashEffect: {fileID: 198741542255655676, guid: 5bea49531fc500c408823a2e2863106f, type: 3}
+  SlamEffect: {fileID: 198190562059387860, guid: ca63c6ac7458764498741e0306f78528, type: 3}
 --- !u!95 &3768220572089237415
 Animator:
   serializedVersion: 5
@@ -702,28 +767,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &2410479665550321089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120978240799133072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c525d6458b9463d88813e878f9c7b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCheck: {fileID: 1344134580086111119}
-  groundDistance: 0.1
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  sprintSpeedDelta: 3
-  dashSpeed: 25
-  dashDuration: 0.2
-  dashCooldown: 4
-  isAttacking: 0
 --- !u!114 &965403901639615895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,48 +797,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1311544851872156592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120978240799133072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e94d25d8d75e7944bbb9e211329b4b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 8322227734125218841}
-  attackInterval: 0.5
-  comboCooldown: 0.1
-  combo:
-  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
-  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
-  - {fileID: 11400000, guid: e41715dc2144744f1a945c0c07b121d7, type: 2}
-  - {fileID: 11400000, guid: fea33ea14415b41e4937d1ba94a040d1, type: 2}
-  skill1Radius: 5
-  skill2DamagePoint: {fileID: 9126284744480706870}
-  monsterMask:
-    serializedVersion: 2
-    m_Bits: 256
-  weaponObject: {fileID: 7350538283848230575}
---- !u!114 &4270141205490548178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120978240799133072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e904cc2c3eeb427993d689f42f51810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PierceEffect1: {fileID: 198926107242498482, guid: 3e04efdf8ee665d48962b33b06e8e3d3, type: 3}
-  PierceEffect2: {fileID: 198659754889719218, guid: 09a2baab97fbf474f9499bf610686e4d, type: 3}
-  SlashEffect: {fileID: 198741542255655676, guid: 5bea49531fc500c408823a2e2863106f, type: 3}
-  SlamEffect: {fileID: 198190562059387860, guid: ca63c6ac7458764498741e0306f78528, type: 3}
 --- !u!1 &2150872898571025067
 GameObject:
   m_ObjectHideFlags: 0

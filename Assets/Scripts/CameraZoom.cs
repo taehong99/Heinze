@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 
 public class CameraZoom : MonoBehaviour
 {

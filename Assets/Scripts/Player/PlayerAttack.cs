@@ -10,17 +10,23 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float attackInterval;
     [SerializeField] float comboCooldown;
     [SerializeField] List<AttackSO> combo;
-
-    [Header("Skills")]
-    [SerializeField] float skill1Radius;
-    [SerializeField] Transform skill2DamagePoint;
     [SerializeField] LayerMask monsterMask;
+
+    [Header("Skill1")]
+    [SerializeField] float skill1Radius;
+
+    [Header("Skill2")]
+    [SerializeField] Transform skill2DamagePoint;
+
+    [Header("Skill3")]
+    [SerializeField] GameObject skill3Prefab;
 
     private float lastClickedTime;
     private float lastComboEnd;
     int comboCounter;
 
     PlayerController controller;
+    PlayerEffects effects;
     Animator animator;
     Collider[] colliders = new Collider[10];
 
@@ -29,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<PlayerController>();
+        effects = GetComponent<PlayerEffects>();
         animator = GetComponent<Animator>();
     }
 
@@ -95,18 +102,23 @@ public class PlayerAttack : MonoBehaviour
         switch (skillId)
         {
             case 0:
-                animator.Play("CrescentSlash");
+                animator.Play("Skill1");
                 break;
             case 1:
-                animator.Play("SummonSword");
+                animator.Play("Skill2");
                 SummonSword();
+                break;
+            case 2:
+                animator.Play("Skill3");
                 break;
         }
     }
 
-    private void CrescentSlash() // Skill1
+    // Skill1
+    private void CrescentSlash()
     {
-        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
+        //Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
+        effects.PlayEffect("Skill1");
         int count = Physics.OverlapSphereNonAlloc(transform.position, skill1Radius, colliders, monsterMask);
         for(int i = 0; i < count; i++)
         {
@@ -115,9 +127,11 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void SummonSword() // Skill2
+    // Skill2
+    private void SummonSword()
     {
-        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
+        //Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
+        effects.PlayEffect("Skill2");
     }
 
     private void Skill2Damage()
@@ -129,6 +143,22 @@ public class PlayerAttack : MonoBehaviour
             damagable?.TakeDamage(1);
         }
     }
+
+    // Skill3
+    private void RogelSlash()
+    {
+        StartCoroutine(SummonWaves());
+    }
+    
+    private IEnumerator SummonWaves()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            effects.PlayEffect("Skill3");
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
 
     private void OnDrawGizmos()
     {
@@ -150,7 +180,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSkill1()
     {
-        UseSkill(0);
+        UseSkill(2);
     }
 
     private void OnSkill2()
