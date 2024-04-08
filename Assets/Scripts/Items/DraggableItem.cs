@@ -11,6 +11,10 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Text countText;
     public Transform canvas;
 
+    private void Start()
+    {
+        image = GetComponent<Image>();
+    }
 
     [HideInInspector] public Transform parentAfterDrag;
     public void OnBeginDrag(PointerEventData eventData)
@@ -25,7 +29,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("Draging");
-        transform.position = Input.mousePosition;
+        //transform.position = Input.mousePosition;
+        transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)

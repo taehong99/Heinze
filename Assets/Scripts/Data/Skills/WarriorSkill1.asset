@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793c541ad891d45e1bfd5cdc423cf14c, type: 3}
+  m_Name: WarriorSkill1
+  m_EditorClassIdentifier: 
+  skillID: 0
+  skillIcon: {fileID: 7375185911448686712, guid: 0cd7a0f2fc236f647ae80a68741b8f66, type: 3}
+  skillName: "\uBC18\uB2EC \uBCA0\uAE30"
+  skillDescription: "\uC77C\uC815 \uBC94\uC704\uC758 \uC801\uC744 \uC7AC\uBE60\uB974\uAC8C
+    \uBCA0\uC5B4 \uACF5\uACA9\uB825\uC758 180% \uB370\uBBF8\uC9C0\uB85C \uACF5\uACA9\uD55C\uB2E4. "
+  skillCaption: "\u2018\uBC18\uB2EC\uBCF4\uB2E4\uB3C4 \uB0A0\uCE74\uB85C\uC6CC \uBCF4\uC774\uB294
+    \uAC80\uAE30\uC5D0 \uB2E4\uAC00\uAC04\uB2E4\uBA74 \uC131\uD558\uC9C0 \uBABB\uD560\uAC83\uC774\uB2E4.\u2019"

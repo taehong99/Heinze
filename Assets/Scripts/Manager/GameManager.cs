@@ -5,9 +5,8 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject warriorPrefab;
+    public PlayerSkillDataSO skillArsenal;
 
-    private InventoryManager inventoryManager;
-    public List<Item> itemToPickup;
     public void Test()
     {
         Debug.Log(GetInstanceID());
@@ -26,10 +25,5 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
 
-        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
-        for (int i = 0; i < itemToPickup.Count; i++)
-        {
-            bool addRestult = inventoryManager.AddItem(itemToPickup[i]);
-        }
     }
 }
