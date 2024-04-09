@@ -8,7 +8,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
 {
     [Header("Slot Data")]
     public PlayerSkillDataSO skillData;
-    bool filled;
+    [SerializeField] bool filled;
     InventoryBar parent;
     Image icon;
     int idx;
@@ -71,6 +71,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
         if (!RectTransformUtility.RectangleContainsScreenPoint((RectTransform)parent.transform, eventData.position))
         {
             icon.transform.SetParent(parent.dragData.transform);
+            icon.transform.SetAsFirstSibling();
             icon.transform.localPosition = Vector2.zero;
             return;
         }
@@ -85,6 +86,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
                     if (slots[i] == parent.dragData.slot) // Slot is same as start
                     {
                         icon.transform.SetParent(parent.dragData.transform);
+                        icon.transform.SetAsFirstSibling();
                         icon.transform.localPosition = Vector2.zero;
                         return;
                     }
@@ -108,34 +110,16 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
                             Manager.Game.UpdateSkillSlot(idx, null);
                             skillData = null;
                             filled = false;
+                            slots[i].filled = true;
                         }
                     }
                 }
             }
         }
         icon.transform.SetParent(parent.dragData.transform);
+        icon.transform.SetAsFirstSibling();
         icon.transform.localPosition = Vector2.zero;
     }
-
-    //public void OnDrop(PointerEventData eventData)
-    //{
-    //    if (filled)
-    //    {
-
-    //    }
-    //    else
-    //    {
-
-    //    }
-
-    //    if (transform.childCount == 0)
-    //    {
-    //        GameObject dropped = eventData.pointerDrag;
-    //        DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
-    //        draggableItem.parentAfterDrag = transform;
-    //    }
-    //}
-
 }    
         
     
