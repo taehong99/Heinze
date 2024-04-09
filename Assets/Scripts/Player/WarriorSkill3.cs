@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleDamage : MonoBehaviour
+public class WarriorSkill3 : MonoBehaviour
 {
     [SerializeField] LayerMask monsterMask;
-    HashSet<Collider> damaged = new HashSet<Collider>();
     Collider[] colliders = new Collider[10];
+    HashSet<Collider> damaged = new HashSet<Collider>();
 
     private void OnDisable()
     {
@@ -16,7 +16,6 @@ public class ParticleDamage : MonoBehaviour
     private void Update()
     {
         int count = Physics.OverlapSphereNonAlloc(transform.position, 5, colliders, monsterMask);
-        Debug.Log(count);
         for (int i = 0; i < count; i++)
         {
             if (damaged.Contains(colliders[i]))

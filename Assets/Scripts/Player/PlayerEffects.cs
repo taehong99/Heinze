@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class PlayerEffects : MonoBehaviour
 {
-    [SerializeField] ParticleSystem PierceEffect1;
-    [SerializeField] ParticleSystem PierceEffect2;
-    [SerializeField] ParticleSystem SlashEffect;
-    [SerializeField] ParticleSystem SlamEffect;
+    //[SerializeField] ParticleSystem PierceEffect1;
+    //[SerializeField] ParticleSystem PierceEffect2;
+    //[SerializeField] ParticleSystem SlashEffect;
+    //[SerializeField] ParticleSystem SlamEffect;
 
-    private PooledObject Pierce1;
+    private PooledObject Pierce;
     private PooledObject Slash;
     private PooledObject Slam;
     private PooledObject Skill1;
     private PooledObject Skill2;
     private PooledObject Skill3;
+    private PooledObject Skill4;
 
     private void Start()
     {
-        Pierce1 = Manager.Resource.Load<PooledObject>("Effects/WarriorPierce1");
+        Pierce = Manager.Resource.Load<PooledObject>("Effects/WarriorPierce1");
         Slash = Manager.Resource.Load<PooledObject>("Effects/WarriorSlash");
         Slam = Manager.Resource.Load<PooledObject>("Effects/WarriorSlam");
         Skill1 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1");
         Skill2 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2");
         Skill3 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill3");
+        Skill4 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4");
     }
 
     public void PlayEffect(string effect)
@@ -31,11 +33,8 @@ public class PlayerEffects : MonoBehaviour
         Vector3 playerTorsoOffset = Vector3.up * 0.8f;
         switch (effect)
         {
-            case "Pierce1":
-                Manager.Pool.GetPool(Pierce1, transform.position + playerTorsoOffset, transform.rotation);
-                break;
-            case "Pierce2":
-                PierceEffect2.Play(true);
+            case "Pierce":
+                Manager.Pool.GetPool(Pierce, transform.position + playerTorsoOffset, transform.rotation);
                 break;
             case "Slash":
                 Manager.Pool.GetPool(Slash, transform.position + playerTorsoOffset, transform.rotation);
@@ -51,6 +50,17 @@ public class PlayerEffects : MonoBehaviour
                 break;
             case "Skill3":
                 Manager.Pool.GetPool(Skill3, transform.position + playerTorsoOffset, Quaternion.LookRotation(transform.forward));
+                break;
+            case "Skill4":
+                Vector3 spawnPos;
+                Quaternion swordRotation = Quaternion.Euler(-90, 0, 0);
+                for (int i = 0; i < 5; i++)
+                {
+                    float xOffset = Random.Range(-5, 5);
+                    float zOffset = Random.Range(-5, 5);
+                    spawnPos = new Vector3(transform.position.x + xOffset, 8, transform.position.z + zOffset);
+                    Manager.Pool.GetPool(Skill4, spawnPos, swordRotation);
+                }
                 break;
             default:
                 break;

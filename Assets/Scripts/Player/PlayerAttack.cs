@@ -111,6 +111,10 @@ public class PlayerAttack : MonoBehaviour
             case 2:
                 animator.Play("Skill3");
                 break;
+            case 3:
+                animator.Play("Skill4");
+                SummonSwords();
+                break;
         }
     }
 
@@ -162,6 +166,11 @@ public class PlayerAttack : MonoBehaviour
         controller.isAttacking = false;
     }
 
+    // Skill4
+    private void SummonSwords()
+    {
+        effects.PlayEffect("Skill4");
+    }
 
     private void OnDrawGizmos()
     {
@@ -188,7 +197,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSkill2()
     {
-        UseSkill(1);
+        UseSkill(3);
     }
 }
 
