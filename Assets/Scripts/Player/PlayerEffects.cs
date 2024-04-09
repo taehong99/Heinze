@@ -16,6 +16,8 @@ public class PlayerEffects : MonoBehaviour
     private PooledObject Skill2;
     private PooledObject Skill3;
     private PooledObject Skill4;
+    private PooledObject Skill5;
+    private PooledObject Skill6;
 
     private void Start()
     {
@@ -26,6 +28,8 @@ public class PlayerEffects : MonoBehaviour
         Skill2 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2");
         Skill3 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill3");
         Skill4 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4");
+        Skill5 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill5");
+        Skill6 = Manager.Resource.Load<PooledObject>("Effects/WarriorSkill6");
     }
 
     public void PlayEffect(string effect)
@@ -43,7 +47,7 @@ public class PlayerEffects : MonoBehaviour
                 Manager.Pool.GetPool(Slam, transform.position, transform.rotation);
                 break;
             case "Skill1":
-                Manager.Pool.GetPool(Skill1, transform.position, transform.rotation);
+                Manager.Pool.GetPool(Skill1, transform.position + playerTorsoOffset, transform.rotation);
                 break;
             case "Skill2":
                 Manager.Pool.GetPool(Skill2, transform.position + transform.forward * 7f, transform.rotation);
@@ -61,6 +65,12 @@ public class PlayerEffects : MonoBehaviour
                     spawnPos = new Vector3(transform.position.x + xOffset, 8, transform.position.z + zOffset);
                     Manager.Pool.GetPool(Skill4, spawnPos, swordRotation);
                 }
+                break;
+            case "Skill5":
+                Manager.Pool.GetPool(Skill5, transform.position, transform.rotation);
+                break;
+            case "Skill6":
+                Manager.Pool.GetPool(Skill6, transform.position, transform.rotation);
                 break;
             default:
                 break;

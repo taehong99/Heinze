@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65420a4ead4654ef48a5a29db289437c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 0
   portals:
   - {fileID: 987361016093621433}
   - {fileID: 2373343798218970834}

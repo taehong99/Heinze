@@ -11,6 +11,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float comboCooldown;
     [SerializeField] List<AttackSO> combo;
     [SerializeField] LayerMask monsterMask;
+    private float lastClickedTime;
+    private float lastComboEnd;
+    int comboCounter;
 
     [Header("Skill1")]
     [SerializeField] float skill1Radius;
@@ -21,16 +24,14 @@ public class PlayerAttack : MonoBehaviour
     [Header("Skill3")]
     [SerializeField] GameObject skill3Prefab;
 
-    private float lastClickedTime;
-    private float lastComboEnd;
-    int comboCounter;
+    [Header("Skill6")]
+    [SerializeField] float skill6BuffDuration;
 
+    [Header("Misc")]
     PlayerController controller;
     PlayerEffects effects;
     Animator animator;
     Collider[] colliders = new Collider[10];
-
-    public GameObject weaponObject;
 
     private void Start()
     {
@@ -42,7 +43,6 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         if (MouseManager.Instance.Left){
-            //ActivateSkillAnimation("Attack");
             Attack();
         }
         ExitAttack();
@@ -92,6 +92,15 @@ public class PlayerAttack : MonoBehaviour
         comboCounter = 0;
         lastComboEnd = Time.time;
     }
+
+    private void Freeze()
+    {
+        controller.isAttacking = true;
+    }
+    private void UnFreeze()
+    {
+        controller.isAttacking = false;
+    }
     #endregion
 
     #region Skills
@@ -101,27 +110,36 @@ public class PlayerAttack : MonoBehaviour
         ForceExitAttack();
         switch (skillId)
         {
-            case 0:
+            case 1:
                 animator.Play("Skill1");
                 break;
-            case 1:
-                animator.Play("Skill2");
-                SummonSword();
-                break;
             case 2:
-                animator.Play("Skill3");
+                animator.Play("Skill2");
+                Skill2();
                 break;
             case 3:
+                animator.Play("Skill3");
+                break;
+            case 4:
                 animator.Play("Skill4");
-                SummonSwords();
+                Skill4();
+                break;
+            case 5:
+                animator.Play("Skill5");
+                Skill5();
+                break;
+            case 6:
+                animator.Play("Skill6");
+                Skill6();
                 break;
         }
     }
 
     // Skill1
-    private void CrescentSlash()
+    private void Skill1()
     {
-        //Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), transform.position + Vector3.up * 0.8f, transform.rotation);
+        Freeze();
+        Invoke("UnFreeze", 0.4f);
         effects.PlayEffect("Skill1");
         int count = Physics.OverlapSphereNonAlloc(transform.position, skill1Radius, colliders, monsterMask);
         for(int i = 0; i < count; i++)
@@ -132,8 +150,10 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Skill2
-    private void SummonSword()
+    private void Skill2()
     {
+        Freeze();
+        Invoke("UnFreeze", 0.7f);
         //Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
         effects.PlayEffect("Skill2");
     }
@@ -149,33 +169,55 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Skill3
-    private void RogelSlash()
+    private void Skill3()
     {
         StartCoroutine(SummonWaves());
     }
     
     private IEnumerator SummonWaves()
     {
-        controller.isAttacking = true;
+        Freeze();
         for(int i = 0; i < 2; i++)
         {
             effects.PlayEffect("Skill3");
             yield return new WaitForSeconds(0.5f);
         }
         effects.PlayEffect("Skill3");
-        controller.isAttacking = false;
+        UnFreeze();
     }
 
     // Skill4
-    private void SummonSwords()
+    private void Skill4()
     {
+        Freeze();
+        Invoke("UnFreeze", 0.5f);
         effects.PlayEffect("Skill4");
     }
 
-    private void OnDrawGizmos()
+    // Skill5
+    private void Skill5()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, skill1Radius);
+        Freeze();
+        Invoke("UnFreeze", 0.5f);
+        effects.PlayEffect("Skill5");
+    }
+
+    // Skill6
+    private void Skill6()
+    {
+        Freeze();
+        Invoke("UnFreeze", 0.5f);
+        effects.PlayEffect("Skill6");
+        Manager.Player.TakeDamage(10);
+        Manager.Player.UpdateStat(Stat.Attack, IncreaseRate.Percent, 0.5f);
+        Manager.Player.UpdateStat(Stat.Defense, IncreaseRate.Percent, 0.5f);
+        Invoke("RemoveBuff", skill6BuffDuration);
+    }
+
+    private void RemoveBuff()
+    {
+        Manager.Player.UpdateStat(Stat.Attack, IncreaseRate.Percent, -0.5f);
+        Manager.Player.UpdateStat(Stat.Defense, IncreaseRate.Percent, -0.5f);
     }
 
     #endregion
@@ -192,12 +234,22 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSkill1()
     {
-        UseSkill(2);
+        UseSkill(5);
     }
 
     private void OnSkill2()
     {
+        UseSkill(6);
+    }
+
+    private void OnSkill3()
+    {
         UseSkill(3);
+    }
+
+    private void OnSkill4()
+    {
+        UseSkill(4);
     }
 }
 

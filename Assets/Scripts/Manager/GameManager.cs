@@ -32,6 +32,8 @@ public class GameManager : Singleton<GameManager>
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill3"), 3, 6);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4"), 5, 10);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), 5, 10);
+        Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill5"), 2, 4);
+        Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill6"), 2, 4);
     }
 
 

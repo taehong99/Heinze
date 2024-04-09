@@ -91668,7 +91668,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.26666668
-    functionName: CrescentSlash
+    functionName: Skill1
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
