@@ -191,7 +191,7 @@ public class PlayerAttack : MonoBehaviour
     private void Skill4()
     {
         Freeze();
-        Invoke("UnFreeze", 0.5f);
+        Invoke("UnFreeze", 1f);
         //effects.PlayEffect("Skill4");
         StartCoroutine(Skill4Routine());
     }
@@ -217,7 +217,7 @@ public class PlayerAttack : MonoBehaviour
     private void Skill5()
     {
         Freeze();
-        Invoke("UnFreeze", 0.5f);
+        Invoke("UnFreeze", 1f);
         effects.PlayEffect("Skill5");
     }
 
@@ -225,7 +225,7 @@ public class PlayerAttack : MonoBehaviour
     private void Skill6()
     {
         Freeze();
-        Invoke("UnFreeze", 0.5f);
+        Invoke("UnFreeze", 1f);
         effects.PlayEffect("Skill6");
         Manager.Player.TakeDamage(10);
         Manager.Player.UpdateStat(Stat.Attack, IncreaseRate.Percent, 0.5f);

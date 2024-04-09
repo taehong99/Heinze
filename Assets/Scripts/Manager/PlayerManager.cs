@@ -24,6 +24,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private float critRate;
     private float defense;
     private float moveSpeed;
+    private float lifeSteal;
     public float Attack => attack;
     public float CritRate => critRate;
     public float Defense => defense;

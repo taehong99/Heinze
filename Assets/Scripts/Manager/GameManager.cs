@@ -6,6 +6,8 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject warriorPrefab;
     private PlayerSkillDataSO[] skillSlots = new PlayerSkillDataSO[4];
+    private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
+    private bool hasPassive;
 
     public void Test()
     {
@@ -22,6 +24,11 @@ public class GameManager : Singleton<GameManager>
         return skillSlots[idx].skillID;
     }
 
+    public void ObtainPassiveSkill()
+    {
+        hasPassive = true;
+    }
+
     public void CreatePools()
     {
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorPierce1"), 2, 4);
@@ -34,11 +41,5 @@ public class GameManager : Singleton<GameManager>
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), 5, 10);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill5"), 2, 4);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill6"), 2, 4);
-    }
-
-
-    void Start()
-    {
-
     }
 }
