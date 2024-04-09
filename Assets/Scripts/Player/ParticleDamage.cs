@@ -4,30 +4,36 @@ using UnityEngine;
 
 public class ParticleDamage : MonoBehaviour
 {
+    [SerializeField] LayerMask monsterMask;
+    HashSet<Collider> damaged = new HashSet<Collider>();
     Collider[] colliders = new Collider[10];
-    [SerializeField] float radius;
-    List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
 
-    private void OnParticleTrigger()
+    private void OnDisable()
     {
-        ParticleSystem ps = GetComponent<ParticleSystem>();
+        damaged.Clear();
+    }
 
-        int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-        Debug.Log("Triggered");
-        int count = Physics.OverlapBoxNonAlloc(enter[0].position, new Vector3(0.5f, 0.5f, 2.5f), colliders, Quaternion.identity,  LayerMask.GetMask("Monster"));
-        for(int i = 0; i < count; i++)
+    private void Update()
+    {
+        int count = Physics.OverlapSphereNonAlloc(transform.position, 5, colliders, monsterMask);
+        Debug.Log(count);
+        for (int i = 0; i < count; i++)
         {
+            if (damaged.Contains(colliders[i]))
+                return;
+
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
-            if(damagable != null)
+            if (damagable != null)
             {
                 damagable.TakeDamage(1);
+                damaged.Add(colliders[i]);
             }
         }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5);
     }
 }

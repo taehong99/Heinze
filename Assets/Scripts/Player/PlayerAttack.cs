@@ -136,7 +136,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Skill2Damage()
     {
-        int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(0.5f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
+        int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(1f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
@@ -152,11 +152,14 @@ public class PlayerAttack : MonoBehaviour
     
     private IEnumerator SummonWaves()
     {
-        for(int i = 0; i < 3; i++)
+        controller.isAttacking = true;
+        for(int i = 0; i < 2; i++)
         {
             effects.PlayEffect("Skill3");
             yield return new WaitForSeconds(0.5f);
         }
+        effects.PlayEffect("Skill3");
+        controller.isAttacking = false;
     }
 
 

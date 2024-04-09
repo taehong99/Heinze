@@ -19,7 +19,7 @@ public class LerpToTarget : MonoBehaviour
 
     IEnumerator MoveRoutine()
     {
-        Vector3 targetPos = transform.forward * lerpDistance;
+        Vector3 targetPos = transform.position + transform.forward * lerpDistance;
 
         float t = 0;
         while (t < lerpDuration)

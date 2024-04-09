@@ -47,10 +47,10 @@ public class PlayerEffects : MonoBehaviour
                 Manager.Pool.GetPool(Skill1, transform.position, transform.rotation);
                 break;
             case "Skill2":
-                Manager.Pool.GetPool(Skill2, transform.position, transform.rotation);
+                Manager.Pool.GetPool(Skill2, transform.position + transform.forward * 7f, transform.rotation);
                 break;
             case "Skill3":
-                Manager.Pool.GetPool(Skill3, transform.position + playerTorsoOffset, transform.rotation);
+                Manager.Pool.GetPool(Skill3, transform.position + playerTorsoOffset, Quaternion.LookRotation(transform.forward));
                 break;
             default:
                 break;
