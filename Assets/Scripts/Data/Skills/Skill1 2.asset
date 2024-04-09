@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 793c541ad891d45e1bfd5cdc423cf14c, type: 3}
-  m_Name: Skill1
+  m_Name: Skill1 2
   m_EditorClassIdentifier: 
   skillID: 0
-  skillIcon: {fileID: -3652342359405761836, guid: 0cd7a0f2fc236f647ae80a68741b8f66, type: 3}
-  skillName: kkk
+  skillIcon: {fileID: 6134970149673287009, guid: 0cd7a0f2fc236f647ae80a68741b8f66, type: 3}
+  skillName: sss
   skillDescription: 
   skillCaption: 

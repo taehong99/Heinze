@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour, IDamagable
 {
@@ -11,8 +12,17 @@ public class Monster : MonoBehaviour, IDamagable
     Animator anim;
     public GameObject hudDamageText;
     public Transform hudPos;
+    private int currentHealth;
+    public Image healthBarImage;
 
-    enum State
+    // 몬스터 hp바 업데이트
+    void UpdateHealthBar()
+    {
+        if (healthBarImage != null)
+            healthBarImage.fillAmount = ((float)currentHealth) / hp;
+    }
+
+enum State
     {
         IDLE,
         CHASE,
@@ -27,10 +37,11 @@ public class Monster : MonoBehaviour, IDamagable
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
-
         // 몬스터의 hp
-        hp = 1;
+        hp = 3;
         state = State.IDLE;
+        currentHealth = hp;
+        UpdateHealthBar();
         StartCoroutine(StateMachine());
     }
 
@@ -139,14 +150,23 @@ public class Monster : MonoBehaviour, IDamagable
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
-        hp -= damage;
-        if (hp <= 0)
+        currentHealth -= damage;
+        //if (hp <= 0)
+        //{
+        //    ChangeState(State.KILLED);
+        //}
+        //else
+        //{
+        //    Debug.Log("데미지를 받음 ㄷㄷ");
+        //    StartCoroutine(DAMAGED());
+        //}
+        UpdateHealthBar();
+        if (currentHealth <= 0)
         {
             ChangeState(State.KILLED);
         }
         else
         {
-            Debug.Log("데미지를 받음 ㄷㄷ");
             StartCoroutine(DAMAGED());
         }
     }

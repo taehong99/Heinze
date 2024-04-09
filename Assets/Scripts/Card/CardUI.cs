@@ -12,7 +12,7 @@ public class CardUI : MonoBehaviour, IPointerDownHandler
     public Text cardNameText;
     public Button addToInventoryButton; // 인벤토리에 추가하는 버튼
 
-    private Card card;
+    private PlayerSkillDataSO card;
 
 
     private void Start()
@@ -20,12 +20,12 @@ public class CardUI : MonoBehaviour, IPointerDownHandler
         animator = GetComponent<Animator>();
     }
     // 카드의 정보를 초기화
-    public void CardUISet(Card card)
+    public void CardUISet(PlayerSkillDataSO card)
     {
         if (card != null)
         {
             this.card = card;
-            cardNameText.text = card.cardName;
+            cardNameText.text = card.skillName;
 
             // 버튼 클릭 이벤트 설정
             addToInventoryButton.onClick.AddListener(AddToInventory);
@@ -51,7 +51,6 @@ public class CardUI : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         //연결된 객체에 데이터를 삽입
-        //
     }
 
     private void AddToInventory()
