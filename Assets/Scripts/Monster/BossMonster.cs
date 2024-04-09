@@ -164,10 +164,10 @@ public class BossMonster : MonoBehaviour, IDamagable
 
         attackCount = 0;
         anim.Play("Skil", 0, 0);
-
+        //GameObject skillEffect = Instantiate(skillEffectPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(4.1f);
 
-        //yield return new WaitForSeconds(skillDuration); // 스킬 지속 시간만큼 대기
+        yield return new WaitForSeconds(skillDuration); // 스킬 지속 시간만큼 대기
         nmAgent.isStopped = false; //멈춤 상태 해제
         ChangeState(State.CHASE);
     }
@@ -204,16 +204,6 @@ public class BossMonster : MonoBehaviour, IDamagable
         // 변경된 상태에 맞는 코루틴 시작
         StartCoroutine(state.ToString());
     }
-
-    //public void TakeDamage(int damage)
-    //{
-    //    Debug.Log("TakeDamage");
-    //    hp -= damage;
-    //    if (hp <= 0)
-    //    {
-    //        ChangeState(State.KILLED);
-    //    }
-    //}
 
     public void Detect(Transform target)
     {

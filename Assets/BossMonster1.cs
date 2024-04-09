@@ -1,9 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Monster : MonoBehaviour, IDamagable
+public class BossMonster1 : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
     [SerializeField] float lostDistance; // 목표와의 최대 거리
@@ -22,7 +23,7 @@ public class Monster : MonoBehaviour, IDamagable
             healthBarImage.fillAmount = ((float)currentHealth) / hp;
     }
 
-enum State
+    enum State
     {
         IDLE,
         CHASE,
@@ -129,7 +130,7 @@ enum State
         Destroy(gameObject, 3f);
         yield return null;
     }
-    
+
     void DisableCollider()
     {
         Collider[] colliders = GetComponentsInChildren<Collider>(); // 몬스터의 모든 콜라이더 가져오기
