@@ -56,15 +56,11 @@ public class PlayerEffects : MonoBehaviour
                 Manager.Pool.GetPool(Skill3, transform.position + playerTorsoOffset, Quaternion.LookRotation(transform.forward));
                 break;
             case "Skill4":
-                Vector3 spawnPos;
-                Quaternion swordRotation = Quaternion.Euler(-90, 0, 0);
-                for (int i = 0; i < 5; i++)
-                {
-                    float xOffset = Random.Range(-5, 5);
-                    float zOffset = Random.Range(-5, 5);
-                    spawnPos = new Vector3(transform.position.x + xOffset, 8, transform.position.z + zOffset);
-                    Manager.Pool.GetPool(Skill4, spawnPos, swordRotation);
-                }
+                Debug.Log("Skill4");
+                float xOffset = Random.Range(-5, 5);
+                float zOffset = Random.Range(-5, 5);
+                Vector3 spawnPos = new Vector3(transform.position.x + xOffset, 8, transform.position.z + zOffset);
+                Manager.Pool.GetPool(Skill4, spawnPos, Quaternion.identity);
                 break;
             case "Skill5":
                 Manager.Pool.GetPool(Skill5, transform.position, transform.rotation);

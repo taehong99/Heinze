@@ -11,7 +11,7 @@ public class WarriorSkill4 : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,7 +25,7 @@ public class WarriorSkill4 : MonoBehaviour
                 damagable.TakeDamage(1);
             }
         }
-        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), collision.GetContact(0).point, Quaternion.Euler(-90, 0, 0));
+        Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), collision.GetContact(0).point, Quaternion.identity);
         GetComponent<PooledObject>().Release();
     }
 }

@@ -21,8 +21,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("Skill2")]
     [SerializeField] Transform skill2DamagePoint;
 
-    [Header("Skill3")]
-    [SerializeField] GameObject skill3Prefab;
+    [Header("Skill4")]
+    [SerializeField] float skill4Duration;
+    [SerializeField] float skill4SpawnInterval;
 
     [Header("Skill6")]
     [SerializeField] float skill6BuffDuration;
@@ -191,7 +192,25 @@ public class PlayerAttack : MonoBehaviour
     {
         Freeze();
         Invoke("UnFreeze", 0.5f);
-        effects.PlayEffect("Skill4");
+        //effects.PlayEffect("Skill4");
+        StartCoroutine(Skill4Routine());
+    }
+
+    private IEnumerator Skill4Routine()
+    {
+        float t1 = 0;
+        float t2 = 0;
+        while (t1 < skill4Duration)
+        {
+            t1 += Time.deltaTime;
+            t2 += Time.deltaTime;
+            if (t2 > skill4SpawnInterval)
+            {
+                effects.PlayEffect("Skill4");
+                t2 = 0;
+            }
+            yield return null;
+        }
     }
 
     // Skill5
