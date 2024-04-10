@@ -19,8 +19,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     int attackCount = 0;
     public GameObject hudDamageText;
     public Transform hudPos;
-    public GameObject skillEffectPrefab; // 스킬 이펙트 참조 변수
-    public GameObject skillEffectr;
+    public GameObject[] skillEffectPrefab; // 스킬 이펙트 참조 변수
 
 
     enum State
@@ -163,54 +162,36 @@ public class BossMonster : MonoBehaviour, IDamagable
         attackCount = 0;
         anim.Play("Skil", 0, 0);
         yield return new WaitForSeconds(4.1f);
-        GameObject skillEffect = Instantiate(skillEffectPrefab, transform.position, transform.rotation);
 
-        float time = 0;
-        // 타겟 방향으로 회전하기
-        Quaternion currentRot = skillEffect.transform.rotation;
+        int randomIndex = Random.Range(0, skillEffectPrefab.Length);
+        GameObject skillEffect = Instantiate(skillEffectPrefab[randomIndex], transform.position, transform.rotation);
 
-        while (time < 1.7f)
-        {
-            if (sensor.target == null)
-                break;
-
-            // 타겟 방향 구하기
-            Vector3 targetDirection = sensor.target.position - skillEffect.transform.position;
-            skillEffect.transform.Rotate(0f, skillEffect.transform.rotation.ToEuler().y +  Time.deltaTime * 2, 0f);
-            //Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            //time += Time.deltaTime * 0.5f;
-            //skillEffect.transform.rotation = Quaternion.Lerp(currentRot, targetRotation, time);
-            yield return null;
-        }
 
         yield return new WaitForSeconds(3f);
-
-        //StartCoroutine(ChasingRoutine(skillEffect));
-        //yield return new WaitForSeconds(skillDuration); // 스킬 지속 시간만큼 대기
         Destroy(skillEffect);
         nmAgent.isStopped = false; //멈춤 상태 해제
         ChangeState(State.CHASE);
     }
-    //Coroutine chasinCo;
-    IEnumerator ChasingRoutine(GameObject obj)
-    {
-        if (sensor.target != null)
-        {
-            // 타겟 방향 구하기
-            Vector3 targetDirection = sensor.target.position - obj.transform.position;
-            Quaternion currentRot = obj.transform.rotation;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            float time = 0;
-            // 타겟 방향으로 회전하기
-            while (time < 1)
-            {
-                time += Time.deltaTime;
-                obj.transform.rotation = Quaternion.Lerp(currentRot, targetRotation, time);
-            }
 
-        }
-        yield return null;
-    }
+    //IEnumerator ChasingRoutine(GameObject obj)
+    //{
+    //    if (sensor.target != null)
+    //    {
+    //        // 타겟 방향 구하기
+    //        Vector3 targetDirection = sensor.target.position - obj.transform.position;
+    //        Quaternion currentRot = obj.transform.rotation;
+    //        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+    //        float time = 0;
+    //        // 타겟 방향으로 회전하기
+    //        while (time < 1)
+    //        {
+    //            time += Time.deltaTime;
+    //            obj.transform.rotation = Quaternion.Lerp(currentRot, targetRotation, time);
+    //        }
+
+    //    }
+    //    yield return null;
+    //}
 
     void ShootProjectile()
     {

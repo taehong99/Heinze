@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public enum MonsterType { Normal, Ranged, Boss1, Boss }
+public enum MonsterType { Normal, Ranged, Boss1, Boss, ExplodeMonster}
 public class MonsterSight : MonoBehaviour
 {
     [SerializeField] MonsterType type;
@@ -12,6 +12,7 @@ public class MonsterSight : MonoBehaviour
     [SerializeField] RangedMonster RangedMonster;
     [SerializeField] BossMonster1 BossMonster1;
     [SerializeField] BossMonster BossMonster;
+    [SerializeField] ExplodeMonster ExplodeMonster;
   
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +33,10 @@ public class MonsterSight : MonoBehaviour
             else if(type == MonsterType.Boss)
             {
                 //BossMonster.Detect(other.transform);
+            }
+            else if(type == MonsterType.ExplodeMonster)
+            {
+                ExplodeMonster.Detect(other.transform);
             }
         }
     }

@@ -1,9 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Monster : MonoBehaviour, IDamagable
+public class ExplodeMonster : MonoBehaviour
 {
     [SerializeField] int hp;
     [SerializeField] float lostDistance; // 목표와의 최대 거리
@@ -14,8 +15,8 @@ public class Monster : MonoBehaviour, IDamagable
     public Transform hudPos;
     private int currentHealth;
     public Image healthBarImage;
-    public GameObject prefab;
-    
+    public GameObject effectPrefab;
+
     // 몬스터 hp바 업데이트
     void UpdateHealthBar()
     {
@@ -41,7 +42,7 @@ public class Monster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         // 몬스터의 hp
-        hp = 3;
+        hp = 10;
         state = State.IDLE;
         currentHealth = hp;
         UpdateHealthBar();
@@ -70,7 +71,6 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator CHASE()
     {
         Debug.Log("Chasing");
-
         // CHASE 상태에서는 계속해서 이동
         while (target != null)
         {
@@ -90,8 +90,9 @@ public class Monster : MonoBehaviour, IDamagable
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
                 // ATTACK 상태로 변경
-                ChangeState(State.ATTACK);
-                yield break; // CHASE 상태를 빠져나옴
+                ChangeState(State.BOMB);
+                yield return null;
+               
             }
             // 목표와의 거리가 멀어진 경우
             else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
@@ -105,13 +106,22 @@ public class Monster : MonoBehaviour, IDamagable
             yield return null;
         }
     }
+    IEnumerator BOMB()
+    {
+        Debug.Log("터진다");
+        GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
 
+        // 이펙트를 재생합니다.
+        effectObject.GetComponent<ParticleSystem>().Play();
+        ChangeState(State.KILLED);
 
+        yield return null;
+    }
     IEnumerator ATTACK()
     {
-        Debug.Log("Attacking");
+        Debug.Log("BomB!!!!");
         // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
-        anim.Play("Attack", 0, 0);
+        anim.Play("Attack");
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
         // 공격이 끝나면 다시 CHASE 상태로 변경
         ChangeState(State.CHASE);
@@ -140,7 +150,6 @@ public class Monster : MonoBehaviour, IDamagable
             collider.enabled = false; // 각 콜라이더를 비활성화
         }
     }
-
     void ChangeState(State newState)
     {
         StopCoroutine(state.ToString());
@@ -175,7 +184,6 @@ public class Monster : MonoBehaviour, IDamagable
             StartCoroutine(DAMAGED());
         }
     }
-
     public void Detect(Transform target)
     {
         // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
