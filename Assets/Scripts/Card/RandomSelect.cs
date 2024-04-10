@@ -32,6 +32,33 @@ public class RandomSelect : MonoBehaviour
             isPressed = true;
         }
     }
+
+    // Order
+    // 1. check which type of card to pick x3
+    public void ChooseCard()
+    {
+        float rand = Random.Range(0f, 1f);
+        if(rand < 0.7f) // 70%
+        {
+            //Buff
+        }
+        else
+        {
+            //Not buff
+        }
+    }
+    // 2. Send clicked card info
+
+
+    public List<Card> result = new List<Card>();  // 랜덤하게 선택된 카드를 담을 리스트
+    public Transform parent;
+    public GameObject cardprefab;
+    public void ResultSelect()
+    {
+        result.Clear(); // 결과 리스트 초기화
+        canExecute = true;
+    }
+
     List<CardUI> cards = new List<CardUI>();
     IEnumerator ResetCanExecute()
     {
@@ -61,18 +88,7 @@ public class RandomSelect : MonoBehaviour
         canExecute = true;
     }
 
-    public List<Card> result = new List<Card>();  // 랜덤하게 선택된 카드를 담을 리스트
-    public Transform parent;
-    public GameObject cardprefab;
-    public void ResultSelect()
-    {
-        result.Clear(); // 결과 리스트 초기화
-        canExecute = true;
-        //for (int i = 0; i < 3; i++)
-        //{
-
-        //}
-    }
+    
 
     // 가중치 랜덤의 설명은 영상을 참고.
     public Card RandomCard()
