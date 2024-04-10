@@ -2245,7 +2245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266157265114488493, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       propertyPath: m_LocalScale.x
@@ -2356,9 +2356,9 @@ MonoBehaviour:
   hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
   hudPos: {fileID: 565299927}
   skillEffectPrefab:
-  - {fileID: 3799661063237393779, guid: 2def04700fc113b4db7a996009325a08, type: 3}
-  - {fileID: 5344905331389212371, guid: e8e090c1aa610414e96d59030a905cfd, type: 3}
   - {fileID: 8735301026974038688, guid: 0b5603d4cd65b9b4b888b0e9465ca2e7, type: 3}
+  - {fileID: 8429970297717719410, guid: c9ed94a2f25005f489bceba136bc2e98, type: 3}
+  - {fileID: 659949911864655371, guid: c3d63e456a39bef4ba1a5a73b5417cae, type: 3}
   state: 0
 --- !u!4 &999414179 stripped
 Transform:
@@ -6892,6 +6892,18 @@ PrefabInstance:
     - target: {fileID: 6448291302415278793, guid: e8e090c1aa610414e96d59030a905cfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632581668551106652, guid: e8e090c1aa610414e96d59030a905cfd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632581668551106652, guid: e8e090c1aa610414e96d59030a905cfd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632581668551106652, guid: e8e090c1aa610414e96d59030a905cfd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
