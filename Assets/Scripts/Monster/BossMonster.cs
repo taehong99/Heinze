@@ -14,12 +14,15 @@ public class BossMonster : MonoBehaviour, IDamagable
     [SerializeField] Transform projectileSpawnPoint;
     [SerializeField] float skillDuration;
     MonserSensor sensor;
-    Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
     int attackCount = 0;
     public GameObject hudDamageText;
     public Transform hudPos;
+    public GameObject skillEffectPrefab; // 스킬 이펙트 참조 변수
+    public GameObject skillEffectr;
+
+
     enum State
     {
         IDLE,
@@ -37,9 +40,12 @@ public class BossMonster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         sensor = GetComponentInChildren<MonserSensor>();
-        sensor = GetComponentInChildren<MonserSensor>();
-        hp = 5;
+
+        // 몬스터의 hp
+        hp = 30;
         state = State.IDLE;
+        // currentHealth = hp;
+        //UpdateHealthBar();
         StartCoroutine(StateMachine());
     }
 
@@ -74,7 +80,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         Debug.Log("Chasing");
 
         // CHASE 상태에서는 계속해서 이동
-        if (sensor.target != null)
+        while (sensor.target != null)
         {
             nmAgent.SetDestination(sensor.target.position);
 
@@ -99,14 +105,6 @@ public class BossMonster : MonoBehaviour, IDamagable
                 {
                     ChangeState(State.SKIL);
                 }
-                yield break; // CHASE 상태를 빠져나옴
-            }
-            // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
-            {
-                sensor.target = null;
-                // IDLE 상태로 변경
-                ChangeState(State.IDLE);
                 yield break; // CHASE 상태를 빠져나옴
             }
 
@@ -164,12 +162,54 @@ public class BossMonster : MonoBehaviour, IDamagable
 
         attackCount = 0;
         anim.Play("Skil", 0, 0);
-        //GameObject skillEffect = Instantiate(skillEffectPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(4.1f);
+        GameObject skillEffect = Instantiate(skillEffectPrefab, transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(skillDuration); // 스킬 지속 시간만큼 대기
+        float time = 0;
+        // 타겟 방향으로 회전하기
+        Quaternion currentRot = skillEffect.transform.rotation;
+
+        while (time < 1.7f)
+        {
+            if (sensor.target == null)
+                break;
+
+            // 타겟 방향 구하기
+            Vector3 targetDirection = sensor.target.position - skillEffect.transform.position;
+            skillEffect.transform.Rotate(0f, skillEffect.transform.rotation.ToEuler().y +  Time.deltaTime * 2, 0f);
+            //Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            //time += Time.deltaTime * 0.5f;
+            //skillEffect.transform.rotation = Quaternion.Lerp(currentRot, targetRotation, time);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        //StartCoroutine(ChasingRoutine(skillEffect));
+        //yield return new WaitForSeconds(skillDuration); // 스킬 지속 시간만큼 대기
+        Destroy(skillEffect);
         nmAgent.isStopped = false; //멈춤 상태 해제
         ChangeState(State.CHASE);
+    }
+    //Coroutine chasinCo;
+    IEnumerator ChasingRoutine(GameObject obj)
+    {
+        if (sensor.target != null)
+        {
+            // 타겟 방향 구하기
+            Vector3 targetDirection = sensor.target.position - obj.transform.position;
+            Quaternion currentRot = obj.transform.rotation;
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            float time = 0;
+            // 타겟 방향으로 회전하기
+            while (time < 1)
+            {
+                time += Time.deltaTime;
+                obj.transform.rotation = Quaternion.Lerp(currentRot, targetRotation, time);
+            }
+
+        }
+        yield return null;
     }
 
     void ShootProjectile()
@@ -201,15 +241,16 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         StopCoroutine(state.ToString());
         state = newState;
+        Debug.Log(newState.ToString());
         // 변경된 상태에 맞는 코루틴 시작
         StartCoroutine(state.ToString());
     }
 
-    public void Detect(Transform target)
-    {
-        // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
-        this.target = target;
-        ChangeState(State.CHASE);
-    }
+    //public void Detect(Transform target)
+    //{
+    //    // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
+    //    this.target = target;
+    //    ChangeState(State.CHASE);
+    //}
 }
 

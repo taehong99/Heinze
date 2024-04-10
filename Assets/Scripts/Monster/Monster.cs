@@ -153,15 +153,15 @@ enum State
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
         currentHealth -= damage;
-        //if (hp <= 0)
-        //{
-        //    ChangeState(State.KILLED);
-        //}
-        //else
-        //{
-        //    Debug.Log("데미지를 받음 ㄷㄷ");
-        //    StartCoroutine(DAMAGED());
-        //}
+        if (hp <= 0)
+        {
+            ChangeState(State.KILLED);
+        }
+        else
+        {
+            Debug.Log("데미지를 받음 ㄷㄷ");
+            StartCoroutine(DAMAGED());
+        }
         UpdateHealthBar();
         if (currentHealth <= 0)
         {

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class BossMonster1 : MonoBehaviour, IDamagable
+public class BossMonster1 : MonoBehaviour
 {
     [SerializeField] int hp;
     [SerializeField] float lostDistance; // 목표와의 최대 거리
-    Transform target;
     NavMeshAgent nmAgent;
+    MonserSensor sensor;
     Animator anim;
     public GameObject hudDamageText;
     public Transform hudPos;
@@ -71,9 +72,9 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         Debug.Log("Chasing");
 
         // CHASE 상태에서는 계속해서 이동
-        while (target != null)
+        while (sensor.target != null)
         {
-            nmAgent.SetDestination(target.position);
+            nmAgent.SetDestination(sensor.target.position);
 
             // 현재 애니메이션 상태 확인
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
@@ -93,9 +94,9 @@ public class BossMonster1 : MonoBehaviour, IDamagable
                 yield break; // CHASE 상태를 빠져나옴
             }
             // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
             {
-                target = null;
+                //sensor.target = null;
                 // IDLE 상태로 변경
                 ChangeState(State.IDLE);
                 yield break; // CHASE 상태를 빠져나옴
@@ -154,15 +155,15 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
         currentHealth -= damage;
-        //if (hp <= 0)
-        //{
-        //    ChangeState(State.KILLED);
-        //}
-        //else
-        //{
-        //    Debug.Log("데미지를 받음 ㄷㄷ");
-        //    StartCoroutine(DAMAGED());
-        //}
+        if (hp <= 0)
+        {
+            ChangeState(State.KILLED);
+        }
+        else
+        {
+            Debug.Log("데미지를 받음 ㄷㄷ");
+            StartCoroutine(DAMAGED());
+        }
         UpdateHealthBar();
         if (currentHealth <= 0)
         {
@@ -173,10 +174,11 @@ public class BossMonster1 : MonoBehaviour, IDamagable
             StartCoroutine(DAMAGED());
         }
     }
-    public void Detect(Transform target)
-    {
-        // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
-        this.target = target;
-        ChangeState(State.CHASE);
-    }
+    //public void Detect(Transform target)
+    //{
+    //    // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
+    //    this.target = target;
+    //    ChangeState(State.CHASE);
+    //}
 }
+
