@@ -28,8 +28,6 @@ public class CardUI : BaseUI, IPointerDownHandler
             GetUI<TextMeshProUGUI>("CardDescription").text = card.description;
             GetUI<TextMeshProUGUI>("CardCaption").text = card.caption;
 
-            //cardNameText.text = card.data.name;
-
             // 버튼 클릭 이벤트 설정
             GetUI<Button>("Front").onClick.AddListener(AddToInventory);
         }
@@ -38,7 +36,6 @@ public class CardUI : BaseUI, IPointerDownHandler
             Debug.LogError("Card is null!");
         }
     }
-
     
     public void Flip() => animator.SetTrigger("Flip");// 카드가 클릭되면 뒤집는 애니메이션 재생
 
@@ -56,5 +53,17 @@ public class CardUI : BaseUI, IPointerDownHandler
     private void AddToInventory()
     {
         Debug.Log("인벤토리에 추가함.");
+        if(cardData is PlayerSkillDataSO)
+        {
+            Manager.Game.AnnounceSkillPicked(cardData as PlayerSkillDataSO);
+        }
+        else if(cardData is PlayerBuffSO)
+        {
+            Manager.Game.AnnounceBuffPicked(cardData as PlayerBuffSO);
+        }
+        else
+        {
+            //Manager.Game.AnnounceItemPicked(cardData as ConsumableItemSO);
+        }
     }
 }

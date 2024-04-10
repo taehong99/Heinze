@@ -11,6 +11,8 @@ public class InventoryBar : MonoBehaviour
     }
 
     public InventorySlot[] inventorySlots;
+    [SerializeField] PassiveSlot passiveSlot;
+
     [HideInInspector] public DragData dragData;
     bool slotsFull;
 
@@ -21,6 +23,7 @@ public class InventoryBar : MonoBehaviour
         {
             inventorySlots[i].SetSlot(i, this);
         }
+        Manager.Game.SkillPicked += AddItem;
     }
 
     public PlayerSkillDataSO GetSkillData(int idx)
@@ -30,6 +33,13 @@ public class InventoryBar : MonoBehaviour
 
     public void AddItem(PlayerSkillDataSO skillData)
     {
+        // Add Passive Skill
+        if(skillData.id >= 10)
+        {
+            passiveSlot.SetSlot(skillData);
+            return;
+        }
+
         if (slotsFull)
         {
             // TODO: Swap skill when slots full prompt

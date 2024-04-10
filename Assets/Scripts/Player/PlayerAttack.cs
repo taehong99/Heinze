@@ -251,24 +251,37 @@ public class PlayerAttack : MonoBehaviour
         weapon.DisableWeapon();
     }
 
+    PlayerSkillDataSO skill;
     private void OnSkill1()
     {
-        UseSkill(5);
+        skill = Manager.Game.GetSkillInSlot(0);
+        if (skill == null)
+            return;
+        UseSkill(skill.id);
     }
 
     private void OnSkill2()
     {
-        UseSkill(6);
+        skill = Manager.Game.GetSkillInSlot(1);
+        if (skill == null)
+            return;
+        UseSkill(skill.id);
     }
 
     private void OnSkill3()
     {
-        UseSkill(3);
+        skill = Manager.Game.GetSkillInSlot(2);
+        if (skill == null)
+            return;
+        UseSkill(skill.id);
     }
 
     private void OnSkill4()
     {
-        UseSkill(4);
+        skill = Manager.Game.GetSkillInSlot(3);
+        if (skill == null)
+            return;
+        UseSkill(skill.id);
     }
 }
 

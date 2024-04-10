@@ -17,6 +17,7 @@ public class TestDummy : MonoBehaviour, IDamagable
     {
         Debug.Log("Took damage");
         StartCoroutine(ColorChangeRoutine());
+        Manager.Game.ShowCards();
     }
 
 

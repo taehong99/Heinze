@@ -17,6 +17,7 @@ MonoBehaviour:
   _name: Buff1
   description: 
   caption: 
-  affectedStat: 4
+  cardColor: {r: 0.59460664, g: 0.86933964, b: 0.9622642, a: 1}
+  affectedStat: 0
   increaseRate: 0
   value: 25

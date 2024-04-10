@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class PassiveSlot : BaseUI
 {
-    [SerializeField] Sprite icon;
+    PlayerSkillDataSO data;
 
-    public void SetIcon()
+    public void SetSlot(PlayerSkillDataSO data)
     {
-        GetUI<Image>("SkillIcon").sprite = icon;
+        this.data = data;
+        GetUI<Image>("SkillIcon").sprite = data.icon;
     }
 }

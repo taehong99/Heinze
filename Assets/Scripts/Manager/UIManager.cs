@@ -14,7 +14,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Image popUpBlocker;
     [SerializeField] Button inGameBlocker;
     [SerializeField] ScreenFader fader;
+    [SerializeField] CardSelectUI cardSelectUI;
     public ScreenFader Fader => fader;
+    public CardSelectUI CardSelectUI => cardSelectUI;
 
     private Dictionary<string, BaseUI> dictionary = new Dictionary<string, BaseUI>();
 
