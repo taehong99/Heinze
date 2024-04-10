@@ -23,7 +23,10 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         templates = GetComponent<RoomTemplates>();
+    }
 
+    public void GenerateMap()
+    {
         GenerateLevel();
         ConnectRooms();
     }
