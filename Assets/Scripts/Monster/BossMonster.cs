@@ -157,21 +157,27 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     IEnumerator SKIL()
     {
-        Debug.Log("Skill activated"); // 스킬 발동을 디버그 로그로 출력
+        Debug.Log("스킬 발동 ! ");
 
         attackCount = 0;
         anim.Play("Skil", 0, 0);
         yield return new WaitForSeconds(4.1f);
 
-        int randomIndex = Random.Range(0, skillEffectPrefab.Length);
-        GameObject skillEffect = Instantiate(skillEffectPrefab[randomIndex], transform.position, transform.rotation);
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
+        int randomIndex = Random.Range(0, skillEffectPrefab.Length);
+        GameObject skillEffect = Instantiate(skillEffectPrefab[randomIndex], transform.position, Quaternion.identity);
+
+        // 플레이어 방향을 향하도록 하는 위치값 
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        skillEffect.transform.rotation = Quaternion.LookRotation(direction);
 
         yield return new WaitForSeconds(3f);
         Destroy(skillEffect);
-        nmAgent.isStopped = false; //멈춤 상태 해제
+        nmAgent.isStopped = false; 
         ChangeState(State.CHASE);
     }
+
 
     //IEnumerator ChasingRoutine(GameObject obj)
     //{
