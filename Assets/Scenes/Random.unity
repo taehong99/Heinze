@@ -224,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1449792413}
-  - component: {fileID: 1449792414}
+  - component: {fileID: 1449792415}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -247,7 +247,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1449792414
+--- !u!114 &1449792415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,30 +256,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1449792412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0224cf30edd7149bce22cc9cfd9e28, type: 3}
+  m_Script: {fileID: 11500000, guid: 792429c7921f2474681d25b50e66a742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck:
-  - cardName: "\uACF0\uB3CC\uC774"
-    cardImage: {fileID: -4153777517944550443, guid: 25512b88008fb874c914931aef5a5ac4, type: 3}
-    weight: 1
-  - cardName: "\uACF0\uC21C\uC774"
-    cardImage: {fileID: 7445541819068948944, guid: 25512b88008fb874c914931aef5a5ac4, type: 3}
-    weight: 5
-  - cardName: "\uACF0\uD0F1\uC774"
-    cardImage: {fileID: -2393091842410444728, guid: 25512b88008fb874c914931aef5a5ac4, type: 3}
-    weight: 25
-  - cardName: "\uACF0\uBB38\uACF0\uBB38\uACF0\uBB38"
-    cardImage: {fileID: 1498201808917496599, guid: 25512b88008fb874c914931aef5a5ac4, type: 3}
-    weight: 39
-  - cardName: "\uACF0\uACF0\uACF0"
-    cardImage: {fileID: 7845443283589397662, guid: 25512b88008fb874c914931aef5a5ac4, type: 3}
-    weight: 30
-  total: 0
-  panelTr: {fileID: 2038896264}
-  result: []
+  skillDeck:
+  - {fileID: 11400000, guid: e1dc96f681d5542a2a4ca81d44d44e5b, type: 2}
+  - {fileID: 11400000, guid: bae3a190a67654d59ae5c304ba3715c0, type: 2}
+  - {fileID: 11400000, guid: 5a9f20de4d8904ba790bdbdf27107caf, type: 2}
+  - {fileID: 11400000, guid: 8c8c0f45fd2a34f7f842b89b51dff15e, type: 2}
+  - {fileID: 11400000, guid: f7c7ac2f56454416388cb478a0bc4d20, type: 2}
+  - {fileID: 11400000, guid: c38b1f64b64164fe490620782ddde8c1, type: 2}
+  buffDeck:
+  - {fileID: 11400000, guid: 062015e67d9f15a4793e7d154e4236fa, type: 2}
+  - {fileID: 11400000, guid: 16ce5dfed603f98449bbd59ffae2f71e, type: 2}
+  - {fileID: 11400000, guid: 2baca0de45068c946963b6efa4544ffe, type: 2}
+  - {fileID: 11400000, guid: 0a7adeef3145b594ca1442f5ddd5f26c, type: 2}
+  cardPrefab: {fileID: 878384543158946410, guid: 4431991b7416a154dbaaf99958a19e89, type: 3}
   parent: {fileID: 2038896264}
-  cardprefab: {fileID: 878384543158946410, guid: 75cb612308941fe4ca50b9b4244ad8a6, type: 3}
+  panel: {fileID: 2038896264}
 --- !u!850595691 &1909259704
 LightingSettings:
   m_ObjectHideFlags: 0

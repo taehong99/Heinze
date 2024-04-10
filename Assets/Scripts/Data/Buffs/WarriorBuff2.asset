@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a8cf2cce92649e99ed44fb3f9abee6, type: 3}
   m_Name: WarriorBuff2
   m_EditorClassIdentifier: 
+  id: 0
+  icon: {fileID: 0}
+  _name: Buff2
+  description: 
+  caption: 
   affectedStat: 4
   increaseRate: 1
   value: 0.15
-  buffIcon: {fileID: 0}
-  buffName: "\uC804\uC0AC\uC758 \uD3EC\uD6A8"
-  buffDescription: "\uCCB4\uB825 \uCD5C\uB300\uCE58 15% \uC99D\uAC00."
-  buffCaption: "\u2018\uC804\uD22C\uC804\uC5D0 \uC18C\uB9AC\uC9C0\uB974\uB294\uAC70
-    \uB9D0\uC774\uC57C, \uC0DD\uAC01\uBCF4\uB2E4 \uD6A8\uACFC\uAC00 \uC788\uB354\uB77C\uAD6C?\u2019"

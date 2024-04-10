@@ -27,7 +27,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void UpdateIcon()
     {
-        icon.sprite = skillData.skillIcon;
+        icon.sprite = skillData.icon;
         filled = true;
     }
 

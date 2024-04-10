@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793c541ad891d45e1bfd5cdc423cf14c, type: 3}
   m_Name: WarriorSkill2
   m_EditorClassIdentifier: 
-  skillID: 2
-  skillIcon: {fileID: 21300000, guid: e669942a7321a4b429eed5797e904cef, type: 3}
-  skillName: "\uCC9C\uD558 \uAE08\uB3C4"
-  skillDescription: "\uC804\uBC29\uC758 \uC77C\uC815 \uBC94\uC704 \uC801\uB4E4\uC744
-    \uC21C\uAC04\uC758 \uAC80\uAE30\uB85C \uACF5\uACA9\uB825\uC758 300% \uB370\uBBF8\uC9C0\uB85C
-    \uACF5\uACA9 \uD55C\uB2E4. "
-  skillCaption: "\u3147\u3147\u3147"
+  id: 2
+  icon: {fileID: 21300000, guid: e669942a7321a4b429eed5797e904cef, type: 3}
+  _name: "\uCC9C\uD558 \uAE08\uB3C4"
+  description: "\uC804\uBC29\uC758 \uC77C\uC815 \uBC94\uC704 \uC801\uB4E4\uC744 \uC21C\uAC04\uC758
+    \uAC80\uAE30\uB85C  \uACF5\uACA9\uB825\uC758 300% \uB370\uBBF8\uC9C0\uB85C \uACF5\uACA9
+    \uD55C\uB2E4."
+  caption: "\u2018 \uD669\uC81C \uD3D0\uD558\uC758 \uC655\uB3C4\uCC98\uB7FC \uCC2C\uB780\uD558\uAC8C
+    \uBE5B\uB098\uB77C!\u2019"
+  cardColor: {r: 0.6314525, g: 0.8113208, b: 0.7244962, a: 1}

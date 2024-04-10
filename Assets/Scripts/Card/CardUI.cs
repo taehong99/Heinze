@@ -3,51 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class CardUI : MonoBehaviour, IPointerDownHandler
+public class CardUI : BaseUI, IPointerDownHandler
 {
-    public Image chr;
-    public Text cardName;
     Animator animator;
-    public Text cardNameText;
-    public Button addToInventoryButton; // 인벤토리에 추가하는 버튼
-
-    private Card card;
-
+    PlayerUpgradeSO cardData;
+    GameObject controller;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
     // 카드의 정보를 초기화
-    public void CardUISet(Card card)
+    public void CardUISet(PlayerUpgradeSO card)
     {
         if (card != null)
         {
-            this.card = card;
-            cardNameText.text = card.cardName;
+            this.cardData = card;
+            GetUI<Image>("FrontBG").color = card.cardColor;
+            GetUI<Image>("BackBG").color = card.cardColor;
+            GetUI<Image>("CardIconImage").sprite = card.icon;
+            GetUI<TextMeshProUGUI>("CardName").text = card._name;
+            GetUI<TextMeshProUGUI>("CardDescription").text = card.description;
+            GetUI<TextMeshProUGUI>("CardCaption").text = card.caption;
+
+            //cardNameText.text = card.data.name;
 
             // 버튼 클릭 이벤트 설정
-            addToInventoryButton.onClick.AddListener(AddToInventory);
+            GetUI<Button>("Front").onClick.AddListener(AddToInventory);
         }
         else
         {
             Debug.LogError("Card is null!");
         }
-
-       
     }
-    // 카드가 클릭되면 뒤집는 애니메이션 재생
 
-    public void Flip()
-        => animator.SetTrigger("Flip");
+    
+    public void Flip() => animator.SetTrigger("Flip");// 카드가 클릭되면 뒤집는 애니메이션 재생
 
-    GameObject controller;
-    public void SetDataContorller(GameObject _cont)
+    public void SetDataController(GameObject _cont) //데이터 연결할 객체를 전달
     {
-        //데이터 연결할 객체를 전달
         controller = _cont;
     }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         //연결된 객체에 데이터를 삽입

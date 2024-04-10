@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RandomSelect : MonoBehaviour
 {
-    public List<Card> deck = new List<Card>();  // 카드 덱
+    /*public List<Card> deck = new List<Card>();  // 카드 덱
     public int total = 0;  // 카드들의 가중치 총 합
     bool canExecute = true;
     float delayTime = 1f; // 이 값은 필요에 따라 조절 가능합니다.
@@ -15,7 +15,7 @@ public class RandomSelect : MonoBehaviour
         for (int i = 0; i < deck.Count; i++)
         {
             // 스크립트가 활성화 되면 카드 덱의 모든 카드의 총 가중치를 구해줍니다.
-            total += deck[i].weight;
+            //total += deck[i].weight;
         }
         isPressed = false;
     }
@@ -32,23 +32,6 @@ public class RandomSelect : MonoBehaviour
             isPressed = true;
         }
     }
-
-    // Order
-    // 1. check which type of card to pick x3
-    public void ChooseCard()
-    {
-        float rand = Random.Range(0f, 1f);
-        if(rand < 0.7f) // 70%
-        {
-            //Buff
-        }
-        else
-        {
-            //Not buff
-        }
-    }
-    // 2. Send clicked card info
-
 
     public List<Card> result = new List<Card>();  // 랜덤하게 선택된 카드를 담을 리스트
     public Transform parent;
@@ -100,13 +83,13 @@ public class RandomSelect : MonoBehaviour
 
         for (int i = 0; i < deck.Count; i++)
         {
-            weight += deck[i].weight;
+           // weight += deck[i].weight;
             if (selectNum <= weight)
             {
-                Card temp = new Card(deck[i]);
-                return temp;
+                //Card temp = new Card(deck[i]);
+                //return temp;
             }
         }
         return null;
-    }
+    }*/
 }
