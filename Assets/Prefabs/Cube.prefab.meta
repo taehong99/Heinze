@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/UI/PopUp/CardSelectUI.prefab.meta
+guid: abd00724e33eb4139960a4d202072492
+========
+guid: 6ed129a12e76529408ddfa294f8e8e3d
+>>>>>>>> develop:Assets/Prefabs/Cube.prefab.meta
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

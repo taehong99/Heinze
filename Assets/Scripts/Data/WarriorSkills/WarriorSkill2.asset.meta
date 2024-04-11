@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Data/WarriorSkills/WarriorSkill2.asset.meta
 guid: bae3a190a67654d59ae5c304ba3715c0
+========
+guid: 1f93100e227be5c40a960dacbf5bb6b4
+>>>>>>>> develop:Assets/Scripts/Data/Skills/Skill1 3.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

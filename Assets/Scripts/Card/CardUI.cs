@@ -11,6 +11,7 @@ public class CardUI : BaseUI, IPointerDownHandler
     PlayerUpgradeSO cardData;
     GameObject controller;
 
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,7 +48,6 @@ public class CardUI : BaseUI, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         //연결된 객체에 데이터를 삽입
-        //
     }
 
     private void AddToInventory()
