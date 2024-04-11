@@ -30,8 +30,7 @@ public class Monster : MonoBehaviour, IDamagable
         ATTACK,
         KILLED,
         DAMAGED,
-        SKIL,
-        BOMB
+        SKIL
     }
 
     State state;

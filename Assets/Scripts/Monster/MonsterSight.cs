@@ -28,7 +28,7 @@ public class MonsterSight : MonoBehaviour
             }
             else if(type == MonsterType.Boss1)
             {
-               //BossMonster1.Detect(other.transform);
+               BossMonster1.Detect(other.transform);
             }        
             else if(type == MonsterType.Boss)
             {

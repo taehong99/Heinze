@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class BossMonster1 : MonoBehaviour
+public class BossMonster1 : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
     [SerializeField] float lostDistance; // 목표와의 최대 거리
+    Transform target;
     NavMeshAgent nmAgent;
-    MonserSensor sensor;
     Animator anim;
     public GameObject hudDamageText;
     public Transform hudPos;
-    private int currentHealth;
     public Image healthBarImage;
-
+    public int currentHealth;
+    public GameObject effectPrefab;
     // 몬스터 hp바 업데이트
     void UpdateHealthBar()
     {
@@ -40,9 +41,8 @@ public class BossMonster1 : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
-        // 몬스터의 hp
-        hp = 3;
         state = State.IDLE;
+        hp = 100;
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
@@ -72,9 +72,9 @@ public class BossMonster1 : MonoBehaviour
         Debug.Log("Chasing");
 
         // CHASE 상태에서는 계속해서 이동
-        while (sensor.target != null)
+        while (target != null)
         {
-            nmAgent.SetDestination(sensor.target.position);
+            nmAgent.SetDestination(target.position);
 
             // 현재 애니메이션 상태 확인
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
@@ -89,24 +89,29 @@ public class BossMonster1 : MonoBehaviour
             // 목표까지의 남은 거리가 멈추는 지점보다 작거나 같으면
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ATTACK 상태로 변경
                 ChangeState(State.ATTACK);
                 yield break; // CHASE 상태를 빠져나옴
             }
             // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
+            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             {
-                //sensor.target = null;
+                target = null;
                 // IDLE 상태로 변경
                 ChangeState(State.IDLE);
                 yield break; // CHASE 상태를 빠져나옴
             }
-
             // 목표 위치로 이동
             yield return null;
         }
     }
 
+    IEnumerator SKIL()
+    {
+        GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+        effectObject.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        effectObject.GetComponent<ParticleSystem>().Play();
+        yield return null;
+    }
     IEnumerator ATTACK()
     {
         Debug.Log("Attacking");
@@ -140,6 +145,7 @@ public class BossMonster1 : MonoBehaviour
             collider.enabled = false; // 각 콜라이더를 비활성화
         }
     }
+
     void ChangeState(State newState)
     {
         StopCoroutine(state.ToString());
@@ -155,15 +161,6 @@ public class BossMonster1 : MonoBehaviour
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
         currentHealth -= damage;
-        if (hp <= 0)
-        {
-            ChangeState(State.KILLED);
-        }
-        else
-        {
-            Debug.Log("데미지를 받음 ㄷㄷ");
-            StartCoroutine(DAMAGED());
-        }
         UpdateHealthBar();
         if (currentHealth <= 0)
         {
@@ -171,14 +168,25 @@ public class BossMonster1 : MonoBehaviour
         }
         else
         {
-            StartCoroutine(DAMAGED());
+            Debug.Log("데미지를 받음 ㄷㄷ");
+
+            // 체력이 10의 배수로 감소했을 때 추가 이펙트 발생
+            if (currentHealth % 10 == 0)
+            {
+                StartCoroutine(SKIL());
+            }
+            else
+            {
+                StartCoroutine(DAMAGED());
+            }
         }
     }
-    //public void Detect(Transform target)
-    //{
-    //    // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
-    //    this.target = target;
-    //    ChangeState(State.CHASE);
-    //}
+
+    public void Detect(Transform target)
+    {
+        // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
+        this.target = target;
+        ChangeState(State.CHASE);
+    }
 }
 

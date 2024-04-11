@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BossMonster : MonoBehaviour, IDamagable
 {
@@ -20,8 +21,14 @@ public class BossMonster : MonoBehaviour, IDamagable
     public GameObject hudDamageText;
     public Transform hudPos;
     public GameObject[] skillEffectPrefab; // 스킬 이펙트 참조 변수
+    public Image healthBarImage;
+    private int currentHealth;
 
-
+    void UpdateHealthBar()
+    {
+        if (healthBarImage != null)
+            healthBarImage.fillAmount = ((float)currentHealth) / hp;
+    }
     enum State
     {
         IDLE,
@@ -43,8 +50,8 @@ public class BossMonster : MonoBehaviour, IDamagable
         // 몬스터의 hp
         hp = 30;
         state = State.IDLE;
-        // currentHealth = hp;
-        //UpdateHealthBar();
+        currentHealth = hp;
+        UpdateHealthBar();
         StartCoroutine(StateMachine());
     }
 
@@ -132,7 +139,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
-        hp -= damage;
+        currentHealth -= damage;
         if (hp <= 0)
         {
             ChangeState(State.KILLED);
@@ -142,8 +149,17 @@ public class BossMonster : MonoBehaviour, IDamagable
             Debug.Log("데미지를 받음 ㄷㄷ");
             StartCoroutine(DAMAGED());
         }
+        UpdateHealthBar();
+        if (currentHealth <= 0)
+        {
+            ChangeState(State.KILLED);
+        }
+        else
+        {
+            StartCoroutine(DAMAGED());
+        }
     }
-    //
+    
 
     IEnumerator DAMAGED()
     {
