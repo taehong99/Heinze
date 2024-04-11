@@ -15,6 +15,7 @@ public class PlayerStatsUI : PopUpUI
 
     private void UpdateValues()
     {
+        GetUI<TextMeshProUGUI>("JobText").text = player.Job.ToString();
         GetUI<TextMeshProUGUI>("HPValueText").text = player.CurHP.ToString();
         GetUI<TextMeshProUGUI>("ATKValueText").text = player.Attack.ToString();
         GetUI<TextMeshProUGUI>("DEFValueText").text = player.Defense.ToString();

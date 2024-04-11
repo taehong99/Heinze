@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerJob { Warrior, Archer, Magician }
 public enum Stat { Attack, Crit, Defense, Speed, Health}
 public class PlayerManager : Singleton<PlayerManager>
 {
     // Data
     [SerializeField] PlayerDataSO data;
+    PlayerJob job = PlayerJob.Warrior; // TODO: Change this
+    public PlayerJob Job;
 
     // HP
     const int minHP = 0;
@@ -40,27 +43,60 @@ public class PlayerManager : Singleton<PlayerManager>
         moveSpeed = data.baseMoveSpeed;
     }
 
+    public void ChooseJob(PlayerJob job)
+    {
+        this.job = job;
+    }
+
     public void Heal(int amount)
     {
         curHP += amount;
         curHP = Mathf.Clamp(curHP, minHP, maxHP);
     }
 
-    public void UpdateStat(Stat stat, float delta)
+    public void UpdateStat(Stat stat, IncreaseRate rate, float delta)
     {
         switch (stat)
         {
             case Stat.Attack:
-                attack += delta;
+                if(rate == IncreaseRate.Flat)
+                {
+                    attack += delta;
+                }
+                else
+                {
+                    attack = Mathf.CeilToInt(attack * (1 + delta));
+                }
                 break;
             case Stat.Crit:
-                critRate += delta;
+                if (rate == IncreaseRate.Flat)
+                {
+                    critRate += delta;
+                }
+                else
+                {
+                    critRate = Mathf.CeilToInt(critRate * (1 + delta));
+                }
                 break;
             case Stat.Defense:
-                defense += delta;
+                if (rate == IncreaseRate.Flat)
+                {
+                    defense += delta;
+                }
+                else
+                {
+                    defense = Mathf.CeilToInt(defense * (1 + delta));
+                }
                 break;
             case Stat.Speed:
-                moveSpeed += delta;
+                if (rate == IncreaseRate.Flat)
+                {
+                    moveSpeed += delta;
+                }
+                else
+                {
+                    moveSpeed = Mathf.CeilToInt(moveSpeed * (1 + delta));
+                }
                 break;
             case Stat.Health:
                 break;
