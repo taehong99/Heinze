@@ -12,8 +12,11 @@ public class GameManager : Singleton<GameManager>
     // Player Skills
     private PlayerAttack playerAttack;
     private PlayerSkillDataSO[] skillSlots = new PlayerSkillDataSO[4];
-    private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
     private bool hasPassive;
+
+    // Player Buffs
+    private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
+    public List<PlayerBuffSO> Buffs => buffs;
 
     // MapGen
     MapGenerator mapGenerator;
@@ -29,7 +32,7 @@ public class GameManager : Singleton<GameManager>
         mapGenerator = GetComponentInChildren<MapGenerator>();
     }
 
-    #region Player Skills + Buffs
+    #region Player Skills
     public void AssignPlayer(PlayerAttack player)
     {
         playerAttack = player;
@@ -49,6 +52,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void AnnounceBuffPicked(PlayerBuffSO data)
     {
+        buffs.Add(data);
         BuffPicked?.Invoke(data);
     }
 

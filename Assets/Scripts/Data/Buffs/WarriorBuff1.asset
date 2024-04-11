@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: WarriorBuff1
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 0}
-  _name: Buff1
-  description: 
-  caption: 
+  icon: {fileID: 21300000, guid: 45105b8c80598974db53b7cfb7a91c7b, type: 3}
+  _name: "\uC804\uC0AC\uC758 \uC2EC\uC7A5"
+  description: "\uCCB4\uB825 \uCD5C\uB300\uCE58 25 \uC99D\uAC00"
+  caption: "\u2018\uD56D\uC0C1 \uC655\uAD6D\uC758 \uB300\uD55C  \uCDA9\uC131\uC2EC\uC744
+    \uAC00\uC2B4\uC5D0 \uC0C8\uACA8\uB77C!\u2019"
   cardColor: {r: 0.59460664, g: 0.86933964, b: 0.9622642, a: 1}
-  affectedStat: 0
+  affectedStat: 4
   increaseRate: 0
   value: 25

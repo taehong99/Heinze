@@ -42,6 +42,12 @@ public class PlayerManager : Singleton<PlayerManager>
         critRate = data.baseCritRate;
         defense = data.baseDefense;
         moveSpeed = data.baseMoveSpeed;
+        Manager.Game.BuffPicked += ObtainBuff;
+    }
+
+    public void ObtainBuff(PlayerBuffSO buff)
+    {
+        UpdateStat(buff.affectedStat, buff.increaseRate, buff.value);
     }
 
     public void ChooseJob(PlayerJob job)
@@ -100,6 +106,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 }
                 break;
             case Stat.Health:
+                Debug.Log($"Health increased by {delta}");
                 break;
         }
     }

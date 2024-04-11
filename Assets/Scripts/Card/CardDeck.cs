@@ -21,6 +21,7 @@ public class CardDeck : MonoBehaviour
         trashDeck = new List<ConsumableItemSO>(deck.items);
 
         Manager.Game.SkillPicked += ClearCards;
+        Manager.Game.BuffPicked += ClearCards;
     }
 
     private void Update()
