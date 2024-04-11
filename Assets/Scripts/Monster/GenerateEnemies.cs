@@ -9,10 +9,10 @@ public class GenerateEnemies : MonoBehaviour
     public int zPos; // 생성되는 z 좌표
     public int enemyCount; // 생성되는 몬스터의 수
 
-    //void Start()
-    //{
-    //    StartCoroutine(EnemyDrop());
-    //}
+    void Start()
+    {
+        StartCoroutine(EnemyDrop());
+    }
 
     IEnumerator EnemyDrop()
     {

@@ -10,7 +10,7 @@ public class PlayerSkillDataSO : ScriptableObject
     public int skillID;
 
     [Header("Visuals")]
-    public Image skillIcon;
+    public Sprite skillIcon;
     public string skillName;
     public string skillDescription;
     public string skillCaption;

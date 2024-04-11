@@ -1,20 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
 public class RangedMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance;
-    [SerializeField] float attackRange;
-    [SerializeField] float attackCooldown;
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] Transform projectileSpawnPoint;
-    MonserSensor sensor;
+    [SerializeField] float lostDistance; // 목표와의 최대 거리
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
+    public GameObject hudDamageText;
+    public Transform hudPos;
 
     enum State
     {
@@ -22,18 +18,18 @@ public class RangedMonster : MonoBehaviour, IDamagable
         CHASE,
         ATTACK,
         KILLED,
-        SKIL
+        DAMAGED
     }
 
-    [SerializeField] State state;
+    State state;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
-        sensor = GetComponentInChildren<MonserSensor>();
 
-        hp = 1;
+        // 몬스터의 hp
+        hp = 5;
         state = State.IDLE;
         StartCoroutine(StateMachine());
     }
@@ -50,20 +46,11 @@ public class RangedMonster : MonoBehaviour, IDamagable
     IEnumerator IDLE()
     {
         // 애니메이션이 IDLE 상태가 아니면 재생
-        while(true)
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            Debug.Log("Idle");
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-            {
-                anim.Play("Idle", 0, 0);
-            }
-            if (sensor.target != null)
-            {
-                ChangeState(State.CHASE);
-                yield break;
-            }
-            yield return null;
+            anim.Play("Idle", 0, 0);
         }
+        yield return null;
     }
 
     IEnumerator CHASE()
@@ -71,9 +58,9 @@ public class RangedMonster : MonoBehaviour, IDamagable
         Debug.Log("Chasing");
 
         // CHASE 상태에서는 계속해서 이동
-        if(sensor.target != null)
-        { 
-            nmAgent.SetDestination(sensor.target.position);
+        while (target != null)
+        {
+            nmAgent.SetDestination(target.position);
 
             // 현재 애니메이션 상태 확인
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
@@ -93,9 +80,9 @@ public class RangedMonster : MonoBehaviour, IDamagable
                 yield break; // CHASE 상태를 빠져나옴
             }
             // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, sensor.target.position) >= lostDistance)
+            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             {
-                sensor.target = null;
+                target = null;
                 // IDLE 상태로 변경
                 ChangeState(State.IDLE);
                 yield break; // CHASE 상태를 빠져나옴
@@ -104,28 +91,24 @@ public class RangedMonster : MonoBehaviour, IDamagable
             // 목표 위치로 이동
             yield return null;
         }
-        ChangeState(State.IDLE);
     }
+
     IEnumerator ATTACK()
     {
-        Debug.Log("attack");
-        nmAgent.velocity = Vector3.zero;
-        ShootProjectile();
+        Debug.Log("Attacking");
+        // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
         anim.Play("Attack", 0, 0);
-        yield return new WaitForSeconds(attackCooldown);
-        nmAgent.isStopped = false;
-        ChangeState(State.CHASE); //뭐야
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        // 공격이 끝나면 다시 CHASE 상태로 변경
+        ChangeState(State.CHASE);
+    }
 
-    }
-    void ShootProjectile()
+    IEnumerator DAMAGED()
     {
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        Projectile script = projectile.GetComponent<Projectile>();
-        if (script != null && sensor.target != null)
-        {
-            script.SetTarget(sensor.target);
-        }
+        anim.Play("Damaged");
+        yield return new WaitForSeconds(1f);
     }
+
     IEnumerator KILLED()
     {
         Debug.Log("Killed");
@@ -152,13 +135,21 @@ public class RangedMonster : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
+        GameObject hudText = Instantiate(hudDamageText);
+        hudText.GetComponent<DamageText>().damage = damage;
+        hudText.transform.position = hudPos.position;
+        Debug.Log("데미지 숫자를 받음");
         hp -= damage;
         if (hp <= 0)
         {
             ChangeState(State.KILLED);
         }
+        else
+        {
+            Debug.Log("데미지를 받음 ㄷㄷ");
+            StartCoroutine(DAMAGED());
+        }
     }
-
     public void Detect(Transform target)
     {
         // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경

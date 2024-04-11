@@ -33,7 +33,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (MouseManager.Instance.Left)        {
+        if (MouseManager.Instance.Left)
+        {
             //ActivateSkillAnimation("Attack");
             Attack();
         }
