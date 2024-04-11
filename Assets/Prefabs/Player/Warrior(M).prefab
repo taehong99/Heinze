@@ -700,10 +700,13 @@ MonoBehaviour:
   monsterMask:
     serializedVersion: 2
     m_Bits: 256
+  warriorDeck: {fileID: 11400000, guid: 8188623695f82494eb220a4a1ecf5a79, type: 2}
+  cooldownTimers: []
   skill1Radius: 5
   skill2DamagePoint: {fileID: 9126284744480706870}
-  skill3Prefab: {fileID: 9195509662312530841, guid: cf2099877d6791547b7d4b7d2fdd6369, type: 3}
-  weaponObject: {fileID: 7350538283848230575}
+  skill4Duration: 0
+  skill4SpawnInterval: 0
+  skill6BuffDuration: 0
 --- !u!114 &4270141205490548178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,10 +719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e904cc2c3eeb427993d689f42f51810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PierceEffect1: {fileID: 198926107242498482, guid: 3e04efdf8ee665d48962b33b06e8e3d3, type: 3}
-  PierceEffect2: {fileID: 198659754889719218, guid: 09a2baab97fbf474f9499bf610686e4d, type: 3}
-  SlashEffect: {fileID: 198741542255655676, guid: 5bea49531fc500c408823a2e2863106f, type: 3}
-  SlamEffect: {fileID: 198190562059387860, guid: ca63c6ac7458764498741e0306f78528, type: 3}
 --- !u!95 &3768220572089237415
 Animator:
   serializedVersion: 5

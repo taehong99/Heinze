@@ -21,7 +21,7 @@ public class InventoryBar : MonoBehaviour
         inventorySlots = GetComponentsInChildren<InventorySlot>();
         for(int i = 0; i < inventorySlots.Length; i++)
         {
-            inventorySlots[i].SetSlot(i, this);
+            inventorySlots[i].InstantiateSlot(i, this);
         }
         Manager.Game.SkillPicked += AddItem;
     }
@@ -52,7 +52,7 @@ public class InventoryBar : MonoBehaviour
                 continue;
             inventorySlots[i].skillData = skillData;
             inventorySlots[i].UpdateIcon();
-            Manager.Game.UpdateSkillSlot(i, skillData);
+            Manager.Game.UpdateSkillSlot(-1, i, skillData);
             return;
         }
 

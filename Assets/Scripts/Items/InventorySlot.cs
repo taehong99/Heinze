@@ -11,14 +11,31 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
     [SerializeField] bool filled;
     InventoryBar parent;
     Image icon;
+    public Image cooldownImage;
     int idx;
 
     void Start()
     {
         icon = GetUI<Image>("SkillIcon");
+        cooldownImage = GetUI<Image>("Cooldown");
     }
 
-    public void SetSlot(int idx, InventoryBar parent)
+    private void Update()
+    {
+        if (filled)
+        {
+            cooldownImage.fillAmount = Manager.Game.GetCooldownRatio(skillData.id);
+        }
+        else
+        {
+            if(cooldownImage != null)
+            {
+                cooldownImage.fillAmount = 0;
+            }
+        }
+    }
+
+    public void InstantiateSlot(int idx, InventoryBar parent)
     {
         this.idx = idx;
         this.parent = parent;
@@ -99,15 +116,17 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
                         {
                             PlayerSkillDataSO tempData = slots[i].skillData;
                             slots[i].skillData = skillData;
-                            Manager.Game.UpdateSkillSlot(i, skillData);
-                            Manager.Game.UpdateSkillSlot(idx, tempData);
                             skillData = tempData;
+                            Manager.Game.UpdateSkillSlot(idx, i, skillData);
+                            //Manager.Game.UpdateSkillSlot(idx, tempData);
+                            
                         }
                         else
                         {
                             slots[i].skillData = skillData;
-                            Manager.Game.UpdateSkillSlot(i, skillData);
-                            Manager.Game.UpdateSkillSlot(idx, null);
+                            Manager.Game.UpdateSkillSlot(idx, i, skillData);
+                            //Manager.Game.UpdateSkillSlot(i, skillData);
+                            //Manager.Game.UpdateSkillSlot(idx, null);
                             skillData = null;
                             filled = false;
                             slots[i].filled = true;

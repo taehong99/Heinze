@@ -15,6 +15,10 @@ public class PlayerAttack : MonoBehaviour
     private float lastComboEnd;
     int comboCounter;
 
+    [Header("Skills")]
+    [SerializeField] WarriorCardDeckSO warriorDeck; //TODO: Refactor
+    public float[] cooldownTimers;
+
     [Header("Skill1")]
     [SerializeField] float skill1Radius;
 
@@ -39,6 +43,8 @@ public class PlayerAttack : MonoBehaviour
         controller = GetComponent<PlayerController>();
         effects = GetComponent<PlayerEffects>();
         animator = GetComponent<Animator>();
+        cooldownTimers = new float[warriorDeck.skills.Count];
+        Manager.Game.AssignPlayer(this);
     }
 
     private void Update()
@@ -241,6 +247,25 @@ public class PlayerAttack : MonoBehaviour
 
     #endregion
 
+    public float GetCooldownRatio(int id)
+    {
+        return cooldownTimers[id] / warriorDeck.skills[id].cooldown;
+    }
+
+    private IEnumerator CooldownTimerRoutine(int id)
+    {
+        if (id == 0)
+            yield break;
+
+        cooldownTimers[id] = warriorDeck.skills[id].cooldown;
+        while (cooldownTimers[id] > 0)
+        {
+            cooldownTimers[id] -= Time.deltaTime;
+            yield return null;
+        }
+        cooldownTimers[id] = 0;
+    }
+
     public void EnableWeapon()
     {
         weapon.EnableWeapon();
@@ -255,33 +280,38 @@ public class PlayerAttack : MonoBehaviour
     private void OnSkill1()
     {
         skill = Manager.Game.GetSkillInSlot(0);
-        if (skill == null)
+        if (skill == null || cooldownTimers[skill.id] > 0)
             return;
+
         UseSkill(skill.id);
+        StartCoroutine(CooldownTimerRoutine(skill.id));
     }
 
     private void OnSkill2()
     {
         skill = Manager.Game.GetSkillInSlot(1);
-        if (skill == null)
+        if (skill == null || cooldownTimers[skill.id] > 0)
             return;
         UseSkill(skill.id);
+        StartCoroutine(CooldownTimerRoutine(skill.id));
     }
 
     private void OnSkill3()
     {
         skill = Manager.Game.GetSkillInSlot(2);
-        if (skill == null)
+        if (skill == null || cooldownTimers[skill.id] > 0)
             return;
         UseSkill(skill.id);
+        StartCoroutine(CooldownTimerRoutine(skill.id));
     }
 
     private void OnSkill4()
     {
         skill = Manager.Game.GetSkillInSlot(3);
-        if (skill == null)
+        if (skill == null || cooldownTimers[skill.id] > 0)
             return;
         UseSkill(skill.id);
+        StartCoroutine(CooldownTimerRoutine(skill.id));
     }
 }
 

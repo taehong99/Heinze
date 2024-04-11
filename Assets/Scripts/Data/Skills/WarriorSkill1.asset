@@ -21,3 +21,4 @@ MonoBehaviour:
     \uBCF4\uC774\uB294 \uAC80\uAE30\uC5D0 \uC123\uBD88\uB9AC \uB2E4\uAC00\uAC04\uB2E4\uBA74
     \uBB34\uC0AC\uD558\uAE30\uB294 \uD798\uB4E4 \uAC83\uC774\uB2E4.\u2019"
   cardColor: {r: 0.6314525, g: 0.8113208, b: 0.7244962, a: 1}
+  cooldown: 5

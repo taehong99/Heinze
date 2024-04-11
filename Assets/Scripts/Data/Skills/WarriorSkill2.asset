@@ -21,3 +21,4 @@ MonoBehaviour:
   caption: "\u2018 \uD669\uC81C \uD3D0\uD558\uC758 \uC655\uB3C4\uCC98\uB7FC \uCC2C\uB780\uD558\uAC8C
     \uBE5B\uB098\uB77C!\u2019"
   cardColor: {r: 0.6314525, g: 0.8113208, b: 0.7244962, a: 1}
+  cooldown: 9

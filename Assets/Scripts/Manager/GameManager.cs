@@ -6,13 +6,20 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
+    // Components
     [SerializeField] GameObject warriorPrefab;
+
+    // Player Skills
+    private PlayerAttack playerAttack;
     private PlayerSkillDataSO[] skillSlots = new PlayerSkillDataSO[4];
     private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
     private bool hasPassive;
 
+    // MapGen
     MapGenerator mapGenerator;
     CardDeck deck;
+
+    // Events
     public event Action<PlayerSkillDataSO> SkillPicked;
     public event Action<PlayerBuffSO> BuffPicked;
     public event Action<ConsumableItemSO> ItemPicked;
@@ -23,18 +30,41 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region Player Skills + Buffs
+    public void AssignPlayer(PlayerAttack player)
+    {
+        playerAttack = player;
+    }
+
+    public float GetCooldownRatio(int id)
+    {
+        if (playerAttack == null)
+            return 0;
+
+        return playerAttack.GetCooldownRatio(id);
+    }
+
     public void AnnounceSkillPicked(PlayerSkillDataSO data)
     {
-        SkillPicked.Invoke(data);
+        SkillPicked?.Invoke(data);
     }
     public void AnnounceBuffPicked(PlayerBuffSO data)
     {
-        BuffPicked.Invoke(data);
+        BuffPicked?.Invoke(data);
     }
 
-    public void UpdateSkillSlot(int idx, PlayerSkillDataSO skillData)
+    public void UpdateSkillSlot(int prevIdx, int newIdx, PlayerSkillDataSO skillData)
     {
-        skillSlots[idx] = skillData;
+        if(prevIdx == -1) // Add to empty slot
+        {
+            skillSlots[newIdx] = skillData;
+        }
+        else // Swap skill slots
+        {
+            // Swap data
+            PlayerSkillDataSO tempData = skillSlots[newIdx];
+            skillSlots[newIdx] = skillData;
+            skillSlots[prevIdx] = tempData;
+        }
     }
 
     public PlayerSkillDataSO GetSkillInSlot(int idx)

@@ -6,4 +6,5 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "Data/Upgrades/PlayerSkillData", fileName = "PlayerSkillData")]
 public class PlayerSkillDataSO : PlayerUpgradeSO
 {
+    public float cooldown;
 }
