@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RottenCheese
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 0}
-  _name: 
-  description: 
-  caption: 
-  cardColor: {r: 0, g: 0, b: 0, a: 0}
+  icon: {fileID: 21300000, guid: 97e0c56968ae6944fa41dafb96382477, type: 3}
+  _name: "\uC369\uC740 \uCE58\uC988"
+  description: "\uCCB4\uB825 5 \uAC10\uC18C"
+  caption: "\u2018\uD55C\uB2EC\uAC04 \uC548\uBC97\uC740 \uAD70\uD654 \uB0C4\uC0C8\uAC00
+    \uB09C\uB2E4\u2018"
+  cardColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   type: 0
-  gainAmount: 0
+  gainAmount: -5

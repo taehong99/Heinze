@@ -55,6 +55,10 @@ public class GameManager : Singleton<GameManager>
         buffs.Add(data);
         BuffPicked?.Invoke(data);
     }
+    public void AnnounceItemPicked(ConsumableItemSO data)
+    {
+        ItemPicked?.Invoke(data);
+    }
 
     public void UpdateSkillSlot(int prevIdx, int newIdx, PlayerSkillDataSO skillData)
     {

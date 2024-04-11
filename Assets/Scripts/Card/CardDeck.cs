@@ -22,6 +22,7 @@ public class CardDeck : MonoBehaviour
 
         Manager.Game.SkillPicked += ClearCards;
         Manager.Game.BuffPicked += ClearCards;
+        Manager.Game.ItemPicked += ClearCards;
     }
 
     private void Update()
@@ -47,10 +48,6 @@ public class CardDeck : MonoBehaviour
         else if(picked is PlayerBuffSO)
         {
             buffDeck.Remove(picked as PlayerBuffSO);
-        }
-        else
-        {
-            trashDeck.Remove(picked as ConsumableItemSO);
         }
 
         foreach (var card in cards)
@@ -89,11 +86,21 @@ public class CardDeck : MonoBehaviour
         int randomIdx;
         if (rand < 0.6f) // Buff 60%
         {
+            if (buffDeck.Count == 0)
+            {
+                randomIdx = Random.Range(0, trashDeck.Count);
+                return trashDeck[randomIdx];
+            }
             randomIdx = Random.Range(0, buffDeck.Count);
             chosen = buffDeck[randomIdx];
         }
         else if (rand < 0.9f) // Skill 30%
         {
+            if(skillDeck.Count == 0)
+            {
+                randomIdx = Random.Range(0, trashDeck.Count);
+                return trashDeck[randomIdx];
+            }
             randomIdx = Random.Range(0, skillDeck.Count);
             chosen = skillDeck[randomIdx];
         }

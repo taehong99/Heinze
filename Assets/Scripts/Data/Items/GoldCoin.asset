@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3937cfcc9aa5b5409042bbbc765a39e, type: 3}
   m_Name: GoldCoin
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: 0}
-  _name: 
-  description: 
-  caption: 
-  cardColor: {r: 0, g: 0, b: 0, a: 0}
-  type: 0
-  gainAmount: 0
+  id: 5
+  icon: {fileID: 21300000, guid: a5aafc306081acb4aa34c64494b9984c, type: 3}
+  _name: "\uAE08\uD654"
+  description: "\uB3C8 + 50"
+  caption: "\u2018\uBC18\uC9DD\uC774\uB294 \uAE08\uD654. \uC790\uD0DC\uAC00 \uC601\uB871\uD558\uB2E4.\u2019"
+  cardColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  type: 1
+  gainAmount: 50

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3937cfcc9aa5b5409042bbbc765a39e, type: 3}
   m_Name: Dust
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: 0}
-  _name: 
-  description: 
-  caption: 
-  cardColor: {r: 0, g: 0, b: 0, a: 0}
+  id: 2
+  icon: {fileID: 21300000, guid: 9d24a057460dd204fa745c8941dd63cb, type: 3}
+  _name: "\uBA3C\uC9C0\uD0F1\uC774"
+  description: "\uC544\uBB34\uD6A8\uACFC\uB3C4 \uC5C6\uC2B5\uB2C8\uB2E4"
+  caption: "\u2018\uC8FC\uBA38\uB2C8\uC18D\uC5D4 \uBA3C\uC9C0 \uBC16\uC5D0 \uC5C6\uB2E4.
+    \uC774\uB7F0\uC820\uC7A5\u2018"
+  cardColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   type: 0
   gainAmount: 0

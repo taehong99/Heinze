@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3937cfcc9aa5b5409042bbbc765a39e, type: 3}
   m_Name: SilverCoin
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: 0}
-  _name: 
-  description: 
-  caption: 
-  cardColor: {r: 0, g: 0, b: 0, a: 0}
-  type: 0
-  gainAmount: 0
+  id: 3
+  icon: {fileID: 21300000, guid: 8be628ab09b6bc94abc34d525ed73566, type: 3}
+  _name: "\uC740\uD654"
+  description: "\uB3C8 + 30"
+  caption: "\u2018\uBC18\uC9DD\uC774\uB294 \uC740\uD654. \uAD6D\uBC25\uC740 \uC0AC\uBA39\uC744
+    \uC218 \uC788\uB2E4.\u2019"
+  cardColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  type: 1
+  gainAmount: 30

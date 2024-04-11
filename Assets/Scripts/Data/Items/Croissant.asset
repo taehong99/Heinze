@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3937cfcc9aa5b5409042bbbc765a39e, type: 3}
   m_Name: Croissant
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: 0}
-  _name: 
-  description: 
-  caption: 
-  cardColor: {r: 0, g: 0, b: 0, a: 0}
+  id: 1
+  icon: {fileID: 21300000, guid: 5a0b5e6cc1ae59a43b94debbf781be3e, type: 3}
+  _name: "\uD06C\uB85C\uC640\uC0C1"
+  description: "\uCCB4\uB825 5 \uD68C\uBCF5"
+  caption: "\u2018\uB538\uAE30\uC7BC\uC774 \uADF8\uB9AC\uC6B4 \uB9DB\uC774\uAD70\u2019"
+  cardColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   type: 0
-  gainAmount: 0
+  gainAmount: 5

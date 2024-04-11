@@ -63,7 +63,7 @@ public class CardUI : BaseUI, IPointerDownHandler
         }
         else
         {
-            //Manager.Game.AnnounceItemPicked(cardData as ConsumableItemSO);
+            Manager.Game.AnnounceItemPicked(cardData as ConsumableItemSO);
         }
     }
 }
