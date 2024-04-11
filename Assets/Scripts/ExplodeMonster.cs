@@ -16,6 +16,9 @@ public class ExplodeMonster : MonoBehaviour
     private int currentHealth;
     public Image healthBarImage;
     public GameObject effectPrefab;
+    public SkinnedMeshRenderer skinnedMeshRenderer;
+    public Material originalMat;
+    public Material redMat;
 
     // 몬스터 hp바 업데이트
     void UpdateHealthBar()
@@ -108,6 +111,10 @@ public class ExplodeMonster : MonoBehaviour
     }
     IEnumerator BOMB()
     {
+        Coroutine colorRoutine = StartCoroutine(ChangeColor());
+        yield return new WaitForSeconds(3);
+        StopCoroutine(colorRoutine);
+
         Debug.Log("터진다");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
 
@@ -117,6 +124,19 @@ public class ExplodeMonster : MonoBehaviour
 
         yield return null;
     }
+
+    IEnumerator ChangeColor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            skinnedMeshRenderer.material = redMat;
+            yield return new WaitForSeconds(0.1f);
+            skinnedMeshRenderer.material = originalMat;
+            yield return null;
+        }
+    }
+
     IEnumerator ATTACK()
     {
         Debug.Log("BomB!!!!");

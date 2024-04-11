@@ -23,7 +23,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     public GameObject[] skillEffectPrefab; // 스킬 이펙트 참조 변수
     public Image healthBarImage;
     private int currentHealth;
-
+    public GameObject effectPrefab;
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -159,12 +159,15 @@ public class BossMonster : MonoBehaviour, IDamagable
             StartCoroutine(DAMAGED());
         }
     }
-    
+
 
     IEnumerator DAMAGED()
     {
-
         anim.Play("Damaged");
+        Debug.Log("이펙트 발동");
+        GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+        //effectObject.transform.position = new Vector3 (0f, 0f, 0f);
+        effectObject.GetComponent<ParticleSystem>().Play();
         // 데미지를 입은 후에 잠시 대기합니다. 이 시간 동안 몬스터는 애니메이션이 재생됩니다.
         yield return new WaitForSeconds(1.0f);
 
@@ -191,7 +194,7 @@ public class BossMonster : MonoBehaviour, IDamagable
 
         yield return new WaitForSeconds(3f);
         Destroy(skillEffect);
-        nmAgent.isStopped = false; 
+        nmAgent.isStopped = false;
         ChangeState(State.CHASE);
     }
 
