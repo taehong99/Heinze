@@ -24,6 +24,17 @@ public class Room : MonoBehaviour
         portals[(int)direction].gameObject.SetActive(true);
     }
 
+    public void ActivatePortals()
+    {
+        foreach(Portal portal in portals)
+        {
+            if(portal.destination != null)
+            {
+                portal.gameObject.SetActive(true);
+            }
+        }
+    }
+
     public void ConnectPortal(Direction direction, Portal neighbor)
     {
         portals[(int)direction].destination = neighbor;

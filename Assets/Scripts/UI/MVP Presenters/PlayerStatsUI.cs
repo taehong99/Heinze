@@ -6,11 +6,23 @@ using TMPro;
 public class PlayerStatsUI : PopUpUI
 {
     PlayerManager player;
+    [SerializeField] GameObject buffSlotPrefab;
 
     void Start()
     {
         player = Manager.Player;
         UpdateValues();
+        UpdateBuffList();
+    }
+
+    private void UpdateBuffList()
+    {
+        foreach(var buff in Manager.Game.Buffs)
+        {
+            BuffSlotUI buffSlot = Instantiate(buffSlotPrefab).GetComponent<BuffSlotUI>();
+            buffSlot.transform.parent = GetUI<Transform>("BuffList");
+            buffSlot.SetValues(buff);
+        }
     }
 
     private void UpdateValues()

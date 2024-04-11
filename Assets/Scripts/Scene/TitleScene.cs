@@ -6,7 +6,7 @@ public class TitleScene : BaseScene
 {
     public void StartGame()
     {
-        Manager.Scene.LoadScene("2.SelectScene");
+        Manager.Scene.LoadScene("2.JobSelectScene");
     }
 
     public override IEnumerator LoadingRoutine()

@@ -23,7 +23,10 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         templates = GetComponent<RoomTemplates>();
+    }
 
+    public void GenerateMap()
+    {
         GenerateLevel();
         ConnectRooms();
     }
@@ -200,7 +203,7 @@ public class MapGenerator : MonoBehaviour
                     //entry.Value.OpenGate((Direction)i);
 
                     // Create Portal to neighbor
-                    entry.Value.ActivatePortal((Direction)i);
+                    //entry.Value.ActivatePortal((Direction)i);
                     entry.Value.ConnectPortal((Direction)i, rooms[GetAdjPos(curPos, (Direction)i)].portals[(int)GetOppositeDirection((Direction)i)]);
                 }
             }

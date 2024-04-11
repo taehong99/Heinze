@@ -4,14 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Data/Upgrades/PlayerSkillData", fileName = "PlayerSkillData")]
-public class PlayerSkillDataSO : ScriptableObject
+public class PlayerSkillDataSO : PlayerUpgradeSO
 {
-    [Header("Data")]
-    public int skillID;
-
-    [Header("Visuals")]
-    public Sprite skillIcon;
-    public string skillName;
-    public string skillDescription;
-    public string skillCaption;
+    public float cooldown;
 }

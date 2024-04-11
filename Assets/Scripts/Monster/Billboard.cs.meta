@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Items/PassiveSlot.cs.meta
+guid: 6f8d6e3a192634d97b4f6a1b25508a90
+========
 guid: 82474a29d0ece2048bdcd3c0326cc8c0
+>>>>>>>> develop:Assets/Scripts/Monster/Billboard.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

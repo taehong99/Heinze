@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Card/CardDeck.cs.meta
+guid: be7cf48f1783f41498b2c1526305ba12
+========
 guid: 7582096ee028f90458704bb7172ec0ee
+>>>>>>>> develop:Assets/Scripts/BossMonster1.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
