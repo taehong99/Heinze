@@ -1377,7 +1377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166073748947206696, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 49.66
+      value: 49.39
       objectReference: {fileID: 0}
     - target: {fileID: 2166073748947206696, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1465,7 +1465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6825654759211155725, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 49.66
+      value: 49.39
       objectReference: {fileID: 0}
     - target: {fileID: 6825654759211155725, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1711,6 +1711,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+--- !u!4 &804639948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2552052527038629183, guid: d9c1d902972575645b4bf73b5e7d5e88, type: 3}
+  m_PrefabInstance: {fileID: 6731169991084721105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &811919336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2245,7 +2250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266157265114488493, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       propertyPath: m_LocalScale.x
@@ -2307,7 +2312,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 58dd0f33babea984b98ec1270f2da97b, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6148646419262381875, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
@@ -2320,9 +2326,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2266157265114488493, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 999414178}
-    - targetCorrespondingSourceObject: {fileID: 2266157265114488493, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 999414181}
     - targetCorrespondingSourceObject: {fileID: 2266157265114488493, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 999414180}
@@ -2392,27 +2395,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &999414181
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999414176}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2.5116262, z: 1}
-  m_Center: {x: 0, y: 0.7558129, z: 0}
 --- !u!1 &1008888485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3929847272200089850, guid: 923e4b497ff08d748857ad558b1741e5, type: 3}
@@ -3245,6 +3227,7 @@ MonoBehaviour:
   hudPos: {fileID: 688147158}
   healthBarImage: {fileID: 1531801313}
   effectPrefab: {fileID: 4351755631599433758, guid: a694b1d3fc527bf45ba7244721fafb65, type: 3}
+  effectPrefab2: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
   skinnedMeshRenderer: {fileID: 1723149608}
   originalMat: {fileID: 2100000, guid: 941e32459d53f164b8964b4720ce69e9, type: 2}
   redMat: {fileID: 2100000, guid: 08a8bd64561155c4f9bce70fd0ddec55, type: 2}
@@ -4575,7 +4558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6639833366511175440, guid: 2527dadde287d954d97ab4c0badb5267, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4875,7 +4858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166073748947206696, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 49.37
+      value: 49.586
       objectReference: {fileID: 0}
     - target: {fileID: 2166073748947206696, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4971,7 +4954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6825654759211155725, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 49.37
+      value: 49.586
       objectReference: {fileID: 0}
     - target: {fileID: 6825654759211155725, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5107,6 +5090,17 @@ RectTransform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 460681576196621836, guid: 923e4b497ff08d748857ad558b1741e5, type: 3}
   m_PrefabInstance: {fileID: 1294247603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1818797192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1011953293262267085, guid: 588e1b0d29ce9a749a8afe9041d44a17, type: 3}
+  m_PrefabInstance: {fileID: 7795487592243474096}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -5985,12 +5979,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  lostDistance: 0
-  hudDamageText: {fileID: 0}
-  hudPos: {fileID: 0}
-  healthBarImage: {fileID: 0}
+  lostDistance: 7
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 804639948}
+  healthBarImage: {fileID: 1818797192}
   currentHealth: 0
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 9197352138177829399, guid: 26c17857546ab114c822fcb03e4beb68, type: 3}
+  effectPrefab2: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
 --- !u!1001 &2272629375108705119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6530,7 +6525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5534011894278594558, guid: d9c1d902972575645b4bf73b5e7d5e88, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
