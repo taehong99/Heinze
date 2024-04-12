@@ -16,8 +16,7 @@ public class Monster : MonoBehaviour, IDamagable
     public Image healthBarImage;
     public GameObject effectPrefab;
     public GameObject itemPrefab;
-    [SerializeField] float height = 5f; // 아이템이 떨어진 후에 하늘에 떠있을 높이
-    [SerializeField] float rotationSpeed = 30f; // 아이템의 회전 속도 (1초에 360도)
+    public float cubeSpawnProbability = 0.05f;
 
 
     // 몬스터 hp바 업데이트
@@ -135,7 +134,11 @@ public class Monster : MonoBehaviour, IDamagable
         Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
-        //DropItem();
+        float RandomValue = Random.value;
+        if (RandomValue < cubeSpawnProbability)
+        {
+            DropItem();
+        }
         Destroy(gameObject, 3f);
         yield return null;
     }
@@ -191,26 +194,10 @@ public class Monster : MonoBehaviour, IDamagable
         ChangeState(State.CHASE);
     }
 
-    //void DropItem()
-    //{
-    //    // 아이템을 생성하고 적절한 위치에 배치합니다.
-    //    GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
-
-    //    // 아이템을 하늘에 떠있도록 높이를 설정합니다.
-    //    newItem.transform.position += Vector3.up * height;
-
-    //    // 아이템이 천천히 회전하도록 설정합니다.
-    //    StartCoroutine(RotateItem(newItem));
-    //}
-
-    IEnumerator RotateItem(GameObject item)
+    void DropItem()
     {
-        while (true)
-        {
-            // 아이템을 1초에 360도 회전시킵니다.
-            item.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-            yield return null;
-        }
+        // 아이템을 생성하고 적절한 위치에 배치합니다.
+        GameObject newItem = Instantiate(itemPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
     }
 
 
