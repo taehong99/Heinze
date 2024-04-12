@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class RangedMonster : MonoBehaviour, IDamagable
 {
@@ -9,9 +10,11 @@ public class RangedMonster : MonoBehaviour, IDamagable
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
+    private int currentHealth;
     public GameObject hudDamageText;
     public Transform hudPos;
-
+    public Image healthBarImage;
+    public GameObject effectPrefab;
     enum State
     {
         IDLE,
@@ -22,15 +25,21 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
 
     State state;
-
+    
+    void UpdateHealthBar()
+    {
+        if (healthBarImage != null)
+            healthBarImage.fillAmount = ((float)currentHealth) / hp;
+    }
     void Start()
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
 
         // 몬스터의 hp
-        hp = 5;
+        hp = 3;
         state = State.IDLE;
+        currentHealth = hp;
         StartCoroutine(StateMachine());
     }
 
@@ -106,6 +115,8 @@ public class RangedMonster : MonoBehaviour, IDamagable
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
+        GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+        effectObject.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(1f);
     }
 
@@ -139,14 +150,23 @@ public class RangedMonster : MonoBehaviour, IDamagable
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
-        hp -= damage;
-        if (hp <= 0)
+        currentHealth -= damage;
+        if (currentHealth <= 0)
         {
             ChangeState(State.KILLED);
         }
         else
         {
             Debug.Log("데미지를 받음 ㄷㄷ");
+            StartCoroutine(DAMAGED());
+        }
+        UpdateHealthBar();
+        if (currentHealth <= 0)
+        {
+            ChangeState(State.KILLED);
+        }
+        else
+        {
             StartCoroutine(DAMAGED());
         }
     }

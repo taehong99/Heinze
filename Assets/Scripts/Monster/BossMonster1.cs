@@ -18,6 +18,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     public Image healthBarImage;
     public int currentHealth;
     public GameObject effectPrefab;
+    public GameObject effectPrefab2;
     // 몬스터 hp바 업데이트
     void UpdateHealthBar()
     {
@@ -125,6 +126,8 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
+        GameObject effectObject = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
+        effectObject.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(1f);
     }
 

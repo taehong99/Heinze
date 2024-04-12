@@ -162,7 +162,6 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     IEnumerator DAMAGED()
     {
-        anim.Play("Damaged");
         Debug.Log("¿Ã∆Â∆Æ πﬂµø");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
         //effectObject.transform.position = new Vector3 (0f, 0f, 0f);
