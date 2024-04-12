@@ -99,6 +99,15 @@ public class GameManager : Singleton<GameManager>
         mapGenerator.GenerateMap();
     }
 
+    public void SpawnChest()
+    {
+        GameObject chest = Manager.Resource.Load<GameObject>("Prefabs/Chest");
+        float xOffset = UnityEngine.Random.Range(-5f, 5f);
+        float zOffset = UnityEngine.Random.Range(-5f, 5f);
+        Vector3 spawnPos = new Vector3(playerAttack.transform.position.x + xOffset, 0, playerAttack.transform.position.z + zOffset);
+        Instantiate(chest, spawnPos, Quaternion.identity);
+    }
+
     public void CreatePools()
     {
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorPierce1"), 2, 4);

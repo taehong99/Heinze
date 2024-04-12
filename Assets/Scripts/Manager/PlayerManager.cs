@@ -106,7 +106,17 @@ public class PlayerManager : Singleton<PlayerManager>
                 }
                 break;
             case Stat.Health:
-                Debug.Log($"Health increased by {delta}");
+                if (rate == IncreaseRate.Flat)
+                {
+                    maxHP += (int)delta;
+                    CurHP += (int)delta;
+                }
+                else
+                {
+                    int sum = Mathf.CeilToInt(maxHP * delta);
+                    maxHP += sum;
+                    CurHP += sum;
+                }
                 break;
         }
     }

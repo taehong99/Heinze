@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7903459199625925206
+--- !u!1 &6285627294015917264
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3104506141869198834}
-  - component: {fileID: 2721630516055537604}
+  - component: {fileID: 8292636051183113855}
+  - component: {fileID: 7867696483224951357}
   m_Layer: 0
-  m_Name: MouseManager
+  m_Name: EventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3104506141869198834
+--- !u!4 &8292636051183113855
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7903459199625925206}
+  m_GameObject: {fileID: 6285627294015917264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 150.51929, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2721630516055537604
+--- !u!114 &7867696483224951357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7903459199625925206}
+  m_GameObject: {fileID: 6285627294015917264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1102cfaad6995eb41a1bd486816a05e9, type: 3}
+  m_Script: {fileID: 11500000, guid: f2660f76ed34346ffa83914038ebd879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotBars:
-  - {fileID: 0}
-  - {fileID: 0}

@@ -9,15 +9,50 @@ public class Room : MonoBehaviour
     public Stage RoomType => roomType;
 
     // Direction Ordering: North South East West
-    //public List<RoomInfo> exits = new List<RoomInfo>();
-    //public Transform[] gates = new Transform[4];
-    //public Transform[] spawnPositions = new Transform[4];
     public Portal[] portals = new Portal[4];
 
-    //public void OpenGate(Direction direction)
-    //{
-    //    gates[(int)direction].gameObject.SetActive(false);
-    //}
+    GenerateEnemies[] spawners;
+    private int monsterCount = 0;
+
+    private void Start()
+    {
+        spawners = GetComponentsInChildren<GenerateEnemies>();
+    }
+
+    void AddCount() => monsterCount++;
+    void SubtractCount() => monsterCount--;
+    public void EnterRoom()
+    {
+        Manager.Event.voidEventDic["enemySpawned"].OnEventRaised += AddCount;
+        Manager.Event.voidEventDic["enemyDied"].OnEventRaised += SubtractCount;
+        SpawnMonsters();
+        StartCoroutine(RoomBattleRoutine());
+    }
+
+    IEnumerator RoomBattleRoutine()
+    {
+        while(monsterCount > 0)
+        {
+            yield return null;
+        }
+        RoomCleared();
+    }
+
+    private void SpawnMonsters()
+    {
+        foreach (var spawner in spawners)
+        {
+            spawner.SpawnEnemies();
+        }
+    }
+
+    private void RoomCleared()
+    {
+        Manager.Game.SpawnChest();
+        ActivatePortals();
+        Manager.Event.voidEventDic["enemySpawned"] = null;
+        Manager.Event.voidEventDic["enemyDied"] = null;
+    }
 
     public void ActivatePortal(Direction direction)
     {

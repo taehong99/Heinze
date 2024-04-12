@@ -4,25 +4,59 @@ using UnityEngine;
 
 public class GenerateEnemies : MonoBehaviour
 {
-    public GameObject Enemy;
-    public int xPos; // 생성되는 x 좌표
-    public int zPos; // 생성되는 z 좌표
-    public int enemyCount; // 생성되는 몬스터의 수
+    [SerializeField] MonsterPoolSO monsterPool;
+    [SerializeField] MonsterGroup monsterGroup;
+    GameObject[] EnemyPrefabs;
+    [SerializeField] int enemiesToSpawn;
+    [SerializeField] int xRadius;
+    [SerializeField] int zRadius;
 
-    void Start()
+    private int xOffset;
+    private int zOffset;
+    private int enemyCount;
+    HashSet<Vector3> spawnedPositions = new HashSet<Vector3>();
+
+    private void Start()
     {
-        StartCoroutine(EnemyDrop());
+        switch (monsterGroup)
+        {
+            case MonsterGroup.All:
+                EnemyPrefabs = monsterPool.Stage1All;
+                break;
+            case MonsterGroup.Dolguns:
+                EnemyPrefabs = monsterPool.Stage1Dolguns;
+                break;
+            case MonsterGroup.Bees:
+                EnemyPrefabs = monsterPool.Stage1Bees;
+                break;
+            case MonsterGroup.Buseuls:
+                EnemyPrefabs = monsterPool.Stage1Buseuls;
+                break;
+            case MonsterGroup.Slimes:
+                EnemyPrefabs = monsterPool.Stage1Slimes;
+                break;
+            case MonsterGroup.Trees:
+                EnemyPrefabs = monsterPool.Stage1Trees;
+                break;
+        }
+        SpawnEnemies();
     }
 
-    IEnumerator EnemyDrop()
+    public void SpawnEnemies()
     {
-        while (enemyCount < 10)
+        Vector3 spawnPos = new Vector3();
+        for(int i = 0; i < enemiesToSpawn; i++)
         {
-            xPos = Random.Range(1, 50);
-            zPos = Random.Range(1, 31);
-            Instantiate(Enemy, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-            enemyCount += 1;
+            while (spawnedPositions.Contains(spawnPos))
+            {
+                xOffset = Random.Range(-xRadius, xRadius + 1);
+                zOffset = Random.Range(-zRadius, zRadius + 1);
+                spawnPos = new Vector3(transform.position.x + xOffset, 0, transform.position.z + zOffset);
+            }
+
+            spawnedPositions.Add(spawnPos);
+            Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], spawnPos, Quaternion.identity);
+            Manager.Event.voidEventDic["enemySpawned"].RaiseEvent();
         }
     }
 }

@@ -11,6 +11,7 @@ public static class Manager
     public static UIManager UI { get { return UIManager.Instance; } }
     public static PlayerManager Player { get { return PlayerManager.Instance; } }
     public static MouseManager Mouse { get { return MouseManager.Instance; } }
+    public static EventManager Event { get { return EventManager.Instance; } }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -24,6 +25,7 @@ public static class Manager
         SceneManager.ReleaseInstance();
         SoundManager.ReleaseInstance();
         UIManager.ReleaseInstance();
+        EventManager.ReleaseInstance();
 
         GameManager.CreateInstance();
         MouseManager.CreateInstance();
@@ -33,6 +35,7 @@ public static class Manager
         ResourceManager.CreateInstance();
         SceneManager.CreateInstance();
         SoundManager.CreateInstance();
+        EventManager.CreateInstance();
         UIManager.CreateInstance();
     }
 }
