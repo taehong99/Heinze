@@ -45,8 +45,8 @@ public class Monster : MonoBehaviour, IDamagable
         nmAgent = GetComponent<NavMeshAgent>();
         // 몬스터의 hp
         state = State.IDLE;
-        currentHealth = hp;
         hp = 3;
+        currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
     }
@@ -125,7 +125,6 @@ public class Monster : MonoBehaviour, IDamagable
         anim.Play("Damaged");
         Debug.Log("이펙트 발동");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-        //effectObject.transform.position = new Vector3 (0f, 0f, 0f);
         effectObject.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(1f);
 
@@ -136,7 +135,7 @@ public class Monster : MonoBehaviour, IDamagable
         Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
-        DropItem();
+        //DropItem();
         Destroy(gameObject, 3f);
         yield return null;
     }
@@ -165,7 +164,7 @@ public class Monster : MonoBehaviour, IDamagable
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
         currentHealth -= damage;
-        if (hp <= 0)
+        if (currentHealth <= 0)
         {
             ChangeState(State.KILLED);
         }
@@ -192,17 +191,17 @@ public class Monster : MonoBehaviour, IDamagable
         ChangeState(State.CHASE);
     }
 
-    void DropItem()
-    {
-        // 아이템을 생성하고 적절한 위치에 배치합니다.
-        GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
+    //void DropItem()
+    //{
+    //    // 아이템을 생성하고 적절한 위치에 배치합니다.
+    //    GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
 
-        // 아이템을 하늘에 떠있도록 높이를 설정합니다.
-        newItem.transform.position += Vector3.up * height;
+    //    // 아이템을 하늘에 떠있도록 높이를 설정합니다.
+    //    newItem.transform.position += Vector3.up * height;
 
-        // 아이템이 천천히 회전하도록 설정합니다.
-        StartCoroutine(RotateItem(newItem));
-    }
+    //    // 아이템이 천천히 회전하도록 설정합니다.
+    //    StartCoroutine(RotateItem(newItem));
+    //}
 
     IEnumerator RotateItem(GameObject item)
     {

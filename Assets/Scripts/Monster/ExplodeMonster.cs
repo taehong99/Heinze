@@ -45,7 +45,7 @@ public class ExplodeMonster : MonoBehaviour
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         // 몬스터의 hp
-        hp = 10;
+        hp = 3;
         state = State.IDLE;
         currentHealth = hp;
         UpdateHealthBar();
@@ -185,7 +185,7 @@ public class ExplodeMonster : MonoBehaviour
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
         currentHealth -= damage;
-        if (hp <= 0)
+        if (currentHealth <= 0)
         {
             ChangeState(State.KILLED);
         }
