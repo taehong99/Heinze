@@ -44,9 +44,9 @@ public class Monster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         // 몬스터의 hp
-        hp = 3;
         state = State.IDLE;
         currentHealth = hp;
+        hp = 3;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
     }
