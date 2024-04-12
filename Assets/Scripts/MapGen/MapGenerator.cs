@@ -31,6 +31,11 @@ public class MapGenerator : MonoBehaviour
         ConnectRooms();
     }
 
+    public void EnterFirstRoom()
+    {
+        rooms[Vector3.zero].EnterRoom();
+    }
+
     // Utils
     private Queue<char> CreateRoomPool()
     {
@@ -91,6 +96,8 @@ public class MapGenerator : MonoBehaviour
         {
             PlaceRoom(templates.roomB[Random.Range(0, templates.roomB.Length)], Vector3.zero);
         }
+
+        //rooms[Vector3.zero].EnterRoom();
 
         // Add openings to queue
         Queue<Vector3> spawnPoints = new Queue<Vector3>();

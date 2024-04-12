@@ -39,11 +39,12 @@ public class GenerateEnemies : MonoBehaviour
                 EnemyPrefabs = monsterPool.Stage1Trees;
                 break;
         }
-        SpawnEnemies();
+        //SpawnEnemies();
     }
 
     public void SpawnEnemies()
     {
+        Debug.Log(EnemyPrefabs == null);
         Vector3 spawnPos = new Vector3();
         for(int i = 0; i < enemiesToSpawn; i++)
         {

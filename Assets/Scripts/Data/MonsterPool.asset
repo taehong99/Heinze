@@ -13,12 +13,30 @@ MonoBehaviour:
   m_Name: MonsterPool
   m_EditorClassIdentifier: 
   Stage1All:
-  - {fileID: 737492392737420725, guid: e0749ee9fb077f843983971c435282c4, type: 3}
-  - {fileID: 6894257843862513260, guid: ec3fbe24982a29d44be3f719cfc919cb, type: 3}
-  - {fileID: 2474853939154205134, guid: bc2166acc9d425b42939f8c98878ac83, type: 3}
-  - {fileID: 5534011894278594558, guid: d9c1d902972575645b4bf73b5e7d5e88, type: 3}
-  Stage1Dolguns: []
-  Stage1Buseuls: []
-  Stage1Bees: []
-  Stage1Trees: []
-  Stage1Slimes: []
+  - {fileID: 3514757121561917445, guid: 25879f14703d125438ddd2f7d0d25090, type: 3}
+  - {fileID: 4904327918713722293, guid: 80ee97ba6146177438d362c1df585d4c, type: 3}
+  - {fileID: 24148545774055697, guid: 1d022dbfc31d8684faaf27b4e4f0663f, type: 3}
+  - {fileID: 5098582649096252846, guid: b698c6e099e80134a866896bb729fb70, type: 3}
+  - {fileID: 8329231557317528055, guid: 37063311c2b56714b8468826edd3d70b, type: 3}
+  - {fileID: 7673803094079189047, guid: f94fc28d2904e4d478a9d73c69fd2e12, type: 3}
+  - {fileID: 4248600690423341884, guid: 4044aea0486f5624cb521e9c37918917, type: 3}
+  - {fileID: 5063708592732276145, guid: 2e695b51bd196c34594598e2e4892b91, type: 3}
+  - {fileID: 3147680159012010715, guid: c7f4e4a80ef810145bb9b22447db6e1b, type: 3}
+  - {fileID: 770337610025101817, guid: 653597eb2ed5b3040bbf69b9b0a53a6b, type: 3}
+  - {fileID: 1529737378970549071, guid: 8b99a2c0a569b334db7f03e023a40686, type: 3}
+  - {fileID: 3658869601261412253, guid: e59b58a668be5334f93b7d5a01f23f9e, type: 3}
+  Stage1Dolguns:
+  - {fileID: 4904327918713722293, guid: 80ee97ba6146177438d362c1df585d4c, type: 3}
+  - {fileID: 1529737378970549071, guid: 8b99a2c0a569b334db7f03e023a40686, type: 3}
+  - {fileID: 3658869601261412253, guid: e59b58a668be5334f93b7d5a01f23f9e, type: 3}
+  - {fileID: 3147680159012010715, guid: c7f4e4a80ef810145bb9b22447db6e1b, type: 3}
+  Stage1Buseuls:
+  - {fileID: 770337610025101817, guid: 653597eb2ed5b3040bbf69b9b0a53a6b, type: 3}
+  - {fileID: 3514757121561917445, guid: 25879f14703d125438ddd2f7d0d25090, type: 3}
+  Stage1Bees:
+  - {fileID: 4248600690423341884, guid: 4044aea0486f5624cb521e9c37918917, type: 3}
+  Stage1Trees:
+  - {fileID: 5063708592732276145, guid: 2e695b51bd196c34594598e2e4892b91, type: 3}
+  - {fileID: 8329231557317528055, guid: 37063311c2b56714b8468826edd3d70b, type: 3}
+  Stage1Slimes:
+  - {fileID: 5098582649096252846, guid: b698c6e099e80134a866896bb729fb70, type: 3}

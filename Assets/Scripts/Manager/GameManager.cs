@@ -99,6 +99,11 @@ public class GameManager : Singleton<GameManager>
         mapGenerator.GenerateMap();
     }
 
+    public void StartStage()
+    {
+        mapGenerator.EnterFirstRoom();
+    }
+
     public void SpawnChest()
     {
         GameObject chest = Manager.Resource.Load<GameObject>("Prefabs/Chest");

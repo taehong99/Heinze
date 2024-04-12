@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1229885798508686871}
@@ -2056,6 +2056,10 @@ PrefabInstance:
       propertyPath: monsterGroup
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
+      propertyPath: enemiesToSpawn
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4958684480570918543, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: m_Name
       value: Spawner (4)
@@ -2989,6 +2993,10 @@ PrefabInstance:
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
+      propertyPath: enemiesToSpawn
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4958684480570918543, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: m_Name
@@ -7322,6 +7330,10 @@ PrefabInstance:
       propertyPath: monsterGroup
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
+      propertyPath: enemiesToSpawn
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4958684480570918543, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: m_Name
       value: Spawner
@@ -8148,6 +8160,10 @@ PrefabInstance:
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
+      propertyPath: enemiesToSpawn
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4958684480570918543, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: m_Name
@@ -12026,6 +12042,10 @@ PrefabInstance:
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
+      propertyPath: enemiesToSpawn
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4958684480570918543, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: m_Name

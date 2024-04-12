@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // ¸ñÇ¥¿ÍÀÇ ÃÖ´ë °Å¸®
+    [SerializeField] float lostDistance; // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Å¸ï¿½
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour, IDamagable
     public float cubeSpawnProbability = 0.05f;
 
 
-    // ¸ó½ºÅÍ hp¹Ù ¾÷µ¥ÀÌÆ®
+    // ï¿½ï¿½ï¿½ï¿½ hpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -42,9 +42,9 @@ public class Monster : MonoBehaviour, IDamagable
     {
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
-        // ¸ó½ºÅÍÀÇ hp
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ hp
         state = State.IDLE;
-        hp = 3;
+        hp = 1;
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
@@ -54,14 +54,14 @@ public class Monster : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ÇöÀç »óÅÂ¿¡ µû¶ó ÄÚ·çÆ¾ ½ÃÀÛ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ IDLE »óÅÂ°¡ ¾Æ´Ï¸é Àç»ý
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ IDLE ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             anim.Play("Idle", 0, 0);
@@ -73,37 +73,37 @@ public class Monster : MonoBehaviour, IDamagable
     {
         Debug.Log("Chasing");
 
-        // CHASE »óÅÂ¿¡¼­´Â °è¼ÓÇØ¼­ ÀÌµ¿
+        // CHASE ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
 
-            // ÇöÀç ¾Ö´Ï¸ÞÀÌ¼Ç »óÅÂ È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¾Æ´Ï¸é Àç»ý
+            // WalkFWD ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
-            // ¸ñÇ¥±îÁöÀÇ ³²Àº °Å¸®°¡ ¸ØÃß´Â ÁöÁ¡º¸´Ù ÀÛ°Å³ª °°À¸¸é
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ATTACK »óÅÂ·Î º¯°æ
+                // ATTACK ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 ChangeState(State.ATTACK);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
-            // ¸ñÇ¥¿ÍÀÇ °Å¸®°¡ ¸Ö¾îÁø °æ¿ì
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             {
                 target = null;
-                // IDLE »óÅÂ·Î º¯°æ
+                // IDLE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 ChangeState(State.IDLE);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
-            // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
             yield return null;
         }
     }
@@ -112,17 +112,17 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator ATTACK()
     {
         Debug.Log("Attacking");
-        // ATTACK »óÅÂ¿¡¼­´Â °ø°Ý ¾Ö´Ï¸ÞÀÌ¼ÇÀ» Àç»ýÇÏ°í ÀÏÁ¤ ½Ã°£ ´ë±â
+        // ATTACK ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
         anim.Play("Attack", 0, 0);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-        // °ø°ÝÀÌ ³¡³ª¸é ´Ù½Ã CHASE »óÅÂ·Î º¯°æ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ CHASE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         ChangeState(State.CHASE);
     }
 
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
-        Debug.Log("ÀÌÆåÆ® ¹ßµ¿");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ßµï¿½");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
         effectObject.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(1f);
@@ -145,10 +145,10 @@ public class Monster : MonoBehaviour, IDamagable
 
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ¸ó½ºÅÍÀÇ ¸ðµç ÄÝ¶óÀÌ´õ °¡Á®¿À±â
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // °¢ ÄÝ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­
+            collider.enabled = false; // ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
     }
 
@@ -156,7 +156,7 @@ public class Monster : MonoBehaviour, IDamagable
     {
         StopCoroutine(state.ToString());
         state = newState;
-        // º¯°æµÈ »óÅÂ¿¡ ¸Â´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½Â´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(state.ToString());
     }
 
@@ -165,7 +165,7 @@ public class Monster : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText);
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
-        Debug.Log("µ¥¹ÌÁö ¼ýÀÚ¸¦ ¹ÞÀ½");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -173,7 +173,7 @@ public class Monster : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("µ¥¹ÌÁö¸¦ ¹ÞÀ½ ¤§¤§");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
@@ -189,14 +189,14 @@ public class Monster : MonoBehaviour, IDamagable
 
     public void Detect(Transform target)
     {
-        // ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ¸é ¸ñÇ¥¸¦ ¼³Á¤ÇÏ°í CHASE »óÅÂ·Î º¯°æ
+        // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ CHASE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.target = target;
         ChangeState(State.CHASE);
     }
 
     void DropItem()
     {
-        // ¾ÆÀÌÅÛÀ» »ý¼ºÇÏ°í ÀûÀýÇÑ À§Ä¡¿¡ ¹èÄ¡ÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Õ´Ï´ï¿½.
         GameObject newItem = Instantiate(itemPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
     }
 
