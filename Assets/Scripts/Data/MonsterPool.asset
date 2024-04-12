@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e2d254b3e79425ba5dc6267463e2da, type: 3}
+  m_Name: MonsterPool
+  m_EditorClassIdentifier: 
+  Stage1All:
+  - {fileID: 737492392737420725, guid: e0749ee9fb077f843983971c435282c4, type: 3}
+  - {fileID: 6894257843862513260, guid: ec3fbe24982a29d44be3f719cfc919cb, type: 3}
+  - {fileID: 2474853939154205134, guid: bc2166acc9d425b42939f8c98878ac83, type: 3}
+  - {fileID: 5534011894278594558, guid: d9c1d902972575645b4bf73b5e7d5e88, type: 3}
+  Stage1Dolguns: []
+  Stage1Buseuls: []
+  Stage1Bees: []
+  Stage1Trees: []
+  Stage1Slimes: []
