@@ -139,6 +139,7 @@ public class Monster : MonoBehaviour, IDamagable
         {
             DropItem();
         }
+        Manager.Event.voidEventDic["enemyDied"].RaiseEvent();
         Destroy(gameObject, 3f);
         yield return null;
     }

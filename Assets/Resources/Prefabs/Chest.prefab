@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 4629645259208603922}
   - component: {fileID: 5693248337768455671}
   - component: {fileID: 5236199413627485233}
+  - component: {fileID: 3645977155286693281}
   m_Layer: 9
   m_Name: Chest
   m_TagString: Untagged
@@ -244,6 +245,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f4cdc3dc5f54b9ba91ec821f8822ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3645977155286693281
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527222829948374097}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a77a42e17c91e4ab8817b60f7afdbe0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1934529287820986538
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +278,7 @@ GameObject:
   - component: {fileID: 4035755117959054295}
   - component: {fileID: 9206233969402923594}
   m_Layer: 0
-  m_Name: SM_Prop_Chest_04_Lid
+  m_Name: ChestLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

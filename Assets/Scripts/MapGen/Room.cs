@@ -45,6 +45,7 @@ public class Room : MonoBehaviour
     {
         while(monsterCount > 0)
         {
+            Debug.Log(monsterCount);
             yield return null;
         }
         RoomCleared();
@@ -60,6 +61,7 @@ public class Room : MonoBehaviour
 
     private void RoomCleared()
     {
+        Debug.Log("room cleared");
         cleared = true;
         Manager.Game.SpawnChest();
         ActivatePortals();
