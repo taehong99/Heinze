@@ -88,5 +88,7 @@ public class Room : MonoBehaviour
     public void ConnectPortal(Direction direction, Portal neighbor)
     {
         portals[(int)direction].destination = neighbor;
+        portals[(int)direction].direction = direction;
+        neighbor.direction = Extension.GetOppositeDirection(direction);
     }
 }

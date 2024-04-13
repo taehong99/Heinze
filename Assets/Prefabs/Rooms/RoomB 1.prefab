@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 7777946544138812019}
   - component: {fileID: 6591036268980085297}
   - component: {fileID: 4022543382735034383}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RandomMapT6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 3092714515625268952}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.1, y: -0.09997559, z: -72.7}
+  m_LocalPosition: {x: -70.1, y: -0.09997559, z: -72.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -677,6 +677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7777946544138812019}
   - {fileID: 4331129827751898418}
   - {fileID: 3292505880710245248}
   - {fileID: 280105287350229170}
@@ -733,7 +734,6 @@ Transform:
   - {fileID: 5371645827978976636}
   - {fileID: 7443707530304682874}
   - {fileID: 4488765515908388401}
-  - {fileID: 7777946544138812019}
   m_Father: {fileID: 9205947004406391620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8957822077289952201

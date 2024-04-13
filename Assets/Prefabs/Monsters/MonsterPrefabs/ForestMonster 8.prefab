@@ -235,6 +235,7 @@ MonoBehaviour:
   hudPos: {fileID: 8793693043691976892}
   healthBarImage: {fileID: 4067973184934636881}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
 --- !u!65 &1233329612730963846
 BoxCollider:
   m_ObjectHideFlags: 0

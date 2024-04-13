@@ -7,6 +7,7 @@ TagManager:
   - InventoryManager
   - GameManager
   - ItemInventory
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - Interactable
   - Beam
   - MonsterDeath
-  - 
-  - 
-  - 
+  - Minimap
+  - Terrain
+  - Door
   - 
   - 
   - 

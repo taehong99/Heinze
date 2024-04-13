@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4652579222931407045}
   - component: {fileID: 2388434108390792419}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,4 +184,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
+  direction: 0
   spawnPos: {fileID: 7793420337902020394}

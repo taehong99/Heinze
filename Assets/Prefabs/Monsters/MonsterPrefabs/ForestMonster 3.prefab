@@ -437,6 +437,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 6432928914134897272}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
   itemPrefab: {fileID: 0}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
   cubeSpawnProbability: 0.05
 --- !u!195 &4784203750724296957
 NavMeshAgent:

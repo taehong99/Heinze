@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 
 public class ObjectFader : MonoBehaviour
 {
+    [SerializeField] LayerMask fadeMask;
     PlayerController player;
     float originalOpacity;
     Material material;
@@ -28,7 +29,7 @@ public class ObjectFader : MonoBehaviour
         // Cast ray from player to camera
         float distance = (transform.position - player.transform.position).magnitude * 50;
         Vector3 direction = (transform.position - player.transform.position).normalized;
-        int count = Physics.RaycastNonAlloc(player.transform.position + direction, direction, hits, distance);
+        int count = Physics.RaycastNonAlloc(player.transform.position + direction, direction, hits, distance, fadeMask);
         Debug.DrawRay(player.transform.position, direction * distance, Color.red);
         // Find all renderers hit by ray and make them transparent
         cur.Clear();

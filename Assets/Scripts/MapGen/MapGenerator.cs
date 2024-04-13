@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] int numRooms;
     [SerializeField] float roomOffset;
+    public float RoomOffset => roomOffset;
     [SerializeField] Stage stage;
     RoomTemplates templates;
 
@@ -209,24 +210,9 @@ public class MapGenerator : MonoBehaviour
 
                     // Create Portal to neighbor
                     //entry.Value.ActivatePortal((Direction)i);
-                    entry.Value.ConnectPortal((Direction)i, rooms[GetAdjPos(curPos, (Direction)i)].portals[(int)GetOppositeDirection((Direction)i)]);
+                    entry.Value.ConnectPortal((Direction)i, rooms[GetAdjPos(curPos, (Direction)i)].portals[(int)Extension.GetOppositeDirection((Direction)i)]);
                 }
             }
-        }
-    }
-
-    private Direction GetOppositeDirection(Direction dir)
-    {
-        switch (dir)
-        {
-            case Direction.North:
-                return Direction.South;
-            case Direction.South:
-                return Direction.North;
-            case Direction.East:
-                return Direction.West;
-            default:
-                return Direction.East;
         }
     }
 }

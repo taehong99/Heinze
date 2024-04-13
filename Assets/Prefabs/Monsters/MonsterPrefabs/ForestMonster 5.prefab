@@ -501,6 +501,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 3670106014003861120}
   effectPrefab: {fileID: 4351755631599433758, guid: a694b1d3fc527bf45ba7244721fafb65, type: 3}
   effectPrefab2: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
   skinnedMeshRenderer: {fileID: 3210630047281780399}
   originalMat: {fileID: 2100000, guid: 941e32459d53f164b8964b4720ce69e9, type: 2}
   redMat: {fileID: 2100000, guid: 08a8bd64561155c4f9bce70fd0ddec55, type: 2}

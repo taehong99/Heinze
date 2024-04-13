@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    const float Skill1Multiplier = 180;
+    const float Skill2Multiplier = 300;
+
     [Header("Basic Attack")]
     [SerializeField] Weapon weapon;
     [SerializeField] float attackInterval;
@@ -152,7 +155,7 @@ public class PlayerAttack : MonoBehaviour
         for(int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
-            damagable?.TakeDamage(1);
+            damagable?.TakeDamage(Manager.Player.GetAttack(Skill1Multiplier));
         }
     }
 
@@ -167,11 +170,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void Skill2Damage()
     {
-        int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(1f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
+        int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(2.5f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
-            damagable?.TakeDamage(1);
+            damagable?.TakeDamage(Manager.Player.GetAttack(Skill2Multiplier));
         }
     }
 

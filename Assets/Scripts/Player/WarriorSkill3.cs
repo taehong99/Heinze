@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WarriorSkill3 : MonoBehaviour
 {
+    const float Skill3Multiplier = 150;
+
     [SerializeField] LayerMask monsterMask;
     Collider[] colliders = new Collider[10];
     HashSet<Collider> damaged = new HashSet<Collider>();
@@ -24,7 +26,7 @@ public class WarriorSkill3 : MonoBehaviour
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeDamage(1);
+                damagable?.TakeDamage(Manager.Player.GetAttack(Skill3Multiplier));
                 damaged.Add(colliders[i]);
             }
         }

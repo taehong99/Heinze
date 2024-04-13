@@ -322,6 +322,7 @@ MonoBehaviour:
   hudPos: {fileID: 722689231090775941}
   healthBarImage: {fileID: 2403358137557436486}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
 --- !u!54 &5147654869299514029
 Rigidbody:
   m_ObjectHideFlags: 0

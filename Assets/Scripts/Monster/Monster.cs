@@ -16,6 +16,7 @@ public class Monster : MonoBehaviour, IDamagable
     public Image healthBarImage;
     public GameObject effectPrefab;
     public GameObject itemPrefab;
+    public GameObject minimapMarkerPrefab;
     public float cubeSpawnProbability = 0.05f;
 
 
@@ -40,6 +41,7 @@ public class Monster : MonoBehaviour, IDamagable
 
     void Start()
     {
+        AddMinimapMarker();
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         // ������ hp
@@ -48,6 +50,13 @@ public class Monster : MonoBehaviour, IDamagable
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
+    }
+
+    private void AddMinimapMarker()
+    {
+        GameObject marker = Instantiate(minimapMarkerPrefab);
+        marker.transform.parent = transform;
+        marker.transform.localPosition = new Vector3(0, 0.5f, 0);
     }
 
     IEnumerator StateMachine()
