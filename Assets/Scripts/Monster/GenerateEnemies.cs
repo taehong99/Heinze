@@ -8,11 +8,11 @@ public class GenerateEnemies : MonoBehaviour
     [SerializeField] MonsterGroup monsterGroup;
     GameObject[] EnemyPrefabs;
     [SerializeField] int enemiesToSpawn;
-    [SerializeField] int xRadius;
-    [SerializeField] int zRadius;
+    [SerializeField] float xRadius;
+    [SerializeField] float zRadius;
 
-    private int xOffset;
-    private int zOffset;
+    private float xOffset;
+    private float zOffset;
     private int enemyCount;
     HashSet<Vector3> spawnedPositions = new HashSet<Vector3>();
 
@@ -44,14 +44,16 @@ public class GenerateEnemies : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        Debug.Log(EnemyPrefabs == null);
         Vector3 spawnPos = new Vector3();
         for(int i = 0; i < enemiesToSpawn; i++)
         {
+            xOffset = Random.Range(-xRadius, xRadius);
+            zOffset = Random.Range(-zRadius, zRadius);
+            spawnPos = new Vector3(transform.position.x + xOffset, 0, transform.position.z + zOffset);
             while (spawnedPositions.Contains(spawnPos))
             {
-                xOffset = Random.Range(-xRadius, xRadius + 1);
-                zOffset = Random.Range(-zRadius, zRadius + 1);
+                xOffset = Random.Range(-xRadius, xRadius);
+                zOffset = Random.Range(-zRadius, zRadius);
                 spawnPos = new Vector3(transform.position.x + xOffset, 0, transform.position.z + zOffset);
             }
 

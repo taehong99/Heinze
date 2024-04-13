@@ -29,7 +29,7 @@ public class Portal : MonoBehaviour
 
         // Screen fade to black
         fader.FadeOut();
-        destination.GetComponentInParent<Room>().EnterRoom();
+        destination.GetComponentInParent<Room>(true).EnterRoom();
         yield return new WaitForSeconds(fader.FadeDuration);
 
         // Teleport Player

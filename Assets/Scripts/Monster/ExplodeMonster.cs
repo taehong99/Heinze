@@ -46,7 +46,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         state = State.IDLE;
-        hp = 3;
+        hp = 1;
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
@@ -210,5 +210,10 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         // 플레이어를 감지하면 목표를 설정하고 CHASE 상태로 변경
         this.target = target;
         ChangeState(State.CHASE);
+    }
+
+    private void OnDisable()
+    {
+        Manager.Event.voidEventDic["enemyDied"].RaiseEvent();
     }
 }

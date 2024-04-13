@@ -65,8 +65,8 @@ public class Room : MonoBehaviour
         cleared = true;
         Manager.Game.SpawnChest();
         ActivatePortals();
-        Manager.Event.voidEventDic["enemySpawned"] = null;
-        Manager.Event.voidEventDic["enemyDied"] = null;
+        Manager.Event.voidEventDic["enemySpawned"].OnEventRaised = null;
+        Manager.Event.voidEventDic["enemyDied"].OnEventRaised = null;
     }
 
     public void ActivatePortal(Direction direction)

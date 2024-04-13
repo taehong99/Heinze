@@ -139,7 +139,6 @@ public class Monster : MonoBehaviour, IDamagable
         {
             DropItem();
         }
-        Manager.Event.voidEventDic["enemyDied"].RaiseEvent();
         Destroy(gameObject, 3f);
         yield return null;
     }
@@ -201,5 +200,8 @@ public class Monster : MonoBehaviour, IDamagable
         GameObject newItem = Instantiate(itemPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
     }
 
-
+    private void OnDisable()
+    {
+        Manager.Event.voidEventDic["enemyDied"].RaiseEvent();
+    }
 }
