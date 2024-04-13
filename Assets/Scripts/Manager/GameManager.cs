@@ -91,9 +91,9 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Map Generation
-    public void SpawnRooms()
+    public void SpawnRooms(Stage stage)
     {
-        mapGenerator.GenerateMap();
+        mapGenerator.GenerateMap(stage);
     }
 
     public void StartStage()

@@ -11,7 +11,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int numRooms;
     [SerializeField] float roomOffset;
     public float RoomOffset => roomOffset;
-    [SerializeField] Stage stage;
     RoomTemplates templates;
 
     Dictionary<Vector3, Room> rooms = new Dictionary<Vector3, Room>();
@@ -26,9 +25,9 @@ public class MapGenerator : MonoBehaviour
         templates = GetComponent<RoomTemplates>();
     }
 
-    public void GenerateMap()
+    public void GenerateMap(Stage stage)
     {
-        GenerateLevel();
+        GenerateLevel(stage);
         ConnectRooms();
     }
 
@@ -79,7 +78,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateLevel()
+    private void GenerateLevel(Stage stage)
     {
         // Queue to check which type of room to instantiate next
         Queue<char> roomPool = CreateRoomPool();

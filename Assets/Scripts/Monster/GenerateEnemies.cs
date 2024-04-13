@@ -18,6 +18,9 @@ public class GenerateEnemies : MonoBehaviour
 
     private void Start()
     {
+        if (monsterGroup == MonsterGroup.MidBoss1 || monsterGroup == MonsterGroup.Boss1)
+            return;
+
         switch (monsterGroup)
         {
             case MonsterGroup.All:
@@ -38,12 +41,25 @@ public class GenerateEnemies : MonoBehaviour
             case MonsterGroup.Trees:
                 EnemyPrefabs = monsterPool.Stage1Trees;
                 break;
+            default:
+                break;
         }
         //SpawnEnemies();
     }
 
     public void SpawnEnemies()
     {
+        if (monsterGroup == MonsterGroup.MidBoss1)
+        {
+            Instantiate(monsterPool.Stage1MidBoss, transform.position, Quaternion.identity);
+            return;
+        }
+        else if(monsterGroup == MonsterGroup.Boss1)
+        {
+            Instantiate(monsterPool.Stage1Boss, transform.position, Quaternion.identity);
+            return;
+        }
+
         Vector3 spawnPos = new Vector3();
         for(int i = 0; i < enemiesToSpawn; i++)
         {

@@ -40,3 +40,5 @@ MonoBehaviour:
   - {fileID: 8329231557317528055, guid: 37063311c2b56714b8468826edd3d70b, type: 3}
   Stage1Slimes:
   - {fileID: 5098582649096252846, guid: b698c6e099e80134a866896bb729fb70, type: 3}
+  Stage1MidBoss: {fileID: 5562937245206290755, guid: 93809b22d60b6d241a6fb03b29d2e762, type: 3}
+  Stage1Boss: {fileID: 4741808232089955042, guid: 2a3e535b0ea47aa4ab10f78e8b966ecb, type: 3}

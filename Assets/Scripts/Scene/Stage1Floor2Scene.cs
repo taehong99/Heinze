@@ -2,16 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Floor1Scene : BaseScene
+public class Stage1Floor2Scene : BaseScene
 {
-    private void Start()
-    {
-        //Manager.Game.CreatePools();
-    }
-
     public override IEnumerator LoadingRoutine()
     {
-        Manager.Game.SpawnRooms();
+        Manager.Game.SpawnRooms(Stage.MidBoss);
         Manager.Game.CreatePools();
         yield return null;
     }

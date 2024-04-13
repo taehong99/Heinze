@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 1779810076}
   - component: {fileID: 1779810077}
   m_Layer: 0
-  m_Name: Floor1Scene
+  m_Name: Stage1-1Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1150,9 +1150,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1779810076}
+  - {fileID: 2109060285}
   - {fileID: 905101537}
   - {fileID: 919604981}
-  - {fileID: 323074270}
   - {fileID: 898051269}
-  - {fileID: 2109060285}
   - {fileID: 1488335629}
+  - {fileID: 323074270}
