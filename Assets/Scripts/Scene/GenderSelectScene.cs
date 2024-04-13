@@ -6,7 +6,7 @@ public class GenderSelectScene : BaseScene
 {
     public void ChooseMale()
     {
-        Manager.Scene.LoadScene("Floor1");
+        Manager.Scene.LoadScene("Stage1-1");
     }
 
     public void ChooseFemale()
