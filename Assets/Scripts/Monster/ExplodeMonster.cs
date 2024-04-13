@@ -17,6 +17,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
     public Image healthBarImage;
     public GameObject effectPrefab;
     public GameObject effectPrefab2;
+    public GameObject minimapMarkerPrefab;
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public Material originalMat;
     public Material redMat;
@@ -43,6 +44,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
 
     void Start()
     {
+        AddMinimapMarker();
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         state = State.IDLE;
@@ -50,6 +52,13 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
+    }
+
+    private void AddMinimapMarker()
+    {
+        GameObject marker = Instantiate(minimapMarkerPrefab);
+        marker.transform.parent = transform;
+        marker.transform.localPosition = new Vector3(0, 0.5f, 0);
     }
 
     IEnumerator StateMachine()

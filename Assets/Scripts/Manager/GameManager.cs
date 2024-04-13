@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
 
     // MapGen
     MapGenerator mapGenerator;
+    public MapGenerator MapGenerator => mapGenerator;
     CardDeck deck;
 
     // Events

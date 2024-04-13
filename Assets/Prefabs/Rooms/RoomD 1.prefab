@@ -384,6 +384,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8388901554425477025}
   - {fileID: 4010100415389276540}
   - {fileID: 3837782068172009791}
   - {fileID: 2539672547184815307}
@@ -426,7 +427,6 @@ Transform:
   - {fileID: 2476543322719152884}
   - {fileID: 8649686328634173317}
   - {fileID: 6152803810582930232}
-  - {fileID: 8388901554425477025}
   m_Father: {fileID: 3129229323035815517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6921253633327822756
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 8388901554425477025}
   - component: {fileID: 9122115675656471616}
   - component: {fileID: 1274300209075087714}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RandomMapT8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ Transform:
   m_GameObject: {fileID: 6921253633327822756}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31, y: -0.09997559, z: -69.7}
+  m_LocalPosition: {x: -29, y: -0.099975586, z: -68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     public Portal destination;
+    public Direction direction;
     [SerializeField] Transform spawnPos;
     ScreenFader fader;
 
@@ -31,6 +32,9 @@ public class Portal : MonoBehaviour
         fader.FadeOut();
         destination.GetComponentInParent<Room>(true).EnterRoom();
         yield return new WaitForSeconds(fader.FadeDuration);
+
+        // Move Minimap Camera
+        Manager.Event.dirEventDic["movedRoom"].RaiseEvent(direction);
 
         // Teleport Player
         other.transform.position = destination.spawnPos.position;

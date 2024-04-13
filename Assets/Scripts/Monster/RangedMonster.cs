@@ -15,6 +15,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     public Transform hudPos;
     public Image healthBarImage;
     public GameObject effectPrefab;
+    public GameObject minimapMarkerPrefab;
     enum State
     {
         IDLE,
@@ -33,6 +34,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
     void Start()
     {
+        AddMinimapMarker();
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
 
@@ -41,6 +43,13 @@ public class RangedMonster : MonoBehaviour, IDamagable
         state = State.IDLE;
         currentHealth = hp;
         StartCoroutine(StateMachine());
+    }
+
+    private void AddMinimapMarker()
+    {
+        GameObject marker = Instantiate(minimapMarkerPrefab);
+        marker.transform.parent = transform;
+        marker.transform.localPosition = new Vector3(0, 0.5f, 0);
     }
 
     IEnumerator StateMachine()
