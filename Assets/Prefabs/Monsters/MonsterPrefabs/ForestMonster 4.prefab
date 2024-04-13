@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 3192599881506881435}
   - component: {fileID: 5225626806669197023}
   - component: {fileID: 4283703858949857828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ForestMonster 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 8329231557317528055}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.366932, y: -0.08332777, z: 5.2397766}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

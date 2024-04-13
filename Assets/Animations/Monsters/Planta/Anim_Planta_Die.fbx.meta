@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: adb1f867faf8d684a85e84b66e32305d
+guid: 7a40dcd30eb18434585991a2d0b3ea53
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -67,7 +67,7 @@ ModelImporter:
     400058: mustache_02
     400060: Root
     400062: stalk_01
-    7400000: Planta_Move
+    7400000: Planta_Die
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -96,35 +96,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Planta_Move
-      takeName: Planta_Move
-      firstFrame: 31
-      lastFrame: 45
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

@@ -9,6 +9,7 @@ public class StartingRoomTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Manager.Game.StartStage();
+            Destroy(gameObject);
         }
     }
 }

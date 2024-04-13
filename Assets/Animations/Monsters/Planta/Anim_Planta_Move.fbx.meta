@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 31fd4beba23520e4787956b6abd999ea
+guid: 713f6007d795de34d977cd723aff94d3
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -67,7 +67,7 @@ ModelImporter:
     400058: mustache_02
     400060: Root
     400062: stalk_01
-    7400000: Planta_Idle
+    7400000: Planta_Move
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -98,10 +98,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Planta_Idle
-      takeName: Planta_Idle
-      firstFrame: 1
-      lastFrame: 24
+      name: Planta_Move
+      takeName: Planta_Move
+      firstFrame: 31
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

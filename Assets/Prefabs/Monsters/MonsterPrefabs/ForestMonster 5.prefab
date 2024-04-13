@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 8057747292013632892}
   - component: {fileID: 8300999794169534765}
   - component: {fileID: 8451259554039540065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ForestMonster 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 7673803094079189047}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9802566, y: -0.08333254, z: 3.9172773}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -401,7 +401,7 @@ Animator:
   m_GameObject: {fileID: 7673803094079189047}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6d872ebf8efb7be42a4c7626c28f0fa5, type: 3}
-  m_Controller: {fileID: 9100000, guid: 57a9c520236436249a20a15b13a0ea47, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5de25b2dc71bcb6448ca6d22b6605a8d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

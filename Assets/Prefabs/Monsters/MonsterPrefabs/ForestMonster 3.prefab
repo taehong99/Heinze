@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 2329836390761616641}
   - component: {fileID: 2135223694473644386}
   - component: {fileID: 2930466179084088511}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: ForestMonster 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
