@@ -162,9 +162,9 @@ public class Monster : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
-        GameObject hudText = Instantiate(hudDamageText);
+        GameObject hudText = Instantiate(hudDamageText, hudPos.position, Quaternion.identity);
         hudText.GetComponent<DamageText>().damage = damage;
-        hudText.transform.position = hudPos.position;
+        //hudText.transform.position = hudPos.position;
         Debug.Log("������ ���ڸ� ����");
         currentHealth -= damage;
         if (currentHealth <= 0)

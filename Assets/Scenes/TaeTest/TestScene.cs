@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TestScene : MonoBehaviour
 {
+    [SerializeField] PlayerSkillDataSO[] skills = new PlayerSkillDataSO[4]; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,12 @@ public class TestScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            foreach(var skill in skills)
+            {
+                Manager.Game.AnnounceSkillPicked(skill);
+            }
+        }
     }
 }

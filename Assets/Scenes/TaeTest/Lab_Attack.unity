@@ -4772,6 +4772,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401c4ddec3fb0a04b96cea1816c654e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 11400000, guid: e1dc96f681d5542a2a4ca81d44d44e5b, type: 2}
+  - {fileID: 11400000, guid: bae3a190a67654d59ae5c304ba3715c0, type: 2}
+  - {fileID: 11400000, guid: 5a9f20de4d8904ba790bdbdf27107caf, type: 2}
+  - {fileID: 11400000, guid: 8c8c0f45fd2a34f7f842b89b51dff15e, type: 2}
 --- !u!4 &1357078384
 Transform:
   m_ObjectHideFlags: 0

@@ -106,7 +106,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnChest()
     {
-        GameObject chest = Manager.Resource.Load<GameObject>("Prefabs/Chest");
+        GameObject chest = Manager.Resource.Load<GameObject>("Prefabs/Props/Chest");
         float xOffset = UnityEngine.Random.Range(-5f, 5f);
         float zOffset = UnityEngine.Random.Range(-5f, 5f);
         Vector3 spawnPos = new Vector3(playerAttack.transform.position.x + xOffset, 0, playerAttack.transform.position.z + zOffset);
