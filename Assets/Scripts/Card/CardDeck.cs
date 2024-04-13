@@ -59,15 +59,17 @@ public class CardDeck : MonoBehaviour
 
     private IEnumerator SpawnCards()
     {
+        HashSet<PlayerUpgradeSO> set = new HashSet<PlayerUpgradeSO>();
         //Choose cards
-        //yield return new WaitForSeconds(delayTime);
         for (int i = 0; i < 3; i++)
         {
             PlayerUpgradeSO card = GetRandomCard();
-            //InGameUI ui = Manager.UI.ShowInGameUI<>
+            while (set.Contains(card)){
+                card = GetRandomCard();
+            }
+            set.Add(card);
             CardUI cardUI = Instantiate(cardPrefab, Manager.UI.CardSelectUI.transform).GetComponent<CardUI>();
             cardUI.CardUISet(card);
-            //cardUI.transform.parent = cardSelectUI.transform;
             cards.Add(cardUI);
             yield return new WaitForSeconds(0.07f);
         }
