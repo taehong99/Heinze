@@ -12,7 +12,6 @@ public class GameManager : Singleton<GameManager>
     // Player Skills
     private PlayerAttack playerAttack;
     private PlayerSkillDataSO[] skillSlots = new PlayerSkillDataSO[4];
-    private bool hasPassive;
 
     // Player Buffs
     private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
@@ -49,6 +48,8 @@ public class GameManager : Singleton<GameManager>
 
     public void AnnounceSkillPicked(PlayerSkillDataSO data)
     {
+        if (data.id == 11)
+            Manager.Player.GainLifeSteal(0.03f);
         SkillPicked?.Invoke(data);
     }
     public void AnnounceBuffPicked(PlayerBuffSO data)
@@ -79,11 +80,6 @@ public class GameManager : Singleton<GameManager>
     public PlayerSkillDataSO GetSkillInSlot(int idx)
     {
         return skillSlots[idx];
-    }
-
-    public void ObtainPassiveSkill()
-    {
-        hasPassive = true;
     }
 
     public void ShowCards()

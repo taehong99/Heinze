@@ -19,13 +19,13 @@ public class PlayerManager : Singleton<PlayerManager>
     public int CurHP { get => curHP; set { curHP = value; PlayerHPChanged?.Invoke(); } }
 
     // Stats
-    private float attack;
+    private int attack;
     [Range(0f, 1f)]
     private float critRate;
     private float defense;
     private float moveSpeed;
     private float lifeSteal;
-    public float Attack => attack;
+    public int Attack => attack;
     public float CritRate => critRate;
     public float Defense => defense;
     public float MoveSpeed => moveSpeed;
@@ -61,6 +61,27 @@ public class PlayerManager : Singleton<PlayerManager>
         curHP = Mathf.Clamp(curHP, minHP, maxHP);
     }
 
+    public int GetAttack(float multiplier) // multiplier = x%
+    {
+        int rawAttack = UnityEngine.Random.Range(attack, attack + 2);
+        float rand = UnityEngine.Random.Range(0f, 1f);
+        if(rand <= critRate)
+        {
+            rawAttack *= 2;
+        }
+        int finalDamage = Mathf.CeilToInt(rawAttack * multiplier / 100);
+        if(lifeSteal > 0f)
+        {
+            Heal(Mathf.RoundToInt(finalDamage * lifeSteal));
+        }
+        return finalDamage;
+    }
+
+    public void GainLifeSteal(float percentage)
+    {
+        lifeSteal += percentage;
+    }
+
     public void UpdateStat(Stat stat, IncreaseRate rate, float delta)
     {
         switch (stat)
@@ -68,7 +89,7 @@ public class PlayerManager : Singleton<PlayerManager>
             case Stat.Attack:
                 if(rate == IncreaseRate.Flat)
                 {
-                    attack += delta;
+                    attack += (int)delta;
                 }
                 else
                 {

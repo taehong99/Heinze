@@ -184,4 +184,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
+  direction: 0
   spawnPos: {fileID: 7793420337902020394}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WarriorSkill4 : MonoBehaviour
 {
+    const float Skill4Multiplier = 110;
+
     [SerializeField] LayerMask monsterMask;
     [SerializeField] float explosionRadius;
     [SerializeField] float spinSpeed;
@@ -22,7 +24,7 @@ public class WarriorSkill4 : MonoBehaviour
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeDamage(1);
+                damagable?.TakeDamage(Manager.Player.GetAttack(Skill4Multiplier));
             }
         }
         Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), collision.GetContact(0).point, Quaternion.identity);

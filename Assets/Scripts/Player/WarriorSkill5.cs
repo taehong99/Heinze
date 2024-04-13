@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WarriorSkill5 : MonoBehaviour
 {
+    const float Skill5Multiplier = 90;
+
     [SerializeField] float damageInterval;
     [SerializeField] LayerMask monsterMask;
     Collider[] colliders = new Collider[10];
@@ -26,7 +28,7 @@ public class WarriorSkill5 : MonoBehaviour
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeDamage(1);
+                damagable?.TakeDamage(Manager.Player.GetAttack(Skill5Multiplier));
             }
         }
     }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] Collider attackCollider;
-    [SerializeField] int damage;
 
     public void EnableWeapon()
     {
@@ -22,8 +21,7 @@ public class Weapon : MonoBehaviour
         IDamagable damagable = other.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(damage);
+            damagable.TakeDamage(Manager.Player.GetAttack(100));
         }
-
     }
 }
