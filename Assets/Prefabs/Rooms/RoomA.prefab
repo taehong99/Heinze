@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomType: 0
+  stairs: {fileID: 0}
   portals:
   - {fileID: 987361016093621433}
   - {fileID: 2373343798218970834}

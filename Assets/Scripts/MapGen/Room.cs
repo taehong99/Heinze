@@ -7,6 +7,7 @@ using Unity.AI.Navigation;
 public class Room : MonoBehaviour
 {
     [SerializeField] Stage roomType;
+    [SerializeField] Stairs stairs;
     public Stage RoomType => roomType;
 
     // Direction Ordering: North South East West
@@ -67,6 +68,11 @@ public class Room : MonoBehaviour
         ActivatePortals();
         Manager.Event.voidEventDic["enemySpawned"].OnEventRaised = null;
         Manager.Event.voidEventDic["enemyDied"].OnEventRaised = null;
+
+        if(roomType == Stage.MidBoss || roomType == Stage.Boss)
+        {
+            stairs.gameObject.SetActive(true);
+        }
     }
 
     public void ActivatePortal(Direction direction)
