@@ -706,9 +706,9 @@ MonoBehaviour:
   cooldownTimers: []
   skill1Radius: 5
   skill2DamagePoint: {fileID: 9126284744480706870}
-  skill4Duration: 0
-  skill4SpawnInterval: 0
-  skill6BuffDuration: 0
+  skill4Duration: 3.5
+  skill4SpawnInterval: 0.25
+  skill6BuffDuration: 10
 --- !u!114 &4270141205490548178
 MonoBehaviour:
   m_ObjectHideFlags: 0
