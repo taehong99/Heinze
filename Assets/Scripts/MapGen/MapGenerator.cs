@@ -27,6 +27,8 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap(Stage stage)
     {
+        rooms.Clear();
+        takenPositions.Clear();
         GenerateLevel(stage);
         ConnectRooms();
     }
@@ -39,6 +41,7 @@ public class MapGenerator : MonoBehaviour
     // Utils
     private Queue<char> CreateRoomPool()
     {
+        int originalRooms = numRooms;
         List<char> order = new List<char>();
         CCount = 1; //Random.Range(1, 3);
         DCount = 1; //Random.Range(1, 3);
@@ -63,6 +66,7 @@ public class MapGenerator : MonoBehaviour
         {
             ShuffleList(order);
         }
+        numRooms = originalRooms;
         return new Queue<char>(order);
     }
 
@@ -165,6 +169,10 @@ public class MapGenerator : MonoBehaviour
         else if(stage == Stage.Boss)
         {
             PlaceRoom(templates.roomBoss, furthestPoint);
+        }
+        else
+        {
+            PlaceRoom(templates.roomStairs, furthestPoint);
         }
     }
 

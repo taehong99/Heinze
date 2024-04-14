@@ -47,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRooms: 8
   roomOffset: -200
-  stage: 1
 --- !u!114 &7593999587956146849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,3 +74,4 @@ MonoBehaviour:
   - {fileID: 1759168712711889003, guid: b0ef5ee28632dd24a9c04af1d0c47f88, type: 3}
   roomMidBoss: {fileID: 4193403298403578975, guid: e233ccb1faf8044528c1d04c63a73fa1, type: 3}
   roomBoss: {fileID: 857329763120007041, guid: fce4f4d029a7443988a770455f2762d0, type: 3}
+  roomStairs: {fileID: 1638899900201400999, guid: 7f0a4a1e9e2fc0b429d99311cb9d0e99, type: 3}

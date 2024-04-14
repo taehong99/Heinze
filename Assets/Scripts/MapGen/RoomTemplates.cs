@@ -10,4 +10,5 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] roomD;
     public GameObject roomMidBoss;
     public GameObject roomBoss;
+    public GameObject roomStairs;
 }
