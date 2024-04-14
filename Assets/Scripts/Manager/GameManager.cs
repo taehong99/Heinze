@@ -1,3 +1,4 @@
+using DungeonArchitect.Samples.ShooterGame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,10 @@ public class GameManager : Singleton<GameManager>
     private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
     public List<PlayerBuffSO> Buffs => buffs;
 
+    // Player Items
+    int potionCount;
+    public int PotionCount {  get { return potionCount; } set { potionCount = value; potionCountChanged?.Invoke(value); } }
+
     // MapGen
     MapGenerator mapGenerator;
     public MapGenerator MapGenerator => mapGenerator;
@@ -26,6 +31,7 @@ public class GameManager : Singleton<GameManager>
     public event Action<PlayerSkillDataSO> SkillPicked;
     public event Action<PlayerBuffSO> BuffPicked;
     public event Action<ConsumableItemSO> ItemPicked;
+    public event Action<int> potionCountChanged;
 
     private void Start()
     {
@@ -59,6 +65,8 @@ public class GameManager : Singleton<GameManager>
     }
     public void AnnounceItemPicked(ConsumableItemSO data)
     {
+        if (data.id == 4)
+            ObtainPotions(3);
         ItemPicked?.Invoke(data);
     }
 
@@ -86,6 +94,24 @@ public class GameManager : Singleton<GameManager>
     {
         deck = GetComponentInChildren<CardDeck>();
         deck.ShowCards();
+    }
+
+    #endregion
+
+    #region Player Items
+    public void DrinkPotion()
+    {
+        if (potionCount == 0)
+            return;
+
+        PotionCount--;
+        Manager.Player.Heal(30);
+    }
+
+    public void ObtainPotions(int count)
+    {
+        Debug.Log(count);
+        PotionCount += count;
     }
 
     #endregion

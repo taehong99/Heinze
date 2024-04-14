@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryBar : MonoBehaviour
+public class SkillSlots : MonoBehaviour
 {
     public class DragData
     {
-        public InventorySlot slot;
+        public SkillSlot slot;
         public Transform transform;
     }
 
-    public InventorySlot[] inventorySlots;
+    public SkillSlot[] inventorySlots;
     [SerializeField] PassiveSlot passiveSlot;
 
     [HideInInspector] public DragData dragData;
@@ -18,7 +18,7 @@ public class InventoryBar : MonoBehaviour
 
     private void Start()
     {
-        inventorySlots = GetComponentsInChildren<InventorySlot>();
+        inventorySlots = GetComponentsInChildren<SkillSlot>();
         for(int i = 0; i < inventorySlots.Length; i++)
         {
             inventorySlots[i].InstantiateSlot(i, this);

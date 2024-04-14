@@ -12,9 +12,6 @@ namespace Tae
         private void Start()
         {
             curInteractable = null;
-
-            // subscribe to player interact input event
-            transform.GetComponentInParent<PlayerController>().InteractPressed += OnInteract;
         }
 
         private void OnInteract()

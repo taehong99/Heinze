@@ -149,6 +149,7 @@ public class Monster : MonoBehaviour, IDamagable
             DropItem();
         }
         Destroy(gameObject, 3f);
+        Destroy(this);
         yield return null;
     }
 
@@ -186,14 +187,14 @@ public class Monster : MonoBehaviour, IDamagable
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
-        if (currentHealth <= 0)
+        /*if (currentHealth <= 0)
         {
             ChangeState(State.KILLED);
         }
         else
         {
             StartCoroutine(DAMAGED());
-        }
+        }*/
     }
 
     public void Detect(Transform target)
@@ -206,7 +207,7 @@ public class Monster : MonoBehaviour, IDamagable
     void DropItem()
     {
         // �������� �����ϰ� ������ ��ġ�� ��ġ�մϴ�.
-        GameObject newItem = Instantiate(itemPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        Instantiate(itemPrefab, transform.position, Quaternion.identity);
     }
 
     private void OnDisable()

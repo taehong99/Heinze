@@ -84,7 +84,7 @@ public class CardDeck : MonoBehaviour
     private PlayerUpgradeSO GetRandomCard()
     {
         float rand = Random.Range(0f, 1f);
-        PlayerUpgradeSO chosen = new PlayerUpgradeSO();
+        PlayerUpgradeSO chosen;
         int randomIdx;
         if (rand < 0.6f) // Buff 60%
         {

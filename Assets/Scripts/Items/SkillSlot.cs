@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class SkillSlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("Slot Data")]
     public PlayerSkillDataSO skillData;
     [SerializeField] bool filled;
-    InventoryBar parent;
+    SkillSlots parent;
     Image icon;
     public Image cooldownImage;
     int idx;
@@ -35,7 +35,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
         }
     }
 
-    public void InstantiateSlot(int idx, InventoryBar parent)
+    public void InstantiateSlot(int idx, SkillSlots parent)
     {
         this.idx = idx;
         this.parent = parent;
@@ -61,7 +61,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
 
         Debug.Log("Begin drag");
         if (parent.dragData == null) // Instantiate if null
-            parent.dragData = new InventoryBar.DragData();
+            parent.dragData = new SkillSlots.DragData();
 
         parent.dragData.slot = this;
         parent.dragData.transform = transform;
@@ -94,7 +94,7 @@ public class InventorySlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHa
         }
         else
         {
-            InventorySlot[] slots = parent.inventorySlots;
+            SkillSlot[] slots = parent.inventorySlots;
             for (int i = 0; i < slots.Length; i++)
             {
                 RectTransform rect = (RectTransform)slots[i].transform;

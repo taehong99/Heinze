@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     Vector3 forwardDir;
     Vector3 rightDir;
-    public event Action InteractPressed;
 
     private void Awake()
     {
@@ -175,8 +174,8 @@ public class PlayerController : MonoBehaviour
         Dash();
     }
 
-    private void OnInteract()
+    private void OnItem1()
     {
-        InteractPressed?.Invoke();
+        Manager.Game.DrinkPotion();
     }
 }
