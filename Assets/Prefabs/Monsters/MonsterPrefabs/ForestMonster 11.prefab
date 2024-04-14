@@ -402,7 +402,7 @@ MonoBehaviour:
   hudPos: {fileID: 5259259382102017535}
   healthBarImage: {fileID: 2839098693669601015}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
   minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
   cubeSpawnProbability: 0.05
 --- !u!65 &5257137128864392145

@@ -20,7 +20,10 @@ public class GameManager : Singleton<GameManager>
 
     // Player Items
     int potionCount;
+    int goldCount;
     public int PotionCount {  get { return potionCount; } set { potionCount = value; potionCountChanged?.Invoke(value); } }
+    public int GoldCount {  get { return goldCount; } set { goldCount = value; goldCountChanged?.Invoke(value); } }
+
 
     // MapGen
     MapGenerator mapGenerator;
@@ -32,6 +35,7 @@ public class GameManager : Singleton<GameManager>
     public event Action<PlayerBuffSO> BuffPicked;
     public event Action<ConsumableItemSO> ItemPicked;
     public event Action<int> potionCountChanged;
+    public event Action<int> goldCountChanged;
 
     private void Start()
     {
@@ -67,6 +71,15 @@ public class GameManager : Singleton<GameManager>
     {
         if (data.id == 4)
             ObtainPotions(3);
+
+        if (data.type == ItemType.Coin)
+        {
+            ObtainGold(data.gainAmount);
+        }
+        else if(data.type == ItemType.Potion)
+        {
+            Manager.Player.Heal(data.gainAmount);
+        }
         ItemPicked?.Invoke(data);
     }
 
@@ -112,6 +125,11 @@ public class GameManager : Singleton<GameManager>
     {
         Debug.Log(count);
         PotionCount += count;
+    }
+
+    public void ObtainGold(int count)
+    {
+        GoldCount += count;
     }
 
     #endregion
