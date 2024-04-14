@@ -21,7 +21,7 @@ public class SkillBarUI : BaseUI
 
     private void UpdateGoldCount(int count)
     {
-        monsterCount.text = count.ToString();
+        goldCount.text = count.ToString();
     }
 
     private void AddMonsterCount()
