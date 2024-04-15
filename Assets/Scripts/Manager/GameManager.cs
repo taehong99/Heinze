@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     // Player Skills
     private PlayerAttack playerAttack;
     private PlayerSkillDataSO[] skillSlots = new PlayerSkillDataSO[4];
+    public PlayerSkillDataSO passiveSlot;
 
     // Player Buffs
     private List<PlayerBuffSO> buffs = new List<PlayerBuffSO>();
@@ -59,7 +60,11 @@ public class GameManager : Singleton<GameManager>
     public void AnnounceSkillPicked(PlayerSkillDataSO data)
     {
         if (data.id == 11)
+        {
             Manager.Player.GainLifeSteal(0.03f);
+            passiveSlot = data;
+        }
+            
         SkillPicked?.Invoke(data);
     }
     public void AnnounceBuffPicked(PlayerBuffSO data)
@@ -162,7 +167,7 @@ public class GameManager : Singleton<GameManager>
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill1"), 2, 4);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), 2, 4);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill3"), 3, 6);
-        Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4"), 5, 10);
+        Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4"), 10, 10);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), 5, 10);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill5"), 2, 4);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill6"), 2, 4);

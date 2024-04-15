@@ -27,10 +27,12 @@ public class PooledObject : MonoBehaviour
     {
         if (pool != null)
         {
+            Debug.Log("Returned");
             pool.ReturnPool(this);
         }
         else
         {
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
     }

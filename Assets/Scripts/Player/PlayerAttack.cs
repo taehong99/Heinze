@@ -52,9 +52,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (MouseManager.Instance.Left){
-            Attack();
-        }
+        //if (MouseManager.Instance.Left){
+        //    Attack();   
+        //}
+        
         ExitAttack();
     }
 
@@ -277,6 +278,11 @@ public class PlayerAttack : MonoBehaviour
     public void DisableWeapon()
     {
         weapon.DisableWeapon();
+    }
+
+    private void OnAttack()
+    {
+        Attack();
     }
 
     PlayerSkillDataSO skill;
