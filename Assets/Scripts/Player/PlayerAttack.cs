@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,7 @@ public class PlayerAttack : MonoBehaviour
     PlayerEffects effects;
     Animator animator;
     Collider[] colliders = new Collider[10];
+    Plane plane = new Plane(Vector3.up, 0);
 
     private void Start()
     {
@@ -55,7 +57,6 @@ public class PlayerAttack : MonoBehaviour
         //if (MouseManager.Instance.Left){
         //    Attack();   
         //}
-        
         ExitAttack();
     }
 
@@ -70,6 +71,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 controller.isAttacking = true;
                 animator.runtimeAnimatorController = combo[comboCounter].animatorOC;
+                LookAtMouse();
                 animator.Play("Attack", 0, 0);
                 comboCounter++;
                 lastClickedTime = Time.time;
@@ -119,6 +121,7 @@ public class PlayerAttack : MonoBehaviour
     protected virtual void UseSkill(int skillId)
     {
         ForceExitAttack();
+        LookAtMouse();
         switch (skillId)
         {
             case 1:
@@ -251,6 +254,18 @@ public class PlayerAttack : MonoBehaviour
     }
 
     #endregion
+
+    Vector3 worldPosition;
+    void LookAtMouse()
+    {
+        float distance;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (plane.Raycast(ray, out distance))
+        {
+            worldPosition = ray.GetPoint(distance);
+        }
+        transform.LookAt(worldPosition);
+    }
 
     public float GetCooldownRatio(int id)
     {
