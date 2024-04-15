@@ -825,8 +825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94da154856c93094681df686bc2a4deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  healthBarImage: {fileID: 0}
+  damageTextPrefab: {fileID: 3760417294855002914, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  spawnPoint: {fileID: 6921132290598660032}
 --- !u!1 &2150872898571025067
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fcfa33b2f5d5e47b5fc920f8e1da03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warriorPrefab: {fileID: 0}
+  warriorPrefab: {fileID: 2120978240799133072, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+  chest: {fileID: 1527222829948374097, guid: d9de5d057b40748efa4ed6788a367456, type: 3}
+  passiveSlot: {fileID: 0}
 --- !u!1 &6898241167444175995
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +95,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deck: {fileID: 11400000, guid: 8188623695f82494eb220a4a1ecf5a79, type: 2}
   cardPrefab: {fileID: 878384543158946410, guid: 4431991b7416a154dbaaf99958a19e89, type: 3}
+  skillDeck: []
+  buffDeck: []
+  trashDeck: []
 --- !u!1001 &6068717269064214194
 PrefabInstance:
   m_ObjectHideFlags: 0
