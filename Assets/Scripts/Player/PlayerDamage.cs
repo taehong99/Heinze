@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerDamagable : MonoBehaviour, IDamagable
+public class PlayerDamage : MonoBehaviour, IDamagable
 {
-    [SerializeField] int maxHealth = 10;
-    private int currentHealth;
-    public Image healthBarImage;
-
-    void UpdateHealthBar()
-    {
-        if (healthBarImage != null)
-            healthBarImage.fillAmount = ((float)currentHealth) / maxHealth;
-    }
+    [SerializeField] DamageText damageTextPrefab;
+    [SerializeField] Transform spawnPoint;
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        Manager.Player.PlayerHealed += ShowHealText;
+    }
+
+    private void OnDestroy()
+    {
+        Manager.Player.PlayerHealed -= ShowHealText;
+    }
+
+    private void ShowHealText(int amount)
+    {
+        DamageText damageText = Instantiate(damageTextPrefab, spawnPoint.position, Quaternion.identity);
+        damageText.SetColor(Color.green);
+        damageText.damage = amount;
     }
 
     public void TakeDamage(int damage)
     {
-        Debug.Log(damage);
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-        UpdateHealthBar();
-    }
-
-    void Die()
-    {
-        Debug.Log("Player died!");
+        int dmg = Manager.Player.CalculateTakenDamage(damage);
+        Manager.Player.TakeDamage(dmg);
+        DamageText damageText = Instantiate(damageTextPrefab, spawnPoint.position, Quaternion.identity);
+        damageText.damage = dmg;
+        Debug.Log(dmg);
     }
 }

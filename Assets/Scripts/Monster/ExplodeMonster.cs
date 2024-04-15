@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ExplodeMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // ¸ñÇ¥¿ÍÀÇ ÃÖ´ë °Å¸®
+    [SerializeField] float lostDistance; // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Å¸ï¿½
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
@@ -22,7 +22,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
     public Material originalMat;
     public Material redMat;
 
-    // ¸ó½ºÅÍ hp¹Ù ¾÷µ¥ÀÌÆ®
+    // ï¿½ï¿½ï¿½ï¿½ hpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -64,14 +64,14 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ÇöÀç »óÅÂ¿¡ µû¶ó ÄÚ·çÆ¾ ½ÃÀÛ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ IDLE »óÅÂ°¡ ¾Æ´Ï¸é Àç»ý
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ IDLE ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             anim.Play("Idle", 0, 0);
@@ -81,39 +81,38 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
 
     IEnumerator CHASE()
     {
-        Debug.Log("Chasing");
-        // CHASE »óÅÂ¿¡¼­´Â °è¼ÓÇØ¼­ ÀÌµ¿
+        // CHASE ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
 
-            // ÇöÀç ¾Ö´Ï¸ÞÀÌ¼Ç »óÅÂ È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¾Æ´Ï¸é Àç»ý
+            // WalkFWD ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
-            // ¸ñÇ¥±îÁöÀÇ ³²Àº °Å¸®°¡ ¸ØÃß´Â ÁöÁ¡º¸´Ù ÀÛ°Å³ª °°À¸¸é
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ÅÍÁö´Â ¸ó½ºÅÍÀÌ¹Ç·Î ¹Ù·Î BOMB ·Î ÀÌµ¿ÇÑ´Ù.
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½Ù·ï¿½ BOMB ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
                 ChangeState(State.BOMB);
                 yield return null;
                
             }
-            // ¸ñÇ¥¿ÍÀÇ °Å¸®°¡ ¸Ö¾îÁø °æ¿ì
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             {
                 target = null;
-                // IDLE »óÅÂ·Î º¯°æ
+                // IDLE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 ChangeState(State.IDLE);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
-            // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
             yield return null;
         }
     }
@@ -124,7 +123,6 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         StopCoroutine(colorRoutine);
         currentHealth = 0;
         UpdateHealthBar();
-        Debug.Log("ÅÍÁø´Ù");
         GameObject effectObject2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
         effectObject2.GetComponent<ParticleSystem>().Play();
         ChangeState(State.KILLED);
@@ -154,7 +152,6 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
 
     IEnumerator KILLED()
     {
-        Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
         Destroy(gameObject, 3f);
@@ -163,17 +160,17 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
 
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ¸ó½ºÅÍÀÇ ¸ðµç ÄÝ¶óÀÌ´õ °¡Á®¿À±â
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // °¢ ÄÝ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­
+            collider.enabled = false; // ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
     }
     void ChangeState(State newState)
     {
         StopCoroutine(state.ToString());
         state = newState;
-        // º¯°æµÈ »óÅÂ¿¡ ¸Â´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½Â´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(state.ToString());
     }
 
@@ -182,7 +179,6 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText);
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
-        Debug.Log("µ¥¹ÌÁö ¼ýÀÚ¸¦ ¹ÞÀ½");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -190,7 +186,6 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("µ¥¹ÌÁö¸¦ ¹ÞÀ½ ¤§¤§");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
@@ -205,7 +200,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
     }
     public void Detect(Transform target)
     {
-        // ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ¸é ¸ñÇ¥¸¦ ¼³Á¤ÇÏ°í CHASE »óÅÂ·Î º¯°æ
+        // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ CHASE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.target = target;
         ChangeState(State.CHASE);
     }

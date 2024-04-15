@@ -1929,6 +1929,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -112.52626
       objectReference: {fileID: 0}
+    - target: {fileID: 6419034066004455840, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 407148167}
+    - target: {fileID: 6419034066004455840, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+      propertyPath: damageTextPrefab
+      value: 
+      objectReference: {fileID: 3760417294855002914, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
     - target: {fileID: 6440284290001534300, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.999959
@@ -2824,6 +2832,11 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!4 &407148167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6921132290598660032, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+  m_PrefabInstance: {fileID: 356168444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &523671760
 PrefabInstance:
   m_ObjectHideFlags: 0
