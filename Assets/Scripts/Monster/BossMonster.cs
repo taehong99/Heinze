@@ -182,14 +182,12 @@ public class BossMonster : MonoBehaviour, IDamagable
         anim.Play("Skil", 0, 0);
         yield return new WaitForSeconds(4.1f);
 
-        //Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         int randomIndex = Random.Range(0, skillEffectPrefab.Length);
         GameObject skillEffect = Instantiate(skillEffectPrefab[randomIndex], transform.position, Quaternion.identity);
-
-        // 플레이어 방향을 향하도록 하는 위치값 
-        //Vector3 direction = (playerTransform.position - transform.position).normalized;
-        //skillEffect.transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        skillEffect.transform.rotation = Quaternion.LookRotation(direction);
 
         yield return new WaitForSeconds(3f);
         Destroy(skillEffect);
@@ -200,7 +198,7 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     void ShootProjectile()
     {
-        GameObject Projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject Projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         projectilePrefab.GetComponent<ParticleSystem>().Play();
         Projectile script = Projectile.GetComponent<Projectile>();
         if (script != null && sensor.target != null)
