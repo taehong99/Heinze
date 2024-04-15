@@ -31,6 +31,5 @@ public class PlayerDamage : MonoBehaviour, IDamagable
         Manager.Player.TakeDamage(dmg);
         DamageText damageText = Instantiate(damageTextPrefab, spawnPoint.position, Quaternion.identity);
         damageText.damage = dmg;
-        Debug.Log(dmg);
     }
 }

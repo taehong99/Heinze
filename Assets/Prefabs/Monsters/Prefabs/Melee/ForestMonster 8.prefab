@@ -510,8 +510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285e7a72e421f834b8460deca9de4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  monster: {fileID: 0}
+  type: 0
+  monster: {fileID: 8559934187716448397}
   RangedMonster: {fileID: 0}
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}

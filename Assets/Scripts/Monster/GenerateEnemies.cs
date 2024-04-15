@@ -63,6 +63,8 @@ public class GenerateEnemies : MonoBehaviour
         Vector3 spawnPos = new Vector3();
         for(int i = 0; i < enemiesToSpawn; i++)
         {
+            xRadius /= 2;
+            zRadius /= 2;
             xOffset = Random.Range(-xRadius, xRadius);
             zOffset = Random.Range(-zRadius, zRadius);
             spawnPos = new Vector3(transform.position.x + xOffset, 0, transform.position.z + zOffset);

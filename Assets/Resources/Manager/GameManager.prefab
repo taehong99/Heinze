@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: stage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5460024011823590119, guid: 586b044bf06f592489a6bed6fa937a9f, type: 3}
+      propertyPath: numRooms
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5883459783612738971, guid: 586b044bf06f592489a6bed6fa937a9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
