@@ -1187,9 +1187,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8719939950304453645}
+  - component: {fileID: 2747301721764130329}
   - component: {fileID: 8292271051481173420}
   - component: {fileID: 2788524292892217030}
-  - component: {fileID: 2747301721764130329}
   - component: {fileID: 50566844423720424}
   m_Layer: 8
   m_Name: ForestBossMonster 2
@@ -1217,6 +1217,36 @@ Transform:
   - {fileID: 884283763846459651}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2747301721764130329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741808232089955042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088bee73c72a944aadcd35885ad9fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 180
+  lostDistance: 7
+  attackRange: 0
+  attackCooldown: 0
+  projectilePrefab: {fileID: 4725983210678844810, guid: b219771238b8f2649b4e2723a6992614, type: 3}
+  projectileSpawnPoint: {fileID: 987994107642668453}
+  skillDuration: 3
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 1894703083624670049}
+  skillEffectPrefab:
+  - {fileID: 3727526034691980890, guid: c08ad0dcf9885f5459f9e893b452affa, type: 3}
+  - {fileID: 1184629829477508290, guid: 04771622a2947264e95a8de388e13558, type: 3}
+  - {fileID: 424988766202661374, guid: c4c9c3e6f872d1148a7fcc047081fecd, type: 3}
+  healthBarImage: {fileID: 6040063032421829117}
+  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  damage: 1
+  itemPrefab: {fileID: 0}
+  state: 0
 --- !u!95 &8292271051481173420
 Animator:
   serializedVersion: 5
@@ -1259,36 +1289,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.9644897, z: 1}
   m_Center: {x: 0, y: 1.0293812, z: 0}
---- !u!114 &2747301721764130329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4741808232089955042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a088bee73c72a944aadcd35885ad9fb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 180
-  lostDistance: 7
-  attackRange: 0
-  attackCooldown: 0
-  projectilePrefab: {fileID: 4725983210678844810, guid: b219771238b8f2649b4e2723a6992614, type: 3}
-  projectileSpawnPoint: {fileID: 987994107642668453}
-  skillDuration: 3
-  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
-  hudPos: {fileID: 1894703083624670049}
-  skillEffectPrefab:
-  - {fileID: 3727526034691980890, guid: c08ad0dcf9885f5459f9e893b452affa, type: 3}
-  - {fileID: 1184629829477508290, guid: 04771622a2947264e95a8de388e13558, type: 3}
-  - {fileID: 424988766202661374, guid: c4c9c3e6f872d1148a7fcc047081fecd, type: 3}
-  healthBarImage: {fileID: 6040063032421829117}
-  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  damage: 1
-  itemPrefab: {fileID: 0}
-  state: 0
 --- !u!195 &50566844423720424
 NavMeshAgent:
   m_ObjectHideFlags: 0

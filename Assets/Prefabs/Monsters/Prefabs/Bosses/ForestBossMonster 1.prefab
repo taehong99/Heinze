@@ -130,10 +130,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4126490825677856103}
+  - component: {fileID: 3893797333362892472}
   - component: {fileID: 2928117817925581386}
   - component: {fileID: 2071890257305701518}
   - component: {fileID: 215162282290353607}
-  - component: {fileID: 3893797333362892472}
   m_Layer: 8
   m_Name: ForestBossMonster 1
   m_TagString: Untagged
@@ -160,6 +160,26 @@ Transform:
   - {fileID: 2223774625131440122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3893797333362892472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562937245206290755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7cf48f1783f41498b2c1526305ba12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 60
+  lostDistance: 7
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 8145874994083734834}
+  healthBarImage: {fileID: 3618645384999974521}
+  currentHealth: 0
+  effectPrefab: {fileID: 9197352138177829399, guid: 26c17857546ab114c822fcb03e4beb68, type: 3}
+  effectPrefab2: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
 --- !u!95 &2928117817925581386
 Animator:
   serializedVersion: 5
@@ -224,26 +244,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3893797333362892472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5562937245206290755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7cf48f1783f41498b2c1526305ba12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 60
-  lostDistance: 7
-  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
-  hudPos: {fileID: 8145874994083734834}
-  healthBarImage: {fileID: 3618645384999974521}
-  currentHealth: 0
-  effectPrefab: {fileID: 9197352138177829399, guid: 26c17857546ab114c822fcb03e4beb68, type: 3}
-  effectPrefab2: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
 --- !u!1 &6080560709930031321
 GameObject:
   m_ObjectHideFlags: 0

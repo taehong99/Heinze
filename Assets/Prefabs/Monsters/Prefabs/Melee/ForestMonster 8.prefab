@@ -165,8 +165,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3178042516797746726}
+  - component: {fileID: 8559934187716448397}
   - component: {fileID: 7156503719023402724}
-  - component: {fileID: 5738616137503362932}
   - component: {fileID: 1233329612730963846}
   - component: {fileID: 4898237642388251595}
   m_Layer: 8
@@ -195,6 +195,29 @@ Transform:
   - {fileID: 7485930606255773103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8559934187716448397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3147680159012010715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  lostDistance: 7
+  damage: 5
+  attackCooldownTime: 2
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 8793693043691976892}
+  healthBarImage: {fileID: 4067973184934636881}
+  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
+  cubeSpawnProbability: 0.05
 --- !u!95 &7156503719023402724
 Animator:
   serializedVersion: 5
@@ -216,30 +239,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5738616137503362932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3147680159012010715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a22d7a9eb76b764995d0137aec57d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  lostDistance: 7
-  attackCooldownTime: 2
-  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
-  hudPos: {fileID: 8793693043691976892}
-  healthBarImage: {fileID: 4067973184934636881}
-  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
-  projectilePrefab: {fileID: 0}
-  projectileSpawnPoint: {fileID: 0}
-  damage: 5
-  itemPrefab: {fileID: 0}
 --- !u!65 &1233329612730963846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -513,7 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   monster: {fileID: 0}
-  RangedMonster: {fileID: 5738616137503362932}
+  RangedMonster: {fileID: 0}
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}

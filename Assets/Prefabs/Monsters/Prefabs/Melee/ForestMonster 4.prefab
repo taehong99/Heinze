@@ -565,9 +565,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 242403579710020282}
+  - component: {fileID: 5225626806669197023}
   - component: {fileID: 3875314775338481727}
   - component: {fileID: 3192599881506881435}
-  - component: {fileID: 5225626806669197023}
   - component: {fileID: 4283703858949857828}
   m_Layer: 8
   m_Name: ForestMonster 4
@@ -595,6 +595,29 @@ Transform:
   - {fileID: 2064862919117530572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5225626806669197023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329231557317528055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 16
+  lostDistance: 7
+  damage: 1
+  attackCooldownTime: 3
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 3740584415864617986}
+  healthBarImage: {fileID: 4824689659977819234}
+  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
+  cubeSpawnProbability: 0.05
 --- !u!95 &3875314775338481727
 Animator:
   serializedVersion: 5
@@ -637,29 +660,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.540123, y: 1.363764, z: 1}
   m_Center: {x: -0.010042191, y: 0.7747661, z: 0}
---- !u!114 &5225626806669197023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8329231557317528055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 16
-  lostDistance: 7
-  damage: 1
-  attackCooldownTime: 3
-  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
-  hudPos: {fileID: 3740584415864617986}
-  healthBarImage: {fileID: 4824689659977819234}
-  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
-  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
-  cubeSpawnProbability: 0.05
 --- !u!195 &4283703858949857828
 NavMeshAgent:
   m_ObjectHideFlags: 0
