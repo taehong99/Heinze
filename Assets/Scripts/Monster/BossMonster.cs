@@ -23,6 +23,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     public Image healthBarImage;
     private int currentHealth;
     public GameObject effectPrefab;
+    public GameObject effectPrefab1;
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -122,8 +123,8 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("attack");
         nmAgent.velocity = Vector3.zero;
-        ShootProjectile();
         anim.Play("Attack", 0, 0);
+        ShootProjectile();
         attackCount++; // 어택 카운트 증가하는거 세기
         yield return new WaitForSeconds(1.2f);
         anim.Play("Idle", 0, 0);
@@ -181,14 +182,14 @@ public class BossMonster : MonoBehaviour, IDamagable
         anim.Play("Skil", 0, 0);
         yield return new WaitForSeconds(4.1f);
 
-        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        //Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         int randomIndex = Random.Range(0, skillEffectPrefab.Length);
         GameObject skillEffect = Instantiate(skillEffectPrefab[randomIndex], transform.position, Quaternion.identity);
 
         // 플레이어 방향을 향하도록 하는 위치값 
-        Vector3 direction = (playerTransform.position - transform.position).normalized;
-        skillEffect.transform.rotation = Quaternion.LookRotation(direction);
+        //Vector3 direction = (playerTransform.position - transform.position).normalized;
+        //skillEffect.transform.rotation = Quaternion.LookRotation(direction);
 
         yield return new WaitForSeconds(3f);
         Destroy(skillEffect);
@@ -197,30 +198,11 @@ public class BossMonster : MonoBehaviour, IDamagable
     }
 
 
-    //IEnumerator ChasingRoutine(GameObject obj)
-    //{
-    //    if (sensor.target != null)
-    //    {
-    //        // 타겟 방향 구하기
-    //        Vector3 targetDirection = sensor.target.position - obj.transform.position;
-    //        Quaternion currentRot = obj.transform.rotation;
-    //        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-    //        float time = 0;
-    //        // 타겟 방향으로 회전하기
-    //        while (time < 1)
-    //        {
-    //            time += Time.deltaTime;
-    //            obj.transform.rotation = Quaternion.Lerp(currentRot, targetRotation, time);
-    //        }
-
-    //    }
-    //    yield return null;
-    //}
-
     void ShootProjectile()
     {
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        Projectile script = projectile.GetComponent<Projectile>();
+        GameObject Projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectilePrefab.GetComponent<ParticleSystem>().Play();
+        Projectile script = Projectile.GetComponent<Projectile>();
         if (script != null && sensor.target != null)
         {
             script.SetTarget(sensor.target);
