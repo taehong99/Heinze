@@ -13,14 +13,16 @@ public class BeamDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        IDamagable damagable = other.GetComponent<IDamagable>();
-        if(damagable != null)
+        if (other.CompareTag("Player") == true)
         {
-            isDamaging = true;
-            StartCoroutine(DealDamage(damagable));
+            IDamagable damagable = other.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                isDamaging = true;
+                StartCoroutine(DealDamage(damagable));
+            }
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         isDamaging = false;

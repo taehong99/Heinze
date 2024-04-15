@@ -1282,12 +1282,13 @@ MonoBehaviour:
   hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
   hudPos: {fileID: 1894703083624670049}
   skillEffectPrefab:
+  - {fileID: 3727526034691980890, guid: c08ad0dcf9885f5459f9e893b452affa, type: 3}
   - {fileID: 1184629829477508290, guid: 04771622a2947264e95a8de388e13558, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 424988766202661374, guid: c4c9c3e6f872d1148a7fcc047081fecd, type: 3}
   healthBarImage: {fileID: 6040063032421829117}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
   damage: 1
+  itemPrefab: {fileID: 0}
   state: 0
 --- !u!195 &50566844423720424
 NavMeshAgent:

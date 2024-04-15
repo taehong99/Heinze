@@ -26,6 +26,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     private int currentHealth;
     public GameObject effectPrefab;
     public int damage = 1;
+    public GameObject itemPrefab;
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -239,6 +240,11 @@ public class BossMonster : MonoBehaviour, IDamagable
         Debug.Log(newState.ToString());
         // 변경된 상태에 맞는 코루틴 시작
         StartCoroutine(state.ToString());
+    }
+
+    void DropItem()
+    {
+        Instantiate(itemPrefab, transform.position, Quaternion.identity);
     }
 
     //public void Detect(Transform target)

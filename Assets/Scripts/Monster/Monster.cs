@@ -151,7 +151,6 @@ public class Monster : MonoBehaviour, IDamagable
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
-        Debug.Log("����Ʈ �ߵ�");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
         effectObject.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(1f);
