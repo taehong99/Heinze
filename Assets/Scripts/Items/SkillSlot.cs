@@ -114,12 +114,12 @@ public class SkillSlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandle
                         icon.sprite = tempSprite;
                         if (slots[i].filled) // Filled slot
                         {
-                            PlayerSkillDataSO tempData = slots[i].skillData;
-                            slots[i].skillData = skillData;
-                            skillData = tempData;
-                            Manager.Game.UpdateSkillSlot(idx, i, skillData);
-                            //Manager.Game.UpdateSkillSlot(idx, tempData);
-                            
+                            // slots[i].skillData = dropped slot
+                            // skillData = original slot
+                            PlayerSkillDataSO tempData = skillData;
+                            skillData = slots[i].skillData;
+                            slots[i].skillData = tempData;
+                            Manager.Game.UpdateSkillSlot(idx, i, tempData);
                         }
                         else
                         {

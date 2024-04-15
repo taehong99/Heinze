@@ -88,18 +88,18 @@ public class GameManager : Singleton<GameManager>
         ItemPicked?.Invoke(data);
     }
 
-    public void UpdateSkillSlot(int prevIdx, int newIdx, PlayerSkillDataSO skillData)
+    public void UpdateSkillSlot(int prevIdx, int newIdx, PlayerSkillDataSO droppedSkill)
     {
         if(prevIdx == -1) // Add to empty slot
         {
-            skillSlots[newIdx] = skillData;
+            skillSlots[newIdx] = droppedSkill;
         }
         else // Swap skill slots
         {
             // Swap data
-            PlayerSkillDataSO tempData = skillSlots[newIdx];
-            skillSlots[newIdx] = skillData;
-            skillSlots[prevIdx] = tempData;
+            PlayerSkillDataSO temp = skillSlots[newIdx];
+            skillSlots[newIdx] = droppedSkill;
+            skillSlots[prevIdx] = temp;
         }
     }
 
