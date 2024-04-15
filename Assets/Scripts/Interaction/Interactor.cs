@@ -38,7 +38,7 @@ namespace Tae
         private void OnTriggerExit(Collider other)
         {
             IInteractable interactable = other.GetComponent<IInteractable>();
-            if (interactable != null)
+            if (interactable != null && curInteractable != null)
             {
                 curInteractable.HideUI();
                 curInteractable = null;

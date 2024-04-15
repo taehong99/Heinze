@@ -56,7 +56,6 @@ public class PlayerEffects : MonoBehaviour
                 Manager.Pool.GetPool(Skill3, transform.position + playerTorsoOffset, Quaternion.LookRotation(transform.forward));
                 break;
             case "Skill4":
-                Debug.Log("Skill4");
                 float xOffset = Random.Range(-5, 5);
                 float zOffset = Random.Range(-5, 5);
                 Vector3 spawnPos = new Vector3(transform.position.x + xOffset, 8, transform.position.z + zOffset);

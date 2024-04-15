@@ -695,9 +695,8 @@ MonoBehaviour:
   attackInterval: 0.4
   comboCooldown: 0.1
   combo:
-  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
-  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
   - {fileID: 11400000, guid: e41715dc2144744f1a945c0c07b121d7, type: 2}
+  - {fileID: 11400000, guid: 34f91f16a68104f9d95d896f1e7c3177, type: 2}
   - {fileID: 11400000, guid: fea33ea14415b41e4937d1ba94a040d1, type: 2}
   monsterMask:
     serializedVersion: 2
@@ -707,8 +706,8 @@ MonoBehaviour:
   skill1Radius: 5
   skill2DamagePoint: {fileID: 9126284744480706870}
   skill4Duration: 3.5
-  skill4SpawnInterval: 0.25
-  skill6BuffDuration: 10
+  skill4SpawnInterval: 0.3
+  skill6BuffDuration: 15
 --- !u!114 &4270141205490548178
 MonoBehaviour:
   m_ObjectHideFlags: 0

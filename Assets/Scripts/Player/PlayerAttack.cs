@@ -40,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
     PlayerController controller;
     PlayerEffects effects;
     Animator animator;
-    Collider[] colliders = new Collider[10];
+    Collider[] colliders = new Collider[20];
     Plane plane = new Plane(Vector3.up, 0);
 
     private void Start()
