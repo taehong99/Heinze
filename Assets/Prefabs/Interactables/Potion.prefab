@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 4735644725981961937}
   - component: {fileID: 6549968161621480844}
   - component: {fileID: 8770064403864761133}
+  - component: {fileID: -4110804884999387704}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Untagged
@@ -316,6 +317,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4110804884999387704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851362543731071335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b036fff1fe7b3439ff118dba9dc388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHieght: 0.2
+  floatSpeed: 1
+  rotateSpeed: 30
 --- !u!1 &7092896558418576227
 GameObject:
   m_ObjectHideFlags: 0

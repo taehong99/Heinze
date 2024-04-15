@@ -9,7 +9,7 @@ public class DamageText : MonoBehaviour
     private float alphaSpeed;
     private float destroyTime;
     TextMeshPro text;
-    Color alpha;
+    public Color color = Color.red;
     public int damage;
 
     // Start is called before the first frame update
@@ -20,7 +20,6 @@ public class DamageText : MonoBehaviour
         destroyTime = 2.0f;
 
         text = GetComponent<TextMeshPro>();
-        alpha = text.color;
         text.text = damage.ToString();
         Invoke("DestroyObject", destroyTime);
     }
@@ -28,9 +27,14 @@ public class DamageText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0)); // ÅØ½ºÆ® À§Ä¡
-        alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaSpeed); // ÅØ½ºÆ® ¾ËÆÄ°ª
-        text.color = alpha;
+        transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0)); // ï¿½Ø½ï¿½Æ® ï¿½ï¿½Ä¡
+        color.a = Mathf.Lerp(color.a, 0, Time.deltaTime * alphaSpeed); // ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½Ä°ï¿½
+        text.color = color;
+    }
+
+    public void SetColor(Color color)
+    {
+        this.color = color;
     }
 
     private void LateUpdate()

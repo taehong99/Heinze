@@ -86,7 +86,6 @@ public class MapGenerator : MonoBehaviour
     {
         // Queue to check which type of room to instantiate next
         Queue<char> roomPool = CreateRoomPool();
-        Debug.Log(roomPool.Count);
 
         // Instantiate starting room with 2 ~ 4 doors
         /*Room curRoom = templates.roomA.GetComponent<Room>();

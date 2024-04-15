@@ -34,6 +34,7 @@ public class PlayerManager : Singleton<PlayerManager>
     // Events
     public event Action PlayerHPChanged;
     public event Action PlayerDied;
+    public event Action<int> PlayerHealed;
 
     private void Start()
     {
@@ -58,13 +59,16 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void Heal(int amount)
     {
-        CurHP += amount;
-        CurHP = Mathf.Clamp(curHP, minHP, maxHP);
+        int missingHP = maxHP - curHP;
+        int healedAmt = Math.Min(missingHP, amount);
+        CurHP += healedAmt;
+        PlayerHealed?.Invoke(healedAmt);
     }
 
     public int GetAttack(float multiplier) // multiplier = x%
     {
-        int rawAttack = UnityEngine.Random.Range(attack, attack + 2);
+        int attackMax = Mathf.CeilToInt(attack * 1.3f);
+        int rawAttack = UnityEngine.Random.Range(attack, attackMax + 1);
         float rand = UnityEngine.Random.Range(0f, 1f);
         if(rand <= critRate)
         {
@@ -141,6 +145,12 @@ public class PlayerManager : Singleton<PlayerManager>
                 }
                 break;
         }
+    }
+
+    public int CalculateTakenDamage(int damage)
+    {
+        int reducedDamage = damage - (int)defense;
+        return Mathf.Clamp(reducedDamage, 0, damage);
     }
 
     public void TakeDamage(int amount)

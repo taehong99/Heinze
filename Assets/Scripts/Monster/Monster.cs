@@ -78,8 +78,6 @@ public class Monster : MonoBehaviour, IDamagable
 
     IEnumerator CHASE()
     {
-        Debug.Log("Chasing");
-
         yield return null;
         while (target != null)
         {
@@ -117,13 +115,11 @@ public class Monster : MonoBehaviour, IDamagable
         yield return null;
         if (attackCoolDown <= 0)
         {
-            Debug.Log("Attacking");
             anim.Play("Attack", 0, 0);
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
             if (target != null)
             {
-                Debug.Log("Attack!!!");
                 IDamagable playerDamagable = target.GetComponent<IDamagable>();
                 if (playerDamagable != null)
                 {
@@ -137,7 +133,6 @@ public class Monster : MonoBehaviour, IDamagable
         else
         {
             ChangeState(State.CHASE);
-            Debug.Log("cooldown"); 
         }
     }
 
@@ -159,7 +154,6 @@ public class Monster : MonoBehaviour, IDamagable
 
     IEnumerator KILLED()
     {
-        Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
         float RandomValue = Random.value;
@@ -200,7 +194,6 @@ public class Monster : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("Damaged Taked");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();

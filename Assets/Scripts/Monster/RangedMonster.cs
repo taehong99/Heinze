@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class RangedMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // ¸ñÇ¥¿ÍÀÇ ÃÖ´ë °Å¸®
-    [SerializeField] float attackCooldownTime = 2.0f; // °ø°Ý Äð´Ù¿î ½Ã°£ (¿¹: 2ÃÊ)
-    float attackCoolDown = 0.0f; // °ø°Ý Äð´Ù¿î ÃÊ±â°ª
+    [SerializeField] float lostDistance; // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Å¸ï¿½
+    [SerializeField] float attackCooldownTime = 2.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¿ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½: 2ï¿½ï¿½)
+    float attackCoolDown = 0.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¿ï¿½ ï¿½Ê±â°ª
 
     Transform target;
     NavMeshAgent nmAgent;
@@ -47,7 +47,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
 
-        // ¸ó½ºÅÍÀÇ hp
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ hp
         hp = 1;
         state = State.IDLE;
         currentHealth = hp;
@@ -65,14 +65,14 @@ public class RangedMonster : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ÇöÀç »óÅÂ¿¡ µû¶ó ÄÚ·çÆ¾ ½ÃÀÛ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ IDLE »óÅÂ°¡ ¾Æ´Ï¸é Àç»ý
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ IDLE ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             anim.Play("Idle", 0, 0);
@@ -86,38 +86,38 @@ public class RangedMonster : MonoBehaviour, IDamagable
 
         yield return null;
 
-        // CHASE »óÅÂ¿¡¼­´Â °è¼ÓÇØ¼­ ÀÌµ¿
+        // CHASE ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
 
-            // ÇöÀç ¾Ö´Ï¸ÞÀÌ¼Ç »óÅÂ È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¾Æ´Ï¸é Àç»ý
+            // WalkFWD ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
-            // ¸ñÇ¥±îÁöÀÇ ³²Àº °Å¸®°¡ ¸ØÃß´Â ÁöÁ¡º¸´Ù ÀÛ°Å³ª °°À¸¸é
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ATTACK »óÅÂ·Î º¯°æ
+                // ATTACK ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 ChangeState(State.ATTACK);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
-            // ¸ñÇ¥¿ÍÀÇ °Å¸®°¡ ¸Ö¾îÁø °æ¿ì
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             //else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             //{
             //    target = null;
-            //    // IDLE »óÅÂ·Î º¯°æ
+            //    // IDLE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
             //    ChangeState(State.IDLE);
-            //    yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+            //    yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             //}
 
-            // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
             yield return null;
         }
     }
@@ -127,14 +127,12 @@ public class RangedMonster : MonoBehaviour, IDamagable
         yield return null;
         if (attackCoolDown <= 0)
         {
-            Debug.Log("Attacking");
             anim.Play("Attack", 0, 0);
             ShootProjectile();
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
             if (target != null)
             {
-                Debug.Log("Attack!!!");
                 IDamagable playerDamagable = target.GetComponent<IDamagable>();
                 if (playerDamagable != null)
                 {
@@ -148,7 +146,6 @@ public class RangedMonster : MonoBehaviour, IDamagable
         else
         {
             ChangeState(State.CHASE);
-            Debug.Log("cooldown");
         }
     }
 
@@ -178,7 +175,6 @@ public class RangedMonster : MonoBehaviour, IDamagable
 
     IEnumerator KILLED()
     {
-        Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
         Destroy(gameObject, 3f);
@@ -186,17 +182,17 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ¸ó½ºÅÍÀÇ ¸ðµç ÄÝ¶óÀÌ´õ °¡Á®¿À±â
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // °¢ ÄÝ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­
+            collider.enabled = false; // ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
     }
     void ChangeState(State newState)
     {
         StopCoroutine(state.ToString());
         state = newState;
-        // º¯°æµÈ »óÅÂ¿¡ ¸Â´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½Â´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(state.ToString());
     }
 
@@ -205,7 +201,6 @@ public class RangedMonster : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText);
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
-        Debug.Log("µ¥¹ÌÁö ¼ýÀÚ¸¦ ¹ÞÀ½");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -213,7 +208,6 @@ public class RangedMonster : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("µ¥¹ÌÁö¸¦ ¹ÞÀ½ ¤§¤§");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
@@ -228,7 +222,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
     public void Detect(Transform target)
     {
-        // ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ¸é ¸ñÇ¥¸¦ ¼³Á¤ÇÏ°í CHASE »óÅÂ·Î º¯°æ
+        // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ CHASE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.target = target;
         ChangeState(State.CHASE);
     }
