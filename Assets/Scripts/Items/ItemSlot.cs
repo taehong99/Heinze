@@ -16,7 +16,13 @@ public class ItemSlot : BaseUI
         icon = GetUI<Image>("ItemIcon");
         emptyIcon = icon.sprite;
         countText = GetUI<TextMeshProUGUI>("ItemCountText");
+        UpdateCount(Manager.Game.PotionCount);
         Manager.Game.potionCountChanged += UpdateCount;
+    }
+
+    private void OnDestroy()
+    {
+        Manager.Game.potionCountChanged -= UpdateCount;
     }
 
     public void UpdateCount(int count)

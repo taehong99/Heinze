@@ -4588,11 +4588,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: xRadius
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: zRadius
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup
@@ -14241,11 +14241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: xRadius
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: zRadius
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup
@@ -17836,11 +17836,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: xRadius
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: zRadius
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup
@@ -22933,11 +22933,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: xRadius
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: zRadius
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3788422731933196966, guid: 8677dd9e99203453e8d6b8917e671474, type: 3}
       propertyPath: monsterGroup

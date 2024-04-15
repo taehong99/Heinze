@@ -370,7 +370,6 @@ GameObject:
   - component: {fileID: 4784203750724296957}
   - component: {fileID: 2329836390761616641}
   - component: {fileID: 2135223694473644386}
-  - component: {fileID: 2930466179084088511}
   m_Layer: 8
   m_Name: ForestMonster 3
   m_TagString: Untagged
@@ -511,23 +510,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2930466179084088511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5098582649096252846}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e6e33826adfed42861041ccf6c2467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterPool: {fileID: 0}
-  monsterGroup: 0
-  enemiesToSpawn: 0
-  xRadius: 0
-  zRadius: 0
 --- !u!1 &6665837156320800256
 GameObject:
   m_ObjectHideFlags: 0

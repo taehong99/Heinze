@@ -28,6 +28,6 @@ public class WarriorSkill4 : MonoBehaviour
             }
         }
         Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), collision.GetContact(0).point, Quaternion.identity);
-        GetComponent<PooledObject>().Release();
+        Destroy(gameObject);
     }
 }

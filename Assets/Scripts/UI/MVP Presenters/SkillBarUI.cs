@@ -19,6 +19,13 @@ public class SkillBarUI : BaseUI
         Manager.Event.voidEventDic["enemyDied"].OnEventRaised += SubtractMonsterCount;
     }
 
+    private void OnDestroy()
+    {
+        Manager.Game.goldCountChanged -= UpdateGoldCount;
+        Manager.Event.voidEventDic["enemySpawned"].OnEventRaised -= AddMonsterCount;
+        Manager.Event.voidEventDic["enemyDied"].OnEventRaised -= SubtractMonsterCount;
+    }
+
     private void UpdateGoldCount(int count)
     {
         goldCount.text = count.ToString();

@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class GenderSelectScene : BaseScene
 {
+    bool chosen;
+
     public void ChooseMale()
     {
-        Manager.Scene.LoadScene("Stage1-1");
+        if (!chosen)
+        {
+            Manager.Scene.LoadScene("Stage1-1");
+            chosen = true;
+        }
     }
 
     public void ChooseFemale()

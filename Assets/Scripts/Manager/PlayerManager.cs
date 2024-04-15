@@ -11,6 +11,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] PlayerDataSO data;
     PlayerJob job = PlayerJob.Warrior; // TODO: Change this
     public PlayerJob Job;
+    public string jobText;
 
     // HP
     const int minHP = 0;
@@ -57,8 +58,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void Heal(int amount)
     {
-        curHP += amount;
-        curHP = Mathf.Clamp(curHP, minHP, maxHP);
+        CurHP += amount;
+        CurHP = Mathf.Clamp(curHP, minHP, maxHP);
     }
 
     public int GetAttack(float multiplier) // multiplier = x%
@@ -144,13 +145,18 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void TakeDamage(int amount)
     {
-        curHP -= amount;
-        curHP = Mathf.Clamp(curHP, minHP, maxHP);
-        if(curHP == 0)
+        CurHP -= amount;
+        CurHP = Mathf.Clamp(curHP, minHP, maxHP);
+        if(CurHP <= 0)
         {
             // Player died event
             PlayerDied?.Invoke();
         }
+    }
+
+    public void Die()
+    {
+
     }
 
     public void Reset() // Call on game restart

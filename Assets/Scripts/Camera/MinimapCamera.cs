@@ -10,6 +10,11 @@ public class MinimapCamera : MonoBehaviour
         Manager.Event.dirEventDic["movedRoom"].OnEventRaised += MoveCamera;
     }
 
+    private void OnDestroy()
+    {
+        Manager.Event.dirEventDic["movedRoom"].OnEventRaised -= MoveCamera;
+    }
+
     private void MoveCamera(Direction dir)
     {
         float offset = Manager.Game.MapGenerator.RoomOffset;

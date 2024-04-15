@@ -23,7 +23,28 @@ public class SkillSlots : MonoBehaviour
         {
             inventorySlots[i].InstantiateSlot(i, this);
         }
+        GetSkillSlotsOnStart();
         Manager.Game.SkillPicked += AddItem;
+    }
+
+    private void GetSkillSlotsOnStart()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if (Manager.Game.GetSkillInSlot(i) == null)
+                continue;
+            inventorySlots[i].skillData = Manager.Game.GetSkillInSlot(i);
+            inventorySlots[i].UpdateIcon();
+        }
+        if (Manager.Game.passiveSlot != null)
+        {
+            passiveSlot.SetSlot(Manager.Game.passiveSlot);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Manager.Game.SkillPicked -= AddItem;
     }
 
     public PlayerSkillDataSO GetSkillData(int idx)

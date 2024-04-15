@@ -46,7 +46,6 @@ public class Room : MonoBehaviour
     {
         while(monsterCount > 0)
         {
-            Debug.Log(monsterCount);
             yield return null;
         }
         RoomCleared();
@@ -66,8 +65,8 @@ public class Room : MonoBehaviour
         cleared = true;
         Manager.Game.SpawnChest();
         ActivatePortals();
-        Manager.Event.voidEventDic["enemySpawned"].OnEventRaised = null;
-        Manager.Event.voidEventDic["enemyDied"].OnEventRaised = null;
+        Manager.Event.voidEventDic["enemySpawned"].OnEventRaised -= AddCount;
+        Manager.Event.voidEventDic["enemyDied"].OnEventRaised -= SubtractCount;
 
         if(roomType == Stage.MidBoss || roomType == Stage.Boss)
         {
