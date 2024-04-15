@@ -1,12 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class RangedMonster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
     [SerializeField] float lostDistance; // 목표와의 최대 거리
+    [SerializeField] float attackCooldownTime = 2.0f; // 공격 쿨다운 시간 (예: 2초)
+    float attackCoolDown = 0.0f; // 공격 쿨다운 초기값
+
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
@@ -16,6 +20,11 @@ public class RangedMonster : MonoBehaviour, IDamagable
     public Image healthBarImage;
     public GameObject effectPrefab;
     public GameObject minimapMarkerPrefab;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawnPoint;
+    public int damage;
+    public GameObject itemPrefab;
+
     enum State
     {
         IDLE,
@@ -26,7 +35,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
 
     State state;
-    
+
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -75,6 +84,8 @@ public class RangedMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("Chasing");
 
+        yield return null;
+
         // CHASE 상태에서는 계속해서 이동
         while (target != null)
         {
@@ -98,13 +109,13 @@ public class RangedMonster : MonoBehaviour, IDamagable
                 yield break; // CHASE 상태를 빠져나옴
             }
             // 목표와의 거리가 멀어진 경우
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
-            {
-                target = null;
-                // IDLE 상태로 변경
-                ChangeState(State.IDLE);
-                yield break; // CHASE 상태를 빠져나옴
-            }
+            //else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            //{
+            //    target = null;
+            //    // IDLE 상태로 변경
+            //    ChangeState(State.IDLE);
+            //    yield break; // CHASE 상태를 빠져나옴
+            //}
 
             // 목표 위치로 이동
             yield return null;
@@ -113,14 +124,50 @@ public class RangedMonster : MonoBehaviour, IDamagable
 
     IEnumerator ATTACK()
     {
-        Debug.Log("Attacking");
-        // ATTACK 상태에서는 공격 애니메이션을 재생하고 일정 시간 대기
-        anim.Play("Attack", 0, 0);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-        // 공격이 끝나면 다시 CHASE 상태로 변경
-        ChangeState(State.CHASE);
+        yield return null;
+        if (attackCoolDown <= 0)
+        {
+            Debug.Log("Attacking");
+            anim.Play("Attack", 0, 0);
+            ShootProjectile();
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+
+            if (target != null)
+            {
+                Debug.Log("Attack!!!");
+                IDamagable playerDamagable = target.GetComponent<IDamagable>();
+                if (playerDamagable != null)
+                {
+                    playerDamagable.TakeDamage(damage);
+                }
+            }
+
+            ChangeState(State.CHASE);
+            attackCoolDown = attackCooldownTime;
+        }
+        else
+        {
+            ChangeState(State.CHASE);
+            Debug.Log("cooldown");
+        }
     }
 
+    void Update()
+    {
+        if (attackCoolDown > 0)
+        {
+            attackCoolDown -= Time.deltaTime;
+        }
+    }
+    void ShootProjectile()
+    {
+        GameObject Projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile script = Projectile.GetComponent<Projectile>();
+        if (script != null && target != null)
+        {
+            script.SetTarget(target);
+        }
+    }
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
@@ -190,4 +237,10 @@ public class RangedMonster : MonoBehaviour, IDamagable
     {
         Manager.Event.voidEventDic["enemyDied"].RaiseEvent();
     }
+
+    void DropItem()
+    {
+        Instantiate(itemPrefab, transform.position, Quaternion.identity);
+    }
+
 }
