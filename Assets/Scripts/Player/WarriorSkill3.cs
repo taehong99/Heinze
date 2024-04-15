@@ -21,7 +21,11 @@ public class WarriorSkill3 : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             if (damaged.Contains(colliders[i]))
+            {
+                Debug.Log("Contained");
                 return;
+            }
+                
 
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)

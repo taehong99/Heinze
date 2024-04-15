@@ -9,6 +9,11 @@ public class TitleScene : BaseScene
         Manager.Scene.LoadScene("2.JobSelectScene");
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     public override IEnumerator LoadingRoutine()
     {
         yield return null;

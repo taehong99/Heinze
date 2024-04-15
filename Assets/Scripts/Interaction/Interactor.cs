@@ -22,6 +22,7 @@ namespace Tae
             Debug.Log("Interact");
             curInteractable.HideUI();
             curInteractable.Interact();
+            curInteractable = null;
         }
 
         private void OnTriggerEnter(Collider other)
