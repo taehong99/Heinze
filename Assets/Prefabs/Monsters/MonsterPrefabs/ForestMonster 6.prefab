@@ -251,7 +251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4248600690423341884}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 0
@@ -316,13 +316,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a22d7a9eb76b764995d0137aec57d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 7
   lostDistance: 7
+  attackCooldownTime: 2
   hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
   hudPos: {fileID: 722689231090775941}
   healthBarImage: {fileID: 2403358137557436486}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
   minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
+  projectilePrefab: {fileID: 8002842398355565849, guid: 022d19bfaed00cc4ba696d876c2af768, type: 3}
+  projectileSpawnPoint: {fileID: 973274710995361824}
+  damage: 3
+  itemPrefab: {fileID: 0}
 --- !u!54 &5147654869299514029
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -567,6 +572,7 @@ MonoBehaviour:
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}
+  RangedBomb: {fileID: 0}
 --- !u!1 &5355330727888275416
 GameObject:
   m_ObjectHideFlags: 0
