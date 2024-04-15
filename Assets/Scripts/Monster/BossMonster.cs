@@ -13,6 +13,8 @@ public class BossMonster : MonoBehaviour, IDamagable
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
     [SerializeField] float skillDuration;
+    
+
     MonserSensor sensor;
     NavMeshAgent nmAgent;
     Animator anim;
@@ -23,7 +25,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     public Image healthBarImage;
     private int currentHealth;
     public GameObject effectPrefab;
-    public GameObject effectPrefab1;
+    public int damage = 1;
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -48,7 +50,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         sensor = GetComponentInChildren<MonserSensor>();
 
         // 몬스터의 hp
-        hp = 30;
+        hp = 180;
         state = State.IDLE;
         currentHealth = hp;
         UpdateHealthBar();
@@ -127,6 +129,16 @@ public class BossMonster : MonoBehaviour, IDamagable
         ShootProjectile();
         attackCount++; // 어택 카운트 증가하는거 세기
         yield return new WaitForSeconds(1.2f);
+        if (sensor.target != null)
+        {
+            Debug.Log("Attack!!!");
+            IDamagable playerDamagable = sensor.target.GetComponent<IDamagable>();
+            if (playerDamagable != null)
+            {
+                playerDamagable.TakeDamage(damage);
+            }
+
+        }
         anim.Play("Idle", 0, 0);
         yield return new WaitForSeconds(1.8f);
         nmAgent.isStopped = false;
@@ -165,9 +177,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("이펙트 발동");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-        //effectObject.transform.position = new Vector3 (0f, 0f, 0f);
         effectObject.GetComponent<ParticleSystem>().Play();
-        // 데미지를 입은 후에 잠시 대기합니다. 이 시간 동안 몬스터는 애니메이션이 재생됩니다.
         yield return new WaitForSeconds(1.0f);
 
     }

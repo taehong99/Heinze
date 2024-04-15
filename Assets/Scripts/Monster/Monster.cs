@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // ��ǥ���� �ִ� �Ÿ�
+    [SerializeField] float lostDistance;
+    [SerializeField] int damage;
+    [SerializeField] float attackCooldownTime = 2.0f; // 공격 쿨다운 시간 (예: 2초)
+    float attackCoolDown = 0.0f; // 공격 쿨다운 초기값
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
@@ -18,9 +21,6 @@ public class Monster : MonoBehaviour, IDamagable
     public GameObject itemPrefab;
     public GameObject minimapMarkerPrefab;
     public float cubeSpawnProbability = 0.05f;
-
-
-    // ���� hp�� ������Ʈ
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -44,9 +44,7 @@ public class Monster : MonoBehaviour, IDamagable
         AddMinimapMarker();
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
-        // ������ hp
         state = State.IDLE;
-        hp = 1;
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
@@ -82,37 +80,33 @@ public class Monster : MonoBehaviour, IDamagable
     {
         Debug.Log("Chasing");
 
-        // CHASE ���¿����� ����ؼ� �̵�
+        yield return null;
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
 
-            // ���� �ִϸ��̼� ���� Ȯ��
+
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD �ִϸ��̼��� �ƴϸ� ���
+
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
-            // ��ǥ������ ���� �Ÿ��� ���ߴ� �������� �۰ų� ������
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ATTACK ���·� ����
+
                 ChangeState(State.ATTACK);
-                yield break; // CHASE ���¸� ��������
+                yield break; 
             }
-            // ��ǥ���� �Ÿ��� �־��� ���
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
-            {
-                target = null;
-                // IDLE ���·� ����
-                ChangeState(State.IDLE);
-                yield break; // CHASE ���¸� ��������
-            }
-            // ��ǥ ��ġ�� �̵�
+            //else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            //{
+            //    target = null;
+            //    ChangeState(State.IDLE);
+            //    yield break;
+            //}
             yield return null;
         }
     }
@@ -120,14 +114,40 @@ public class Monster : MonoBehaviour, IDamagable
 
     IEnumerator ATTACK()
     {
-        Debug.Log("Attacking");
-        // ATTACK ���¿����� ���� �ִϸ��̼��� ����ϰ� ���� �ð� ���
-        anim.Play("Attack", 0, 0);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-        // ������ ������ �ٽ� CHASE ���·� ����
-        ChangeState(State.CHASE);
+        yield return null;
+        if (attackCoolDown <= 0)
+        {
+            Debug.Log("Attacking");
+            anim.Play("Attack", 0, 0);
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+
+            if (target != null)
+            {
+                Debug.Log("Attack!!!");
+                IDamagable playerDamagable = target.GetComponent<IDamagable>();
+                if (playerDamagable != null)
+                {
+                    playerDamagable.TakeDamage(damage);
+                }
+            }
+
+            ChangeState(State.CHASE);
+            attackCoolDown = attackCooldownTime;
+        }
+        else
+        {
+            ChangeState(State.CHASE);
+            Debug.Log("cooldown"); 
+        }
     }
 
+    void Update()
+    {
+        if (attackCoolDown > 0)
+        {
+            attackCoolDown -= Time.deltaTime;
+        }
+    }
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
@@ -155,10 +175,10 @@ public class Monster : MonoBehaviour, IDamagable
 
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ������ ��� �ݶ��̴� ��������
+        Collider[] colliders = GetComponentsInChildren<Collider>();
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // �� �ݶ��̴��� ��Ȱ��ȭ
+            collider.enabled = false;
         }
     }
 
@@ -166,7 +186,6 @@ public class Monster : MonoBehaviour, IDamagable
     {
         StopCoroutine(state.ToString());
         state = newState;
-        // ����� ���¿� �´� �ڷ�ƾ ����
         StartCoroutine(state.ToString());
     }
 
@@ -175,7 +194,6 @@ public class Monster : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText, hudPos.position, Quaternion.identity);
         hudText.GetComponent<DamageText>().damage = damage;
         //hudText.transform.position = hudPos.position;
-        Debug.Log("������ ���ڸ� ����");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -183,30 +201,20 @@ public class Monster : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("�������� ���� ����");
+            Debug.Log("Damaged Taked");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
-        /*if (currentHealth <= 0)
-        {
-            ChangeState(State.KILLED);
-        }
-        else
-        {
-            StartCoroutine(DAMAGED());
-        }*/
     }
 
     public void Detect(Transform target)
     {
-        // �÷��̾ �����ϸ� ��ǥ�� �����ϰ� CHASE ���·� ����
         this.target = target;
         ChangeState(State.CHASE);
     }
 
     void DropItem()
     {
-        // �������� �����ϰ� ������ ��ġ�� ��ġ�մϴ�.
         Instantiate(itemPrefab, transform.position, Quaternion.identity);
     }
 

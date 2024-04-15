@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerDamage : MonoBehaviour
+public class PlayerDamagable : MonoBehaviour, IDamagable
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] int maxHealth = 10;
+    private int currentHealth;
+    public Image healthBarImage;
+
+    void UpdateHealthBar()
     {
-        
+        if (healthBarImage != null)
+            healthBarImage.fillAmount = ((float)currentHealth) / maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Debug.Log(damage);
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        UpdateHealthBar();
+    }
+
+    void Die()
+    {
+        Debug.Log("Player died!");
     }
 }
