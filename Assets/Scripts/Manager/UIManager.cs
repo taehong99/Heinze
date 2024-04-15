@@ -27,6 +27,12 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         EnsureEventSystem();
+        Manager.Player.PlayerDied += ShowGameOverUI;
+    }
+
+    private void OnDestroy()
+    {
+        Manager.Player.PlayerDied -= ShowGameOverUI;
     }
 
     private void Update()
@@ -46,6 +52,11 @@ public class UIManager : Singleton<UIManager>
                 return;
             }
         }
+    }
+
+    private void ShowGameOverUI()
+    {
+        ShowPopUpUI<GameOverUI>();
     }
 
     public void EnsureEventSystem()

@@ -147,11 +147,16 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         CurHP -= amount;
         CurHP = Mathf.Clamp(curHP, minHP, maxHP);
-        if(CurHP == 0)
+        if(CurHP <= 0)
         {
             // Player died event
             PlayerDied?.Invoke();
         }
+    }
+
+    public void Die()
+    {
+
     }
 
     public void Reset() // Call on game restart

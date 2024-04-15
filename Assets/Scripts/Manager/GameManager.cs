@@ -25,7 +25,6 @@ public class GameManager : Singleton<GameManager>
     public int PotionCount {  get { return potionCount; } set { potionCount = value; potionCountChanged?.Invoke(value); } }
     public int GoldCount {  get { return goldCount; } set { goldCount = value; goldCountChanged?.Invoke(value); } }
 
-
     // MapGen
     MapGenerator mapGenerator;
     public MapGenerator MapGenerator => mapGenerator;
@@ -172,5 +171,18 @@ public class GameManager : Singleton<GameManager>
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill5"), 2, 4);
         Manager.Pool.CreatePool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill6"), 2, 4);
     }
+    #endregion
+
+    #region Game Over
+
+    public void RestartGame()
+    {
+        skillSlots = new PlayerSkillDataSO[4];
+        passiveSlot = null;
+        buffs.Clear();
+        PotionCount = 0;
+        GoldCount = 0;
+    }
+
     #endregion
 }
