@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5872322025868325378}
   - component: {fileID: 8889419041185453736}
   - component: {fileID: 3839109528581775374}
-  - component: {fileID: 1142143202582656244}
   - component: {fileID: 1141324207856579317}
   m_Layer: 8
   m_Name: ForestMonster 2
@@ -105,33 +104,6 @@ MonoBehaviour:
   itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
   minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
   cubeSpawnProbability: 0.05
---- !u!54 &1142143202582656244
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24148545774055697}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!195 &1141324207856579317
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -354,6 +326,7 @@ MonoBehaviour:
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}
+  RangedBomb: {fileID: 0}
 --- !u!135 &6654824504882744611
 SphereCollider:
   m_ObjectHideFlags: 0

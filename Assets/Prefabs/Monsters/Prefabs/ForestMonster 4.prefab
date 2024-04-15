@@ -385,7 +385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8985896614226697718}
   - component: {fileID: 5480159323806996610}
-  - component: {fileID: 7957580640177684728}
   - component: {fileID: 5081714676698626889}
   m_Layer: 0
   m_Name: MonsterSight
@@ -427,33 +426,7 @@ MonoBehaviour:
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}
---- !u!54 &7957580640177684728
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6956492827534358605}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  RangedBomb: {fileID: 0}
 --- !u!135 &5081714676698626889
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -593,7 +566,6 @@ GameObject:
   m_Component:
   - component: {fileID: 242403579710020282}
   - component: {fileID: 3875314775338481727}
-  - component: {fileID: 7705285099059765204}
   - component: {fileID: 3192599881506881435}
   - component: {fileID: 5225626806669197023}
   - component: {fileID: 4283703858949857828}
@@ -644,33 +616,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &7705285099059765204
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8329231557317528055}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &3192599881506881435
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube : MonoBehaviour
+public class FloatingItem : MonoBehaviour
 {
     public float floatHieght = 1f;
     public float floatSpeed = 1f;
@@ -22,7 +22,7 @@ public class Cube : MonoBehaviour
     {
         transform.position = Vector3.Lerp(startPos, targetPos, Mathf.PingPong(Time.time * floatSpeed, 1f));
 
-        // Å¥ºê°¡ ¸ñÇ¥ À§Ä¡¿¡ µµ´ÞÇÏ¸é, ½ÃÀÛ À§Ä¡¿Í ¸ñÇ¥ À§Ä¡¸¦ ±³Ã¼ÇÏ¿© ¹Ýº¹ÇÑ´Ù.
+        // Å¥ï¿½ê°¡ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ï¿ï¿½ ï¿½Ýºï¿½ï¿½Ñ´ï¿½.
         if(transform.position == targetPos)
         {
             Vector3 temp = startPos;

@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 8216678391282678586}
   - component: {fileID: 5209123460093542903}
   - component: {fileID: 6360699439448821673}
-  - component: {fileID: 1096873850611351773}
   - component: {fileID: 5825788957422822213}
   m_Layer: 8
   m_Name: ForestMonster 10
@@ -242,33 +241,6 @@ MonoBehaviour:
   itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
   minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
   cubeSpawnProbability: 0.05
---- !u!54 &1096873850611351773
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529737378970549071}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!195 &5825788957422822213
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -753,7 +725,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1811711575858300289}
   - component: {fileID: 394823003069658729}
-  - component: {fileID: 6192626785982326066}
   - component: {fileID: 3254556787824509973}
   m_Layer: 0
   m_Name: MonsterSight
@@ -795,33 +766,7 @@ MonoBehaviour:
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}
---- !u!54 &6192626785982326066
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752093721313909026}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  RangedBomb: {fileID: 0}
 --- !u!135 &3254556787824509973
 SphereCollider:
   m_ObjectHideFlags: 0

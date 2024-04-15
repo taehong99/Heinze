@@ -4858,7 +4858,6 @@ GameObject:
   - component: {fileID: 8482556577676454162}
   - component: {fileID: 1701958327876657584}
   - component: {fileID: 5103780695900873265}
-  - component: {fileID: 2145914379550057835}
   m_Layer: 0
   m_Name: SharpExplosionFire
   m_TagString: Untagged
@@ -9802,19 +9801,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &2145914379550057835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4562356354560609029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 628ef9b0c7e4fd24db54868035e11237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomPercent: 15
 --- !u!1 &4683517644899509723
 GameObject:
   m_ObjectHideFlags: 0
