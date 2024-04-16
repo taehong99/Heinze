@@ -14,7 +14,6 @@ public class MonsterSpawner : MonoBehaviour
     private float xOffset;
     private float zOffset;
     private int enemyCount;
-    HashSet<Vector3> spawnedPositions = new HashSet<Vector3>();
 
     private void Start()
     {
@@ -49,8 +48,6 @@ public class MonsterSpawner : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        spawnedPositions.Clear();
-        
         if (monsterGroup == MonsterGroup.MidBoss1)
         {
             Instantiate(monsterPool.Stage1MidBoss, transform.position, Quaternion.identity);
@@ -70,14 +67,6 @@ public class MonsterSpawner : MonoBehaviour
             xOffset = Random.Range(-xRadius, xRadius);
             zOffset = Random.Range(-zRadius, zRadius);
             spawnPos = new Vector3(transform.position.x + xOffset, 0, transform.position.z + zOffset);
-            while (spawnedPositions.Contains(spawnPos))
-            {
-                xOffset = Random.Range(-xRadius, xRadius);
-                zOffset = Random.Range(-zRadius, zRadius);
-                spawnPos = new Vector3(transform.position.x + xOffset, 0, transform.position.z + zOffset);
-            }
-
-            spawnedPositions.Add(spawnPos);
             Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], spawnPos, Quaternion.identity);
             Manager.Event.voidEventDic["enemySpawned"].RaiseEvent();
         }
