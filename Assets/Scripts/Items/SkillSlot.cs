@@ -44,13 +44,13 @@ public class SkillSlot : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandle
 
     public void UpdateIcon()
     {
-        icon.sprite = skillData.icon;
+        GetUI<Image>("SkillIcon").sprite = skillData.icon;
         filled = true;
     }
 
     public void UpdateIcon(Sprite newIcon)
     {
-        icon.sprite = newIcon;
+        GetUI<Image>("SkillIcon").sprite = newIcon;
         filled = true;
     }
 

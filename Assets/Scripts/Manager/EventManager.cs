@@ -12,6 +12,7 @@ public class EventManager : Singleton<EventManager>
         // Monster Spawn Events
         voidEventDic.Add("enemySpawned", Manager.Resource.Load<VoidEventChannelSO>("Events/EnemySpawnedEvent"));
         voidEventDic.Add("enemyDied", Manager.Resource.Load<VoidEventChannelSO>("Events/EnemyDiedEvent"));
+        voidEventDic.Add("bossDefeated", Manager.Resource.Load<VoidEventChannelSO>("Events/BossDefeatedEvent"));
 
         // Room Transition Events
         dirEventDic.Add("movedRoom", Manager.Resource.Load<DirectionEventChannelSO>("Events/MovedRoomEvent"));
