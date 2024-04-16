@@ -20,7 +20,13 @@ public class AudioClipsSO : ScriptableObject
     public AudioClip attack3SFX;
     public AudioClip walkingSFX;
     public AudioClip runningSFX;
-
+    public AudioClip skill1SFX;
+    public AudioClip skill2SFX;
+    public AudioClip skill3SFX;
+    public AudioClip skill4SFX;
+    public AudioClip skill5SFX;
+    public AudioClip skill6SFX;
+    
     [Header("Monster")]
     public AudioClip explosionSFX;
     public AudioClip monsterHitSFX;
@@ -30,5 +36,9 @@ public class AudioClipsSO : ScriptableObject
     public AudioClip potionDrinkSFX;
     public AudioClip openDoorSFX;
     public AudioClip gameOverSFX;
-    
+    public AudioClip chestOpenSFX;
+    public AudioClip cardSelectSFX;
+    public AudioClip cardFlipSFX;
+    public AudioClip tabOpenSFX;
+    public AudioClip tabCloseSFX;
 }

@@ -174,6 +174,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Freeze();
         Invoke("UnFreeze", 0.4f);
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill1SFX);
         effects.PlayEffect("Skill1");
         int count = Physics.OverlapSphereNonAlloc(transform.position, skill1Radius, colliders, monsterMask);
         for(int i = 0; i < count; i++)
@@ -188,6 +189,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Freeze();
         Invoke("UnFreeze", 0.7f);
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill2SFX);
         //Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill2"), transform.position + transform.forward * 7f, transform.rotation);
         effects.PlayEffect("Skill2");
     }
@@ -205,6 +207,7 @@ public class PlayerAttack : MonoBehaviour
     // Skill3
     private void Skill3()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill3SFX);
         StartCoroutine(SummonWaves());
     }
     
@@ -226,6 +229,7 @@ public class PlayerAttack : MonoBehaviour
         Freeze();
         Invoke("UnFreeze", 1f);
         //effects.PlayEffect("Skill4");
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill4SFX);
         StartCoroutine(Skill4Routine());
     }
 
@@ -251,6 +255,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Freeze();
         Invoke("UnFreeze", 1f);
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill5SFX);
         effects.PlayEffect("Skill5");
     }
 
@@ -259,6 +264,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Freeze();
         Invoke("UnFreeze", 1f);
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill6SFX);
         effects.PlayEffect("Skill6");
         Manager.Player.TakeDamage(10);
         Manager.Player.UpdateStat(Stat.Attack, IncreaseRate.Percent, 0.5f);

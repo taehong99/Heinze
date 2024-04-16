@@ -41,10 +41,12 @@ public class UIManager : Singleton<UIManager>
         {
             if (popUpStack.Count == 0)
             {
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.tabOpenSFX);
                 ShowPopUpUI<PlayerStatsUI>();
             }
             else if (popUpStack.Peek().name == "PlayerStatsUI(Clone)")
             {
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.tabCloseSFX);
                 ClosePopUpUI();
             }
             else
