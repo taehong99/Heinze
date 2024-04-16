@@ -182,6 +182,7 @@ public class GameManager : Singleton<GameManager>
         buffs.Clear();
         PotionCount = 0;
         GoldCount = 0;
+        Manager.Player.SetBaseStats();
     }
 
     #endregion

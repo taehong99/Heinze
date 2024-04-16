@@ -39,13 +39,18 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Start()
     {
+        SetBaseStats();
+        Manager.Game.BuffPicked += ObtainBuff;
+    }
+
+    public void SetBaseStats()
+    {
         maxHP = data.baseHP;
-        curHP = maxHP;
+        CurHP = maxHP;
         attack = data.baseAttack;
         critRate = data.baseCritRate;
         defense = data.baseDefense;
         moveSpeed = data.baseMoveSpeed;
-        Manager.Game.BuffPicked += ObtainBuff;
     }
 
     public void AssignPlayer(PlayerController player)
@@ -178,18 +183,5 @@ public class PlayerManager : Singleton<PlayerManager>
             // Player died event
             PlayerDied?.Invoke();
         }
-    }
-
-    public void Die()
-    {
-
-    }
-
-    public void Reset() // Call on game restart
-    {
-        maxHP = data.baseHP;
-        curHP = maxHP;
-        attack = data.baseAttack;
-        defense = data.baseDefense;
     }
 }

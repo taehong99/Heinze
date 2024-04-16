@@ -27,6 +27,11 @@ public class SkillSlots : MonoBehaviour
         Manager.Game.SkillPicked += AddItem;
     }
 
+    private void OnDestroy()
+    {
+        Manager.Game.SkillPicked -= AddItem;
+    }
+
     private void GetSkillSlotsOnStart()
     {
         for(int i = 0; i < 4; i++)
@@ -40,11 +45,6 @@ public class SkillSlots : MonoBehaviour
         {
             passiveSlot.SetSlot(Manager.Game.passiveSlot);
         }
-    }
-
-    private void OnDestroy()
-    {
-        Manager.Game.SkillPicked -= AddItem;
     }
 
     public PlayerSkillDataSO GetSkillData(int idx)
