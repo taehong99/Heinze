@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 180
   lostDistance: 7
-  attackRange: 0
+  attackRange: 7
   attackCooldown: 0
   projectilePrefab: {fileID: 4725983210678844810, guid: b219771238b8f2649b4e2723a6992614, type: 3}
   projectileSpawnPoint: {fileID: 987994107642668453}

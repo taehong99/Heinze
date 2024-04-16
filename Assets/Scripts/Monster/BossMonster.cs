@@ -177,6 +177,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     IEnumerator DAMAGED()
     {
         Debug.Log("¿Ã∆Â∆Æ πﬂµø");
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.monsterHitSFX);
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
         effectObject.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(1.0f);

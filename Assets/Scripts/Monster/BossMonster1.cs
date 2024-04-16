@@ -191,6 +191,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         hudText.transform.position = hudPos.position;
         Debug.Log("데미지 숫자를 받음");
         currentHealth -= damage;
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.monsterHitSFX);
         UpdateHealthBar();
         if (currentHealth <= 0)
         {
