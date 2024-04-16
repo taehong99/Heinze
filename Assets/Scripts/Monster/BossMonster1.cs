@@ -163,6 +163,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
+        Manager.Event.voidEventDic["bossDefeated"].RaiseEvent();
         Destroy(gameObject, 3f);
         yield return null;
     }

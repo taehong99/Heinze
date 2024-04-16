@@ -21,7 +21,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     int attackCount = 0;
     public GameObject hudDamageText;
     public Transform hudPos;
-    public GameObject[] skillEffectPrefab; // ½ºÅ³ ÀÌÆåÆ® ÂüÁ¶ º¯¼ö
+    public GameObject[] skillEffectPrefab; // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Image healthBarImage;
     private int currentHealth;
     public GameObject effectPrefab;
@@ -50,7 +50,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         nmAgent = GetComponent<NavMeshAgent>();
         sensor = GetComponentInChildren<MonserSensor>();
 
-        // ¸ó½ºÅÍÀÇ hp
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ hp
         hp = 180;
         state = State.IDLE;
         currentHealth = hp;
@@ -62,7 +62,7 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ÇöÀç »óÅÂ¿¡ µû¶ó ÄÚ·çÆ¾ ½ÃÀÛ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
             yield return StartCoroutine(state.ToString());
         }
     }
@@ -88,24 +88,24 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("Chasing");
 
-        // CHASE »óÅÂ¿¡¼­´Â °è¼ÓÇØ¼­ ÀÌµ¿
+        // CHASE ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½
         while (sensor.target != null)
         {
             nmAgent.SetDestination(sensor.target.position);
 
-            // ÇöÀç ¾Ö´Ï¸ÞÀÌ¼Ç »óÅÂ È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¾Æ´Ï¸é Àç»ý
+            // WalkFWD ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk");
             }
 
-            // ¸ñÇ¥±îÁöÀÇ ³²Àº °Å¸®°¡ ¸ØÃß´Â ÁöÁ¡º¸´Ù ÀÛ°Å³ª °°À¸¸é
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ATTACK »óÅÂ·Î º¯°æ
+                // ATTACK ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (attackCount < 3)
                 {
                     ChangeState(State.ATTACK);
@@ -114,10 +114,10 @@ public class BossMonster : MonoBehaviour, IDamagable
                 {
                     ChangeState(State.SKIL);
                 }
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
 
-            // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
             yield return null;
         }
         ChangeState(State.IDLE);
@@ -128,7 +128,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         nmAgent.velocity = Vector3.zero;
         anim.Play("Attack", 0, 0);
         ShootProjectile();
-        attackCount++; // ¾îÅÃ Ä«¿îÆ® Áõ°¡ÇÏ´Â°Å ¼¼±â
+        attackCount++; // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(1.2f);
         if (sensor.target != null)
         {
@@ -151,7 +151,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText);
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
-        Debug.Log("µ¥¹ÌÁö ¼ýÀÚ¸¦ ¹ÞÀ½");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½");
         currentHealth -= damage;
         if (hp <= 0)
         {
@@ -159,7 +159,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("µ¥¹ÌÁö¸¦ ¹ÞÀ½ ¤§¤§");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
@@ -176,7 +176,7 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     IEnumerator DAMAGED()
     {
-        Debug.Log("ÀÌÆåÆ® ¹ßµ¿");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ßµï¿½");
         Manager.Sound.PlaySFX(Manager.Sound.AudioClips.monsterHitSFX);
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
         effectObject.GetComponent<ParticleSystem>().Play();
@@ -188,7 +188,7 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     IEnumerator SKIL()
     {
-        Debug.Log("½ºÅ³ ¹ßµ¿ ! ");
+        Debug.Log("ï¿½ï¿½Å³ ï¿½ßµï¿½ ! ");
 
         attackCount = 0;
         anim.Play("Skil", 0, 0);
@@ -222,16 +222,17 @@ public class BossMonster : MonoBehaviour, IDamagable
     {
         Debug.Log("Killed");
         anim.Play("Die", 0, 0);
+        Manager.Event.voidEventDic["bossDefeated"].RaiseEvent();
         DisableCollider();
         Destroy(gameObject, 3f);
         yield return null;
     }
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ¸ó½ºÅÍÀÇ ¸ðµç ÄÝ¶óÀÌ´õ °¡Á®¿À±â
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // °¢ ÄÝ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­
+            collider.enabled = false; // ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
     }
     void ChangeState(State newState)
@@ -239,7 +240,7 @@ public class BossMonster : MonoBehaviour, IDamagable
         StopCoroutine(state.ToString());
         state = newState;
         Debug.Log(newState.ToString());
-        // º¯°æµÈ »óÅÂ¿¡ ¸Â´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½Â´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(state.ToString());
     }
 
@@ -250,7 +251,7 @@ public class BossMonster : MonoBehaviour, IDamagable
 
     //public void Detect(Transform target)
     //{
-    //    // ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ¸é ¸ñÇ¥¸¦ ¼³Á¤ÇÏ°í CHASE »óÅÂ·Î º¯°æ
+    //    // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ CHASE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
     //    this.target = target;
     //    ChangeState(State.CHASE);
     //}
