@@ -183,6 +183,7 @@ public class GameManager : Singleton<GameManager>
         PotionCount = 0;
         GoldCount = 0;
         Manager.Player.SetBaseStats();
+        GetComponent<CardDeck>().RefillDeck();
     }
 
     #endregion

@@ -14,13 +14,13 @@ public class Room : MonoBehaviour
     public Portal[] portals = new Portal[4];
 
     NavMeshSurface navMeshSurface;
-    GenerateEnemies[] spawners;
+    MonsterSpawner[] spawners;
     private int monsterCount = 0;
     bool cleared = false;
 
     private void Awake()
     {
-        spawners = GetComponentsInChildren<GenerateEnemies>();
+        spawners = GetComponentsInChildren<MonsterSpawner>();
         navMeshSurface = GetComponentInChildren<NavMeshSurface>();
     }
 
