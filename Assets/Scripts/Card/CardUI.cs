@@ -50,6 +50,11 @@ public class CardUI : BaseUI, IPointerDownHandler
         //연결된 객체에 데이터를 삽입
     }
 
+    public void PlayCardFlipSound()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.cardFlipSFX);
+    }
+
     private void AddToInventory()
     {
         Manager.Player.UnFreeze();

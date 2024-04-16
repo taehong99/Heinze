@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WarriorBuff7
   m_EditorClassIdentifier: 
   id: 6
-  icon: {fileID: 21300000, guid: 66d20603cde573f438f7bea038d967e4, type: 3}
+  icon: {fileID: 21300000, guid: bf09406fdc109e449b1161a6eea3b565, type: 3}
   _name: "\uACBD\uB7C9 \uAC11\uC637"
   description: "\uC774\uB3D9\uC18D\uB3C4 0.2 \uC99D\uAC00"
   caption: "\uAC00\uBCBC\uC6CC\uB3C4 \uAC15\uB3C4\uB294 \uBE44\uC2B7\uD55C \uB9C8\uBC95\uC758
