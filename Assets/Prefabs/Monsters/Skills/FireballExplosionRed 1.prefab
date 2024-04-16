@@ -4949,7 +4949,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 2.5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -9854,8 +9854,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.82197, y: 4.3128095, z: 3.5008047}
-  m_Center: {x: -0.2282852, y: 0.14077997, z: 1.2504028}
+  m_Size: {x: 6.244913, y: 5.6096196, z: 3.7628407}
+  m_Center: {x: -0.030797482, y: -0.36118996, z: 1.3814209}
 --- !u!1 &6794684239684423458
 GameObject:
   m_ObjectHideFlags: 0

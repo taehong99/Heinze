@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,7 +9,11 @@ using UnityEngine.UI;
 public class BossMonster1 : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // ¸ñÇ¥¿ÍÀÇ ÃÖ´ë °Å¸®
+    [SerializeField] float lostDistance; 
+    [SerializeField] float attackCooldownTime = 2.0f; 
+    float attackCoolDown = 0.0f;
+
+
     Transform target;
     NavMeshAgent nmAgent;
     Animator anim;
@@ -19,7 +23,8 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     public int currentHealth;
     public GameObject effectPrefab;
     public GameObject effectPrefab2;
-    // ¸ó½ºÅÍ hp¹Ù ¾÷µ¥ÀÌÆ®
+    public int damage;
+    // ëª¬ìŠ¤í„° hpë°” ì—…ë°ì´íŠ¸
     void UpdateHealthBar()
     {
         if (healthBarImage != null)
@@ -43,7 +48,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         state = State.IDLE;
-        hp = 100;
+        hp = 60;
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());
@@ -53,14 +58,14 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ÇöÀç »óÅÂ¿¡ µû¶ó ÄÚ·çÆ¾ ½ÃÀÛ
+            // í˜„ì¬ ìƒíƒœì— ë”°ë¼ ì½”ë£¨í‹´ ì‹œì‘
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        // ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ IDLE »óÅÂ°¡ ¾Æ´Ï¸é Àç»ı
+        // ì• ë‹ˆë©”ì´ì…˜ì´ IDLE ìƒíƒœê°€ ì•„ë‹ˆë©´ ì¬ìƒ
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             anim.Play("Idle", 0, 0);
@@ -71,37 +76,38 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     IEnumerator CHASE()
     {
         Debug.Log("Chasing");
+        yield return null;
 
-        // CHASE »óÅÂ¿¡¼­´Â °è¼ÓÇØ¼­ ÀÌµ¿
+        // CHASE ìƒíƒœì—ì„œëŠ” ê³„ì†í•´ì„œ ì´ë™
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
 
-            // ÇöÀç ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ È®ÀÎ
+            // í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ í™•ì¸
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¾Æ´Ï¸é Àç»ı
+            // WalkFWD ì• ë‹ˆë©”ì´ì…˜ì´ ì•„ë‹ˆë©´ ì¬ìƒ
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
-            // ¸ñÇ¥±îÁöÀÇ ³²Àº °Å¸®°¡ ¸ØÃß´Â ÁöÁ¡º¸´Ù ÀÛ°Å³ª °°À¸¸é
+            // ëª©í‘œê¹Œì§€ì˜ ë‚¨ì€ ê±°ë¦¬ê°€ ë©ˆì¶”ëŠ” ì§€ì ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ìœ¼ë©´
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
                 ChangeState(State.ATTACK);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ìƒíƒœë¥¼ ë¹ ì ¸ë‚˜ì˜´
             }
-            // ¸ñÇ¥¿ÍÀÇ °Å¸®°¡ ¸Ö¾îÁø °æ¿ì
-            else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
-            {
-                target = null;
-                // IDLE »óÅÂ·Î º¯°æ
-                ChangeState(State.IDLE);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
-            }
-            // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // ëª©í‘œì™€ì˜ ê±°ë¦¬ê°€ ë©€ì–´ì§„ ê²½ìš°
+            //else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
+            //{
+            //    target = null;
+            //    // IDLE ìƒíƒœë¡œ ë³€ê²½
+            //    ChangeState(State.IDLE);
+            //    yield break; // CHASE ìƒíƒœë¥¼ ë¹ ì ¸ë‚˜ì˜´
+            //}
+            // ëª©í‘œ ìœ„ì¹˜ë¡œ ì´ë™
             yield return null;
         }
     }
@@ -115,14 +121,35 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     }
     IEnumerator ATTACK()
     {
-        Debug.Log("Attacking");
-        yield return new WaitForSeconds(1);
-        anim.Play("Attack", 0, 0);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-        // °ø°İÀÌ ³¡³ª¸é ´Ù½Ã CHASE »óÅÂ·Î º¯°æ
-        ChangeState(State.CHASE);
-    }
+        yield return null;
+        if (attackCoolDown <= 0)
+        {
+            anim.Play("Attack");
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
+            if (target != null)
+            {
+                IDamagable playerDamagable = target.GetComponent<IDamagable>();
+                if (playerDamagable != null)
+                {
+                    playerDamagable.TakeDamage(damage);
+                }
+            }
+            ChangeState(State.CHASE);
+            attackCoolDown = attackCooldownTime;
+        }
+        else
+        {
+            ChangeState(State.CHASE);
+        }
+    }
+    void Update()
+    {
+        if (attackCoolDown > 0)
+        {
+            attackCoolDown -= Time.deltaTime;
+        }
+    }
     IEnumerator DAMAGED()
     {
         anim.Play("Damaged");
@@ -142,10 +169,10 @@ public class BossMonster1 : MonoBehaviour, IDamagable
 
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ¸ó½ºÅÍÀÇ ¸ğµç Äİ¶óÀÌ´õ °¡Á®¿À±â
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // ëª¬ìŠ¤í„°ì˜ ëª¨ë“  ì½œë¼ì´ë” ê°€ì ¸ì˜¤ê¸°
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // °¢ Äİ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­
+            collider.enabled = false; // ê° ì½œë¼ì´ë”ë¥¼ ë¹„í™œì„±í™”
         }
     }
 
@@ -153,7 +180,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
     {
         StopCoroutine(state.ToString());
         state = newState;
-        // º¯°æµÈ »óÅÂ¿¡ ¸Â´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ë³€ê²½ëœ ìƒíƒœì— ë§ëŠ” ì½”ë£¨í‹´ ì‹œì‘
         StartCoroutine(state.ToString());
     }
 
@@ -162,7 +189,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText);
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
-        Debug.Log("µ¥¹ÌÁö ¼ıÀÚ¸¦ ¹ŞÀ½");
+        Debug.Log("ë°ë¯¸ì§€ ìˆ«ìë¥¼ ë°›ìŒ");
         currentHealth -= damage;
         UpdateHealthBar();
         if (currentHealth <= 0)
@@ -171,9 +198,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("µ¥¹ÌÁö¸¦ ¹ŞÀ½ ¤§¤§");
-
-            // Ã¼·ÂÀÌ 10ÀÇ ¹è¼ö·Î °¨¼ÒÇßÀ» ¶§ Ãß°¡ ÀÌÆåÆ® ¹ß»ı
+            Debug.Log("ë°ë¯¸ì§€ë¥¼ ë°›ìŒ ã„·ã„·");
             if (currentHealth % 10 == 0)
             {
                 StartCoroutine(SKIL());
@@ -187,7 +212,7 @@ public class BossMonster1 : MonoBehaviour, IDamagable
 
     public void Detect(Transform target)
     {
-        // ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ¸é ¸ñÇ¥¸¦ ¼³Á¤ÇÏ°í CHASE »óÅÂ·Î º¯°æ
+        // í”Œë ˆì´ì–´ë¥¼ ê°ì§€í•˜ë©´ ëª©í‘œë¥¼ ì„¤ì •í•˜ê³  CHASE ìƒíƒœë¡œ ë³€ê²½
         this.target = target;
         ChangeState(State.CHASE);
     }

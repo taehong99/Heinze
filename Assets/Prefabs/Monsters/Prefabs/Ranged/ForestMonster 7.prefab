@@ -165,13 +165,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285e7a72e421f834b8460deca9de4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  monster: {fileID: 1707427347858240450}
+  type: 5
+  monster: {fileID: 0}
   RangedMonster: {fileID: 0}
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}
-  RangedBomb: {fileID: 0}
+  RangedBomb: {fileID: 4022594205038889899}
 --- !u!135 &2180666369667498609
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3980442184704914595
 GameObject:
@@ -233,10 +233,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3599703246514729602}
-  - component: {fileID: 1707427347858240450}
   - component: {fileID: 3474902537472935369}
   - component: {fileID: 8932128605975688954}
   - component: {fileID: 3411613123233739256}
+  - component: {fileID: 4022594205038889899}
   m_Layer: 8
   m_Name: ForestMonster 7
   m_TagString: Untagged
@@ -252,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5063708592732276145}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
@@ -263,29 +263,6 @@ Transform:
   - {fileID: 3772831610520848599}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1707427347858240450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5063708592732276145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 7
-  lostDistance: 7
-  damage: 3
-  attackCooldownTime: 2
-  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
-  hudPos: {fileID: 1313363652457897534}
-  healthBarImage: {fileID: 7767808213528588329}
-  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  itemPrefab: {fileID: 0}
-  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
-  cubeSpawnProbability: 0
 --- !u!95 &3474902537472935369
 Animator:
   serializedVersion: 5
@@ -321,7 +298,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 15
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -350,6 +327,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.782808, z: 0.95165014}
   m_Center: {x: 0, y: 0.9292632, z: 0.024175134}
+--- !u!114 &4022594205038889899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063708592732276145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757989a8395a92b499735c568c3cfbb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 7
+  lostDistance: 7
+  attackCooldownTime: 4
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 1313363652457897534}
+  healthBarImage: {fileID: 7767808213528588329}
+  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
+  projectilePrefab: {fileID: 0}
+  projectileSpawnPoint: {fileID: 1313363652457897534}
+  damage: 5
+  itemPrefab: {fileID: 0}
+  angle: 30
 --- !u!1 &5078340738579379918
 GameObject:
   m_ObjectHideFlags: 0
