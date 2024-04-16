@@ -53,7 +53,8 @@ public class CardUI : BaseUI, IPointerDownHandler
     private void AddToInventory()
     {
         Manager.Player.UnFreeze();
-        if(cardData is PlayerSkillDataSO)
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.cardSelectSFX);
+        if (cardData is PlayerSkillDataSO)
         {
             Manager.Game.AnnounceSkillPicked(cardData as PlayerSkillDataSO);
         }

@@ -16,12 +16,14 @@ public class Chest : MonoBehaviour, IInteractable
     public void Interact()
     {
         Manager.Player.Freeze();
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.chestOpenSFX);
         animator.Play("Open");
     }
 
     private void ShowCards()
     {
         Manager.Game.ShowCards();
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.cardFlipSFX);
         Destroy(gameObject);
     }
 
