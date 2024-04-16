@@ -10,6 +10,7 @@ public class GenderSelectScene : BaseScene
     {
         if (!chosen)
         {
+            Manager.Sound.PlaySFX(Manager.Sound.AudioClips.clickSFX);
             Manager.Scene.LoadScene("Stage1-1");
             chosen = true;
         }

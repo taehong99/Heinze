@@ -122,6 +122,7 @@ public class GameManager : Singleton<GameManager>
         if (potionCount == 0)
             return;
 
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.potionDrinkSFX);
         PotionCount--;
         Manager.Player.Heal(30);
     }
@@ -178,12 +179,12 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         skillSlots = new PlayerSkillDataSO[4];
+        buffs = new List<PlayerBuffSO>();
         passiveSlot = null;
-        buffs.Clear();
         PotionCount = 0;
         GoldCount = 0;
         Manager.Player.SetBaseStats();
-        GetComponent<CardDeck>().RefillDeck();
+        GetComponent<CardDeck>()?.RefillDeck();
     }
 
     #endregion

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751b7f099df7b491d9e89b926fbdda64, type: 3}
+  m_Name: AudioClips
+  m_EditorClassIdentifier: 
+  lobbyBGM: {fileID: 8300000, guid: 9d295ce8aca7e40faa7d483133310bd2, type: 3}
+  floor1BGM: {fileID: 8300000, guid: 3dfdf395c788841a1a88cb268801aa1b, type: 3}
+  floor2BGM: {fileID: 8300000, guid: f157389adef74411a9644f324c324cfa, type: 3}
+  floor3BGM: {fileID: 8300000, guid: 89b572d2fd54a4e05a4ff46ad285e24d, type: 3}
+  midbossBGM: {fileID: 8300000, guid: 46bf281b26b324af1b2535b234bc3c2d, type: 3}
+  bossBGM: {fileID: 8300000, guid: 8360e187f1c054bb0aac799a498b5b1a, type: 3}
+  dashSFX: {fileID: 8300000, guid: ffad501f8f73e4d1ea92194372c4a206, type: 3}
+  attack1SFX: {fileID: 8300000, guid: 767618277ed4c44d2b5191362ad632cf, type: 3}
+  attack2SFX: {fileID: 8300000, guid: 3c0dd35b72aa94345b46a5f625383bb1, type: 3}
+  attack3SFX: {fileID: 8300000, guid: e64f388e44ccf4d31836cd2461931c7e, type: 3}
+  walkingSFX: {fileID: 8300000, guid: aa6966ffc62fe4bc3ae37db2d4003100, type: 3}
+  runningSFX: {fileID: 8300000, guid: 0c4e40669a1574c49bf3102244d92ad6, type: 3}
+  explosionSFX: {fileID: 8300000, guid: c947eb5d99a4640ff8283ed0749c5241, type: 3}
+  monsterHitSFX: {fileID: 8300000, guid: 020824dbd9eae4051b2c23d6b2d88b96, type: 3}
+  clickSFX: {fileID: 8300000, guid: fea7ad877ca0b4fb5a6eac453135392b, type: 3}
+  potionDrinkSFX: {fileID: 8300000, guid: 271f3085387a149b89f4a8d09fd8214a, type: 3}
+  openDoorSFX: {fileID: 8300000, guid: cb1df71b52fe34d4390210a277dffe8d, type: 3}
+  gameOverSFX: {fileID: 8300000, guid: 1d6f1cda6d1304fd2a206cc6ec944dd3, type: 3}

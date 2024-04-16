@@ -11,6 +11,7 @@ public class Stage1Floor1Scene : BaseScene
 
     public override IEnumerator LoadingRoutine()
     {
+        Manager.Sound.PlayBGM(Manager.Sound.AudioClips.floor1BGM);
         Manager.Game.SpawnRooms(Stage.Normal);
         Manager.Game.CreatePools();
         yield return null;

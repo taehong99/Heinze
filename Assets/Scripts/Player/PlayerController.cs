@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("State Bools")]
     private bool isDashing;
     public bool isAttacking;
+    private bool isSprinting;
 
     [Header("Misc")]
     CharacterController controller;
@@ -65,11 +66,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            isSprinting = true;
             animator.SetBool("isSprinting", true);
             moveSpeed += sprintSpeedDelta;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            isSprinting = false;
             animator.SetBool("isSprinting", false);
             moveSpeed -= sprintSpeedDelta;
         }
@@ -101,8 +104,22 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
 
-        // 벡터 투영 (오르막길 속도 구현)
-        //Vector3.Project()
+        // Footstep SFX
+        if(moveDir.magnitude == 0)
+        {
+            Manager.Sound.StopFootsteps();
+        }
+        else
+        {
+            if (isSprinting)
+            {
+                Manager.Sound.PlayFootsteps(Manager.Sound.AudioClips.runningSFX);
+            }
+            else
+            {
+                Manager.Sound.PlayFootsteps(Manager.Sound.AudioClips.walkingSFX);
+            }
+        }
     }
 
     Vector3 velocity;
@@ -125,6 +142,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         animator.Play("Dash");
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.dashSFX);
         DashCount--;
         StartCoroutine(DashRoutine());
     }

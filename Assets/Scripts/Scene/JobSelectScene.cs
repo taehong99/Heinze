@@ -6,6 +6,7 @@ public class JobSelectScene : BaseScene
 {
     public void ChooseWarrior()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.clickSFX);
         Manager.Player.ChooseJob(PlayerJob.Warrior);
         Manager.Scene.LoadScene("3.GenderSelectScene");
     }

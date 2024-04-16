@@ -56,6 +56,7 @@ public class UIManager : Singleton<UIManager>
 
     private void ShowGameOverUI()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.gameOverSFX);
         ShowPopUpUI<GameOverUI>();
     }
 

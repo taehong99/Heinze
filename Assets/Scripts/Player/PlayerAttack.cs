@@ -114,6 +114,26 @@ public class PlayerAttack : MonoBehaviour
     {
         controller.isAttacking = false;
     }
+
+    private void PlayAttackSound(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.attack1SFX);
+                break;
+            case 2:
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.attack2SFX);
+                break;
+            case 3:
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.attack3SFX);
+                break;
+            default:
+                break;
+        }
+            
+    }
+
     #endregion
 
     #region Skills

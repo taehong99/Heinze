@@ -36,6 +36,11 @@ public class Room : MonoBehaviour
         if (cleared)
             return;
 
+        if(roomType == Stage.MidBoss)
+            Manager.Sound.PlayBGM(Manager.Sound.AudioClips.midbossBGM);
+        else if(roomType == Stage.Boss)
+            Manager.Sound.PlayBGM(Manager.Sound.AudioClips.bossBGM);
+
         Manager.Event.voidEventDic["enemySpawned"].OnEventRaised += AddCount;
         Manager.Event.voidEventDic["enemyDied"].OnEventRaised += SubtractCount;
         SpawnMonsters();

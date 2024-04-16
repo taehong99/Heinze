@@ -15,8 +15,20 @@ public class AudioClipsSO : ScriptableObject
 
     [Header("Player")]
     public AudioClip dashSFX;
+    public AudioClip attack1SFX;
+    public AudioClip attack2SFX;
+    public AudioClip attack3SFX;
+    public AudioClip walkingSFX;
+    public AudioClip runningSFX;
+
+    [Header("Monster")]
+    public AudioClip explosionSFX;
+    public AudioClip monsterHitSFX;
 
     [Header("Misc")]
     public AudioClip clickSFX;
     public AudioClip potionDrinkSFX;
+    public AudioClip openDoorSFX;
+    public AudioClip gameOverSFX;
+    
 }
