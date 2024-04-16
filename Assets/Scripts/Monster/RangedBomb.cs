@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class RangedBomb : MonoBehaviour, IDamagable
 {
     [SerializeField] int hp;
-    [SerializeField] float lostDistance; // ¸ñÇ¥¿ÍÀÇ ÃÖ´ë °Å¸®
-    [SerializeField] float attackCooldownTime = 2.0f; // °ø°İ Äğ´Ù¿î ½Ã°£ (¿¹: 2ÃÊ)
-    float attackCoolDown = 0.0f; // °ø°İ Äğ´Ù¿î ÃÊ±â°ª
+    [SerializeField] float lostDistance; // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Å¸ï¿½
+    [SerializeField] float attackCooldownTime = 2.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¿ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½: 2ï¿½ï¿½)
+    float attackCoolDown = 0.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¿ï¿½ ï¿½Ê±â°ª
 
     Transform target;
     NavMeshAgent nmAgent;
@@ -23,6 +23,7 @@ public class RangedBomb : MonoBehaviour, IDamagable
     public Transform projectileSpawnPoint;
     public int damage;
     public GameObject itemPrefab;
+    public float angle;
 
     enum State
     {
@@ -46,7 +47,7 @@ public class RangedBomb : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
 
-        // ¸ó½ºÅÍÀÇ hp
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ hp
         hp = 1;
         state = State.IDLE;
         currentHealth = hp;
@@ -64,14 +65,14 @@ public class RangedBomb : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ÇöÀç »óÅÂ¿¡ µû¶ó ÄÚ·çÆ¾ ½ÃÀÛ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        // ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ IDLE »óÅÂ°¡ ¾Æ´Ï¸é Àç»ı
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ IDLE ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             anim.Play("Idle", 0, 0);
@@ -85,38 +86,38 @@ public class RangedBomb : MonoBehaviour, IDamagable
 
         yield return null;
 
-        // CHASE »óÅÂ¿¡¼­´Â °è¼ÓÇØ¼­ ÀÌµ¿
+        // CHASE ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½
         while (target != null)
         {
             nmAgent.SetDestination(target.position);
 
-            // ÇöÀç ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             var curAnimStateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-            // WalkFWD ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ¾Æ´Ï¸é Àç»ı
+            // WalkFWD ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½
             if (!curAnimStateInfo.IsName("Walk"))
             {
                 anim.Play("Walk", 0, 0);
                 yield return null;
             }
 
-            // ¸ñÇ¥±îÁöÀÇ ³²Àº °Å¸®°¡ ¸ØÃß´Â ÁöÁ¡º¸´Ù ÀÛ°Å³ª °°À¸¸é
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
             {
-                // ATTACK »óÅÂ·Î º¯°æ
+                // ATTACK ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 ChangeState(State.ATTACK);
-                yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+                yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
-            // ¸ñÇ¥¿ÍÀÇ °Å¸®°¡ ¸Ö¾îÁø °æ¿ì
+            // ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             //else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             //{
             //    target = null;
-            //    // IDLE »óÅÂ·Î º¯°æ
+            //    // IDLE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
             //    ChangeState(State.IDLE);
-            //    yield break; // CHASE »óÅÂ¸¦ ºüÁ®³ª¿È
+            //    yield break; // CHASE ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             //}
 
-            // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
             yield return null;
         }
     }
@@ -126,20 +127,18 @@ public class RangedBomb : MonoBehaviour, IDamagable
         yield return null;
         if (attackCoolDown <= 0)
         {
-            Debug.Log("Attacking");
             anim.Play("Attack", 0, 0);
             ShootProjectile();
             yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
-            if (target != null)
-            {
-                Debug.Log("Attack!!!");
-                IDamagable playerDamagable = target.GetComponent<IDamagable>();
-                if (playerDamagable != null)
-                {
-                    playerDamagable.TakeDamage(damage);
-                }
-            }
+            //if (target != null)
+            //{
+            //    IDamagable playerDamagable = target.GetComponent<IDamagable>();
+            //    if (playerDamagable != null)
+            //    {
+            //        playerDamagable.TakeDamage(damage);
+            //    }
+            //}
 
             ChangeState(State.CHASE);
             attackCoolDown = attackCooldownTime;
@@ -147,7 +146,6 @@ public class RangedBomb : MonoBehaviour, IDamagable
         else
         {
             ChangeState(State.CHASE);
-            Debug.Log("cooldown");
         }
     }
 
@@ -160,49 +158,55 @@ public class RangedBomb : MonoBehaviour, IDamagable
     }
     void ShootProjectile()
     {
-        // Åõ»çÃ¼¸¦ »ı¼ºÇÏ°í ±× °á°ú¸¦ ÀúÀå
-        GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-
-        // »ı¼ºµÈ Åõ»çÃ¼°¡ À¯È¿ÇÑÁö È®ÀÎ
-        if (newProjectile != null)
+        // í”Œë ˆì´ì–´ê°€ ì—†ìœ¼ë©´ ë°œì‚¬í•˜ì§€ ì•ŠìŒ
+        if (target == null)
         {
-            Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-            if (rb != null && target != null)
-            {
-                Vector3 direction = target.position - projectileSpawnPoint.position;
-                float distance = direction.magnitude;
-                direction.Normalize();
+            Debug.LogError("í”Œë ˆì´ì–´ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
+            return;
+        }
 
-                // Åõ»çÃ¼ÀÇ ÃÊ±â ¼Óµµ ¹× ¹ß»ç °¢µµ ¼³Á¤ (¿øÇÏ´Â °ªÀ¸·Î Á¶ÀıÇØ¾ß ÇÔ)
-                float launchAngle = 80f; // ¹ß»ç °¢µµ (45µµ)
-                float gravity = Physics.gravity.magnitude; // Áß·Â °¡¼Óµµ
-                float initialVelocity = Mathf.Sqrt((distance * gravity) / Mathf.Sin(2 * launchAngle * Mathf.Deg2Rad)); // ÃÊ±â ¼Óµµ °è»ê
+        // Vector3 direction = (target.transform.position - projectileSpawnPoint.position).normalized;
+        Vector3 direction = (new Vector3(target.transform.position.x, 0.5f, target.transform.position.z) - projectileSpawnPoint.position).normalized;
+        Vector3 leftDirection = Quaternion.Euler(0, -angle, 0) * direction;
+        Vector3 rightDirection = Quaternion.Euler(0, angle, 0) * direction;
 
-                // ÃÊ±â ¼Óµµ¸¦ Åõ»çÃ¼ÀÇ Àü¹æ ¹æÇâÀ¸·Î Àû¿ë
-                Vector3 launchVelocity = direction * initialVelocity * 1.3f;
-
-                // Åõ»çÃ¼¿¡ ÃÊ±â ¼Óµµ ¹× Áß·Â Àû¿ë
-                rb.velocity = launchVelocity;
-                rb.useGravity = true; // Áß·Â »ç¿ë
-
-                // Åõ»çÃ¼ÀÇ È¸Àü ¼³Á¤ (ÇÊ¿ä¿¡ µû¶ó Á¶Àı)
-                Quaternion rotation = Quaternion.LookRotation(direction);
-                newProjectile.transform.rotation = rotation;
-
-                Projectile projectileScript = newProjectile.GetComponent<Projectile>();
-                if (projectileScript != null)
-                {
-                    projectileScript.SetTarget(target);
-                }
-            }
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile3 projectileScript = projectile.GetComponent<Projectile3>();
+        if (projectileScript != null)
+        {
+            projectileScript.SetDirection(direction);
         }
         else
         {
-            Debug.LogError("Åõ»çÃ¼¸¦ »ı¼ºÇÏÁö ¸øÇß½À´Ï´Ù.");
+            Debug.LogError("í”„ë¡œì íƒ€ì¼ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
+            return;
         }
+
+        GameObject leftprojectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile3 leftprojectileScript = leftprojectile.GetComponent<Projectile3>();
+        if (leftprojectileScript != null)
+        {
+            leftprojectileScript.SetDirection(leftDirection);
+        }
+        else
+        {
+            Debug.LogError("í”„ë¡œì íƒ€ì¼ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
+            return;
+        }
+
+        GameObject rightprojectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile3 rightprojectileScript = rightprojectile.GetComponent<Projectile3>();
+        if (rightprojectileScript != null)
+        {
+            rightprojectileScript.SetDirection(rightDirection);
+        }
+        else
+        {
+            Debug.LogError("í”„ë¡œì íƒ€ì¼ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
+            return;
+        }
+
     }
-
-
 
     IEnumerator DAMAGED()
     {
@@ -214,7 +218,6 @@ public class RangedBomb : MonoBehaviour, IDamagable
 
     IEnumerator KILLED()
     {
-        Debug.Log("Killed");
         anim.Play("Die", 0, 0);
         DisableCollider();
         Destroy(gameObject, 3f);
@@ -222,17 +225,17 @@ public class RangedBomb : MonoBehaviour, IDamagable
     }
     void DisableCollider()
     {
-        Collider[] colliders = GetComponentsInChildren<Collider>(); // ¸ó½ºÅÍÀÇ ¸ğµç Äİ¶óÀÌ´õ °¡Á®¿À±â
+        Collider[] colliders = GetComponentsInChildren<Collider>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½İ¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false; // °¢ Äİ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­
+            collider.enabled = false; // ï¿½ï¿½ ï¿½İ¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         }
     }
     void ChangeState(State newState)
     {
         StopCoroutine(state.ToString());
         state = newState;
-        // º¯°æµÈ »óÅÂ¿¡ ¸Â´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½Â´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(state.ToString());
     }
 
@@ -241,7 +244,6 @@ public class RangedBomb : MonoBehaviour, IDamagable
         GameObject hudText = Instantiate(hudDamageText);
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
-        Debug.Log("µ¥¹ÌÁö ¼ıÀÚ¸¦ ¹ŞÀ½");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -249,7 +251,6 @@ public class RangedBomb : MonoBehaviour, IDamagable
         }
         else
         {
-            Debug.Log("µ¥¹ÌÁö¸¦ ¹ŞÀ½ ¤§¤§");
             StartCoroutine(DAMAGED());
         }
         UpdateHealthBar();
@@ -264,7 +265,7 @@ public class RangedBomb : MonoBehaviour, IDamagable
     }
     public void Detect(Transform target)
     {
-        // ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ¸é ¸ñÇ¥¸¦ ¼³Á¤ÇÏ°í CHASE »óÅÂ·Î º¯°æ
+        // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ CHASE ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.target = target;
         ChangeState(State.CHASE);
     }

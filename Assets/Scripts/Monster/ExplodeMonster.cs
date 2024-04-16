@@ -108,7 +108,6 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
             else if (Vector3.Distance(transform.position, target.position) >= lostDistance)
             {
                 target = null;
-                // IDLE ���·� ����
                 ChangeState(State.IDLE);
                 yield break; // CHASE ���¸� ��������
             }

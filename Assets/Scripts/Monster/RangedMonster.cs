@@ -24,6 +24,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     public Transform projectileSpawnPoint;
     public int damage;
     public GameObject itemPrefab;
+    public float projectileSpeed = 10f; // 투사체 속도
 
     enum State
     {
@@ -158,7 +159,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
     void ShootProjectile()
     {
-        GameObject Projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Projectile script = Projectile.GetComponent<Projectile>();
         if (script != null && target != null)
         {

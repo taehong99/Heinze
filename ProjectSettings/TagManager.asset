@@ -8,6 +8,7 @@ TagManager:
   - GameManager
   - ItemInventory
   - Missile
+  - Obstacle
   layers:
   - Default
   - TransparentFX

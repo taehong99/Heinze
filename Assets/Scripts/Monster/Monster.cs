@@ -61,7 +61,6 @@ public class Monster : MonoBehaviour, IDamagable
     {
         while (hp > 0)
         {
-            // ���� ���¿� ���� �ڷ�ƾ ����
             yield return StartCoroutine(state.ToString());
         }
     }
