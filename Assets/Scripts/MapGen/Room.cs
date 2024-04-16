@@ -17,6 +17,7 @@ public class Room : MonoBehaviour
     MonsterSpawner[] spawners;
     private int monsterCount = 0;
     bool cleared = false;
+    bool bossDefeated = false;
 
     private void Awake()
     {
@@ -27,6 +28,17 @@ public class Room : MonoBehaviour
     private void Start()
     {
         navMeshSurface.BuildNavMesh();
+
+        if (roomType == Stage.MidBoss || roomType == Stage.Boss)
+        {
+            Manager.Event.voidEventDic["bossDefeated"].OnEventRaised += OnBossDefeat;
+        }
+    }
+
+    private void OnBossDefeat()
+    {
+        bossDefeated = true;
+        Manager.Event.voidEventDic["bossDefeated"].OnEventRaised -= OnBossDefeat;
     }
 
     void AddCount() => monsterCount++;
@@ -49,9 +61,19 @@ public class Room : MonoBehaviour
 
     IEnumerator RoomBattleRoutine()
     {
-        while(monsterCount > 0)
+        if(roomType == Stage.MidBoss || roomType == Stage.Boss)
         {
-            yield return null;
+            while (bossDefeated == false)
+            {
+                yield return null;
+            }
+        }
+        else
+        {
+            while (monsterCount > 0)
+            {
+                yield return null;
+            }
         }
         RoomCleared();
     }

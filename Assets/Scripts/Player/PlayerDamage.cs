@@ -20,6 +20,8 @@ public class PlayerDamage : MonoBehaviour, IDamagable
 
     private void ShowHealText(int amount)
     {
+        if (amount == 0)
+            return;
         DamageText damageText = Instantiate(damageTextPrefab, spawnPoint.position, Quaternion.identity);
         damageText.SetColor(Color.green);
         damageText.damage = amount;
@@ -30,6 +32,8 @@ public class PlayerDamage : MonoBehaviour, IDamagable
         int dmg = Manager.Player.CalculateTakenDamage(damage);
         Manager.Player.TakeDamage(dmg);
         DamageText damageText = Instantiate(damageTextPrefab, spawnPoint.position, Quaternion.identity);
+        if (damage == 0)
+            damageText.SetColor(Color.gray);
         damageText.damage = dmg;
     }
 }
