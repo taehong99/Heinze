@@ -48,6 +48,17 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeed = Manager.Player.MoveSpeed;
         DashCount = 0;
+        Manager.Player.AssignPlayer(this);
+    }
+
+    public void Freeze()
+    {
+        enabled = false;
+    }
+
+    public void UnFreeze()
+    {
+        enabled = true;
     }
 
     private void Update()

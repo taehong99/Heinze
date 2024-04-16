@@ -9,6 +9,7 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     // Data
     [SerializeField] PlayerDataSO data;
+    PlayerController controller;
     PlayerJob job = PlayerJob.Warrior; // TODO: Change this
     public PlayerJob Job;
     public string jobText;
@@ -45,6 +46,21 @@ public class PlayerManager : Singleton<PlayerManager>
         defense = data.baseDefense;
         moveSpeed = data.baseMoveSpeed;
         Manager.Game.BuffPicked += ObtainBuff;
+    }
+
+    public void AssignPlayer(PlayerController player)
+    {
+        controller = player;
+    }
+
+    public void Freeze()
+    {
+        controller.Freeze();
+    }
+
+    public void UnFreeze()
+    {
+        controller.UnFreeze();
     }
 
     public void ObtainBuff(PlayerBuffSO buff)

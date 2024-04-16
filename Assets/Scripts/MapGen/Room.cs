@@ -61,7 +61,6 @@ public class Room : MonoBehaviour
 
     private void RoomCleared()
     {
-        Debug.Log("room cleared");
         cleared = true;
         Manager.Game.SpawnChest();
         ActivatePortals();

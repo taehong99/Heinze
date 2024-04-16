@@ -49,6 +49,8 @@ public class GenerateEnemies : MonoBehaviour
 
     public void SpawnEnemies()
     {
+        spawnedPositions.Clear();
+        
         if (monsterGroup == MonsterGroup.MidBoss1)
         {
             Instantiate(monsterPool.Stage1MidBoss, transform.position, Quaternion.identity);

@@ -175,7 +175,6 @@ public class PlayerAttack : MonoBehaviour
     private void Skill2Damage()
     {
         int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(2.5f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
-        Debug.Log($"Skill2 overlap count:{count}");
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();

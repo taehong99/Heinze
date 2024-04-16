@@ -5369,7 +5369,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 225935958927534131, guid: 3b4d3a01aa5832f45990d1cebe21169c, type: 3}
       propertyPath: sceneName
-      value: Stage1-1
+      value: Stage1-2
       objectReference: {fileID: 0}
     - target: {fileID: 4726397294700591070, guid: 3b4d3a01aa5832f45990d1cebe21169c, type: 3}
       propertyPath: m_Name
