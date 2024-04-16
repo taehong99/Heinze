@@ -181,7 +181,7 @@ MonoBehaviour:
   currentHealth: 0
   effectPrefab: {fileID: 8450392109063183404, guid: e59adb44c8a49834984e59f0b7a2d427, type: 3}
   effectPrefab2: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  damage: 5
+  damage: 3
 --- !u!95 &2928117817925581386
 Animator:
   serializedVersion: 5

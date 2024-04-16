@@ -268,17 +268,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4022594205038889899, guid: 2e695b51bd196c34594598e2e4892b91, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 4943884657239985609, guid: e8fb7b0c333183841a27d0af14c00097, type: 3}
     - target: {fileID: 5063708592732276145, guid: 2e695b51bd196c34594598e2e4892b91, type: 3}
       propertyPath: m_Name
       value: ForestMonster 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063708592732276145, guid: 2e695b51bd196c34594598e2e4892b91, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2511,10 +2503,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestBossMonster 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5562937245206290755, guid: 93809b22d60b6d241a6fb03b29d2e762, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2696,10 +2684,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestMonster 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5098582649096252846, guid: b698c6e099e80134a866896bb729fb70, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7965216005775783207, guid: b698c6e099e80134a866896bb729fb70, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2761,10 +2745,6 @@ PrefabInstance:
     - target: {fileID: 24148545774055697, guid: 1d022dbfc31d8684faaf27b4e4f0663f, type: 3}
       propertyPath: m_Name
       value: ForestMonster 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 24148545774055697, guid: 1d022dbfc31d8684faaf27b4e4f0663f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8372509043084927684, guid: 1d022dbfc31d8684faaf27b4e4f0663f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3086,10 +3066,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestMonster 8
       objectReference: {fileID: 0}
-    - target: {fileID: 3147680159012010715, guid: c7f4e4a80ef810145bb9b22447db6e1b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3178042516797746726, guid: c7f4e4a80ef810145bb9b22447db6e1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.35
@@ -3151,10 +3127,6 @@ PrefabInstance:
     - target: {fileID: 3514757121561917445, guid: 25879f14703d125438ddd2f7d0d25090, type: 3}
       propertyPath: m_Name
       value: ForestMonster 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514757121561917445, guid: 25879f14703d125438ddd2f7d0d25090, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8996152306078044058, guid: 25879f14703d125438ddd2f7d0d25090, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3267,7 +3239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8601036824610517454, guid: e59b58a668be5334f93b7d5a01f23f9e, type: 3}
       propertyPath: damage
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3290,10 +3262,6 @@ PrefabInstance:
     - target: {fileID: 770337610025101817, guid: 653597eb2ed5b3040bbf69b9b0a53a6b, type: 3}
       propertyPath: m_Name
       value: ForestMonster 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 770337610025101817, guid: 653597eb2ed5b3040bbf69b9b0a53a6b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2925960143548519910, guid: 653597eb2ed5b3040bbf69b9b0a53a6b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3392,10 +3360,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestMonster 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4904327918713722293, guid: 80ee97ba6146177438d362c1df585d4c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3457,10 +3421,6 @@ PrefabInstance:
     - target: {fileID: 8329231557317528055, guid: 37063311c2b56714b8468826edd3d70b, type: 3}
       propertyPath: m_Name
       value: ForestMonster 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329231557317528055, guid: 37063311c2b56714b8468826edd3d70b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3647,10 +3607,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestMonster 6
       objectReference: {fileID: 0}
-    - target: {fileID: 4248600690423341884, guid: 4044aea0486f5624cb521e9c37918917, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4825279185634333539, guid: 4044aea0486f5624cb521e9c37918917, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.8818502
@@ -3769,10 +3725,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestMonster 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1529737378970549071, guid: 8b99a2c0a569b334db7f03e023a40686, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6495057523202950611, guid: 8b99a2c0a569b334db7f03e023a40686, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.1349735
@@ -3872,7 +3824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673803094079189047, guid: f94fc28d2904e4d478a9d73c69fd2e12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3893,7 +3845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741808232089955042, guid: 2a3e535b0ea47aa4ab10f78e8b966ecb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8719939950304453645, guid: 2a3e535b0ea47aa4ab10f78e8b966ecb, type: 3}
       propertyPath: m_LocalPosition.x

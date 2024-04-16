@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 21
   lostDistance: 7
-  damage: 6
+  damage: 4
   attackCooldownTime: 2
   hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
   hudPos: {fileID: 2142556974528716901}

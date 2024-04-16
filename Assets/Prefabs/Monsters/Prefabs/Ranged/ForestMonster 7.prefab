@@ -347,9 +347,9 @@ MonoBehaviour:
   healthBarImage: {fileID: 7767808213528588329}
   effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
   minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 4943884657239985609, guid: e8fb7b0c333183841a27d0af14c00097, type: 3}
   projectileSpawnPoint: {fileID: 1313363652457897534}
-  damage: 5
+  damage: 3
   itemPrefab: {fileID: 0}
   angle: 30
 --- !u!1 &5078340738579379918

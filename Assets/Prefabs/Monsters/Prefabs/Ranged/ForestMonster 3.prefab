@@ -482,7 +482,7 @@ MonoBehaviour:
   minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
   projectilePrefab: {fileID: 8002842398355565849, guid: 022d19bfaed00cc4ba696d876c2af768, type: 3}
   projectileSpawnPoint: {fileID: 3565459392176951212}
-  damage: 2
+  damage: 4
   itemPrefab: {fileID: 0}
   projectileSpeed: 10
 --- !u!1 &6665837156320800256

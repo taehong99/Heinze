@@ -124,15 +124,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         UpdateHealthBar();
         GameObject effectObject2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
         effectObject2.GetComponent<ParticleSystem>().Play();
-        if(currentHealth <= 0)
-        {
-            ChangeState(State.KILLED);
-        }
-        else
-        {
-            ChangeState(State.CHASE);
-        }
-
+        ChangeState(State.KILLED);
         yield return null;
     }
 
@@ -153,6 +145,7 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         anim.Play("Damaged");
         GameObject effectObject = Instantiate(effectPrefab, transform.position, Quaternion.identity);
         effectObject.GetComponent<ParticleSystem>().Play();
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.monsterHitSFX);
         yield return new WaitForSeconds(1f);
     }
 

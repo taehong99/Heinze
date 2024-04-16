@@ -208,6 +208,7 @@ public class RangedMonster : MonoBehaviour, IDamagable
         hudText.GetComponent<DamageText>().damage = damage;
         hudText.transform.position = hudPos.position;
         currentHealth -= damage;
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.monsterHitSFX);
         if (currentHealth <= 0)
         {
             ChangeState(State.KILLED);
