@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 7156503719023402724}
   - component: {fileID: 1233329612730963846}
   - component: {fileID: 4898237642388251595}
+  - component: {fileID: 5874981248630126382}
   m_Layer: 8
   m_Name: ForestMonster 8
   m_TagString: Untagged
@@ -184,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3147680159012010715}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -207,9 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 20
   lostDistance: 7
-  damage: 5
+  damage: 8
   attackCooldownTime: 2
   hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
   hudPos: {fileID: 8793693043691976892}
@@ -282,6 +283,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5874981248630126382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3147680159012010715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  lostDistance: 7
+  damage: 5
+  attackCooldownTime: 2
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 8793693043691976892}
+  healthBarImage: {fileID: 4067973184934636881}
+  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  itemPrefab: {fileID: 0}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
+  cubeSpawnProbability: 0.05
 --- !u!1 &3922315833562771888
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +520,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1751184431896023919
 MonoBehaviour:
@@ -511,7 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  monster: {fileID: 8559934187716448397}
+  monster: {fileID: 5874981248630126382}
   RangedMonster: {fileID: 0}
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}

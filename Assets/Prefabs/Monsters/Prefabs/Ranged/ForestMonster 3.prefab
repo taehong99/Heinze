@@ -85,7 +85,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7590087885086454667
 Rigidbody:
@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285e7a72e421f834b8460deca9de4d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  monster: {fileID: 4059960841307920063}
-  RangedMonster: {fileID: 0}
+  type: 1
+  monster: {fileID: 0}
+  RangedMonster: {fileID: 8457484885057161170}
   BossMonster1: {fileID: 0}
   BossMonster: {fileID: 0}
   ExplodeMonster: {fileID: 0}
@@ -366,10 +366,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7965216005775783207}
-  - component: {fileID: 4059960841307920063}
   - component: {fileID: 4567530477688999386}
   - component: {fileID: 4784203750724296957}
   - component: {fileID: 2329836390761616641}
+  - component: {fileID: 8457484885057161170}
   m_Layer: 8
   m_Name: ForestMonster 3
   m_TagString: Untagged
@@ -396,29 +396,6 @@ Transform:
   - {fileID: 491276045129345670}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4059960841307920063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5098582649096252846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aea70e3b1926554485f33fabcb0485a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 3
-  lostDistance: 7
-  damage: 2
-  attackCooldownTime: 1
-  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
-  hudPos: {fileID: 3240850439579299657}
-  healthBarImage: {fileID: 6432928914134897272}
-  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
-  itemPrefab: {fileID: 5851362543731071335, guid: 585777558e3f12545a6ee8beb31d5ffe, type: 3}
-  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
-  cubeSpawnProbability: 0.05
 --- !u!95 &4567530477688999386
 Animator:
   serializedVersion: 5
@@ -454,7 +431,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 7
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -483,6 +460,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.74315256, z: 1}
   m_Center: {x: 0, y: 0.5043272, z: 0}
+--- !u!114 &8457484885057161170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098582649096252846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a22d7a9eb76b764995d0137aec57d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 3
+  lostDistance: 7
+  attackCooldownTime: 2
+  hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
+  hudPos: {fileID: 3565459392176951212}
+  healthBarImage: {fileID: 6432928914134897272}
+  effectPrefab: {fileID: 4562356354560609029, guid: df7066734b688f34dae17e6a04e5ce52, type: 3}
+  minimapMarkerPrefab: {fileID: 3488717689371173727, guid: 6ca29e2a0e120914a8ff949523dcb9d9, type: 3}
+  projectilePrefab: {fileID: 8002842398355565849, guid: 022d19bfaed00cc4ba696d876c2af768, type: 3}
+  projectileSpawnPoint: {fileID: 3565459392176951212}
+  damage: 2
+  itemPrefab: {fileID: 0}
+  projectileSpeed: 10
 --- !u!1 &6665837156320800256
 GameObject:
   m_ObjectHideFlags: 0

@@ -159,8 +159,13 @@ public class RangedMonster : MonoBehaviour, IDamagable
     }
     void ShootProjectile()
     {
+        Vector3 direction = (target.transform.position + Vector3.up * 2) - projectileSpawnPoint.position;
+        //direction.y = 1f;
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        Projectile script = Projectile.GetComponent<Projectile>();
+        projectile.transform.forward = direction.normalized;
+
+
+        Projectile script = projectile.GetComponent<Projectile>();
         if (script != null && target != null)
         {
             script.SetTarget(target);

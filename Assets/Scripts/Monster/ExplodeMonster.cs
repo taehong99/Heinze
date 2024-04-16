@@ -124,7 +124,14 @@ public class ExplodeMonster : MonoBehaviour, IDamagable
         UpdateHealthBar();
         GameObject effectObject2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
         effectObject2.GetComponent<ParticleSystem>().Play();
-        ChangeState(State.KILLED);
+        if(currentHealth <= 0)
+        {
+            ChangeState(State.KILLED);
+        }
+        else
+        {
+            ChangeState(State.CHASE);
+        }
 
         yield return null;
     }
