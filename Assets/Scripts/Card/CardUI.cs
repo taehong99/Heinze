@@ -52,7 +52,7 @@ public class CardUI : BaseUI, IPointerDownHandler
 
     private void AddToInventory()
     {
-        Debug.Log("인벤토리에 추가함.");
+        Manager.Player.UnFreeze();
         if(cardData is PlayerSkillDataSO)
         {
             Manager.Game.AnnounceSkillPicked(cardData as PlayerSkillDataSO);

@@ -14,13 +14,13 @@ public class Room : MonoBehaviour
     public Portal[] portals = new Portal[4];
 
     NavMeshSurface navMeshSurface;
-    GenerateEnemies[] spawners;
+    MonsterSpawner[] spawners;
     private int monsterCount = 0;
     bool cleared = false;
 
     private void Awake()
     {
-        spawners = GetComponentsInChildren<GenerateEnemies>();
+        spawners = GetComponentsInChildren<MonsterSpawner>();
         navMeshSurface = GetComponentInChildren<NavMeshSurface>();
     }
 
@@ -35,6 +35,11 @@ public class Room : MonoBehaviour
     {
         if (cleared)
             return;
+
+        if(roomType == Stage.MidBoss)
+            Manager.Sound.PlayBGM(Manager.Sound.AudioClips.midbossBGM);
+        else if(roomType == Stage.Boss)
+            Manager.Sound.PlayBGM(Manager.Sound.AudioClips.bossBGM);
 
         Manager.Event.voidEventDic["enemySpawned"].OnEventRaised += AddCount;
         Manager.Event.voidEventDic["enemyDied"].OnEventRaised += SubtractCount;
@@ -61,7 +66,6 @@ public class Room : MonoBehaviour
 
     private void RoomCleared()
     {
-        Debug.Log("room cleared");
         cleared = true;
         Manager.Game.SpawnChest();
         ActivatePortals();

@@ -114,6 +114,26 @@ public class PlayerAttack : MonoBehaviour
     {
         controller.isAttacking = false;
     }
+
+    private void PlayAttackSound(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.attack1SFX);
+                break;
+            case 2:
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.attack2SFX);
+                break;
+            case 3:
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.attack3SFX);
+                break;
+            default:
+                break;
+        }
+            
+    }
+
     #endregion
 
     #region Skills
@@ -175,7 +195,6 @@ public class PlayerAttack : MonoBehaviour
     private void Skill2Damage()
     {
         int count = Physics.OverlapBoxNonAlloc(skill2DamagePoint.position, new Vector3(2.5f, 1f, 5f), colliders, skill2DamagePoint.rotation, monsterMask);
-        Debug.Log($"Skill2 overlap count:{count}");
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();

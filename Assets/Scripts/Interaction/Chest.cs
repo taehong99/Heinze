@@ -15,6 +15,7 @@ public class Chest : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        Manager.Player.Freeze();
         animator.Play("Open");
     }
 
@@ -26,13 +27,11 @@ public class Chest : MonoBehaviour, IInteractable
 
     public void ShowUI()
     {
-        Debug.Log("Show UI");
         canvas.gameObject.SetActive(true);
     }
 
     public void HideUI()
     {
-        Debug.Log("Hide UI");
         canvas.gameObject.SetActive(false);
     }
 }

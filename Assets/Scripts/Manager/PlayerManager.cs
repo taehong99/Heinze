@@ -9,6 +9,7 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     // Data
     [SerializeField] PlayerDataSO data;
+    PlayerController controller;
     PlayerJob job = PlayerJob.Warrior; // TODO: Change this
     public PlayerJob Job;
     public string jobText;
@@ -38,13 +39,33 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Start()
     {
+        SetBaseStats();
+        Manager.Game.BuffPicked += ObtainBuff;
+    }
+
+    public void SetBaseStats()
+    {
         maxHP = data.baseHP;
-        curHP = maxHP;
+        CurHP = maxHP;
         attack = data.baseAttack;
         critRate = data.baseCritRate;
         defense = data.baseDefense;
         moveSpeed = data.baseMoveSpeed;
-        Manager.Game.BuffPicked += ObtainBuff;
+    }
+
+    public void AssignPlayer(PlayerController player)
+    {
+        controller = player;
+    }
+
+    public void Freeze()
+    {
+        controller.Freeze();
+    }
+
+    public void UnFreeze()
+    {
+        controller.UnFreeze();
     }
 
     public void ObtainBuff(PlayerBuffSO buff)
@@ -162,18 +183,5 @@ public class PlayerManager : Singleton<PlayerManager>
             // Player died event
             PlayerDied?.Invoke();
         }
-    }
-
-    public void Die()
-    {
-
-    }
-
-    public void Reset() // Call on game restart
-    {
-        maxHP = data.baseHP;
-        curHP = maxHP;
-        attack = data.baseAttack;
-        defense = data.baseDefense;
     }
 }

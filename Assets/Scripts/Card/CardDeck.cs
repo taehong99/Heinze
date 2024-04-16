@@ -25,6 +25,20 @@ public class CardDeck : MonoBehaviour
         Manager.Game.ItemPicked += ClearCards;
     }
 
+    private void OnDestroy()
+    {
+        Manager.Game.SkillPicked -= ClearCards;
+        Manager.Game.BuffPicked -= ClearCards;
+        Manager.Game.ItemPicked -= ClearCards;
+    }
+
+    public void RefillDeck()
+    {
+        skillDeck = new List<PlayerSkillDataSO>(deck.skills);
+        buffDeck = new List<PlayerBuffSO>(deck.buffs);
+        trashDeck = new List<ConsumableItemSO>(deck.items);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))

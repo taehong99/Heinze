@@ -20,6 +20,7 @@ public class Portal : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.openDoorSFX);
         StartCoroutine(RoomTransitionRoutine(other));
     }
 

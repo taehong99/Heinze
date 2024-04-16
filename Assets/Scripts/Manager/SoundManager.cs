@@ -5,9 +5,30 @@ public class SoundManager : Singleton<SoundManager>
 {
     [SerializeField] AudioSource bgmSource;
     [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioSource footstepsSource;
+    public AudioClipsSO AudioClips;
 
     public float BGMVolme { get { return bgmSource.volume; } set { bgmSource.volume = value; } }
     public float SFXVolme { get { return sfxSource.volume; } set { sfxSource.volume = value; } }
+    public float FootstepsVolme { get { return footstepsSource.volume; } set { footstepsSource.volume = value; } }
+
+    public void PlayFootsteps(AudioClip clip)
+    {
+        if(footstepsSource.clip == clip)
+            return;
+
+        footstepsSource.clip = clip;
+        footstepsSource.Play();
+    }
+
+    public void StopFootsteps()
+    {
+        if (footstepsSource.isPlaying == false)
+            return;
+
+        footstepsSource.clip = null;
+        footstepsSource.Stop();
+    }
 
     public void PlayBGM(AudioClip clip)
     {
