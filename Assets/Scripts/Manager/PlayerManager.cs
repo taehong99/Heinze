@@ -9,7 +9,7 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     // Data
     [SerializeField] PlayerDataSO data;
-    PlayerController controller;
+    public PlayerController controller;
     PlayerJob job = PlayerJob.Warrior; // TODO: Change this
     public PlayerJob Job;
     public string jobText;

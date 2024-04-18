@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.TextCore.Text;
+using Cinemachine;
 
 public class ObjectFader : MonoBehaviour
 {

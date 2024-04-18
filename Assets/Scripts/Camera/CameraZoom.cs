@@ -16,6 +16,17 @@ public class CameraZoom : MonoBehaviour
     void Start()
     {
         vcam = GetComponent<CinemachineVirtualCamera>();
+        StartCoroutine(FindPlayerRoutine());
+    }
+
+    IEnumerator FindPlayerRoutine()
+    {
+        while(GameObject.FindGameObjectsWithTag("Player").Length < 1)
+        {
+            yield return null;
+        }
+
+        vcam.Follow = GameObject.FindGameObjectsWithTag("Player")[0].transform;
     }
 
     private void Update()

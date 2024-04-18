@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Gender { Male, Female }
 public class GenderSelectScene : BaseScene
 {
     bool chosen;
@@ -11,6 +12,7 @@ public class GenderSelectScene : BaseScene
         if (!chosen)
         {
             Manager.Sound.PlaySFX(Manager.Sound.AudioClips.clickSFX);
+            Manager.Game.SelectGender(Gender.Male);
             Manager.Scene.LoadScene("Stage1-1");
             chosen = true;
         }
@@ -18,7 +20,13 @@ public class GenderSelectScene : BaseScene
 
     public void ChooseFemale()
     {
-
+        if (!chosen)
+        {
+            Manager.Sound.PlaySFX(Manager.Sound.AudioClips.clickSFX);
+            Manager.Game.SelectGender(Gender.Female);
+            Manager.Scene.LoadScene("Stage1-1");
+            chosen = true;
+        }
     }
 
     public override IEnumerator LoadingRoutine()

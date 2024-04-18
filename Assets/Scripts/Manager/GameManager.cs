@@ -2,12 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
     // Components
-    [SerializeField] GameObject warriorPrefab;
+    public Vector3 playerSpawnPoint;
+    GameObject playerPrefab;
+    public Transform curScenePlayer;
+    [SerializeField] GameObject warriorMPrefab;
+    [SerializeField] GameObject warriorFPrefab;
     [SerializeField] GameObject chest;
 
     // Player Skills
@@ -41,6 +46,21 @@ public class GameManager : Singleton<GameManager>
     {
         mapGenerator = GetComponentInChildren<MapGenerator>();
     }
+
+    #region
+    public void SelectGender(Gender gender)
+    {
+        if (gender == Gender.Male)
+        {
+            playerPrefab = warriorMPrefab;
+        }
+        else
+        {
+            playerPrefab = warriorFPrefab;
+        }
+    }
+
+    #endregion
 
     #region Player Skills
     public void AssignPlayer(PlayerAttack player)
@@ -140,6 +160,12 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Map Generation
+    public void SpawnPlayer()
+    {
+        curScenePlayer = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity).GetComponent<Transform>();
+        Debug.Log(curScenePlayer.name);
+    }
+
     public void SpawnRooms(Stage stage)
     {
         mapGenerator.GenerateMap(stage);

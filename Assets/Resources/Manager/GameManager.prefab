@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fcfa33b2f5d5e47b5fc920f8e1da03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warriorPrefab: {fileID: 2120978240799133072, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+  playerSpawnPoint: {x: 0, y: 0, z: 0}
+  warriorMPrefab: {fileID: 2120978240799133072, guid: 924883fd96ce64e7fa099d6ac2432c40, type: 3}
+  warriorFPrefab: {fileID: 6632805498665424314, guid: 0e02f97117d644beaa3f776db1e76e34, type: 3}
   chest: {fileID: 1527222829948374097, guid: d9de5d057b40748efa4ed6788a367456, type: 3}
   passiveSlot: {fileID: 0}
 --- !u!1 &6898241167444175995

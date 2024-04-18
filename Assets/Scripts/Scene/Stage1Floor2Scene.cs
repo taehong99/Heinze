@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage1Floor2Scene : BaseScene
+public class Stage1Floor2Scene : BaseStageScene
 {
     public override IEnumerator LoadingRoutine()
     {

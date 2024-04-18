@@ -5,22 +5,29 @@ using UnityEngine.UI;
 
 public class PlayerDashPresenter : BaseUI
 {
-    [SerializeField] PlayerController player;
+    PlayerController player;
     Slider dashSlider;
     Image[] dashSlots = new Image[3];
 
     void Start()
     {
-        //player = Manager.Player.GetComponent<PlayerController>();
-        player.DashCountChanged += OnDashChanged;
-
+        StartCoroutine(FindPlayerRoutine());
         dashSlider = GetUI<Slider>("DashBar");
-        dashSlider.maxValue = player.DashCooldown;
-
+        
         dashSlots[0] = GetUI<Image>("DashOrb1");
         dashSlots[1] = GetUI<Image>("DashOrb2");
         dashSlots[2] = GetUI<Image>("DashOrb3");
+    }
 
+    IEnumerator FindPlayerRoutine()
+    {
+        while (Manager.Player.controller == null)
+        {
+            yield return null;
+        }
+        player = Manager.Player.controller;
+        player.DashCountChanged += OnDashChanged;
+        dashSlider.maxValue = player.DashCooldown;
     }
 
     private void OnDestroy()
@@ -30,6 +37,8 @@ public class PlayerDashPresenter : BaseUI
 
     void Update()
     {
+        if (player == null)
+            return;
         dashSlider.value = player.DashCooldownProgress;
     }
 
