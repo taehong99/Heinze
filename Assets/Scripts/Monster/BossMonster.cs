@@ -51,7 +51,6 @@ public class BossMonster : MonoBehaviour, IDamagable
         sensor = GetComponentInChildren<MonserSensor>();
 
         // ������ hp
-        hp = 180;
         state = State.IDLE;
         currentHealth = hp;
         UpdateHealthBar();

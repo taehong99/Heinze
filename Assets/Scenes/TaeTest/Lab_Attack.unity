@@ -441,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5562937245206290755, guid: 93809b22d60b6d241a6fb03b29d2e762, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4136,6 +4136,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2747301721764130329, guid: 2a3e535b0ea47aa4ab10f78e8b966ecb, type: 3}
+      propertyPath: hp
+      value: 1800
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747301721764130329, guid: 2a3e535b0ea47aa4ab10f78e8b966ecb, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4741808232089955042, guid: 2a3e535b0ea47aa4ab10f78e8b966ecb, type: 3}
       propertyPath: m_Name
       value: ForestBossMonster 2 (1)

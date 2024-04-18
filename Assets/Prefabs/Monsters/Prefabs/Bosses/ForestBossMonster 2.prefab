@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a088bee73c72a944aadcd35885ad9fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 180
+  hp: 1800
   lostDistance: 7
   attackRange: 7
   attackCooldown: 0

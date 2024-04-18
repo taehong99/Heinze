@@ -48,7 +48,6 @@ public class BossMonster1 : MonoBehaviour, IDamagable
         anim = GetComponent<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
         state = State.IDLE;
-        hp = 60;
         currentHealth = hp;
         UpdateHealthBar();
         StartCoroutine(StateMachine());

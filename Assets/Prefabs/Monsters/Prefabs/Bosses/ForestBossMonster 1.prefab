@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7cf48f1783f41498b2c1526305ba12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 60
+  hp: 300
   lostDistance: 7
   attackCooldownTime: 2
   hudDamageText: {fileID: 1403896569391108652, guid: 571941192f7c4f3429d1610227c10d06, type: 3}
