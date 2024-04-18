@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Data/WarriorSkills/WarriorPassive1.asset.meta
+guid: 60c384b461ffe544a89db12698b3d4ac
+========
+guid: c5fe3c0b58c21464d97efee0ba8099a3
+>>>>>>>> develop:Assets/Scripts/Data/Skills/Skill1 2.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

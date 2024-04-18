@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e400ff0172498bd4e8328e7bb8f2b3ee, type: 3}
+  m_Name: WarriorDeck
+  m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 11400000, guid: 60c384b461ffe544a89db12698b3d4ac, type: 2}
+  - {fileID: 11400000, guid: e1dc96f681d5542a2a4ca81d44d44e5b, type: 2}
+  - {fileID: 11400000, guid: bae3a190a67654d59ae5c304ba3715c0, type: 2}
+  - {fileID: 11400000, guid: 5a9f20de4d8904ba790bdbdf27107caf, type: 2}
+  - {fileID: 11400000, guid: 8c8c0f45fd2a34f7f842b89b51dff15e, type: 2}
+  - {fileID: 11400000, guid: f7c7ac2f56454416388cb478a0bc4d20, type: 2}
+  - {fileID: 11400000, guid: c38b1f64b64164fe490620782ddde8c1, type: 2}
+  buffs:
+  - {fileID: 11400000, guid: 062015e67d9f15a4793e7d154e4236fa, type: 2}
+  - {fileID: 11400000, guid: 16ce5dfed603f98449bbd59ffae2f71e, type: 2}
+  - {fileID: 11400000, guid: 2baca0de45068c946963b6efa4544ffe, type: 2}
+  - {fileID: 11400000, guid: 0a7adeef3145b594ca1442f5ddd5f26c, type: 2}
+  - {fileID: 11400000, guid: 266bf48a5f2d0ba4bbec3b845ce41d61, type: 2}
+  - {fileID: 11400000, guid: 41cda31104cac95489c3a8afde6c038c, type: 2}
+  - {fileID: 11400000, guid: be2bef93c12b31c4e99a2e4e26f2e089, type: 2}
+  - {fileID: 11400000, guid: 77a104f2e6fcf6d42a7227f2570702eb, type: 2}
+  - {fileID: 11400000, guid: 87a0aabd6dd95ee40a500f2508902970, type: 2}
+  - {fileID: 11400000, guid: e934c2ae0ec0a85448f6d7641a7e3b43, type: 2}
+  items:
+  - {fileID: 11400000, guid: 209e0bf7810aca545af0c4c9911b9f9e, type: 2}
+  - {fileID: 11400000, guid: d7babc659b7a12548bfd5c5a197d7547, type: 2}
+  - {fileID: 11400000, guid: c72278d4f78cc344a87a6452d0075efc, type: 2}
+  - {fileID: 11400000, guid: 7a3b65d5b79dc53478ac4dedd9a2cf24, type: 2}
+  - {fileID: 11400000, guid: fd15dfee39c817148a2d6df4781ca0ec, type: 2}
+  - {fileID: 11400000, guid: 59d7fc1a05556d645a09ec6f338c90f9, type: 2}

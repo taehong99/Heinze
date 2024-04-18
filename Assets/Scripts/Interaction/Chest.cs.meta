@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Items/Chest.cs.meta
+guid: 85f4cdc3dc5f54b9ba91ec821f8822ee
+========
+guid: 8fbbfb51ff0c14145a1f56bc2bb78e57
+>>>>>>>> develop:Assets/Scripts/EnemyhpBar.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

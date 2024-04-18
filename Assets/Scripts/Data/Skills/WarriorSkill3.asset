@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793c541ad891d45e1bfd5cdc423cf14c, type: 3}
+  m_Name: WarriorSkill3
+  m_EditorClassIdentifier: 
+  id: 3
+  icon: {fileID: 21300000, guid: e391100589d442b4eb6cdf71205aac9f, type: 3}
+  _name: "\uB85C\uAC94 \uC2AC\uB798\uC26C"
+  description: "\uC804\uBC29\uC73C\uB85C \uAC80\uAE30\uB97C 3\uBC88 \uB0A0\uB824
+    (\uC6D0\uAC70\uB9AC \uACF5\uACA9)  \uACF5\uACA9\uB825\uC758 150% \uB370\uBBF8\uC9C0\uB85C
+    \uACF5\uACA9\uD55C\uB2E4."
+  caption: "\u2018\uAC80\uC0AC\uB77C\uACE0 \uC11C\uC11C \uB9DE\uACE0\uC788\uC9C0\uB9CC\uC740
+    \uC54A\uB294\uB2E4\uACE0\u2018"
+  cardColor: {r: 0.6314525, g: 0.8113208, b: 0.7244962, a: 1}
+  cooldown: 15

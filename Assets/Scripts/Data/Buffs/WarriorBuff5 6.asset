@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a8cf2cce92649e99ed44fb3f9abee6, type: 3}
+  m_Name: WarriorBuff5 6
+  m_EditorClassIdentifier: 
+  id: 10
+  icon: {fileID: 21300000, guid: 7e9a970a80a9b7a478db141613a1b657, type: 3}
+  _name: "\uAE30\uC0AC\uC758 \uB9F9\uC138"
+  description: "\uACF5\uACA9\uB825 10 \uC99D\uAC00, \uBC29\uC5B4\uB825 3 \uD558\uB77D"
+  caption: "\u2018\uD560\uB54C\uB9C8\uB2E4 \uC624\uAE00\uAC70\uB824..!\u2019"
+  cardColor: {r: 0.59460664, g: 0.86933964, b: 0.9622642, a: 1}
+  affectedStat: 0
+  increaseRate: 0
+  value: 10

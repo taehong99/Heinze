@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - InventoryManager
+  - GameManager
+  - ItemInventory
+  - Missile
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -12,14 +17,14 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Monster
+  - Interactable
+  - Beam
+  - MonsterDeath
+  - Minimap
+  - Terrain
+  - Door
   - 
   - 
   - 

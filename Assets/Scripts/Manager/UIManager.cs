@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,9 +9,16 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Canvas popUpCanvas;
     [SerializeField] Canvas windowCanvas;
     [SerializeField] Canvas inGameCanvas;
+    [SerializeField] Canvas fadeCanvas;
 
     [SerializeField] Image popUpBlocker;
     [SerializeField] Button inGameBlocker;
+    [SerializeField] ScreenFader fader;
+    [SerializeField] CardSelectUI cardSelectUI;
+    public ScreenFader Fader => fader;
+    public CardSelectUI CardSelectUI => cardSelectUI;
+
+    private Dictionary<string, BaseUI> dictionary = new Dictionary<string, BaseUI>();
 
     private Stack<PopUpUI> popUpStack = new Stack<PopUpUI>();
     private float prevTimeScale;
@@ -19,6 +27,39 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         EnsureEventSystem();
+        Manager.Player.PlayerDied += ShowGameOverUI;
+    }
+
+    private void OnDestroy()
+    {
+        Manager.Player.PlayerDied -= ShowGameOverUI;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (popUpStack.Count == 0)
+            {
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.tabOpenSFX);
+                ShowPopUpUI<PlayerStatsUI>();
+            }
+            else if (popUpStack.Peek().name == "PlayerStatsUI(Clone)")
+            {
+                Manager.Sound.PlaySFX(Manager.Sound.AudioClips.tabCloseSFX);
+                ClosePopUpUI();
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
+
+    private void ShowGameOverUI()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.gameOverSFX);
+        ShowPopUpUI<GameOverUI>();
     }
 
     public void EnsureEventSystem()
@@ -47,6 +88,12 @@ public class UIManager : Singleton<UIManager>
         T ui = Instantiate(popUpUI, popUpCanvas.transform);
         popUpStack.Push(ui);
         return ui;
+    }
+
+    public T ShowPopUpUI<T>() where T : PopUpUI
+    {
+        T resource = Load<T>($"UI/PopUp/{typeof(T).Name}");
+        return ShowPopUpUI(resource);
     }
 
     public void ClosePopUpUI()
@@ -118,5 +165,19 @@ public class UIManager : Singleton<UIManager>
         inGameBlocker.gameObject.SetActive(false);
         Destroy(curInGameUI.gameObject);
         curInGameUI = null;
+    }
+
+    private T Load<T>(string path) where T : BaseUI
+    {
+        if (dictionary.TryGetValue(path, out BaseUI ui))
+        {
+            return ui as T;
+        }
+        else
+        {
+            T resource = Resources.Load<T>(path);
+            dictionary.Add(path, resource);
+            return resource;
+        }
     }
 }

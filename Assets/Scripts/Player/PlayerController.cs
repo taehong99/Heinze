@@ -2,49 +2,96 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField] float sprintSpeedDelta;
-    [SerializeField] float jumpHeight;
+    [Header("Movement")]
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] float sprintSpeedDelta;
+    private float moveSpeed;
 
+    [Header("Dash")]
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashCooldown;
+    private float dashCooldownProgress;
+    public event Action<int> DashCountChanged;
+    private int maxDashes = 3;
+    private int dashCount;
+    public int DashCount { get { return dashCount; } set { dashCount = value; DashCountChanged?.Invoke(value); } }
+    public float DashCooldownProgress => dashCooldownProgress;
+    public float DashCooldown => dashCooldown;
+
+    [Header("State Bools")]
+    private bool isDashing;
+    public bool isAttacking;
+    private bool isSprinting;
+
+    [Header("Misc")]
     CharacterController controller;
     Animator animator;
+    PlayerAttack attacker;
     Vector3 moveDir;
+    Vector3 forwardDir;
+    Vector3 rightDir;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        attacker = GetComponent<PlayerAttack>();
+    }
+
+    private void Start()
+    {
+        moveSpeed = Manager.Player.MoveSpeed;
+        DashCount = 0;
+        Manager.Player.AssignPlayer(this);
+    }
+
+    public void Freeze()
+    {
+        enabled = false;
+    }
+
+    public void UnFreeze()
+    {
+        enabled = true;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            isSprinting = true;
             animator.SetBool("isSprinting", true);
             moveSpeed += sprintSpeedDelta;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            isSprinting = false;
             animator.SetBool("isSprinting", false);
             moveSpeed -= sprintSpeedDelta;
         }
+
         Move();
-        HandleGravityAndJump();
+        HandleGravity();
+        DashCooldownUpdate();
     }
 
     float rotationSpeed = 10f;
     private void Move()
     {
-        Vector3 forwardDir = Camera.main.transform.forward;
+        if (isDashing || isAttacking || !controller.enabled)
+            return;
+
+        forwardDir = Camera.main.transform.forward;
         forwardDir = new Vector3(forwardDir.x, 0, forwardDir.z).normalized;
 
-        Vector3 rightDir = Camera.main.transform.right;
+        rightDir = Camera.main.transform.right;
         rightDir = new Vector3(rightDir.x, 0, rightDir.z).normalized;
 
         controller.Move(forwardDir * moveDir.z * moveSpeed * Time.deltaTime);
@@ -57,13 +104,27 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
 
-        // 벡터 투영 (오르막길 속도 구현)
-        //Vector3.Project()
+        // Footstep SFX
+        if(moveDir.magnitude == 0)
+        {
+            Manager.Sound.StopFootsteps();
+        }
+        else
+        {
+            if (isSprinting)
+            {
+                Manager.Sound.PlayFootsteps(Manager.Sound.AudioClips.runningSFX);
+            }
+            else
+            {
+                Manager.Sound.PlayFootsteps(Manager.Sound.AudioClips.walkingSFX);
+            }
+        }
     }
 
     Vector3 velocity;
     bool isGrounded;
-    private void HandleGravityAndJump()
+    private void HandleGravity()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool("isGrounded", isGrounded);
@@ -75,13 +136,55 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void Jump()
+    private void Dash()
     {
-        if (!isGrounded)
+        if (dashCount == 0)
             return;
 
-        animator.SetTrigger("Jump");
-        velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+        animator.Play("Dash");
+        Manager.Sound.PlaySFX(Manager.Sound.AudioClips.dashSFX);
+        DashCount--;
+        StartCoroutine(DashRoutine());
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        isDashing = true;
+        attacker.ForceExitAttack();
+        float time = 0;
+
+        Vector3 dashDir;
+        if (moveDir.magnitude == 0)
+        {
+            dashDir = transform.forward;
+        }
+        else
+        {
+            dashDir = forwardDir * moveDir.z + rightDir * moveDir.x;
+        }
+        
+        while (time < dashDuration)
+        {
+            controller.Move(dashDir * dashSpeed * Time.deltaTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        isDashing = false;
+    }
+
+    private void DashCooldownUpdate()
+    {
+        if(dashCount == maxDashes)
+        {
+            return;
+        }
+
+        dashCooldownProgress += Time.deltaTime;
+        if(dashCooldownProgress >= dashCooldown)
+        {
+            DashCount++;
+            dashCooldownProgress = 0;
+        }
     }
 
     private void OnMove(InputValue value)
@@ -95,8 +198,13 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("zSpeed", moveDir.z);
     }
 
-    private void OnJump()
+    private void OnDash()
     {
-        Jump();
+        Dash();
+    }
+
+    private void OnItem1()
+    {
+        Manager.Game.DrinkPotion();
     }
 }
