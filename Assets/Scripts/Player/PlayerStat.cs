@@ -6,7 +6,7 @@ public class PlayerStat
 {
     public float BaseValue;
     
-    public int Value { get { return CalculateFinalValue(); } }
+    public float Value { get { return CalculateFinalValue(); } }
  
     private readonly List<StatModifier> statModifiers;
  
@@ -26,7 +26,7 @@ public class PlayerStat
         return statModifiers.Remove(mod);
     }
  
-    private int CalculateFinalValue()
+    private float CalculateFinalValue()
     {
         float finalValue = BaseValue;
  
@@ -44,6 +44,6 @@ public class PlayerStat
             }
         }
         
-        return (int)Math.Round(finalValue, 4);
+        return (float)Math.Round(finalValue, 4);
     }
 }

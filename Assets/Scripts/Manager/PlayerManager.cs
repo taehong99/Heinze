@@ -70,7 +70,7 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         // Determine Base Attack Value
         int attackMax = Mathf.CeilToInt(Attack.Value * 1.3f);
-        int rawAttack = UnityEngine.Random.Range(Attack.Value, attackMax + 1);
+        int rawAttack = UnityEngine.Random.Range((int)Attack.Value, attackMax + 1);
         
         // Check for Critical Strike
         float rand = UnityEngine.Random.Range(0f, 1f);
@@ -130,7 +130,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public int CalculateTakenDamage(int damage)
     {
-        int reducedDamage = damage - Defense.Value;
+        int reducedDamage = damage - (int)Defense.Value;
         return Mathf.Clamp(reducedDamage, 0, damage);
     }
 

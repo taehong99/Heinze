@@ -29,9 +29,9 @@ public class PlayerStatsUI : PopUpUI
     {
         GetUI<TextMeshProUGUI>("JobText").text = player.Job.ToString();
         GetUI<TextMeshProUGUI>("HPValueText").text = player.CurHP.ToString();
-        GetUI<TextMeshProUGUI>("ATKValueText").text = player.Attack.ToString();
-        GetUI<TextMeshProUGUI>("DEFValueText").text = player.Defense.ToString();
-        GetUI<TextMeshProUGUI>("CRValueText").text = player.CritRate.ToString();
-        GetUI<TextMeshProUGUI>("MSValueText").text = player.MoveSpeed.ToString();
+        GetUI<TextMeshProUGUI>("ATKValueText").text = player.Attack.Value.ToString();
+        GetUI<TextMeshProUGUI>("DEFValueText").text = player.Defense.Value.ToString();
+        GetUI<TextMeshProUGUI>("CRValueText").text = $"{player.CritRate.Value * 100} %";
+        GetUI<TextMeshProUGUI>("MSValueText").text = player.MoveSpeed.Value.ToString();
     }
 }
