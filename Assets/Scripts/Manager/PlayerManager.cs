@@ -21,16 +21,22 @@ public class PlayerManager : Singleton<PlayerManager>
     public int CurHP { get => curHP; set { curHP = value; PlayerHPChanged?.Invoke(); } }
 
     // Stats
-    private int attack;
-    [Range(0f, 1f)]
-    private float critRate;
-    private float defense;
-    private float moveSpeed;
-    private float lifeSteal;
-    public int Attack => attack;
-    public float CritRate => critRate;
-    public float Defense => defense;
-    public float MoveSpeed => moveSpeed;
+    public PlayerStat Attack;
+    public PlayerStat Defense;
+    public PlayerStat CritRate;
+    public PlayerStat MoveSpeed;
+    public PlayerStat LifeSteal;
+    
+    // private int attack;
+    // [Range(0f, 1f)]
+    // private float critRate;
+    // private float defense;
+    // private float moveSpeed;
+    // private float lifeSteal;
+    // public int Attack => attack;
+    // public float CritRate => critRate;
+    // public float Defense => defense;
+    // public float MoveSpeed => moveSpeed;
 
     // Events
     public event Action PlayerHPChanged;
@@ -43,124 +49,78 @@ public class PlayerManager : Singleton<PlayerManager>
         Manager.Game.BuffPicked += ObtainBuff;
     }
 
+    #region Player Stats
     public void SetBaseStats()
     {
         maxHP = data.baseHP;
         CurHP = maxHP;
-        attack = data.baseAttack;
-        critRate = data.baseCritRate;
-        defense = data.baseDefense;
-        moveSpeed = data.baseMoveSpeed;
+        Attack = new PlayerStat(data.baseAttack);
+        Defense = new PlayerStat(data.baseDefense);
+        CritRate = new PlayerStat(data.baseCritRate);
+        MoveSpeed = new PlayerStat(data.baseMoveSpeed);
+        LifeSteal = new PlayerStat(0);
     }
-
-    public void AssignPlayer(PlayerController player)
-    {
-        controller = player;
-    }
-
-    public void Freeze()
-    {
-        controller.Freeze();
-    }
-
-    public void UnFreeze()
-    {
-        controller.UnFreeze();
-    }
-
+    
     public void ObtainBuff(PlayerBuffSO buff)
     {
-        UpdateStat(buff.affectedStat, buff.increaseRate, buff.value);
+        UpdateStat(buff.affectedStat, new StatModifier(buff.value, buff.increaseRate));
     }
-
-    public void ChooseJob(PlayerJob job)
+    
+    public int CalculateDamage(float multiplier) // multiplier = x%
     {
-        this.job = job;
-    }
-
-    public void Heal(int amount)
-    {
-        int missingHP = maxHP - curHP;
-        int healedAmt = Math.Min(missingHP, amount);
-        CurHP += healedAmt;
-        PlayerHealed?.Invoke(healedAmt);
-    }
-
-    public int GetAttack(float multiplier) // multiplier = x%
-    {
-        int attackMax = Mathf.CeilToInt(attack * 1.3f);
-        int rawAttack = UnityEngine.Random.Range(attack, attackMax + 1);
+        // Determine Base Attack Value
+        int attackMax = Mathf.CeilToInt(Attack.Value * 1.3f);
+        int rawAttack = UnityEngine.Random.Range(Attack.Value, attackMax + 1);
+        
+        // Check for Critical Strike
         float rand = UnityEngine.Random.Range(0f, 1f);
-        if(rand <= critRate)
+        if(rand <= CritRate.Value)
         {
             rawAttack *= 2;
         }
+        
+        // Calculate Final Damage
         int finalDamage = Mathf.CeilToInt(rawAttack * multiplier / 100);
-        if(lifeSteal > 0f)
+        
+        // Apply Lifesteal
+        if(LifeSteal.Value > 0f)
         {
-            Heal(Mathf.RoundToInt(finalDamage * lifeSteal));
+            Heal(Mathf.RoundToInt(finalDamage * LifeSteal.Value));
         }
+        
         return finalDamage;
     }
 
     public void GainLifeSteal(float percentage)
     {
-        lifeSteal += percentage;
+        LifeSteal.AddModifier(new StatModifier(0.03f, IncreaseRate.Percent));
     }
 
-    public void UpdateStat(Stat stat, IncreaseRate rate, float delta)
+    public void UpdateStat(Stat stat, StatModifier mod)
     {
         switch (stat)
         {
             case Stat.Attack:
-                if(rate == IncreaseRate.Flat)
-                {
-                    attack += (int)delta;
-                }
-                else
-                {
-                    attack = Mathf.CeilToInt(attack * (1 + delta));
-                }
-                break;
-            case Stat.Crit:
-                if (rate == IncreaseRate.Flat)
-                {
-                    critRate += delta;
-                }
-                else
-                {
-                    critRate = Mathf.CeilToInt(critRate * (1 + delta));
-                }
+                Attack.AddModifier(mod);
                 break;
             case Stat.Defense:
-                if (rate == IncreaseRate.Flat)
-                {
-                    defense += delta;
-                }
-                else
-                {
-                    defense = Mathf.CeilToInt(defense * (1 + delta));
-                }
+                Defense.AddModifier(mod);
+                break;
+            case Stat.Crit:
+                CritRate.AddModifier(mod);
                 break;
             case Stat.Speed:
-                if (rate == IncreaseRate.Flat)
-                {
-                    moveSpeed += delta;
-                }
-                else
-                {
-                    moveSpeed = Mathf.CeilToInt(moveSpeed * (1 + delta));
-                }
+                MoveSpeed.AddModifier(mod);
                 break;
             case Stat.Health:
-                if (rate == IncreaseRate.Flat)
+                if (mod.Type == IncreaseRate.Flat)
                 {
-                    maxHP += (int)delta;
-                    CurHP += (int)delta;
+                    maxHP += (int)mod.Value;
+                    CurHP += (int)mod.Value;
                 }
                 else
                 {
-                    int sum = Mathf.CeilToInt(maxHP * delta);
+                    int sum = Mathf.CeilToInt(maxHP * mod.Value);
                     maxHP += sum;
                     CurHP += sum;
                 }
@@ -170,7 +130,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public int CalculateTakenDamage(int damage)
     {
-        int reducedDamage = damage - (int)defense;
+        int reducedDamage = damage - Defense.Value;
         return Mathf.Clamp(reducedDamage, 0, damage);
     }
 
@@ -183,5 +143,34 @@ public class PlayerManager : Singleton<PlayerManager>
             // Player died event
             PlayerDied?.Invoke();
         }
+    }
+    
+    public void Heal(int amount)
+    {
+        int missingHP = maxHP - curHP;
+        int healedAmt = Math.Min(missingHP, amount);
+        CurHP += healedAmt;
+        PlayerHealed?.Invoke(healedAmt);
+    }
+    #endregion
+
+    public void AssignPlayer(PlayerController player)
+    {
+        controller = player;
+    }
+
+    public void ChooseJob(PlayerJob job)
+    {
+        this.job = job;
+    }
+    
+    public void Freeze()
+    {
+        controller.Freeze();
+    }
+
+    public void UnFreeze()
+    {
+        controller.UnFreeze();
     }
 }

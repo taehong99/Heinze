@@ -180,7 +180,7 @@ public class PlayerAttack : MonoBehaviour
         for(int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
-            damagable?.TakeDamage(Manager.Player.GetAttack(Skill1Multiplier));
+            damagable?.TakeDamage(Manager.Player.CalculateDamage(Skill1Multiplier));
         }
     }
 
@@ -200,7 +200,7 @@ public class PlayerAttack : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
-            damagable?.TakeDamage(Manager.Player.GetAttack(Skill2Multiplier));
+            damagable?.TakeDamage(Manager.Player.CalculateDamage(Skill2Multiplier));
         }
     }
 
@@ -260,6 +260,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Skill6
+    private StatModifier skill6Buff = new StatModifier(0.5f, IncreaseRate.Percent);
     private void Skill6()
     {
         Freeze();
@@ -267,15 +268,15 @@ public class PlayerAttack : MonoBehaviour
         Manager.Sound.PlaySFX(Manager.Sound.AudioClips.skill6SFX);
         effects.PlayEffect("Skill6");
         Manager.Player.TakeDamage(10);
-        Manager.Player.UpdateStat(Stat.Attack, IncreaseRate.Percent, 0.5f);
-        Manager.Player.UpdateStat(Stat.Defense, IncreaseRate.Percent, 0.5f);
+        Manager.Player.Attack.AddModifier(skill6Buff);
+        Manager.Player.Defense.AddModifier(skill6Buff);
         Invoke("RemoveBuff", skill6BuffDuration);
     }
 
     private void RemoveBuff()
     {
-        Manager.Player.UpdateStat(Stat.Attack, IncreaseRate.Percent, -0.5f);
-        Manager.Player.UpdateStat(Stat.Defense, IncreaseRate.Percent, -0.5f);
+        Manager.Player.Attack.RemoveModifier(skill6Buff);
+        Manager.Player.Defense.RemoveModifier(skill6Buff);
     }
 
     #endregion

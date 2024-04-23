@@ -24,7 +24,7 @@ public class WarriorSkill4 : MonoBehaviour
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable?.TakeDamage(Manager.Player.GetAttack(Skill4Multiplier));
+                damagable?.TakeDamage(Manager.Player.CalculateDamage(Skill4Multiplier));
             }
         }
         Manager.Pool.GetPool(Manager.Resource.Load<PooledObject>("Effects/WarriorSkill4Explosion"), collision.GetContact(0).point, Quaternion.identity);

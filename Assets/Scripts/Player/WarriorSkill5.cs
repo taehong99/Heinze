@@ -28,7 +28,7 @@ public class WarriorSkill5 : MonoBehaviour
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable?.TakeDamage(Manager.Player.GetAttack(Skill5Multiplier));
+                damagable?.TakeDamage(Manager.Player.CalculateDamage(Skill5Multiplier));
             }
         }
     }

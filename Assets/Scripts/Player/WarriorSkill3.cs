@@ -30,7 +30,7 @@ public class WarriorSkill3 : MonoBehaviour
             IDamagable damagable = colliders[i].GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable?.TakeDamage(Manager.Player.GetAttack(Skill3Multiplier));
+                damagable?.TakeDamage(Manager.Player.CalculateDamage(Skill3Multiplier));
                 damaged.Add(colliders[i]);
             }
         }

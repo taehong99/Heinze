@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
         IDamagable damagable = other.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(Manager.Player.GetAttack(100));
+            damagable.TakeDamage(Manager.Player.CalculateDamage(100));
         }
     }
 }

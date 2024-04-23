@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        moveSpeed = Manager.Player.MoveSpeed;
+        moveSpeed = Manager.Player.MoveSpeed.Value;
         DashCount = 0;
         Manager.Player.AssignPlayer(this);
     }
